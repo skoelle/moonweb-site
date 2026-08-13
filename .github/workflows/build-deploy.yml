@@ -82,12 +82,20 @@ jobs:
           name: dist-${{ matrix.site }}
           path: dist/${{ matrix.site }}
 
-      - name: Deploy to Cloudflare Pages
+      - name: Create wrangler.toml for Worker
+        run: |
+          echo 'name = "${{ matrix.cf_project }}"' > wrangler.toml
+          echo 'compatibility_date = "2024-01-01"' >> wrangler.toml
+          echo '' >> wrangler.toml
+          echo '[assets]' >> wrangler.toml
+          echo 'directory = "./dist/${{ matrix.site }}"' >> wrangler.toml
+
+      - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist/${{ matrix.site }} --project-name=${{ matrix.cf_project }} --commit-dirty=true
+          command: deploy
 
   summary:
     name: Deploy Summary
@@ -115,11 +123,11 @@ jobs:
           echo "| retro | https://retro.moonweb.org |" >> $GITHUB_STEP_SUMMARY
 
 # Required repo secrets:
-#   CLOUDFLARE_API_TOKEN   — Cloudflare API token with Pages:Edit permission
+#   CLOUDFLARE_API_TOKEN   — Cloudflare API token with Workers:Edit permission
 #   CLOUDFLARE_ACCOUNT_ID  — Cloudflare account ID
 #
 # Required one-time setup (see PLAN.md Phase 2):
-#   Create Cloudflare Pages projects and bind custom domains.
+#   Create Cloudflare Workers and bind custom domains.
 #   DNS is already on Cloudflare (SPEC.md §4.6).
-#   Note: Cloudflare Free-Tier limits to 5 Pages projects per repository.
+#   Note: Cloudflare Free-Tier limits to 5 Workers per repository.
 #
