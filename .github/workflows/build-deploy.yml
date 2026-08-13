@@ -23,9 +23,9 @@ jobs:
       matrix:
         site: [hub, infra, smarthome, code, retro]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
@@ -50,7 +50,7 @@ jobs:
           find dist/${{ matrix.site }} -type f | head -20
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dist-${{ matrix.site }}
           path: dist/${{ matrix.site }}
@@ -77,7 +77,7 @@ jobs:
             cf_project: moonweb-retro
     steps:
       - name: Download build artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: dist-${{ matrix.site }}
           path: dist/${{ matrix.site }}
