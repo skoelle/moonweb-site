@@ -7,40 +7,12 @@ Stand: 2026-08-13
 | Phase | Status | Bemerkung |
 |-------|--------|-----------|
 | Phase 0 — Repo & Tooling | ✅ fertig | Eleventy 3.1.6, CI/CD, .gitignore erweitert |
-| Phase 1 — Content | 🟡 80% | hub, code, infra, smarthome fast fertig, retro offen |
+| Phase 1 — Content | ✅ fertig | hub, code, infra, smarthome komplett, retro bewusst rudimentär |
 | Phase 2 — CI/CD | ✅ fertig | build-deploy.yml mit Caching + Validation + Summary |
-| Phase 3 — Launch | 🟡 fast ready | Impressum + Favicons + Meta-Tags + CSS fertig |
+| Phase 3 — Launch | ✅ fertig | Cloudflare Pages live, Smoke-Test bestanden |
 | Phase 4 — Deferred | ⏸️ zurückgestellt | Ledmatrix-Migration, 28k8, Analytics |
 
-## Offene Items — nach Priorität
-
-### P1 — Muss vor Launch
-
-- [ ] **Placeholder-Cards aufräumen** — 12 Cards verlinken noch auf "#"
-  - infra/ (7x): PVE, pve2, Docker-VM, Synology, Fritz!Box, OpenWRT, IoT VLAN
-  - smarthome/ (3x): Dashboard Controls, Air Quality, Weather
-  - retro/ (3x): alle Cards
-  - Entweder echte Ziel-URLs, Karte entfernen, oder als nicht-klickbare Info-Items darstellen
-
-- [ ] **Content-Review** — Vor Launch einmal alle Seiten durchgehen
-
-### P2 — Für Launch
-
-- [ ] **Cloudflare Pages Projects erstellen**
-  - moonweb-hub, moonweb-infra, moonweb-smarthome, moonweb-code, moonweb-retro
-  - Hinweis: Cloudflare Free-Tier erlaubt nur 5 Projects pro Repository
-
-- [ ] **DNS & Custom Domains binden**
-  - hub.moonweb.org, infra.moonweb.org, smarthome.moonweb.org, code.moonweb.org, retro.moonweb.org
-
-- [ ] **Secrets in GitHub Repo prüfen**
-  - CLOUDFLARE_API_TOKEN
-  - CLOUDFLARE_ACCOUNT_ID
-
-### P3 — Nach Launch
-
-- [ ] Smoke-Test Cross-Linking (hub → alle Sites, Site-Switcher, externe Links)
-- [ ] README.md aktualisieren (aktuellen Stand beschreiben)
+## Offene Items
 
 ### P4 — Deferred (nicht dringend)
 
@@ -53,17 +25,23 @@ Stand: 2026-08-13
 ## Schon erledigt (Stand 2026-08-13)
 
 - [x] Impressum angelegt + Footer-Link auf allen Sites
-- [x] Favicons (SVG mit Emojis) pro Subdomain
-- [x] Meta descriptions auf allen 14 Seiten
+- [x] Favicons (SVG mit Emojis) pro Subdomain — `shared/favicon/*.svg`, per Passthrough Copy
+- [x] Meta descriptions auf allen 33 Seiten
 - [x] CSS @import-Kette bereinigt (kein Render-Blocking mehr)
 - [x] .gitignore erweitert (.env*, Zertifikate, Swap-Files)
+- [x] Placeholder-Cards `"#"` bereinigt — keine mehr vorhanden
+- [x] README.md überarbeitet (Emojis, Architektur, Tech-Stack, CI/CD)
+- [x] Lizenz hinzugefügt (CC BY-NC-SA 4.0)
+- [x] Content-Review — alle Seiten geprüft, alles passt
+- [x] Cloudflare Pages Projects erstellt (moonweb-hub, -infra, -smarthome, -code, -retro)
+- [x] DNS & Custom Domains gebunden
+- [x] Secrets konfiguriert (CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID)
+- [x] Smoke-Test Cross-Linking — alles funktioniert auf live
 
 ## Workflow für neue Contexts
 
 Wenn du einen neuen Context öffnest, lies diese Datei und prüfe:
-1. Welche P1-Items sind noch offen? → Davor arbeiten
-2. Welche P2-Items blockieren den Launch? → Parallel klären
-3. P3/P4 nur wenn angefordert
+1. Welche P4-Items sind relevant? → Nur wenn angefordert
 
 ## Definition of done
 

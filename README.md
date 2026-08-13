@@ -242,4 +242,8 @@ All five sites are written **entirely in English**. German source documents are 
 
 ## 📄 License
 
-This project is for personal use. See [stefankoelle.de](https://stefankoelle.de) for contact.
+[![CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+See [LICENSE](LICENSE) for the full text.
