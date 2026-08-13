@@ -1,0 +1,42 @@
+---
+title: "Home"
+section: "hub"
+description: "moonweb.org — my personal homelab: smarthome, infrastructure, code, and retro hardware."
+layout: base.njk
+sections:
+  - heading: "Homelab sites"
+    cards:
+      - title: "infra"
+        summary: "Stack overview: Proxmox, Synology, network, backups, and how I work."
+        href: "https://infra.moonweb.org"
+        emoji: "🏗️"
+      - title: "smarthome"
+        summary: "What's actually running on home.moonweb.org, and why."
+        href: "https://smarthome.moonweb.org"
+        emoji: "🏠"
+      - title: "code"
+        summary: "Curated catalog of my GitHub projects."
+        href: "https://code.moonweb.org"
+        emoji: "💻"
+      - title: "retro"
+        summary: "Physical retro hardware collection."
+        href: "https://retro.moonweb.org"
+        emoji: "🕹️"
+  - heading: "About me"
+    cards:
+      - title: "CV / stefankoelle.de"
+        summary: "Career, contact, and background."
+        href: "https://stefankoelle.de"
+        emoji: "👤"
+  - heading: "Time capsules"
+    cards:
+      - title: "28k8.moonweb.org"
+        summary: "tHE tEMPLE BBS Mailbox and 90s releases archive."
+        href: "https://28k8.moonweb.org"
+        emoji: "💾"
+      - title: "www.moonweb.org"
+        summary: "The 2000s internet projects, networking and engineering."
+        href: "https://www.moonweb.org"
+        emoji: "🌐"
+---
+{% include "card-grid.njk" %}

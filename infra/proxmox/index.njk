@@ -1,0 +1,42 @@
+---
+title: "Proxmox Virtualization"
+section: "infra"
+parent: "/"
+description: "What Proxmox VE is, the hardware it runs on in my homelab, its key advantages, and a short setup walkthrough."
+layout: base.njk
+---
+<h1>Proxmox Virtualization</h1>
+<div class="detail-content">
+
+<p>Proxmox VE (Virtual Environment) is a free, open-source virtualization platform that combines KVM-based full virtual machines with lightweight LXC containers in a single web-managed system. It's built on top of Debian, includes ZFS storage management, backup/restore, clustering and monitoring out of the box, and is the foundation my entire homelab runs on — both the <a href="/docker/">Docker</a> hosts and the standalone <a href="/lxc/">LXC services</a> live as guests on top of it.</p>
+
+<h2>Hardware</h2>
+<ul>
+<li><strong>PVE (main server)</strong> — a Beelink Mini-PC, running as the primary Proxmox host. It has a 500GB SSD for VM and container storage, and connects to the network via the server-room Zyxel switch.</li>
+<li><strong>pve2 (test server)</strong> — a second Proxmox host, physically located in the study and connected via the OpenWRT-side Zyxel switch. It's dedicated purely to testing and development, running the third <a href="/docker/">Docker host VM (docker-host-pve2)</a> plus experimental setups without risking the production environment.</li>
+<li><strong>Backups</strong> — nightly VM backups from PVE run at 00:30 to an NFS share on the Synology (<code>nas:/volume1/backup</code>), with retention of the last 3 daily, 3 monthly and 1 yearly backup.</li>
+</ul>
+
+<h2>Advantages</h2>
+<ul>
+<li><strong>Mixed virtualization</strong> — full KVM virtual machines and lightweight LXC containers run side by side on the same host, so I can pick whichever fits a service best.</li>
+<li><strong>Web-based management</strong> — the entire cluster, its VMs, containers, storage and backups are managed from one browser UI via Authelia/Nginx, no separate tooling needed.</li>
+<li><strong>Built-in ZFS support</strong> — snapshots, checksumming and pool management are native, making disk setup and VM protection straightforward.</li>
+<li><strong>Native backup/restore</strong> — scheduled backups to an external NFS target are configured directly in Proxmox, without third-party backup software.</li>
+<li><strong>No licensing cost</strong> — the platform is fully usable without a subscription by switching to the no-subscription repository, which matters for a homelab that isn't running on enterprise support contracts.</li>
+</ul>
+
+<h2>Open-source edition</h2>
+<ul>
+<li><strong>Proxmox VE Community/no-subscription</strong> — the enterprise repositories are disabled and the host is switched to the free "no-subscription" package repository, giving full functionality identical to the paid tiers minus vendor support and the enterprise-only repo.</li>
+<li><strong>License</strong> — Proxmox VE itself is open source (AGPLv3); the subscription only adds official support and access to the more conservative enterprise update channel.</li>
+</ul>
+
+<h2>Setup process</h2>
+<ul>
+<li><strong>Bootstrap</strong> — on new Beelink hardware, an initial OS (Windows) needs to be cleared first; entering the BIOS (DEL key) to set the boot order to USB-first allows booting the Proxmox installer.</li>
+<li><strong>Base install</strong> — Proxmox VE installed directly from ISO, then updated after disabling the enterprise repo and enabling the no-subscription repo.</li>
+<li><strong>Storage</strong> — an additional SSD is partitioned (GPT via <code>parted</code>) and turned into a ZFS pool through the Disks → ZFS section of the web UI.</li>
+<li><strong>Networking/backup target</strong> — an NFS share from the Synology is mounted for backup storage, and a nightly backup job is scheduled per VM.</li>
+<li><strong>Guest creation</strong> — VMs (like the Debian Docker-host VMs) and LXCs (Pi-hole, Ubuntu-Worker, MariaDB) are created through the web UI, with ISO images uploaded to local storage beforehand.</li>
+</ul>

@@ -1,0 +1,58 @@
+---
+title: "Retro"
+section: "retro"
+description: "Physical retro hardware collection — Raspberry Pi units, Pi 400, and vintage computing setups."
+layout: base.njk
+sections:
+  - heading: "Atari ST Corner"
+    cards:
+      - title: "🖥️ The Mega ST Fleet"
+        summary: "Three Mega ST 4 machines and a Mega ST 2, each with a clearly defined role from heirloom to workstation."
+        href: "/atari-mega-st-fleet/"
+      - title: "⚡ ET4000 Experiment"
+        summary: "Why bolting a graphics card onto a Mega ST overloads a 1980s power supply, and what actually solved the resolution problem."
+        href: "/et4000-experiment/"
+      - title: "📺 Monitor Compatibility"
+        summary: "The 15kHz problem explained, and which modern monitor panels actually cooperate with Atari colour modes."
+        href: "/atari-monitor-compatibility/"
+      - title: "🔌 Networking & BBS"
+        summary: "Getting an Atari ST online via STinG and Wi-Fi modem hardware, and dialing into classic bulletin board systems."
+        href: "/atari-networking-bbs/"
+  - heading: "Amiga Corner"
+    cards:
+      - title: "💾 AmigaOS on Modern Platforms"
+        summary: "Running AmigaOS 3.2.3 on MiSTer FPGA versus Amiberry on a Raspberry Pi, and the HDF pitfalls to avoid."
+        href: "/amiga-modern-platforms/"
+      - title: "🥧 The PiMiga Journey"
+        summary: "Three generations of the PiMiga distro compared, and why the newest release isn't automatically the best one."
+        href: "/pimiga-journey/"
+      - title: "⚔️ Vampire, A600GS or MiSTer"
+        summary: "Why comparing modern Amiga hardware by benchmark numbers alone is actively misleading."
+        href: "/amiga-hardware-landscape/"
+      - title: "📦 The A1200"
+        summary: "What's confirmed so far about Retro Games Ltd.'s upcoming Amiga 1200 console, ahead of its 2026 launch."
+        href: "/the-a1200/"
+  - heading: "FPGA & Emulation"
+    cards:
+      - title: "🧩 MiST and MiSTer"
+        summary: "Two FPGA boards with two very different personalities, and why the newer one doesn't win every category."
+        href: "/mist-mister-fpga/"
+      - title: "🛋️ Batocera in the Living Room"
+        summary: "The couch-friendly, software-emulation counterpart to the FPGA rigs, covering everything from Atari ST to arcade."
+        href: "/batocera-living-room/"
+      - title: "🕹️ Mini Arcades & Handhelds"
+        summary: "A buyer's guide to compact retro gaming devices, and how to spot a bootleg clone before you buy one."
+        href: "/mini-arcade-handheld-roundup/"
+  - heading: "DOS & PC"
+    cards:
+      - title: "💻 The 486 DX2-66 Tower"
+        summary: "An original Colani-design 486 tower kept running alongside its MiSTer AO486 FPGA equivalent."
+        href: "/dos-486-tower/"
+  - heading: "Overview"
+    cards:
+      - title: "🏠 The Retro Corner Today"
+        summary: "A room-by-room snapshot of every retro system currently active across the home."
+        href: "/retro-corner-snapshot/"
+
+---
+{% include "card-grid.njk" %}

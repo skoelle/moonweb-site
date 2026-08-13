@@ -1,0 +1,22 @@
+---
+title: "Running AmigaOS in 2026: MiSTer FPGA vs Amiberry on Pi"
+section: "retro"
+description: "Two very different ways to get a fully working AmigaOS 3.2.3 desktop running today."
+layout: base.njk
+---
+<a class="back-link" href="/">← Back to retro overview</a>
+<h1>Running AmigaOS in 2026: MiSTer FPGA vs Amiberry on Pi</h1>
+<div class="detail-content">
+
+<p>AmigaOS 3.2.3 runs beautifully both on FPGA and on modern ARM boards — the question is which trade-offs you're willing to accept.</p>
+
+<h2>Two Roads to the Same Workbench</h2>
+<ul>
+<li><strong>MiSTer with the Minimig-AGA core</strong> — the most hardware-authentic option. Native resolution tops out around 800×600, with RTG (Picasso96) support pushing that up to 1080p. Timing accuracy and near-zero input latency make it the pick for demos and cycle-sensitive software.</li>
+<li><strong>Amiberry on a Raspberry Pi</strong> — the flexible option. Running headless (no X11 desktop, straight from the console/KMS framebuffer) is the single biggest performance lever — the difference between a laggy desktop and a snappy 60fps Workbench.</li>
+<li><strong>The HDF minefield</strong> — hard disk image files either carry an RDB partition table or they don't, and getting the geometry parameters (surfaces/sectors/reserved blocks) wrong produces the classic "Not a DOS disk in device DH0" error. Reformatting through HDToolBox from a fresh install is often faster than debugging geometry math.</li>
+<li><strong>Picking a monitor</strong> — a 4:3 panel at native 1280×1024 (like an older NEC MultiSync) gives the most period-accurate Workbench experience; anything widescreen needs scaling compromises.</li>
+</ul>
+
+<p class="redacted-note">Both setups now run side by side without any real winner — MiSTer for authenticity and demos, the Pi for tinkering and RTG resolutions.</p>
+</div>

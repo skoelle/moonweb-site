@@ -1,0 +1,44 @@
+---
+title: "AirPlay Audio"
+section: "smarthome"
+parent: "/"
+description: "Multi-room AirPlay receivers with software volume boost on Raspberry Pi devices."
+layout: base.njk
+---
+<h1>AirPlay Audio</h1>
+<div class="detail-content">
+
+<p>Two Raspberry Pis run AirPlay receivers so any Apple device in the flat
+can stream audio to the kitchen or the bathroom without a dedicated
+speaker app.</p>
+
+<h2>Setup</h2>
+<table>
+<tr><th>Location</th><th>Hardware</th><th>AirPlay version</th><th>Runs as</th></tr>
+<tr><td>Kitchen</td><td>Raspberry Pi 3B</td><td>AirPlay 2</td><td>Docker container (shairport-sync)</td></tr>
+<tr><td>Bathroom</td><td>Raspberry Pi Zero W</td><td>AirPlay 1</td><td>Native systemd service (older OS, legacy repo)</td></tr>
+</table>
+
+<h2>The volume-boost problem</h2>
+<p>Both Pis' analog audio output is too quiet at full hardware volume, so
+a software mixer stage (<code>+20&nbsp;dB</code> via an ALSA softvol plugin) sits between
+shairport-sync and the hardware. The hardware mixer itself is deliberately
+left fixed at 100% / 0&nbsp;dB, and shairport-sync only ever adjusts its own
+internal software volume — this avoids the volume jumps and mixer
+conflicts that show up when multiple layers all try to control loudness.</p>
+
+<h2>Bathroom-specific integration</h2>
+<p>The bathroom Pi also runs a small custom tool that starts an internet
+radio stream automatically when its light sensor detects the light has
+been switched on. A simple flag file signals whether AirPlay is currently
+active, so the automatic radio stream politely stays off while someone is
+actively AirPlaying — and resumes its normal behavior as soon as the
+AirPlay session ends.</p>
+
+<h2>Why this design</h2>
+<ul>
+<li>Software-only volume control avoids ALSA mixer conflicts across two different loudness sources.</li>
+<li>The flag-file handoff is trivial to implement and doesn't need a message broker for something this simple.</li>
+<li>Docker on the kitchen Pi keeps that receiver easy to update; the bathroom Pi's older OS made a native install more reliable than fighting Docker on legacy hardware.</li>
+</ul>
+</div>

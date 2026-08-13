@@ -1,0 +1,35 @@
+---
+title: "OctoPrint"
+section: "smarthome"
+parent: "/"
+description: "Remote 3D printer control and camera streaming with OctoPrint on Raspberry Pi."
+layout: base.njk
+---
+<h1>OctoPrint</h1>
+<div class="detail-content">
+
+<p>A Raspberry Pi 3B runs OctoPrint for remote 3D-printer control, plus a
+live camera stream so print progress can be checked without walking over
+to the printer.</p>
+
+<h2>Current setup</h2>
+<ul>
+<li><strong>OctoPrint</strong> runs as a Docker container — the main remote control interface for the printer.</li>
+<li><strong>Camera streaming</strong> is handled by a lightweight camera-server project, exposing both an HLS stream and an MJPEG stream, the latter wired directly into OctoPrint's webcam panel.</li>
+<li><strong>Container management</strong> (Portainer, cAdvisor, a node exporter) runs alongside, giving the same monitoring pattern as the rest of the fleet.</li>
+</ul>
+
+<h2>History</h2>
+<p>This Pi originally also had a small status display attached; the
+display was later moved to the backup Pi (which benefits more from local,
+no-network status output) once this Pi's camera stream took over as the
+primary way to check on things remotely. The unit was also renamed at
+that point to better reflect its now-singular focus on the printer.</p>
+
+<h2>Notable OS lesson</h2>
+<p>After moving this Pi to a newer OS release, boot configuration files
+moved to a new path — editing the old path silently does nothing, which
+is an easy trap when following older notes or tutorials for the same
+hardware.</p>
+
+</div>

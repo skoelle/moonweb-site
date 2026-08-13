@@ -1,0 +1,36 @@
+---
+title: "Xubuntu Dev VM"
+section: "infra"
+parent: "/"
+description: "A disposable, daily-backed-up Xubuntu VM for AI-assisted, remote development via SSH and Chrome Remote Desktop."
+layout: base.njk
+---
+<h1>Xubuntu Dev VM</h1>
+<div class="detail-content">
+
+<p>This is a Xubuntu virtual machine on <a href="/proxmox/">Proxmox pve2</a> in the study that serves as my main development environment, replacing the need for a dedicated physical workstation. It's designed to be lightweight, remotely accessible from anywhere, and — most importantly — completely disposable, which is what makes it a safe place to let AI coding agents operate with far more autonomy than I'd otherwise allow.</p>
+
+<h2>Why a disposable VM is the biggest advantage</h2>
+<ul>
+<li><strong>Daily backups as a safety net</strong> — the VM is backed up once a day through Proxmox. If an AI agent breaks the system, misconfigures something critical, or deletes the wrong files, I simply restore yesterday's snapshot rather than manually debugging the damage.</li>
+<li><strong>No irreplaceable local data</strong> — nothing important lives only on this VM. All actual project code lives in Git repositories, so after a restore I just <code>git pull</code> everything back and I'm exactly where I left off, minus whatever the agent broke.</li>
+<li><strong>Higher trust, more autonomy for AI agents</strong> — because the worst-case outcome is "restore a snapshot and re-pull," I can give coding agents like OpenCode much broader permissions on this machine than I would on a system holding unique, unbacked-up state. The blast radius of a mistake is capped at "lose a few hours of uncommitted work," never at "lose data."</li>
+<li><strong>Cheap to rebuild from scratch</strong> — if the VM ever gets into a truly bad state, standing up a fresh Xubuntu VM and re-cloning repos is a short, well-understood process rather than an emergency.</li>
+</ul>
+
+<h2>Remote workflow via SSH</h2>
+<ul>
+<li><strong><a href="https://herdr.dev/">Herdr</a></strong> — manages my development workspaces over SSH, letting me organize and switch between multiple project contexts on the VM without manually juggling terminal sessions.</li>
+<li><strong><a href="https://opencode.ai/de">OpenCode</a></strong> — the AI coding agent I run inside these workspaces; it's the main reason the VM's disposability matters, since it can act with elevated freedom knowing any damage is trivially reversible.</li>
+<li><strong><a href="https://github.com/jesseduffield/lazygit">lazygit</a></strong> — terminal UI for Git, used for fast commit/branch/diff workflows directly inside the SSH session without leaving the terminal.</li>
+</ul>
+
+<h2>Graphical fallback via Chrome Remote Desktop</h2>
+<ul>
+<li><strong>Full desktop access</strong> — when a GUI IDE is preferable to terminal-based editing, Chrome Remote Desktop connects straight into the Xubuntu desktop from any device.</li>
+<li><strong>WebStorm</strong> — used for TypeScript projects that benefit from a full IDE (refactoring tools, debugging, integrated test runners).</li>
+<li><strong>PyCharm</strong> — used the same way for Python projects.</li>
+</ul>
+
+<p class="redacted-note">This setup deliberately treats the dev VM as ephemeral infrastructure, not a pet — the philosophy is: keep state in Git, keep the VM replaceable, and let daily backups absorb the risk of giving an AI agent real write access to the system.</p>
+</div>

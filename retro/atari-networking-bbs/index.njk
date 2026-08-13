@@ -1,0 +1,22 @@
+---
+title: "Getting a 40-Year-Old Computer Online: Atari ST Networking and BBS Access"
+section: "retro"
+description: "Connecting an Atari ST to the modern internet and to dial-up-era bulletin board systems, warts and all."
+layout: base.njk
+---
+<a class="back-link" href="/">← Back to retro overview</a>
+<h1>Getting a 40-Year-Old Computer Online: Atari ST Networking and BBS Access</h1>
+<div class="detail-content">
+
+<p>The Atari ST predates the consumer internet entirely, yet a surprising amount of retrofitted networking hardware exists to get one talking to a modern network — or to a bulletin board system straight out of the dial-up era.</p>
+
+<h2>The Toolbox</h2>
+<ul>
+<li><strong>STinG</strong> — the classic TCP/IP stack for TOS, still the backbone for anything network-related on an original machine, from Telnet sessions to FTP transfers.</li>
+<li><strong>ESP32-based Wi-Fi modules</strong> — small serial-attached boards that emulate a modem over Wi-Fi. Results vary wildly between firmware projects: one variant handles HTTP downloads fine but can't do Telnet, another supports full modem emulation but drops connections unpredictably during longer BBS sessions.</li>
+<li><strong>Terminal software quirks</strong> — ANSI art and special characters routinely render incorrectly in period terminal clients, an ongoing annoyance when connecting to text-heavy BBS systems.</li>
+<li><strong>File transfer the easy way</strong> — a plain FTP client on the Atari talking to a NAS on the local network sidesteps most of the internet-connectivity headaches entirely, especially for moving disk images and software archives back and forth.</li>
+</ul>
+
+<p class="redacted-note">If you're chasing BBS nostalgia on real hardware: budget far more patience for the networking layer than for the actual computer. The 1980s hardware is the easy part; convincing 2020s Wi-Fi and modern BBS ANSI dialects to cooperate is the real challenge.</p>
+</div>

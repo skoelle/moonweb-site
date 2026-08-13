@@ -1,0 +1,41 @@
+---
+title: "Backup Strategy"
+section: "infra"
+parent: "/"
+description: "Layered 3-2-1 backup strategy covering NAS snapshots, offsite copies, and cloud storage."
+layout: base.njk
+---
+<h1>Backup Strategy</h1>
+<div class="detail-content">
+
+<p>The homelab uses a layered backup approach, split into two independent
+tracks: NAS user content, and Proxmox VM/LXC backups. Both follow a
+3-2-1-style rule — multiple copies, multiple media types, at least one
+copy on a different machine.</p>
+
+<h2>NAS user content — four layers</h2>
+<table>
+<tr><th>Layer</th><th>Target</th><th>Frequency</th><th>Purpose</th></tr>
+<tr><td>Snapshots</td><td>Synology, built-in</td><td>Hourly</td><td>Fast recovery of accidentally deleted files</td></tr>
+<tr><td>Local backup</td><td>USB drive attached to the NAS</td><td>Daily</td><td>Local versioned backup, independent of the NAS disks</td></tr>
+<tr><td>Offsite sync</td><td>External drive on a Raspberry Pi in a different room</td><td>Weekly</td><td>Geographically separated copy within the flat</td></tr>
+<tr><td>Cloud archive</td><td>Cloud storage</td><td>Continuous</td><td>Off-site copy for worst-case scenarios (fire, theft)</td></tr>
+</table>
+
+<h2>Proxmox VM/LXC backups — three copies, two machines</h2>
+<table>
+<tr><th>Copy</th><th>Target</th><th>Frequency</th></tr>
+<tr><td>1 — original</td><td>Proxmox host itself</td><td>Daily</td></tr>
+<tr><td>2 — primary offsite</td><td>Synology NAS (different machine)</td><td>Daily, right after copy 1</td></tr>
+<tr><td>3 — secondary offsite</td><td>Raspberry Pi backup target, different room</td><td>Daily (skipped one day/week to avoid network contention with the weekly NAS sync)</td></tr>
+</table>
+
+<h2>Design principles</h2>
+<ul>
+<li>Backups always cross at least one machine boundary — nothing is considered "backed up" if it only lives on the source machine's local disk.</li>
+<li>Weekly and daily jobs are scheduled to avoid saturating the internal power-line network link used by the offsite backup target.</li>
+<li>All scheduled jobs ping a dead-man's-switch monitoring service; a missed backup triggers an alert.</li>
+<li>Power to the offsite drive is only switched on for the duration of its weekly sync, to save power and extend disk life.</li>
+</ul>
+
+</div>

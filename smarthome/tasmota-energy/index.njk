@@ -1,0 +1,45 @@
+---
+title: "Tasmota & Energy Monitoring"
+section: "smarthome"
+parent: "/"
+description: "Smart plugs and power monitoring across the flat with daily usage statistics."
+layout: base.njk
+---
+<h1>Tasmota & Energy Monitoring</h1>
+<div class="detail-content">
+
+<p>Power monitoring across the flat runs on a mix of Tasmota-flashed smart
+plugs, tracking accumulated kWh per device and feeding daily usage
+figures into the home dashboard.</p>
+
+<h2>What's metered</h2>
+<table>
+<tr><th>Device type</th><th>Typical use</th><th>Rough daily usage</th></tr>
+<tr><td>Fridge plug</td><td>Kitchen appliance monitoring</td><td>~0.8 kWh/day (very stable)</td></tr>
+<tr><td>Dishwasher plug</td><td>Appliance monitoring</td><td>~1.2 kWh/day (varies with use)</td></tr>
+<tr><td>Office/desk plug</td><td>Workstation + peripherals</td><td>~1.2-1.7 kWh/day</td></tr>
+<tr><td>Entertainment plugs (TV, Apple TV)</td><td>Media devices</td><td>Very low, Apple TV especially so</td></tr>
+<tr><td>LED matrix displays</td><td>Ambient info displays</td><td>~0.04 kWh/day each</td></tr>
+</table>
+
+<h2>Multi-socket power strips</h2>
+<p>Several rooms use multi-outlet smart power strips (each socket
+individually switchable and metered) rather than single smart plugs — this
+keeps things like "washing machine + dryer" or "office desk cluster" on
+one strip while still tracking each socket's consumption separately.</p>
+
+<h2>Flashing process</h2>
+<p>New devices go through a standard conversion flow (from the
+manufacturer's original cloud-dependent firmware to Tasmota) using a
+well-documented community process. It occasionally fails on the first
+attempt due to a transient Wi-Fi handshake issue — retrying resolves it
+without any special handling.</p>
+
+<h2>What this data is used for</h2>
+<ul>
+<li>Spotting appliances with unexpectedly high standby draw.</li>
+<li>Sanity-checking that "turned off" devices are actually drawing near-zero power.</li>
+<li>Feeding the home dashboard's live power figures alongside the climate sensors.</li>
+</ul>
+
+</div>

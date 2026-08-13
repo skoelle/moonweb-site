@@ -1,0 +1,35 @@
+---
+title: "Synology NAS"
+section: "infra"
+parent: "/"
+description: "Model, storage setup and current role of the Synology NAS in the homelab after the late-2025 cleanup."
+layout: base.njk
+---
+<h1>Synology NAS</h1>
+<div class="detail-content">
+
+<p>The NAS at the center of the homelab is a Synology DS918+, a 4-bay desktop NAS originally released in 2018. It runs Synology's DSM operating system and uses SHR (Synology Hybrid RAID) across its four drive bays, mixing different drive capacities while still keeping a full mirror-equivalent level of redundancy. After a focused cleanup pass at the end of 2025, the NAS was stripped down to only the packages and containers that are actually in active use, rather than years of accumulated, half-used software.</p>
+
+<h2>Storage</h2>
+<ul>
+<li><strong>Bays</strong> — 4 drive slots, populated with a mix of large-capacity HDDs rather than a single uniform set, which SHR was specifically chosen to support.</li>
+<li><strong>RAID type</strong> — SHR (Synology Hybrid RAID), giving single-drive fault tolerance while allowing disks of different sizes to be mixed and later upgraded one at a time without rebuilding the whole array from scratch.</li>
+<li><strong>Snapshots</strong> — Btrfs snapshot replication is used for file versioning instead of the classic recycle bin, taken hourly with a retention schedule of 7 days, 3 weeks, 3 months and 1 year.</li>
+</ul>
+
+<h2>What runs on it today</h2>
+<ul>
+<li><strong>Docker host VM</strong> — a dedicated Debian VM (docker-host-nas) runs on the NAS's virtualization layer, hosting containers that specifically need direct access to NAS storage volumes.</li>
+<li><strong>File storage & backup target</strong> — the core role of the NAS remains classic network storage, plus acting as the backup destination for scheduled Proxmox VM backups from the rest of the homelab.</li>
+<li><strong>Legacy packages removed</strong> — unused DSM packages (like a web/photo/media package, an old drive-sync service and unused indexing) were uninstalled to reduce background load and disk writes.</li>
+</ul>
+
+<h2>Main strengths</h2>
+<ul>
+<li><strong>Central storage hub</strong> — single source of truth for files and backups that every other host in the network (Proxmox VMs, exporters, workstations) can write to or read from.</li>
+<li><strong>Built-in snapshotting</strong> — Btrfs-based snapshots give point-in-time recovery without the overhead of a separate versioning package.</li>
+<li><strong>Flexible RAID</strong> — SHR allows disks to be swapped and capacity to grow over time without needing matched drive sizes from day one.</li>
+<li><strong>Lightweight virtualization</strong> — running a single purpose-built Docker VM on the NAS keeps storage-adjacent workloads close to the data, without turning the NAS itself into a general-purpose application server.</li>
+</ul>
+
+</div>

@@ -1,0 +1,43 @@
+---
+title: "LXC Container Strategy"
+section: "infra"
+parent: "/"
+description: "Overview of the lightweight LXC containers running on the main Proxmox host, and why they are LXC instead of Docker."
+layout: base.njk
+---
+<h1>LXC Container Strategy</h1>
+<div class="detail-content">
+
+<p>Alongside the Docker-based setup, I run a small number of Linux Containers (LXC) directly on the main Proxmox host (PVE). An LXC is an OS-level virtualization container — unlike a Docker container, which packages a single application and its dependencies, an LXC behaves like a full lightweight Linux system with its own init process, systemd services and package manager, but without the overhead of a full virtual machine. Proxmox manages LXCs natively as first-class citizens, right next to VMs, with their own snapshotting, backup and resource-limit tooling. I use far fewer LXCs than Docker containers, reserving them for cases where a persistent, OS-like environment or tight integration with Proxmox itself makes more sense than a containerized app.</p>
+
+<h2>Why LXC instead of Docker here</h2>
+<ul>
+<li><strong>Native Proxmox integration</strong> — LXCs show up directly in the Proxmox UI with their own resource graphs, backup jobs and snapshots, without needing a Docker host VM in between.</li>
+<li><strong>Lower overhead than a VM</strong> — an LXC shares the host kernel, so it starts almost instantly and uses less RAM/CPU than a full Debian VM, while still feeling like a real, persistent Linux machine.</li>
+<li><strong>Better fit for system-level services</strong> — some services (like a DNS resolver or a database server) benefit from being a stable, always-on OS process with predictable networking, rather than an ephemeral, frequently-redeployed container.</li>
+<li><strong>Simplicity for infrequently-changed services</strong> — these three services rarely change their configuration, so the extra flexibility of Compose-based redeployment isn't needed; a straightforward apt-installed service is easier to reason about long-term.</li>
+</ul>
+
+<h2>Pi-hole</h2>
+<ul>
+<li><strong>Purpose</strong> — network-wide DNS sinkhole and ad/tracker blocking for every device on the home network.</li>
+<li><strong>Why LXC</strong> — DNS resolution needs to be rock-solid and always reachable at a fixed IP; running it as a lean, dedicated LXC avoids depending on the Docker host VM being up, and keeps it isolated from Docker networking quirks that could interfere with DNS.</li>
+<li><strong>Advantage</strong> — near-zero overhead, boots in seconds after a Proxmox host reboot, and its stability is decoupled from whatever is happening on the Docker hosts.</li>
+</ul>
+
+<h2>Ubuntu-Worker</h2>
+<ul>
+<li><strong>Purpose</strong> — a general-purpose Ubuntu LXC used as a flexible worker/utility machine for ad-hoc scripts, cron jobs and small maintenance tasks that don't warrant their own container image.</li>
+<li><strong>Why LXC</strong> — it needs to behave like a normal Linux box (full package manager, cron, shell access) rather than a single-purpose containerized app, which makes an LXC a much better fit than wrapping everything in Docker.</li>
+<li><strong>Advantage</strong> — quick to spin up, snapshot and roll back via Proxmox, and useful as a lightweight sandbox for testing shell scripts or automation before productionizing them elsewhere.</li>
+</ul>
+
+<h2>MariaDB</h2>
+<ul>
+<li><strong>Purpose</strong> — central relational database instance, currently used by services such as nginx-proxy-manager, reachable over the network at a fixed internal IP.</li>
+<li><strong>Why LXC</strong> — a database benefits from direct, persistent disk access and predictable performance without the extra storage-driver indirection of Docker volumes; running it as an unprivileged LXC keeps it isolated while still feeling like a native MariaDB install.</li>
+<li><strong>Advantage</strong> — simple backup via <code>mysqldump</code>, straightforward remote access configuration (bind-address, dedicated service users per consuming application), and one central database that multiple Docker containers on other hosts can connect to over the network instead of each running their own database container.</li>
+</ul>
+
+<p class="redacted-note">All three LXCs run exclusively on the main Proxmox host (PVE), not on pve2 or the Synology — they're intentionally kept centralized since they're few in number and don't need the multi-host redundancy that the Docker setup has. IPs, credentials and specific VMIDs are omitted here; only the reasoning behind the LXC-vs-Docker choice is shown.</p>
+</div>

@@ -1,0 +1,25 @@
+---
+title: "Why an ET4000 Graphics Card and a Mega ST Don't Mix (Yet)"
+section: "retro"
+description: "A cautionary tale about pushing 1980s power supplies past their limits with a modern-ish graphics card."
+layout: base.njk
+---
+<a class="back-link" href="/">← Back to retro overview</a>
+<h1>Why an ET4000 Graphics Card and a Mega ST Don't Mix (Yet)</h1>
+<div class="detail-content">
+
+<p>An ET4000 ISA graphics card, adapted to the Atari MegaBus, promises higher resolutions and more colors than the native Shifter chip can dream of. In practice, bolting one onto a heavily upgraded Mega ST turned into a lesson in power supply physics.</p>
+
+<h2>What Went Wrong</h2>
+<ul>
+<li><strong>Power supply overload</strong> — the stock Mega ST PSU simply wasn't designed to feed a MonSTerBoard, an ET4000, and a MegaBus adapter at the same time. The 5V and 12V rails ended up right at their instability limit.</li>
+<li><strong>The missing -12V</strong> — the ET4000 needs -12V for its output drivers, usually tapped from the RS-232 port, adding yet another drain on an already stressed supply.</li>
+<li><strong>Heat with nowhere to go</strong> — the card runs hot, and the Mega ST case has zero provision for active cooling.</li>
+<li><strong>Signal integrity issues</strong> — the ISA-to-MegaBus adapter introduces reflections at higher frequencies, and access to ET4000 RAM is roughly 65% slower than native ST RAM, with no hardware BitBLT to make up for it.</li>
+</ul>
+
+<h2>The Practical Fallback</h2>
+<p>FPGA cores on MiSTer and MiST only emulate the native ST Shifter — there's no ET4000 emulation on the horizon given the FPGA resources it would require. The real answer for higher resolutions turned out to be software: Hatari running in VDI mode on a Raspberry Pi 400, which comfortably delivers 1280×768 with far more colors and zero PSU drama.</p>
+
+<p class="redacted-note">Lesson learned: "just add a graphics card" on 40-year-old hardware is never "just" anything. The ET4000 project isn't dead, but it's shelved until there's a properly beefed-up power supply and cooling solution to go with it.</p>
+</div>

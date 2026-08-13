@@ -1,0 +1,33 @@
+---
+title: "Infra"
+section: "infra"
+description: "Homelab infrastructure overview: Proxmox hosts, Synology NAS, Docker VMs and Setup-Guides."
+layout: base.njk
+sections:
+  - heading: "Plattform"
+    cards:
+      - title: "🖥️ Proxmox host (PVE)"
+        summary: "Hosting environment for running production VMs and LXC containers for the homelab."
+        href: "/proxmox/"
+      - title: "💾 Synology DS918+"
+        summary: "NAS running Docker services and acting as the primary backup repository."
+        href: "/synology/"
+      - title: "🐳 Docker VMs (Debian)"
+        summary: "Primary target for new Docker/Compose services, running the monitoring exporters."
+        href: "/docker/"
+      - title: "📦 LxC Container"
+        summary: "Pi-hole, Ubuntu-Worker and MariaDB running on slim LxC Containers."
+        href: "/lxc/"
+  - heading: "Strategies & Setup-Guides"
+    cards:
+      - title: "🔄 Backup strategy"
+        summary: "Layered backup approach covering NAS user content and VM/LXC backups across multiple locations."
+        href: "/backup-strategy/"
+      - title: "📊 Prometheus/Grafana"
+        summary: "Central metrics collection and dashboards for hosts, containers, and hardware."
+        href: "/monitoring/"
+      - title: "💻 Dev environment"
+        summary: "A disposable, daily-backed-up Xubuntu VM for AI-assisted, remote development via SSH and Chrome Remote Desktop."
+        href: "/dev-environment/"
+---
+{% include "card-grid.njk" %}

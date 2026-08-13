@@ -1,0 +1,127 @@
+[
+  {
+    "title": "Calendar Sync",
+    "repo": "calender_sync",
+    "subcategory": "Automation & Sync",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "MariaDB"
+    ],
+    "summary": "Syncs a private Google Calendar (ICS) into MariaDB, with recurring-event expansion, soft-delete tracking, and a FastAPI web UI/REST API.",
+    "repo_url": "https://github.com/skoelle/calender_sync"
+  },
+  {
+    "title": "iCloud Contacts Sync",
+    "repo": "icloud-contacts-sync",
+    "subcategory": "Automation & Sync",
+    "status": "active",
+    "stack": [
+      "Python",
+      "MariaDB",
+      "CardDAV"
+    ],
+    "summary": "Automated iCloud contacts sync to MariaDB via CardDAV delta sync, multi-user account mapping, birthday email digest, and a read-only API/web view behind Authelia.",
+    "repo_url": "https://github.com/skoelle/icloud-contacts-sync"
+  },
+  {
+    "title": "DynDNS Updater",
+    "repo": "dyndns-updater",
+    "subcategory": "Automation & Sync",
+    "status": "active",
+    "stack": [
+      "Python",
+      "Docker"
+    ],
+    "summary": "Cloudflare + FreeDNS DynDNS updater for FritzBox (TR-064), packaged as a Docker container.",
+    "repo_url": "https://github.com/skoelle/dyndns-updater"
+  },
+  {
+    "title": "kctl-tui",
+    "repo": "kctl-tui",
+    "subcategory": "Dev Tools",
+    "status": "active",
+    "stack": [
+      "Go",
+      "Bubble Tea"
+    ],
+    "summary": "A terminal entry point for everyday Kubernetes work: guided context/team/namespace selection, a 3-pane k9s-style status view, guided rollout restarts, and an AWS Secrets Manager <-> Kubernetes Secret diff/sync workflow.",
+    "repo_url": "https://github.com/skoelle/kctl-tui"
+  },
+  {
+    "title": "FocusApp",
+    "repo": "focusapp",
+    "subcategory": "Web Apps",
+    "status": "active",
+    "stack": [
+      "React",
+      "TypeScript",
+      "ASP.NET Core",
+      "MariaDB"
+    ],
+    "summary": "A clean, modern todo application with drag & drop reordering. Responsive design, MariaDB persistence, Docker deployment.",
+    "repo_url": "https://github.com/skoelle/focusapp"
+  },
+  {
+    "title": "PeopleCostCounter",
+    "repo": "PeopleCostCounter",
+    "subcategory": "Web Apps",
+    "status": "active",
+    "stack": [
+      "Vanilla JS"
+    ],
+    "summary": "A single-page tool that shows in real time how much a meeting is costing, based on team size and average salary, with English and German UIs.",
+    "repo_url": "https://github.com/skoelle/PeopleCostCounter"
+  },
+  {
+    "title": "MVG Departures",
+    "repo": "mvg-departures",
+    "subcategory": "Web Apps",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI"
+    ],
+    "summary": "Compact MVG/S-Bahn departure monitor with configurable stations, direction filters, and a mobile-friendly HTML/JSON view.",
+    "repo_url": "https://github.com/skoelle/mvg-departures"
+  },
+  {
+    "title": "M5Stack Dashboard",
+    "repo": "m5stack-dashboard",
+    "subcategory": "Firmware & Hardware",
+    "status": "active",
+    "stack": [
+      "C++",
+      "PlatformIO",
+      "ESP32"
+    ],
+    "summary": "M5Stack Core dashboard showing live weather, calendar events, and MVG departures. Navigate with 3 physical buttons, dark iOS-style UI.",
+    "repo_url": "https://github.com/skoelle/m5stack-dashboard"
+  },
+  {
+    "title": "WT32-SC01 Dashboard",
+    "repo": "wt32sc01-dashboard",
+    "subcategory": "Firmware & Hardware",
+    "status": "active",
+    "stack": [
+      "C++",
+      "PlatformIO",
+      "LovyanGFX",
+      "LVGL"
+    ],
+    "summary": "Touch dashboard for the WT32-SC01 Plus (ESP32-S3, compact display) showing weather, calendar events and MVG departures from local APIs.",
+    "repo_url": "https://github.com/skoelle/wt32sc01-dashboard"
+  },
+  {
+    "title": "Marcer GameDVD Launcher",
+    "repo": "marcer-gamedvd-launcher",
+    "subcategory": "Misc",
+    "status": "active",
+    "stack": [
+      "C#"
+    ],
+    "summary": "Console launcher for a Atari ST/Falcon GameDVD USB stick — browse, compare, and launch games from the terminal with overlay/patch mode.",
+    "repo_url": "https://github.com/skoelle/marcer-gamedvd-launcher"
+  }
+]

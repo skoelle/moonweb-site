@@ -1,0 +1,22 @@
+---
+title: "Vampire V4, A600GS or MiSTer: Amiga Hardware Isn't a Simple Speed Race"
+section: "retro"
+description: "Why raw benchmark numbers are actively misleading when comparing modern Amiga hardware options."
+layout: base.njk
+---
+<a class="back-link" href="/">← Back to retro overview</a>
+<h1>Vampire V4, A600GS or MiSTer: Amiga Hardware Isn't a Simple Speed Race</h1>
+<div class="detail-content">
+
+<p>Trying to compare Amiga hardware options by benchmark numbers alone is a trap. A Dhrystone score from a real FPGA CPU implementation and an ARM chip's MIPS rating measure completely different things — and neither tells you much about which system will actually run your favourite demo correctly.</p>
+
+<h2>The Contenders</h2>
+<ul>
+<li><strong>Vampire V4 Standalone</strong> — an FPGA-implemented 68080 CPU that's genuinely blisteringly fast (sub-second Workbench boots), but software compatibility suffers since the 68080 isn't a perfect 68060 clone. Best for games and demos, not for daily productivity.</li>
+<li><strong>A600GS / A1200NG</strong> — ARM-based boards running Amiberry underneath, in either a complete mini-PC (A600GS) or a drop-in motherboard replacement with real floppy and CompactFlash support (A1200NG). Cheap, plug-and-play, but with occasional software compatibility quirks.</li>
+<li><strong>MiSTer with the Minimig core</strong> — "loses" on paper to A600GS in raw MIPS numbers, but wins on emulation accuracy and software compatibility. Its D-Cache-on mode is faster still but introduces glitches, so it's best left off for stability.</li>
+<li><strong>The real decision factor</strong> — not speed, but compatibility, stability, and how much you value hardware-accurate timing versus raw throughput.</li>
+</ul>
+
+<p class="redacted-note">Conclusion after digging through all three: if you already own a working MiSTer, there's no compelling reason to chase the newer ARM boards for "better" performance — the practical difference is marginal, and MiSTer's broader core library wins in the long run.</p>
+</div>

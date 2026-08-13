@@ -1,0 +1,125 @@
+name: Build & Deploy moonweb-site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel in-progress runs for the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "22"
+
+jobs:
+  build:
+    name: Build ${{ matrix.site }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        site: [hub, infra, smarthome, code, retro]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build ${{ matrix.site }}
+        run: npm run build:${{ matrix.site }}
+
+      - name: Validate build output
+        run: |
+          if [ ! -d "dist/${{ matrix.site }}" ]; then
+            echo "Error: dist/${{ matrix.site }} not found"
+            exit 1
+          fi
+          if [ -z "$(ls -A dist/${{ matrix.site }}" 2>/dev/null)" ]; then
+            echo "Error: dist/${{ matrix.site }} is empty"
+            exit 1
+          fi
+          echo "Build output:"
+          find dist/${{ matrix.site }} -type f | head -20
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ matrix.site }}
+          path: dist/${{ matrix.site }}
+          retention-days: 7
+
+  deploy:
+    name: Deploy ${{ matrix.site }}
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - site: hub
+            cf_project: moonweb-hub
+          - site: infra
+            cf_project: moonweb-infra
+          - site: smarthome
+            cf_project: moonweb-smarthome
+          - site: code
+            cf_project: moonweb-code
+          - site: retro
+            cf_project: moonweb-retro
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-${{ matrix.site }}
+          path: dist/${{ matrix.site }}
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist/${{ matrix.site }} --project-name=${{ matrix.cf_project }} --commit-dirty=true
+
+  summary:
+    name: Deploy Summary
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Print deployment summary
+        run: |
+          echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ needs.deploy.result }}" = "success" ]; then
+            echo "✅ All sites deployed successfully!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Deployment failed. Check the deploy jobs for details." >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Sites" >> $GITHUB_STEP_SUMMARY
+          echo "| Site | URL |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-----|" >> $GITHUB_STEP_SUMMARY
+          echo "| hub | https://hub.moonweb.org |" >> $GITHUB_STEP_SUMMARY
+          echo "| infra | https://infra.moonweb.org |" >> $GITHUB_STEP_SUMMARY
+          echo "| smarthome | https://smarthome.moonweb.org |" >> $GITHUB_STEP_SUMMARY
+          echo "| code | https://code.moonweb.org |" >> $GITHUB_STEP_SUMMARY
+          echo "| retro | https://retro.moonweb.org |" >> $GITHUB_STEP_SUMMARY
+
+# Required repo secrets:
+#   CLOUDFLARE_API_TOKEN   — Cloudflare API token with Pages:Edit permission
+#   CLOUDFLARE_ACCOUNT_ID  — Cloudflare account ID
+#
+# Required one-time setup (see PLAN.md Phase 2):
+#   Create Cloudflare Pages projects and bind custom domains.
+#   DNS is already on Cloudflare (SPEC.md §4.6).
+#   Note: Cloudflare Free-Tier limits to 5 Pages projects per repository.
+#

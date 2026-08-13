@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.cache/
+*.log
+.idea/
+.env*
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.cert
+*.crt
+.DS_Store
+*.swp
+*.swo

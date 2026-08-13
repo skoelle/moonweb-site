@@ -1,0 +1,38 @@
+---
+title: "Monitoring"
+section: "infra"
+parent: "/"
+description: "Prometheus and Grafana monitoring stack for hosts, containers, and hardware metrics."
+layout: base.njk
+---
+<h1>Monitoring</h1>
+<div class="detail-content">
+
+<p>Prometheus and Grafana form the central monitoring stack for the whole
+homelab, running as Docker containers on the NAS.</p>
+
+<h2>What's monitored</h2>
+<ul>
+<li><strong>Proxmox host metrics</strong> — a PVE exporter reports node-level and per-VM/LXC CPU, memory, and disk metrics into a dedicated Grafana dashboard.</li>
+<li><strong>Host metrics everywhere</strong> — a node exporter runs on the NAS, the Docker host, and every Raspberry Pi, feeding basic CPU/RAM/disk/network stats.</li>
+<li><strong>Container metrics</strong> — cAdvisor runs on both the Docker host and the NAS, breaking down resource usage per container.</li>
+<li><strong>Network hardware via SNMP</strong> — an SNMP exporter polls a network-attached printer for toner level, page count, and status, proving the same pattern works for any SNMP-capable device.</li>
+</ul>
+
+<h2>Dashboards</h2>
+<table>
+<tr><th>Dashboard</th><th>Focus</th></tr>
+<tr><td>Proxmox monitoring (extended)</td><td>Node-level and per-guest VM/LXC metrics</td></tr>
+<tr><td>Docker container monitoring</td><td>Per-container CPU/memory/network/disk</td></tr>
+<tr><td>Network printer</td><td>Toner level, page count, online/offline status via SNMP</td></tr>
+</table>
+
+<h2>Open items</h2>
+<ul>
+<li>Alerting rules are not yet configured for most services.</li>
+<li>The secondary (test) Proxmox host isn't monitored yet — it's usually powered off.</li>
+<li>Retention policy for Prometheus data hasn't been tuned.</li>
+<li>Monitoring data itself isn't currently backed up.</li>
+</ul>
+
+</div>

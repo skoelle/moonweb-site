@@ -1,0 +1,39 @@
+---
+title: "HomematicIP + MQTT"
+section: "smarthome"
+parent: "/"
+description: "How HomematicIP room sensors are bridged into MQTT and stored in InfluxDB for dashboards."
+layout: base.njk
+---
+<h1>HomematicIP + MQTT</h1>
+<div class="detail-content">
+
+<p>HomematicIP room thermostats (living room, bedroom, home office) report
+temperature and humidity into the smart home dashboard via a small,
+deliberately low-tech bridge: <strong>Home Assistant → MQTT → InfluxDB</strong>.</p>
+
+<h2>Why this path, and not a direct integration</h2>
+<p>A dedicated HomematicIP-to-MQTT exporter used to run as a standalone
+Docker container, but the underlying Python library lost compatibility
+with HomematicIP's cloud API and hasn't been maintained since 2022. Home
+Assistant, on the other hand, ships an actively maintained HomematicIP
+Cloud integration — so instead of chasing a broken exporter, the bridge
+now runs as native Home Assistant automations that simply republish
+sensor state changes to MQTT.</p>
+
+<h2>How it works</h2>
+<ol>
+<li>Home Assistant automations trigger on thermostat state changes.</li>
+<li>Each automation publishes the current temperature and humidity to a per-room MQTT topic.</li>
+<li>A small .NET background service subscribes to those topics and writes the values into InfluxDB, tagged by room and sensor type.</li>
+<li>Grafana reads from InfluxDB for the temperature/humidity dashboards.</li>
+</ol>
+
+<h2>Why this is worth documenting</h2>
+<ul>
+<li>No extra Docker container or unmaintained library dependency.</li>
+<li>Cloud-API changes are absorbed by Home Assistant's own maintainers, not by custom code.</li>
+<li>The MQTT bridge is just configuration (automations), not a service that needs its own uptime monitoring.</li>
+</ul>
+
+</div>

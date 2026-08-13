@@ -1,0 +1,22 @@
+---
+title: "MiST and MiSTer: Two FPGA Boxes, Two Very Different Personalities"
+section: "retro"
+description: "Why the newer, more powerful MiSTer isn't automatically the better choice for every retro system."
+layout: base.njk
+---
+<a class="back-link" href="/">← Back to retro overview</a>
+<h1>MiST and MiSTer: Two FPGA Boxes, Two Very Different Personalities</h1>
+<div class="detail-content">
+
+<p>Both boards run classic computers as hardware-accurate FPGA cores rather than software emulation, but living with them side by side reveals they're not interchangeable — each one is simply better at certain jobs.</p>
+
+<h2>Division of Labour</h2>
+<ul>
+<li><strong>MiST for Atari ST</strong> — older and more limited in scope than MiSTer, but its ST/STE core is rock solid. It's the default choice for anything Atari, paired with a network-capable configuration for file transfers.</li>
+<li><strong>MiSTer for everything else</strong> — Amiga, DOS (via the AO486 core), and a huge library of other systems. Its Atari ST core, oddly, is the less reliable one of the two boards — reason enough to keep MiST around instead of retiring it.</li>
+<li><strong>Native resolution ceiling</strong> — both boards only emulate the original Shifter chip on Atari ST: Low-Res (320×200), Medium-Res (640×200), and High-Res (640×400 mono). No ET4000-style graphics card emulation is on the table; a Falcon030 core with higher native resolutions has been rumoured for years without shipping.</li>
+<li><strong>Known rough edges</strong> — accessory programs loading but not appearing on the desktop, and disabled XBOOT support, are still open items to chase down on the MiST side.</li>
+</ul>
+
+<p class="redacted-note">The takeaway after months of use: don't assume the shinier, newer board wins every category. Sometimes the "older" FPGA implementation is simply the more mature one for a specific chipset.</p>
+</div>

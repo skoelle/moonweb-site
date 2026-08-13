@@ -1,0 +1,22 @@
+---
+title: "PiMiga 3 to 5: Chasing the Perfect Amiga-on-a-Pi Distro"
+section: "retro"
+description: "Three generations of PiMiga later, here's what actually changed — and why newer isn't always better."
+layout: base.njk
+---
+<a class="back-link" href="/">← Back to retro overview</a>
+<h1>PiMiga 3 to 5: Chasing the Perfect Amiga-on-a-Pi Distro</h1>
+<div class="detail-content">
+
+<p>PiMiga bundles Amiberry, a full Amiga 1200 AGA emulation with Workbench 3.1, and thousands of pre-installed games into a ready-to-flash SD card image. Living through three major versions taught a few unexpected lessons.</p>
+
+<h2>What Changed Across Versions</h2>
+<ul>
+<li><strong>PiMiga 3.0 (2022)</strong> — the original recipe: Amiberry under DietPi with an XFCE desktop and the iGame v2 launcher. Now effectively retired, with no further updates.</li>
+<li><strong>PiMiga 4.0 (2024)</strong> — brought multi-architecture support (ARM and Intel/AMD) and swapped in the MegaAGS launcher, with roughly 4,800 games pre-installed. Its biggest strength: MegaAGS ships with strong trainer/cheat support baked into its game profiles.</li>
+<li><strong>PiMiga 5.0 (Dec 2025, final release)</strong> — the creator's last planned version. Switches back to the simpler iGame v2 launcher, drops in 600+ auto-switching backdrops, and adds native support for the newest Pi hardware — but loses much of the trainer-focused depth that made version 4 so useful for casual replay sessions.</li>
+<li><strong>The real decision criterion</strong> — not "which is newest" but "do I care more about trainers/cheats (stick with v4's MegaAGS) or about the latest hardware support and polish (go with v5's iGame)". Running both on separate SD cards sidesteps the choice entirely.</li>
+</ul>
+
+<p class="redacted-note">Also worth knowing: getting the display right on an older 4:3 monitor is almost never a Raspberry Pi config.txt problem — it's nearly always an Amiberry/X11 scaling setting. Check the emulator's Integer Scaling option before touching boot config files.</p>
+</div>

@@ -1,0 +1,36 @@
+---
+title: "TubeArchivist"
+section: "smarthome"
+parent: "/"
+description: "Self-hosted YouTube archiving and media management running on the Synology NAS."
+layout: base.njk
+---
+<h1>TubeArchivist</h1>
+<div class="detail-content">
+
+<p>TubeArchivist runs on the Synology NAS via Docker Compose, self-hosting
+a searchable archive of downloaded YouTube content (Elasticsearch +
+Redis + the TubeArchivist app itself).</p>
+
+<h2>Why this needed real troubleshooting</h2>
+<p>Running Elasticsearch on Synology's DSM kernel isn't fully
+straightforward: newer Elasticsearch releases require a Linux kernel
+feature (SECCOMP) that Synology's kernel doesn't compile in. The fix is
+version-pinning Elasticsearch to the last release that still works
+without it, rather than fighting the kernel.</p>
+
+<h2>Other Synology-specific quirks</h2>
+<ul>
+<li>Synology's Container Manager doesn't always auto-join containers to the same Docker network even when they're defined in one Compose file — an explicit named network avoids silent connectivity failures between the app, Elasticsearch, and Redis.</li>
+<li>A version upgrade of the app itself required a very specific step-by-step path (skipping versions breaks the database migration) rather than jumping straight to the latest release.</li>
+</ul>
+
+<h2>What's backed up</h2>
+<table>
+<tr><th>Data</th><th>Included in NAS backup?</th></tr>
+<tr><td>Downloaded media files</td><td>Yes, via the NAS's own backup volumes</td></tr>
+<tr><td>Elasticsearch metadata/index</td><td>Yes, via the NAS's own backup volumes</td></tr>
+<tr><td>Redis cache</td><td>No — safe to delete/rebuild, only holds session data</td></tr>
+</table>
+
+</div>

@@ -1,0 +1,13 @@
+{% for section in sections %}
+<section class="card-section">
+  <h2>{{ section.heading }}</h2>
+  <div class="card-grid">
+    {% for card in section.cards %}
+    <a class="card" href="{{ card.href }}">
+      <h3>{% if card.emoji %}{{ card.emoji }} {% endif %}{{ card.title }}</h3>
+      <p>{{ card.summary }}</p>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}

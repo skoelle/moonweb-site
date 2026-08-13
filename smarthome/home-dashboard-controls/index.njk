@@ -1,0 +1,49 @@
+---
+title: "Home Control Buttons"
+section: "smarthome"
+description: "Overview of the central buttons dashboard used to control lighting, smart plugs, music, network devices and monitoring shortcuts around the apartment."
+layout: base.njk
+---
+<a class="back-link" href="/">← Back to infra overview</a>
+<h1>Home Control Buttons</h1>
+<div class="detail-content">
+
+<p>Instead of jumping between multiple apps and web UIs, I built a single static HTML page with grouped buttons that trigger actions or link directly to the relevant tool for every physical device and service in the apartment. It's the fastest way to switch lights, kill music, check a sensor or jump into an admin dashboard from a phone or tablet without hunting through bookmarks.</p>
+
+<h2>Lighting & ambience</h2>
+<ul>
+<li><strong>Balkon</strong> — LED on/off toggle for the balcony lighting.</li>
+<li><strong>Beleuchtung (all rooms)</strong> — global "all on"/"all off" shortcut plus per-room toggles for living room and kitchen lighting.</li>
+</ul>
+
+<h2>Music controls</h2>
+<ul>
+<li><strong>Kitchen</strong> — quick buttons for SomaFM, a classical station, and an off switch, all routed to the kitchen speaker.</li>
+<li><strong>Living room</strong> — the same SomaFM/classical options plus dedicated Lounge, 2000s and Deluxe stations, and an off switch.</li>
+</ul>
+
+<h2>Tasmota smart plugs</h2>
+<ul>
+<li><strong>TasmoAdmin</strong> — link straight into the central Tasmota device dashboard for firmware and config management.</li>
+<li><strong>Power strips (Gosund P1)</strong> — two multi-outlet strips covering the home-office network gear and backup drive, and the iMac corner with its peripherals.</li>
+<li><strong>Single sockets (SP112)</strong> — four individually switchable outlets covering hallway, kitchen, dryer and washing machine circuits, each also powering an associated LED matrix or small Pi.</li>
+<li><strong>Other plug families</strong> — additional Nous, Eightree (ESP32-based), Athom and IDS smart plugs cover spare capacity, living-room seating/desk outlets, storage room, kitchen appliances, and a few legacy TV/PC outlets (several currently marked defective).</li>
+</ul>
+
+<h2>Special devices & status</h2>
+<ul>
+<li><strong>Tasmota RF Bridge / Delock</strong> — bridges RF-only devices (like the home-office 3D printer plug) into the Tasmota/MQTT ecosystem.</li>
+<li><strong>LED Matrix restarts</strong> — one-click restart buttons for each room's LED matrix display, avoiding a manual power-cycle.</li>
+<li><strong>Healthchecks & version info</strong> — direct links into the Healthchecks dashboard and a version/status overview for the connected devices.</li>
+</ul>
+
+<h2>Network shortcuts</h2>
+<ul>
+<li><strong>Routers & mesh</strong> — quick links to the main Fritzbox and its mesh repeaters covering different floors and the kitchen/IoT band.</li>
+<li><strong>Switches</strong> — direct access to each Zyxel switch's admin page (server room, living room, PowerLAN, OpenWRT segment).</li>
+<li><strong>OpenWRT & mini router</strong> — links into the OpenWRT admin UI and the small travel router used for testing.</li>
+<li><strong>Sensors & MQTT</strong> — shortcuts to server-room and balcony sensor readings, bathroom analog values, and background worker/API status pages (HTML and JSON views).</li>
+</ul>
+
+<p class="redacted-note">This dashboard is intentionally simple: static HTML, no login, meant purely for convenience on the local network rather than as a secured control surface. Device names and room assignments are shown for structure; a few outlets are currently unused or marked defective and simply act as placeholders for future devices.</p>
+</div>

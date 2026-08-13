@@ -1,0 +1,68 @@
+---
+title: "Docker Container Strategy"
+section: "infra"
+parent: "/"
+description: "How self-hosted services are organized across three Docker hosts on Proxmox and Synology, using Docker Compose as the single source of truth."
+layout: base.njk
+---
+<h1>Docker Container Strategy</h1>
+<div class="detail-content">
+
+<p>My homelab runs almost entirely on Docker, spread across three dedicated Debian VMs instead of installing containers directly on bare metal or on the NAS operating system itself. Each VM is a clean, disposable Docker host that can be snapshotted and backed up as a whole through Proxmox, and every service is defined declaratively as a Docker Compose file living under <code>/docker-data/compose/&lt;service&gt;/</code>. This keeps the setup portable, reproducible, and easy to document — if a host dies, restoring a VM snapshot brings every container definition back with it.</p>
+
+<h2>The three Docker hosts</h2>
+<ul>
+<li><strong>docker-host-pve</strong> — Debian VM on the main Proxmox server (PVE). This is the primary target for almost all container deployments, including my own images pulled from GHCR. Fully covered by Proxmox VM backups, so the whole host can be restored in one shot.</li>
+<li><strong>docker-host-nas</strong> — Debian VM running directly on the Synology (via Virtual Machine Manager). Identical setup and folder structure to the PVE host, but used specifically for containers that need direct access to NAS storage volumes, such as media-processing tools that read and write large file libraries.</li>
+<li><strong>docker-host-pve2</strong> — Debian VM on the secondary Proxmox server (pve2), which lives in the study and is treated as a pure test/dev environment. New containers and compose setups get trialed here before being promoted to docker-host-pve.</li>
+</ul>
+
+<h2>Standardized layout</h2>
+<ul>
+<li><strong>/docker-data/compose/</strong> — one subfolder per service, each containing its own <code>docker-compose.yml</code> (and <code>.env</code> where needed).</li>
+<li><strong>/docker-data/volumes/</strong> — persistent container data, kept outside the compose folders so it survives redeploys.</li>
+<li><strong>/docker-data/backups/</strong> — local backup staging before data is pulled into the wider backup chain.</li>
+<li><strong>Same convention everywhere</strong> — because all three hosts follow this identical structure, moving a service between hosts or rebuilding a host from scratch is just a matter of copying the compose folder and running <code>docker compose up -d</code>.</li>
+</ul>
+
+<h2>Own GitHub projects</h2>
+<ul>
+<li><strong>icloud-contacts-sync</strong> — syncs contact data between iCloud and other systems.</li>
+<li><strong>calendar-sync</strong> — keeps calendars synchronized across sources.</li>
+<li><strong>mvg-departures</strong> — pulls Munich public transport (MVG) departure data for local dashboards.</li>
+<li><strong>wetter-api</strong> — a small weather API/worker pair, built from a custom GHCR image and updated automatically via Watchtower.</li>
+</ul>
+
+<h2>Infrastructure containers</h2>
+<ul>
+<li><strong>mosquitto-mqtt</strong> — central MQTT broker for smart-home and sensor messaging.</li>
+<li><strong>grafana, prometheus, influxdb</strong> — the monitoring and metrics stack for dashboards and time-series data.</li>
+<li><strong>healthchecks, uptime-kuma, cadvisor</strong> — service and container health/uptime monitoring.</li>
+<li><strong>dyndns-updater</strong> — keeps DNS pointed at the home connection; my own project, see <a href="https://github.com/skoelle/dyndns-updater">skoelle/dyndns-updater</a> on GitHub.</li>
+<li><strong>watchtower</strong> — automatically checks for and applies container image updates on a daily schedule.</li>
+<li><strong>authelia, nginx-proxy-manager</strong> — authentication layer and reverse proxy for exposing internal services safely.</li>
+<li><strong>postfix</strong> — internal mail relay used by other containers (e.g. Watchtower notifications) to send email.</li>
+<li><strong>portainer</strong> — web UI for managing containers across hosts.</li>
+<li><strong>exporters</strong> — Prometheus exporters for Fritz!Box, Zyxel switches, Nginx, and SNMP devices, feeding the Grafana/Prometheus stack.</li>
+</ul>
+
+<h2>Smart home containers</h2>
+<ul>
+<li><strong>Home Assistant</strong> — only used for homematicIP integration to mqtt.</li>
+</ul>
+
+<h2>Application containers</h2>
+<ul>
+<li><strong>SearXNG</strong> — self-hosted, privacy-respecting metasearch engine.</li>
+<li><strong>Open WebUI</strong> — chat interface for locally hosted LLMs.</li>
+<li><strong>Stirling PDF</strong> — self-hosted PDF toolkit for merging, converting and editing documents.</li>
+<li><strong>ArchiveBox</strong> — personal web archiving of bookmarked pages.</li>
+<li><strong>TubeSync / TubeArchivist [NAS]</strong> — download and archive YouTube content directly onto NAS storage; these run on docker-host-nas specifically because they need direct volume access to the Synology's disks.</li>
+</ul>
+
+<h2>Development tools</h2>
+<ul>
+<li><strong>Gitea</strong> — self-hosted Git server acting as a mirror of my GitHub repositories, giving me a local fallback and faster internal access.</li>
+</ul>
+
+</div>

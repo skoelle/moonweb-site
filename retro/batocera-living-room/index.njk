@@ -1,0 +1,22 @@
+---
+title: "Batocera in the Living Room: One Box, Every Retro System"
+section: "retro"
+description: "Why the living room emulation station takes a completely different approach than the FPGA rigs upstairs."
+layout: base.njk
+---
+<a class="back-link" href="/">← Back to retro overview</a>
+<h1>Batocera in the Living Room: One Box, Every Retro System</h1>
+<div class="detail-content">
+
+<p>Not every retro session calls for hardware-accurate FPGA timing. Sometimes you just want to grab a controller on the couch and pick something from a big menu — that's exactly what the Batocera station in the living room is for.</p>
+
+<h2>What's Under the Hood</h2>
+<ul>
+<li><strong>Software emulation, not FPGA</strong> — Hatari for Atari ST, UAE for Amiga, DOSBox for DOS, MAME/FBA for arcade, plus the usual console emulators (NES, SNES, Mega Drive, PlayStation). It's the go-to place for Atari ST gaming in this setup, since MiSTer's own ST core is unreliable.</li>
+<li><strong>ROM organisation</strong> — following the TOSEC standard and cleaning up collections with RomVault DAT files, aiming for "1G1R" (One Game One ROM) sets to keep launcher menus from turning into an unmanageable wall of duplicates.</li>
+<li><strong>Curated sources</strong> — a well-known "scene DVD" collection covers Atari ST releases comprehensively; Amiga has no equally tidy equivalent, since TOSEC's Amiga archive is comprehensive but messy, mixing dozens of crack-group releases per game.</li>
+<li><strong>Division of labour with MiSTer/MiST</strong> — Batocera wins on convenience and breadth, MiSTer/MiST win on accuracy and low-latency feel for serious sessions.</li>
+</ul>
+
+<p class="redacted-note">If you're building a similar box: don't skip the DAT-file cleanup step. An unsorted TOSEC dump makes browsing physically painful once you cross a few thousand entries.</p>
+</div>

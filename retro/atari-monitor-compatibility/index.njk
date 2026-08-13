@@ -1,0 +1,22 @@
+---
+title: "The 15kHz Problem: Finding a Monitor That Speaks Atari"
+section: "retro"
+description: "Why most modern monitors refuse to display Atari ST colour modes, and which ones actually work."
+layout: base.njk
+---
+<a class="back-link" href="/">← Back to retro overview</a>
+<h1>The 15kHz Problem: Finding a Monitor That Speaks Atari</h1>
+<div class="detail-content">
+
+<p>Atari ST colour modes (Low-Res and Medium-Res) run at a horizontal scan frequency of 15kHz — a frequency almost no modern VGA monitor supports, since anything made in the last two decades expects at least 30kHz. High-Res monochrome runs at roughly 35kHz and gets along fine with most displays, but colour gaming is a different story entirely.</p>
+
+<h2>Panel Technology Matters More Than You'd Think</h2>
+<ul>
+<li><strong>MVA/PVA panels</strong> — the surprise winners. Their flexible crystal alignment tolerates unusual 15kHz signals far better than standard panels. A NEC MultiSync LCD1970NXp with an MVA panel handles Medium-Res colour reliably, once you fine-tune the H.Size setting.</li>
+<li><strong>IPS panels</strong> — a mixed bag. Some work (a widescreen Lenovo ThinkVision LT1952p reportedly fills the screen beautifully via an ST2VGA adapter), others don't, and there's no way to tell without testing.</li>
+<li><strong>VA panels</strong> — a dead end. Modern VA displays like the Dell SE2722HX and SE2422HX have a minimum horizontal frequency of 30kHz, ruling out native 15kHz signals entirely.</li>
+<li><strong>The universal fix</strong> — an Open Source Scan Converter (OSSC) upsamples the 15kHz signal for any HDMI monitor, at the cost of extra hardware and money.</li>
+</ul>
+
+<p class="redacted-note">If you're chasing 15kHz authenticity, buy the specific panel model people have already confirmed working in the forums — don't trust a spec sheet that just says "supports VGA."</p>
+</div>
