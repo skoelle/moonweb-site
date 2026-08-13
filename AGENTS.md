@@ -19,7 +19,7 @@ Monorepo für 5 statische Websites unter moonweb.org, basierend auf Eleventy (11
 - stefankoelle.de — Lebenslauf, Kontakt (extern gehostet)
 - www.moonweb.org — 2000er Internet-Zeitkapsel
 - 28k8.moonweb.org — 90er BBS/Scene-Archiv
-- home.moonweb.org — Authelia-geschütztes Homelab-Dashboard
+
 
 ## Dateistruktur
 
@@ -78,7 +78,7 @@ moonweb-site/
 - **Deploy:** Cloudflare Pages (5 separate Projects)
 - **CI/CD:** GitHub Actions
 - **GitHub-Aggregator:** Python (liest .moonweb.yml aus Repos)
-- **Cloudflare Free-Tier:** Max 5 Pages Projects pro Repository
+- **Deploy:** Cloudflare Pages (5 separate Projects)
 
 ## Entwicklung
 
@@ -127,7 +127,6 @@ Benötigte Secrets:
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`
 
-Hinweis: Cloudflare Free-Tier erlaubt nur 5 Projects pro Repository. stefankoelle.de bleibt extern.
 
 ## Offene Punkte
 

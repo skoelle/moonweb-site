@@ -10,7 +10,7 @@ code.moonweb.org       → 💻 Curated GitHub project catalog
 retro.moonweb.org      → 🕹️  Physical retro hardware collection
 ```
 
-> **External sites** (not in this monorepo): [stefankoelle.de](https://stefankoelle.de) (CV), [www.moonweb.org](https://www.moonweb.org) (2000s time capsule), [28k8.moonweb.org](https://28k8.moonweb.org) (90s BBS archive), [home.moonweb.org](https://home.moonweb.org) (Authelia-protected dashboard).
+> **External sites** (not in this monorepo): [stefankoelle.de](https://stefankoelle.de) (CV), [www.moonweb.org](https://www.moonweb.org) (2000s time capsule), [28k8.moonweb.org](https://28k8.moonweb.org) (90s BBS archive).
 
 ---
 
@@ -29,18 +29,14 @@ retro.moonweb.org      → 🕹️  Physical retro hardware collection
                        │
                        ▼
           ┌────────────────────────┐
-          │   Cloudflare Workers   │
-          │   (5 Pages projects)   │
+           │   Cloudflare Workers   │
+           │   (Cloudflare Workers) │
           └────────────────────────┘
                        │
         ┌──────────────┼──────────────┐
         ▼              ▼              ▼
   hub.moonweb.org  infra.moonweb.org  …
 ```
-
-### Why 5 separate Cloudflare projects?
-
-Cloudflare Free-Tier limits to **5 Pages projects per repository**. Each subdomain (hub, infra, smarthome, code, retro) gets its own project. `stefankoelle.de` stays external to stay within this limit.
 
 ---
 

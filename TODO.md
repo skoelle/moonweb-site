@@ -20,7 +20,7 @@ Stand: 2026-08-13
 - [ ] 28k8.moonweb.org Zukunft klären
 - [ ] Perplexity-Rückkanal
 - [ ] Apex-Domain Redirect (moonweb.org → hub.moonweb.org)
-- [ ] stefankoelle.de in Monorepo portieren (nur wenn Cloudflare Free-Tier-Limit gelöst wird)
+- [ ] stefankoelle.de in Monorepo portieren
 
 ## Schon erledigt (Stand 2026-08-13)
 

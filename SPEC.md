@@ -20,10 +20,10 @@ outside the monorepo, untouched:
 ├── stefankoelle.de          CV, career, personal (extern gehostet)
 ├── www.moonweb.org          finished, no overlap (2001-style internet time capsule)
 ├── 28k8.moonweb.org         90s BBS/scene archive, separate approach, may migrate later (undecided)
-└── home.moonweb.org         Authelia-protected homelab dashboard/control plane (not part of this site set)
+
 ```
 
-Apex domain `moonweb.org` currently redirects to `www.moonweb.org`. This stays as-is for now; a later redirect to `hub.moonweb.org` is possible but out of scope for this build. Cloudflare Free-Tier limits to 5 Pages projects per repository, which is why cv (stefankoelle.de) stays external.
+Apex domain `moonweb.org` currently redirects to `www.moonweb.org`. This stays as-is for now; a later redirect to `hub.moonweb.org` is possible but out of scope for this build.
 
 ## 3. Domain purposes
 
@@ -31,7 +31,7 @@ Apex domain `moonweb.org` currently redirects to `www.moonweb.org`. This stays a
 |---|---|---|
 | hub | Gateway, links to everything, one-line description per destination | Minimal |
 | infra | Shallow, structured overview of the stack: Proxmox (PVE + pve2), Synology DS918+, VLANs, Fritz!Box mesh, SSO, plus how I work (OpenCode/OpenClaw dev environment) | Reference, high-level only |
-| smarthome | Why the homelab exists — what's actually running on `home.moonweb.org` as smart home: sensors, automation, calendar/contacts sync, dashboards, media | Project storytelling |
+| smarthome | Why the homelab exists — what's actually running on the homelab as smart home: sensors, automation, calendar/contacts sync, dashboards, media | Project storytelling |
 | code | Curated, sorted GitHub catalog — overview only, always linking out to GitHub | Portfolio |
 | retro | Physical retro hardware collection (not software/demos — that's 28k8's domain) | Simple, factual |
 
@@ -40,7 +40,7 @@ Apex domain `moonweb.org` currently redirects to `www.moonweb.org`. This stays a
 ### 4.1 Header-consistent, content-flexible principle
 
 - **Header is identical** across infra/smarthome/code/retro: site-switcher (hub · infra · smarthome · code · retro), domain accent color, consistent branding.
-- **Overview (index) pages** use a shared card-grid layout (reference: current `home.moonweb.org` — banner header, grouped card sections, clean sans-serif, generous whitespace, light theme only, no heavy JS).
+- **Overview (index) pages** use a shared card-grid layout (reference: clean card-grid layout with banner header, grouped card sections, sans-serif, generous whitespace, light theme only, no heavy JS).
 - **Detail/sub-pages** keep the same header but may use a freer layout below it (reference: `/ledmatrix/` on stefankoelle.de today — pin tables, API docs, photos in free layout instead of a rigid card grid).
 
 Note: cv (stefankoelle.de) is external and uses its own independent design — it does not follow this principle.
@@ -137,14 +137,13 @@ moonweb-site/
     └── build-deploy.yml      # builds all sites, deploys each to its Cloudflare Pages project
 ```
 
-Note: `cv/` (stefankoelle.de) is hosted externally and linked from hub/site-switcher — it is not part of this monorepo (Cloudflare Free-Tier limits to 5 Pages projects per repository).
+Note: `cv/` (stefankoelle.de) is hosted externally and linked from hub/site-switcher — it is not part of this monorepo.
 
 ## 11. Technical stack
 
 - **Static site generator:** Eleventy (11ty) — markdown/YAML-first, minimal JS, `_data` folders map directly onto the `.moonweb.yml` aggregator output, low maintenance for five sites at this scale.
 - **Build:** entirely in GitHub Actions.
 - **Deploy:** Cloudflare Pages — five separate Pages projects (one per public domain: hub, infra, smarthome, code, retro), since Cloudflare Pages binds one custom-domain set per project. One shared GitHub Actions workflow builds all five sites and deploys each output folder to its respective Pages project.
-- **Cloudflare Free-Tier limit:** Max 5 Pages projects per repository — cv (stefankoelle.de) stays external to avoid hitting this limit.
 - **Runtime:** fully static, no server-side code, no containers for the website itself (distinct from the actual homelab services running on the Docker host).
 - **DNS:** already on Cloudflare — no additional setup step needed for Pages custom domains.
 - **Local preview:** Eleventy's built-in dev server with live reload, run per-site (`npm run dev:<site>`) before any commit.
@@ -156,4 +155,4 @@ Note: `cv/` (stefankoelle.de) is hosted externally and linked from hub/site-swit
 - Any Perplexity-backchannel mechanism (website content reusable inside this project) — deferred, no time invested now.
 - Analytics of any kind.
 - Automated content generation/translation pipelines beyond the one-time GitHub aggregator for code and the one-time translation pass during migration.
-- Porting stefankoelle.de into the monorepo — stays external (Cloudflare Free-Tier limits to 5 Pages projects per repository).
+- Porting stefankoelle.de into the monorepo — stays external.

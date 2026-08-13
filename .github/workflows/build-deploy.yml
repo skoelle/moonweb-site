@@ -129,5 +129,4 @@ jobs:
 # Required one-time setup (see PLAN.md Phase 2):
 #   Create Cloudflare Workers and bind custom domains.
 #   DNS is already on Cloudflare (SPEC.md §4.6).
-#   Note: Cloudflare Free-Tier limits to 5 Workers per repository.
 #
