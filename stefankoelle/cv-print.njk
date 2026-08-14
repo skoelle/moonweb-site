@@ -4,32 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CV - Stefan Koelle</title>
-  <link rel="stylesheet" href="/assets/style.css">
-  <style>
-    @media print {
-      body { background: white; }
-      #links, #head, #background-image, .headlinespace, .space,
-      #personalprojectscontent, #programminglanguagescontent, #impressumcontent {
-        display: none !important;
-      }
-      #container { max-width: 100%; padding: 0; }
-      #headline { position: static; width: 100%; box-shadow: none; background: none; }
-      #cvcontent {
-        position: static;
-        width: 100%;
-        box-shadow: none;
-        background: none;
-        padding: 0;
-      }
-    }
-  </style>
 </head>
-<body class="blog">
+<body>
   <div id="container">
     <div id="wrapper-content">
       <div id="headline">
-        <h1>Stefan Kölle</h1>
-        Senior Software Developer & Software&nbsp;Architect
+        <div id="headline-text">
+          <h1>Stefan Kölle</h1>
+          Senior Software Developer & Software&nbsp;Architect
+        </div>
+        <div id="headline-photo">
+          <img src="../assets/stefan-koelle-foto.jpg" alt="Stefan Koelle">
+        </div>
       </div>
       {% include "cv-content.njk" %}
     </div>

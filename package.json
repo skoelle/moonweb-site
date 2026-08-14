@@ -17,7 +17,8 @@
     "build:code": "npx @11ty/eleventy --config=code/eleventy.config.js",
     "build:retro": "npx @11ty/eleventy --config=retro/eleventy.config.js",
     "build:stefankoelle": "npx @11ty/eleventy --config=stefankoelle/eleventy.config.js",
-    "build": "npm run build:hub && npm run build:infra && npm run build:smarthome && npm run build:code && npm run build:retro && npm run build:stefankoelle"
+    "build": "npm run build:hub && npm run build:infra && npm run build:smarthome && npm run build:code && npm run build:retro && npm run build:stefankoelle",
+    "pdf:cv": "bash stefankoelle/pdf/build-pdf.sh"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6"
