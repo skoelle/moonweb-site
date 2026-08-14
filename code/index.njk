@@ -4,11 +4,12 @@ section: "code"
 description: "Curated catalog of my public GitHub projects — automation, dev tools, web apps, and firmware."
 layout: base.njk
 subcategories:
-  - "Automation & Sync"
+  - "Web Projects"
+  - "Smart Home Apps"
+  - "Infra Tools"
   - "Dev Tools"
-  - "Web Apps"
-  - "Firmware & Hardware"
-  - "Misc"
+  - "Retro"
+  - "Maker Firmware"
 ---
 <p>A curated, sorted catalog of my public GitHub projects. Each card links
 directly to its repository.</p>
@@ -20,6 +21,7 @@ directly to its repository.</p>
     {% for repo in repos %}
       {% if repo.subcategory == subcat %}
       <a class="card" href="{{ repo.repo_url }}">
+        {% if repo.emoji %}<span class="card-emoji">{{ repo.emoji }}</span>{% endif %}
         <h3>{{ repo.title }}</h3>
         <p>{{ repo.summary }}</p>
       </a>

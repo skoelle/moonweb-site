@@ -1,127 +1,231 @@
 [
   {
-    "title": "Calendar Sync",
-    "repo": "calender_sync",
-    "subcategory": "Automation & Sync",
+    "title": "PeopleCostCounter",
+    "emoji": "💰",
+    "category": "code",
+    "subcategory": "Dev Tools",
     "status": "active",
     "stack": [
-      "Python",
-      "FastAPI",
-      "MariaDB"
+      "HTML",
+      "CSS",
+      "JavaScript"
     ],
-    "summary": "Syncs a private Google Calendar (ICS) into MariaDB, with recurring-event expansion, soft-delete tracking, and a FastAPI web UI/REST API.",
-    "repo_url": "https://github.com/skoelle/calender_sync"
-  },
-  {
-    "title": "iCloud Contacts Sync",
-    "repo": "icloud-contacts-sync",
-    "subcategory": "Automation & Sync",
-    "status": "active",
-    "stack": [
-      "Python",
-      "MariaDB",
-      "CardDAV"
-    ],
-    "summary": "Automated iCloud contacts sync to MariaDB via CardDAV delta sync, multi-user account mapping, birthday email digest, and a read-only API/web view behind Authelia.",
-    "repo_url": "https://github.com/skoelle/icloud-contacts-sync"
-  },
-  {
-    "title": "DynDNS Updater",
-    "repo": "dyndns-updater",
-    "subcategory": "Automation & Sync",
-    "status": "active",
-    "stack": [
-      "Python",
-      "Docker"
-    ],
-    "summary": "Cloudflare + FreeDNS DynDNS updater for FritzBox (TR-064), packaged as a Docker container.",
-    "repo_url": "https://github.com/skoelle/dyndns-updater"
+    "repo": "PeopleCostCounter",
+    "repo_url": "https://github.com/skoelle/PeopleCostCounter",
+    "summary": "A vanilla JS single-page tool that shows in real time how much a meeting is costing, based on team size and average salary, with English and German UIs."
   },
   {
     "title": "kctl-tui",
-    "repo": "kctl-tui",
+    "emoji": "🐳",
+    "category": "code",
     "subcategory": "Dev Tools",
     "status": "active",
     "stack": [
       "Go",
-      "Bubble Tea"
+      "Bubbletea",
+      "Bubbles",
+      "Lipgloss",
+      "YAML"
     ],
-    "summary": "A terminal entry point for everyday Kubernetes work: guided context/team/namespace selection, a 3-pane k9s-style status view, guided rollout restarts, and an AWS Secrets Manager <-> Kubernetes Secret diff/sync workflow.",
-    "repo_url": "https://github.com/skoelle/kctl-tui"
+    "repo": "kctl-tui",
+    "repo_url": "https://github.com/skoelle/kctl-tui",
+    "summary": "A small terminal entry point (Go + Bubble Tea) for everyday Kubernetes work: guided context/team/namespace selection, a 3-pane k9s status view, guided rollout restarts, and an AWS Secrets Manager <-> Kubernetes Secret diff/force-sync workflow."
   },
   {
-    "title": "FocusApp",
-    "repo": "focusapp",
-    "subcategory": "Web Apps",
-    "status": "active",
-    "stack": [
-      "React",
-      "TypeScript",
-      "ASP.NET Core",
-      "MariaDB"
-    ],
-    "summary": "A clean, modern todo application with drag & drop reordering. Responsive design, MariaDB persistence, Docker deployment.",
-    "repo_url": "https://github.com/skoelle/focusapp"
-  },
-  {
-    "title": "PeopleCostCounter",
-    "repo": "PeopleCostCounter",
-    "subcategory": "Web Apps",
-    "status": "active",
-    "stack": [
-      "Vanilla JS"
-    ],
-    "summary": "A single-page tool that shows in real time how much a meeting is costing, based on team size and average salary, with English and German UIs.",
-    "repo_url": "https://github.com/skoelle/PeopleCostCounter"
-  },
-  {
-    "title": "MVG Departures",
-    "repo": "mvg-departures",
-    "subcategory": "Web Apps",
+    "title": "DynDns Updater",
+    "emoji": "📡",
+    "category": "code",
+    "subcategory": "Infra Tools",
     "status": "active",
     "stack": [
       "Python",
-      "FastAPI"
+      "Flask",
+      "Requests",
+      "fritzconnection",
+      "APScheduler"
     ],
-    "summary": "Compact MVG/S-Bahn departure monitor with configurable stations, direction filters, and a mobile-friendly HTML/JSON view.",
-    "repo_url": "https://github.com/skoelle/mvg-departures"
+    "repo": "dyndns-updater",
+    "repo_url": "https://github.com/skoelle/dyndns-updater",
+    "summary": "Cloudflare + FreeDNS DynDNS-Updater for FritzBox (TR-064) as Docker Container"
   },
   {
     "title": "M5Stack Dashboard",
-    "repo": "m5stack-dashboard",
-    "subcategory": "Firmware & Hardware",
+    "emoji": "🌡️",
+    "category": "code",
+    "subcategory": "Maker Firmware",
     "status": "active",
     "stack": [
       "C++",
+      "Arduino",
+      "ESP32",
       "PlatformIO",
-      "ESP32"
+      "ArduinoJson"
     ],
-    "summary": "M5Stack Core dashboard showing live weather, calendar events, and MVG departures. Navigate with 3 physical buttons, dark iOS-style UI.",
-    "repo_url": "https://github.com/skoelle/m5stack-dashboard"
+    "repo": "m5stack-dashboard",
+    "repo_url": "https://github.com/skoelle/m5stack-dashboard",
+    "summary": "M5Stack Core dashboard (ESP32) showing live weather, calendar events, and MVG (Munich transit) departures. Navigate with 3 physical buttons, dark iOS-style UI with colorful procedural icons, built with PlatformIO."
   },
   {
-    "title": "WT32-SC01 Dashboard",
-    "repo": "wt32sc01-dashboard",
-    "subcategory": "Firmware & Hardware",
+    "title": "wt32sc01 Dashboard",
+    "emoji": "📱",
+    "category": "code",
+    "subcategory": "Maker Firmware",
     "status": "active",
     "stack": [
-      "C++",
       "PlatformIO",
+      "Arduino",
       "LovyanGFX",
-      "LVGL"
+      "LVGL 9",
+      "ArduinoJson"
     ],
-    "summary": "Touch dashboard for the WT32-SC01 Plus (ESP32-S3, compact display) showing weather, calendar events and MVG departures from local APIs.",
-    "repo_url": "https://github.com/skoelle/wt32sc01-dashboard"
+    "repo": "wt32sc01-dashboard",
+    "repo_url": "https://github.com/skoelle/wt32sc01-dashboard",
+    "summary": "Touch dashboard for the WT32-SC01 Plus (ESP32-S3, 3.5\" display) showing weather, calendar events and MVG departures from local APIs. Built with PlatformIO, LovyanGFX and LVGL."
   },
   {
     "title": "Marcer GameDVD Launcher",
-    "repo": "marcer-gamedvd-launcher",
-    "subcategory": "Misc",
+    "emoji": "🕹️",
+    "category": "code",
+    "subcategory": "Retro",
     "status": "active",
     "stack": [
-      "C#"
+      "C#",
+      ".NET",
+      "Console"
     ],
-    "summary": "Console launcher for a Atari ST/Falcon GameDVD USB stick — browse, compare, and launch games from the terminal with overlay/patch mode.",
-    "repo_url": "https://github.com/skoelle/marcer-gamedvd-launcher"
+    "repo": "marcer-gamedvd-launcher",
+    "repo_url": "https://github.com/skoelle/marcer-gamedvd-launcher",
+    "summary": "Console launcher for Marcer's Atari ST/Falcon GameDVD USB stick — browse, compare, and launch games from the terminal with overlay/patch mode."
+  },
+  {
+    "title": "Phobia Welcome Intro",
+    "emoji": "💾",
+    "category": "code",
+    "subcategory": "Retro",
+    "status": "active",
+    "stack": [
+      "Turbo Pascal",
+      "DOS",
+      "VGA",
+      "SoundBlaster",
+      "X-LIB"
+    ],
+    "repo": "dos-phobia-welcome-intro",
+    "repo_url": "https://github.com/skoelle/dos-phobia-welcome-intro",
+    "summary": "This Pascal program is an intro demo from 1994. It displays text messages and graphics using VGA graphics mode. The program handles palette changes, writes text to the screen, and manages sound through devices like PC Speaker and SoundBlaster. The main loop updates the screen and handles user input to control the demo."
+  },
+  {
+    "title": "TranceMission Intros",
+    "emoji": "📺",
+    "category": "code",
+    "subcategory": "Retro",
+    "status": "active",
+    "stack": [
+      "Turbo Pascal",
+      "Assembler",
+      "DOS",
+      "VGA"
+    ],
+    "repo": "dos-tcm-intros",
+    "repo_url": "https://github.com/skoelle/dos-tcm-intros",
+    "summary": "These demos often showcased advanced graphics, sound, and programming techniques using Turbo Pascal and assembler."
+  },
+  {
+    "title": "Turbo Pascal X-LIB UNiT V0.3",
+    "emoji": "🎮",
+    "category": "code",
+    "subcategory": "Retro",
+    "status": "active",
+    "stack": [
+      "Turbo Pascal",
+      "VGA Graphics",
+      "MS-DOS",
+      "X-LIB"
+    ],
+    "repo": "turbopascal-xlib-unit",
+    "repo_url": "https://github.com/skoelle/turbopascal-xlib-unit",
+    "summary": "This Pascal unit, xlibunit, is a graphics library designed for use in Turbo Pascal programs. It provides various procedures for initializing and manipulating VGA graphics modes, handling color palettes, and drawing on the screen. It's particularly useful for creating graphic demos."
+  },
+  {
+    "title": "Focus App",
+    "emoji": "🎯",
+    "category": "code",
+    "subcategory": "Smart Home Apps",
+    "status": "active",
+    "stack": [
+      "C#",
+      ".NET",
+      "React",
+      "TypeScript",
+      "Entity Framework Core",
+      "MariaDB",
+      "Docker"
+    ],
+    "repo": "focusapp",
+    "repo_url": "https://github.com/skoelle/focusapp",
+    "summary": "A clean, modern todo application with drag & drop reordering. Built with React, TypeScript, and ASP.NET Core. Features responsive design, MariaDB persistence, and Docker deployment."
+  },
+  {
+    "title": "Google Calender Sync",
+    "emoji": "📅",
+    "category": "code",
+    "subcategory": "Smart Home Apps",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "Uvicorn",
+      "Jinja2"
+    ],
+    "repo": "calender_sync",
+    "repo_url": "https://github.com/skoelle/calender_sync",
+    "summary": "Syncs a private Google Calendar (ICS) into MariaDB, with recurring-event expansion, soft-delete tracking, and a FastAPI web UI/REST API"
+  },
+  {
+    "title": "MVG Departures",
+    "emoji": "🚇",
+    "category": "code",
+    "subcategory": "Smart Home Apps",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "Uvicorn",
+      "Jinja2"
+    ],
+    "repo": "mvg-departures",
+    "repo_url": "https://github.com/skoelle/mvg-departures",
+    "summary": "Compact MVG/S‑Bahn departure monitor (FastAPI) with configurable stations, direction filters, and a mobile‑friendly HTML and JSON view"
+  },
+  {
+    "title": "iCloud Contacts Sync",
+    "emoji": "🔄",
+    "category": "code",
+    "subcategory": "Smart Home Apps",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "Uvicorn",
+      "Jinja2"
+    ],
+    "repo": "icloud-contacts-sync",
+    "repo_url": "https://github.com/skoelle/icloud-contacts-sync",
+    "summary": "Automated iCloud contacts sync to MariaDB via CardDAV delta sync, with a multi-user account mapping, birthday email digest, and an internal read-only API/web view behind Authelia."
+  },
+  {
+    "title": "moonweb-site",
+    "emoji": "🌐",
+    "category": "code",
+    "subcategory": "Web Projects",
+    "status": "active",
+    "stack": [
+      "JavaScript",
+      "Eleventy",
+      "Nunjucks"
+    ],
+    "repo": "moonweb-site",
+    "repo_url": "https://github.com/skoelle/moonweb-site",
+    "summary": "Monorepo for moonweb.org — my personal homelab hub. Five static sites (Eleventy) covering infrastructure, smart home, code, and retro hardware. Deployed to Cloudflare Pages."
   }
 ]

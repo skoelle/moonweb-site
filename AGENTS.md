@@ -11,7 +11,7 @@ Monorepo für 5 statische Websites unter moonweb.org + stefankoelle.de, basieren
 | hub | hub.moonweb.org | Zentrale Indexseite, verlinkt alles | Fertig |
 | infra | infra.moonweb.org | Infrastruktur-Übersicht (Proxmox, Synology, Netzwerk) | Übersicht + 3 Detailseiten |
 | smarthome | smarthome.moonweb.org | Smart Home Projekte und Dashboards | Übersicht + 6 Detailseiten |
-| code | code.moonweb.org | GitHub-Projekte (aggregiert via .moonweb.yml) | Fertig (10 Repos) |
+| code | code.moonweb.org | GitHub-Projekte (aggregiert via .moonweb.yml) | Fertig (14 Repos) |
 | retro | retro.moonweb.org | Physische Retro-Hardware | Nur Übersicht (WIP) |
 
 ### Externe Sites (SFTP-Deployment)
@@ -153,3 +153,44 @@ Benötigte Secrets:
 - retro/ ist bewusst rudimentär gehalten
 - Querverlinkungen stefankoelle.de <-> smarthome (zukuenftig)
 - Ledmatrix ggf. nach smarthome verschieben (when ready)
+
+## GitHub Aggregator
+
+Das Skript `scripts/github-aggregator/aggregate.py` liest aus jedem public Repo unter `skoelle` die `.moonweb.yml` und generiert `code/_data/repos.json`.
+
+### .moonweb.yml Format
+
+```yaml
+title: "Projektname"           # Pflicht
+emoji: "🚀"                    # Pflicht
+category: code                  # Pflicht (Filter)
+subcategory: "Web Projects"    # Pflicht
+status: active                  # Optional
+stack: [Python, FastAPI]        # Optional
+summary: "Kurzbeschreibung"    # Optional (Fallback: GitHub description)
+repo_url: auto                  # Auto (GitHub html_url)
+repo: auto                      # Auto (GitHub name)
+```
+
+### Valid Subcategories
+
+- Web Projects
+- Smart Home Apps
+- Infra Tools
+- Dev Tools
+- Retro
+- Maker Firmware
+
+### Aggregator ausfuehren
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install pyyaml
+.venv/bin/python scripts/github-aggregator/aggregate.py
+```
+
+## Python / pip
+
+- Niemals `pip install` direkt ausführen
+- Immer ein virtuelles Umfeld (`.venv`) anlegen und darin arbeiten
+- `python3 -m venv .venv` im Projektverzeichnis

@@ -1,8 +1,6 @@
 title: "MVG Departures"
+emoji: "🚆"
 category: code
-subcategory: "Web Apps"
+subcategory: "Smart Home Apps"
 status: active
 stack: [Python, FastAPI]
-hosted_on: "Docker Host Debian (PVE)"
-summary: "Compact MVG/S-Bahn departure monitor with configurable stations."
-repo_url: "https://github.com/skoelle/mvg-departures"

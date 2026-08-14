@@ -59,6 +59,9 @@ def main():
         meta = fetch_moonweb_yml(repo["name"])
         if not meta or meta.get("category") != "code":
             continue
+        meta.setdefault("repo", repo["name"])
+        meta.setdefault("repo_url", repo["html_url"])
+        meta.setdefault("summary", repo.get("description", ""))
         entries.append(meta)
 
     entries.sort(key=lambda e: (e.get("subcategory", ""), e.get("title", "")))
