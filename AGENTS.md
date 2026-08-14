@@ -104,6 +104,15 @@ npm run build                # Alle Sites bauen
 - CV-Partial zentral pflegbar (einmal aendern → Web + PDF aktualisieren)
 - LED Matrix als eigene Seite unter stefankoelle.de/ledmatrix/
 
+### CSS Cache-Busting
+
+CSS-Dateien werden als Passthrough kopiert (kein Hash im Dateinamen). Bei CSS-Änderungen muss der Query-String in der `?v=N` Inkludierung erhöht werden:
+
+- `stefankoelle/index.njk`: `<link rel="stylesheet" href="/assets/style.css?v=N">`
+- `stefankoelle/ledmatrix/index.njk`: `<link rel="stylesheet" href="assets/style.css?v=N">`
+
+Bei jeder CSS-Anpassung `?v=N` um 1 erhöhen, sonst cached der Browser die alte Datei.
+
 ## CI/CD
 
 ### Cloudflare Pages (moonweb)

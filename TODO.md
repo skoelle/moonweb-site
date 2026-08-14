@@ -23,6 +23,7 @@ Stand: 2026-08-14
 - [ ] PDF-Build fuer CV (WeasyPrint, lokal testen)
 - [ ] Querverlinkungen stefankoelle.de <-> smarthome
 - [ ] Ledmatrix ggf. nach smarthome verschieben
+- [ ] **Dotnet Home-Automation-Projekt beschreiben** — Interne .NET Core Software für Kommunikation auf buttons.html und InfluxDB. Code muss erst aufgeraeumt und nach GitHub publiziert werden, dann Beschreibung auf stefankoelle.de und ggf. smarthome ergänzen.
 
 ### Offene Entscheidungen
 

@@ -24,16 +24,12 @@ layout: stefankoelle.njk
 
   <h3>Home Network Projects (2025-2026)</h3>
   <ul>
-    <li><b>Docker Host VM 110 (Proxmox PVE)</b><br>Deployed new virtualized Docker host (VM 110,) with Debian 12.2 as fresh infrastructure replacement for legacy VM 101. Implemented optimized Docker engine with containerized services including Portainer, Prometheus, Grafana, Gitea, MQTT broker, and monitoring exporters. Successfully migrated nginx-proxy-manager database from Docker to MariaDB LxC for improved stability.</li>
+    <li><b>Docker Host (Proxmox PVE)</b><br>Virtualized Docker host with Debian 12.2 running containerized services including Portainer, Prometheus, Grafana, Gitea, monitoring exporters, and more. Full architecture documented on <a href="https://infra.moonweb.org/docker/">infra.moonweb.org</a>.</li>
     <li><b>InfluxDB Time-Series Integration</b><br>Deployed InfluxDB 2.x for sensor data collection from Tasmota smart plugs and HomematicIP thermostats, replacing older MySQL-based storage with modern time-series architecture.</li>
-    <li><b>LED Matrix ESP32 InfluxDB Time-Series Integration</b><br>Implemented data persistence layer for <a href="/ledmatrix/">LED Matrix ESP32</a> sensor systems (DHT22 temperature/humidity) with InfluxDB 2.x backend. Automated collection of matrix display metrics and environmental sensor data at 60-second intervals, enabling historical trend analysis and long-term performance monitoring.</li>
-    <li><b>Interactive Air Quality Dashboard (luftwerte.html)</b><br>Developed dynamic HTML5 dashboard consuming real-time sensor data directly from InfluxDB backend via Flux query API. Displays aggregated temperature and humidity measurements across all network locations with responsive design supporting multiple device form factors. Serves as primary interface for environmental monitoring accessible via nginx reverse proxy.</li>
-    <li><b>Tasmota Energy Monitoring</b><br>Implemented smart plug energy tracking system with 8 Tasmota-enabled devices, integrating MQTT data collection and visualization for home automation monitoring.</li>
-    <li><b>MQTT Broker Migration</b><br>Migrated MQTT infrastructure from Synology NAS to Docker-based VM for improved stability and integration with modern smart home automation, while maintaining backward compatibility with legacy devices.</li>
-    <li><b>Four Managed Zyxel GS1200-8HP Switches</b><br>Deployed four managed Zyxel switches across network topology with SNMP exporter integration for centralized monitoring. Serverraum (192.168.178.250), Wohnzimmer (192.168.178.251), Powerlan (192.168.178.252), and OpenWRT office (192.168.188.250). Each switch monitored via Prometheus with dedicated export ports (9436-9439) providing real-time network traffic and port status visibility.</li>
-    <li><b>Multi-WAN OpenWrt Router (Office Workstation)</b><br>Implemented advanced OpenWrt routing system in office workspace with multi-WAN capabilities, connected as Zyxel switch target (192.168.188.250). Enables intelligent traffic distribution, failover support, and advanced VLAN segmentation for hybrid network connectivity during retro-computing sessions and general office networking.</li>
-    <li><b>Network Monitoring & SNMP Integration</b><br>Extended Prometheus infrastructure with SNMP exporters for all managed switches, enabling unified visibility of hardware statistics, port utilization, and network performance metrics across home network environment.</li>
-    <li><b>IoT VLAN Isolation (VLAN 189)</b><br>Implemented dedicated isolated network segment for IoT devices using Zyxel GS1200-8 switch with OpenWRT, separating smart home devices from legacy systems through VLAN segmentation.</li>
+    <li><b>LED Matrix ESP32 InfluxDB Integration</b><br>Data persistence layer for <a href="/ledmatrix/">LED Matrix ESP32</a> sensor systems (DHT22 temperature/humidity) with InfluxDB 2.x backend. Automated collection at 60-second intervals for historical trend analysis.</li>
+    <li><b>Air Quality Dashboard</b><br>Dynamic HTML5 dashboard consuming real-time sensor data from InfluxDB via Flux query API. Displays temperature and humidity across all network locations, accessible via nginx reverse proxy.</li>
+    <li><b>Tasmota Energy Monitoring</b><br>Smart plug energy tracking with 8 Tasmota-enabled devices, integrating MQTT data collection and visualization. See also <a href="https://smarthome.moonweb.org/tasmota-energy/">smarthome.moonweb.org</a>.</li>
+    <li><b>Network Hardware & Monitoring</b><br>Four Zyxel GS1200-8HP managed switches (server room, living room, study powerline, study OpenWrt), plus a <a href="https://infra.moonweb.org/openwrt/">Multi-WAN OpenWrt router</a> for failover and VLAN segmentation. All switches integrated into <a href="https://infra.moonweb.org/monitoring/">Prometheus monitoring</a> via SNMP exporters. IoT devices isolated in VLAN 189.</li>
   </ul>
 
   <h3>Retro Computing (2022/2023)</h3>
@@ -52,44 +48,19 @@ layout: stefankoelle.njk
 
   <h3>Home Automation (since 2018)</h3>
   <ul>
-    <li>Arduino/ESP32/Raspberry/Home Automation.</li>
-    <li><a href="/ledmatrix/">LED Matrix ESP32</a> for Date, Time, Weather, and Status messages (Web API).</li>
-    <ul>
-      <li>Attached Light sensor, DHT22 Temperature Sensor (Web API).</li>
-      <li>Every room has its LED matrix.</li>
-    </ul>
-    <li>dotnet core application (Master on iMac and 4 clients on Raspberry PIs).</li>
-    <li>MQTT for message transfer and remote control via Tasmota RF Module (433MHz).</li>
-    <li>Evaluation of power meters from washing machine and tumbler.</li>
-    <li>Info message when finished on LED matrices.</li>
-    <li>MP3 player (e.g., automatic play in the bathroom when the light is on).</li>
-    <li>One Raspberry Pi with pilight and RF433 Module for activating remote control power plugs.</li>
-  </ul>
-
-  <h3>Proxmox Server with Various LxC Linux (since 2020)</h3>
-  <ul>
-    <li>pihole</li>
-    <li>suricata</li>
-    <li>webone</li>
-    <li>minecraft bedrock server (multiple instances)</li>
-    <li>divoom-rest</li>
+    <li><a href="/ledmatrix/">LED Matrix ESP32</a> for date, time, weather, and status messages (Web API) — every room has its own display.</li>
+    <li>MQTT for message transfer and remote control via Tasmota RF modules (433MHz).</li>
+    <li>Power meter monitoring for washing machine and tumbler with info messages on LED matrices when finished.</li>
+    <li>MP3 player with automated playback (e.g., bathroom radio when light is on).</li>
+    <li>Raspberry Pi with pilight and RF433 module for remote control power plugs.</li>
   </ul>
 
   <h3>Various Docker Systems (since 2016)</h3>
   <ul>
-    <li>portainer</li>
-    <li>nginx</li>
-    <li>grafana</li>
-    <li>prometheus</li>
-    <li>cadvisor</li>
-    <li>nodeexporter</li>
-    <li>gitae</li>
-    <li>stirling-pdf</li>
-    <li>stretto</li>
-    <li>tubearchivist</li>
-    <li>tubesync</li>
-    <li>healthchecks</li>
-    <li>watchtower</li>
+    <li><b>Monitoring:</b> Prometheus, Grafana, InfluxDB, cAdvisor, Node Exporter, SNMP exporters</li>
+    <li><b>Smart Home:</b> Mosquitto MQTT broker, Home Assistant</li>
+    <li><b>Infrastructure:</b> Portainer, Nginx Proxy Manager, Authelia (SSO), Watchtower, Healthchecks</li>
+    <li><b>Applications:</b> Gitea (GitHub mirror), Stirling PDF, TubeArchivist, TubeSync, SearXNG</li>
   </ul>
 
   <h3>Walk-on Song (2019)</h3>

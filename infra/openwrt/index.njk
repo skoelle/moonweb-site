@@ -1,0 +1,41 @@
+---
+title: "OpenWrt Multi-WAN Router"
+section: "infra"
+parent: "/"
+description: "Multi-WAN OpenWrt router in the study with WiFi and Powerline failover, plus VLAN 189 for IoT isolation."
+layout: base.njk
+---
+<h1>OpenWrt Multi-WAN Router</h1>
+<div class="detail-content">
+
+<p>The study has historically suffered from unreliable network connectivity. To solve this, I set up an OpenWrt router that combines two WAN paths — WiFi and a dedicated Powerline link back to the server room — with automatic failover between them.</p>
+
+<h2>Multi-WAN setup</h2>
+<ul>
+<li><strong>WAN 1 — WiFi (802.11ac)</strong> — higher throughput but less stable, used for bulk transfers and general traffic.</li>
+<li><strong>WAN 2 — Powerline (Ethernet backhaul)</strong> — lower throughput but rock-solid, carries latency-sensitive traffic like VPN tunnels and Teams calls.</li>
+<li><strong>Failover</strong> — both paths are active simultaneously; if one drops, traffic automatically shifts to the remaining path. This provides redundancy in both directions.</li>
+</ul>
+
+<p>Traffic is routed intelligently based on connection quality: VPN and real-time communication prefer the stable Powerline path, while everything else benefits from the higher WiFi throughput when available.</p>
+
+<h2>Network role</h2>
+<ul>
+<li>Connected to a dedicated <strong>Zyxel GS1200-8HP</strong> managed switch in the study.</li>
+<li>Serves as the gateway for all study devices, including retro-computing hardware and the development VM.</li>
+<li>Provides advanced VLAN segmentation beyond what the main Fritz!Box offers.</li>
+</ul>
+
+<h2>IoT VLAN 189</h2>
+<p>A dedicated, isolated network segment for IoT devices, running on a separate small WiFi access point on a different channel. This keeps smart home hardware — including the balcony sensors and light controller — off the main network while maintaining full connectivity to the homelab services.</p>
+<ul>
+<li><strong>VLAN ID:</strong> 189</li>
+<li><strong>Purpose:</strong> Isolate IoT/smart home devices from general network traffic.</li>
+<li><strong>Connected devices:</strong> Balcony sensor unit (balcony light controller, sensors), smart plugs, and other IoT hardware.</li>
+<li><strong>Routing:</strong> Traffic from VLAN 189 is routed to the homelab Docker hosts for MQTT, InfluxDB, and monitoring, but cannot initiate connections to the main network.</li>
+</ul>
+
+<h2>Monitoring</h2>
+<p>The OpenWrt router is integrated into the <a href="/monitoring/">Prometheus monitoring stack</a> via SNMP exporter, providing visibility into WAN uptime, throughput, and connection quality across both paths.</p>
+
+</div>
