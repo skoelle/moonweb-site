@@ -4,6 +4,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "stefankoelle/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "stefankoelle/ledmatrix/assets": "ledmatrix/assets" });
   eleventyConfig.addPassthroughCopy({ "stefankoelle/robots.txt": "robots.txt" });
+  eleventyConfig.addPassthroughCopy({ "stefankoelle/pdf/cv.pdf": "pdf/cv.pdf" });
 
   return {
     dir: {
