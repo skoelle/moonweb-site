@@ -9,7 +9,7 @@ description: "WiFi-controlled LED display solution with REST API, DHT22 sensor, 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{{ description }}">
   <meta name="author" content="Stefan Kölle">
-  <title>{{ title }} - ESP32 Projekt</title>
+  <title>{{ title }} - ESP32 Project</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -18,6 +18,8 @@ description: "WiFi-controlled LED display solution with REST API, DHT22 sensor, 
       <a href="#" class="logo">🔌 LED Matrix WebServer</a>
       <ul class="nav-menu">
         <li><a href="#overview">Overview</a></li>
+        <li><a href="#usecases">Use Cases</a></li>
+        <li><a href="#installation">Installation</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#hardware">Hardware</a></li>
         <li><a href="#api">API</a></li>
@@ -33,7 +35,7 @@ description: "WiFi-controlled LED display solution with REST API, DHT22 sensor, 
         <p>WiFi-controlled LED display solution with REST API, DHT22 sensor, and OTA updates for your home network.</p>
         <div class="cta-buttons">
           <a href="#overview" class="btn btn-primary">Project</a>
-          <a href="#api" class="btn btn-secondary">API Dokumentation</a>
+          <a href="#api" class="btn btn-secondary">API Documentation</a>
         </div>
       </div>
       <div class="hero-image">
@@ -49,6 +51,7 @@ description: "WiFi-controlled LED display solution with REST API, DHT22 sensor, 
         The LED Matrix WebServer system is a fully configurable LED display solution for home networks.
         It is based on the NodeMCU-32S ESP32 with up to 12 cascaded MAX7219 8x8 LED modules.
         Using a simple REST API, messages can be displayed, animations controlled, and sensor data queried.
+        Six units are deployed across the apartment, each serving as an information display in its room.
       </p>
 
       <div class="cards-grid">
@@ -85,88 +88,58 @@ description: "WiFi-controlled LED display solution with REST API, DHT22 sensor, 
       </div>
     </section>
 
-    <section class="section" id="hardware">
-      <h2 class="section-title">Hardware Components</h2>
+    <section class="section" id="usecases">
+      <h2 class="section-title">Use Cases</h2>
+      <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+        The LED Matrix is a receiver — what you send to it is entirely up to you.
+        Here are some examples of how I use the displays across the apartment.
+      </p>
 
-      <div class="specs-table">
-        <table>
-          <thead>
-            <tr>
-              <th>Component</th>
-              <th>Model / Type</th>
-              <th>Features</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Microcontroller</strong></td>
-              <td>NodeMCU-32S ESP32</td>
-              <td>32-Bit Dual-Core 240MHz, WiFi + Bluetooth</td>
-            </tr>
-            <tr>
-              <td><strong>LED Display</strong></td>
-              <td>12× MAX7219 8x8 Module</td>
-              <td>cascaded</td>
-            </tr>
-            <tr>
-              <td><strong>Sensor</strong></td>
-              <td>DHT22 (AM2302)</td>
-              <td>Temperature ±0.5°C, Humidity ±2%</td>
-            </tr>
-            <tr>
-              <td><strong>Buzzer</strong></td>
-              <td>Passive Buzzer</td>
-              <td>GPIO 16 PWM controlled via NPN transistor</td>
-            </tr>
-            <tr>
-              <td><strong>Power Supply</strong></td>
-              <td>USB-C oder externe 5V PSU</td>
-              <td>5V for MAX7219, 3.3V internal for logic</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--color-primary);">Pin Configuration</h3>
-      <div class="code-block">
-        <div class="code-label">GPIO Pin Assignment</div>
-        <pre>LedMatrix Software V1.08
-NodeMCU-32S ESP32 (USB powered)
-
-POWER SUPPLY:
-  Micro USB ──→ ESP32 (5V regulator generates 3.3V internal)
-
-SPI SIGNALS (MAX7219):
-  VIN 5V  ──→ MAX7219 VCC
-  GND     ──→ MAX7219 GND
-  GPIO 5  ──→ MAX7219 CS  (Chip Select)
-  GPIO 18 ──→ MAX7219 CLK (Clock)
-  GPIO 23 ──→ MAX7219 DIN (Data In)
-  Modul 1 DOUT → Modul 2 DIN → Modul 3 DIN
-
-DHT22 SENSOR:
-  GPIO 27 ──→ DHT22 Data
-  3V3    ──→ DHT22 VCC
-  GND     ──→ DHT22 GND
-
-BUZZER:
-  GPIO 16 ──→ Buzzer Control (via transistor)
-  GPIO 16 ──1kΩ── NPN Transistor BASE
-                    NPN Transistor COLLECTOR ──→ Buzzer +
-                    NPN Transistor EMITTER ──→ GND
-  Buzzer - ──→ GND (ESP32)
-
-ANALOG INPUTS (optional):
-  GPIO 34 ──→ Analog Sensor 1
-  GPIO 35 ──→ Analog Sensor 2
-  GPIO 36 ──→ Analog Sensor 3</pre>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">🕐</div>
+          <div class="feature-text">
+            <h3>Date &amp; Time</h3>
+            <p>Always-on clock and date display in each room</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🌤️</div>
+          <div class="feature-text">
+            <h3>Weather Data</h3>
+            <p>Current temperature and conditions from indoor sensors</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📊</div>
+          <div class="feature-text">
+            <h3>Sensor Readings</h3>
+            <p>Live temperature and humidity from the on-board DHT22 sensor</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔔</div>
+          <div class="feature-text">
+            <h3>Status Messages</h3>
+            <p>Notifications like "washing machine done" triggered via MQTT</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🌐</div>
+          <div class="feature-text">
+            <h3>Custom Messages</h3>
+            <p>Any text or scrolling message via the REST API</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="section" id="installation">
-      <h2 class="section-title">Installation &amp; Setup</h2>
-      <p style="margin-bottom: 2rem;">
-        Here are photos of various LED Matrix installations in the home network. The systems show different colors and configurations.
+      <h2 class="section-title">Installation</h2>
+      <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+        Six LED Matrix units are deployed across the apartment, each mounted in its respective room.
+        Every unit consists of an ESP32 board with cascaded MAX7219 LED modules and a DHT22 sensor,
+        connected via SPI. The displays are powered through micro-USB or directly via the 5V pins.
       </p>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
@@ -269,6 +242,85 @@ ANALOG INPUTS (optional):
       </div>
     </section>
 
+    <section class="section" id="hardware">
+      <h2 class="section-title">Hardware Components</h2>
+
+      <div class="specs-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Model / Type</th>
+              <th>Features</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Microcontroller</strong></td>
+              <td>NodeMCU-32S ESP32</td>
+              <td>32-Bit Dual-Core 240MHz, WiFi + Bluetooth</td>
+            </tr>
+            <tr>
+              <td><strong>LED Display</strong></td>
+              <td>12× MAX7219 8x8 Module</td>
+              <td>cascaded</td>
+            </tr>
+            <tr>
+              <td><strong>Sensor</strong></td>
+              <td>DHT22 (AM2302)</td>
+              <td>Temperature ±0.5°C, Humidity ±2%</td>
+            </tr>
+            <tr>
+              <td><strong>Buzzer</strong></td>
+              <td>Passive Buzzer</td>
+              <td>GPIO 16 PWM controlled via NPN transistor</td>
+            </tr>
+            <tr>
+              <td><strong>Power Supply</strong></td>
+              <td>Micro USB or direct 5V pin</td>
+              <td>5V for MAX7219, 3.3V internal for logic</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--color-primary);">Pin Configuration</h3>
+      <div class="code-block">
+        <div class="code-label">GPIO Pin Assignment</div>
+        <pre>LedMatrix Software V1.08
+NodeMCU-32S ESP32 (USB powered)
+
+POWER SUPPLY:
+  Micro USB ──→ ESP32 (5V regulator generates 3.3V internal)
+  or: 5V Pin ──→ ESP32 5V (bypassing USB regulator)
+
+SPI SIGNALS (MAX7219):
+  VIN 5V  ──→ MAX7219 VCC
+  GND     ──→ MAX7219 GND
+  GPIO 5  ──→ MAX7219 CS  (Chip Select)
+  GPIO 18 ──→ MAX7219 CLK (Clock)
+  GPIO 23 ──→ MAX7219 DIN (Data In)
+  Modul 1 DOUT → Modul 2 DIN → Modul 3 DIN
+
+DHT22 SENSOR:
+  GPIO 27 ──→ DHT22 Data
+  3V3    ──→ DHT22 VCC
+  GND     ──→ DHT22 GND
+
+BUZZER:
+  GPIO 16 ──→ Buzzer Control (via transistor)
+  GPIO 16 ──1kΩ── NPN Transistor BASE
+                    NPN Transistor COLLECTOR ──→ Buzzer +
+                    NPN Transistor EMITTER ──→ GND
+  Buzzer - ──→ GND (ESP32)
+
+ANALOG INPUTS (optional):
+  GPIO 34 ──→ Analog Sensor 1
+  GPIO 35 ──→ Analog Sensor 2
+  GPIO 36 ──→ Analog Sensor 3</pre>
+      </div>
+    </section>
+
     <section class="section" id="api">
       <h2 class="section-title">REST API Documentation</h2>
 
@@ -285,7 +337,7 @@ Response: HTML Welcome Page with menu</pre>
       </div>
 
       <div class="code-block">
-        <div class="code-label">Firmware-Version</div>
+        <div class="code-label">Firmware Version</div>
         <pre>GET /version
 Response: v1.08 (dht)</pre>
       </div>
@@ -351,13 +403,13 @@ Response: "1234,2345,3456" (comma-separated values)</pre>
       <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--color-primary);">Sounds &amp; Buzzer</h3>
 
       <div class="code-block">
-        <div class="code-label">Success melody (Done)</div>
+        <div class="code-label">Done melody</div>
         <pre>GET /sound/erledigt
 Plays positive tone sequence</pre>
       </div>
 
       <div class="code-block">
-        <div class="code-label">Warnings melody</div>
+        <div class="code-label">Warning melody</div>
         <pre>GET /sound/warnung
 Plays warning tone sequence</pre>
       </div>
@@ -371,7 +423,7 @@ Plays error tone sequence</pre>
       <div class="code-block">
         <div class="code-label">Completed melody</div>
         <pre>GET /sound/abgeschlossen
-Plays success tone sequence</pre>
+Plays completed tone sequence</pre>
       </div>
 
       <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--color-primary);">Control &amp; System</h3>
@@ -430,7 +482,7 @@ ESP32 will be restarted (with display shutdown)</pre>
             </tr>
             <tr>
               <td>Power Supply</td>
-              <td>USB-C 5V</td>
+              <td>Micro USB 5V or direct 5V pin</td>
               <td>~500mA for logic</td>
             </tr>
             <tr>
@@ -467,61 +519,23 @@ ESP32 will be restarted (with display shutdown)</pre>
         </table>
       </div>
     </section>
-
-    <section class="section">
-      <h2 class="section-title">Code Quality</h2>
-      <p style="margin-bottom: 1.5rem;">
-        The code has been thoroughly reviewed and classified as production-ready.
-      </p>
-
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-title">✅ Strengths</div>
-          <div class="card-content">
-            <ul style="list-style-position: inside; margin-top: 0.5rem;">
-              <li>Robust WiFi management</li>
-              <li>Non-blocking Async-WebServer</li>
-              <li>Error handling for DHT</li>
-              <li>OTA updates implemented</li>
-            </ul>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">⚠️ Potential for Improvement</div>
-          <div class="card-content">
-            <ul style="list-style-position: inside; margin-top: 0.5rem;">
-              <li>Hard-coded SSID/password</li>
-              <li>Expand input validation</li>
-            </ul>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">📊 Evaluation</div>
-          <div class="card-content">
-            <div style="margin-top: 1rem;">
-              <strong>Grade: A-</strong><br>
-              Production ready<br>
-              Uptime: 30-45 days normal
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer>
     <div class="footer-content">
       <div class="footer-section">
-        <h4>Projekt</h4>
+        <h4>Project</h4>
         <ul>
           <li><a href="#overview">Overview</a></li>
+          <li><a href="#usecases">Use Cases</a></li>
+          <li><a href="#installation">Installation</a></li>
           <li><a href="#features">Features</a></li>
           <li><a href="#hardware">Hardware</a></li>
           <li><a href="#api">API</a></li>
         </ul>
       </div>
       <div class="footer-section">
-        <h4>Technologie</h4>
+        <h4>Technology</h4>
         <ul>
           <li>ESP32 NodeMCU-32S</li>
           <li>Arduino IDE</li>
