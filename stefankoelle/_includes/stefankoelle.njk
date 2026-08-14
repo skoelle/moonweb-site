@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#ffffff">
+  <title>{% if title %}{{ title }}{% else %}Stefan Koelle{% endif %}</title>
+  <meta name="description" content="{{ description }}">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="manifest" href="/assets/manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" href="/assets/ms-icon-144x144.png">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="blog">
+  <div id="container">
+    <div id="wrapper-content">
+
+      <div id="links">
+        <a href="#home" class="separator"><i class="fa-solid fa-home"></i></a>
+        <a href="#cv" class="separator">CV</a>
+        <a href="#personalprojects" class="separator">Personal Projects</a>
+        <a href="#programminglanguages" class="separator">Programming Languages</a>
+        <a href="#impressum">Impressum</a>
+
+        <div class="flex-break"></div>
+
+        <a href="https://www.linkedin.com/in/stefankoelle/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://www.xing.com/profile/Stefan_Koelle" target="_blank"><i class="fa-brands fa-xing"></i></a>
+        <a href="https://github.com/skoelle" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="https://sourceforge.net/u/skoelle/profile/" target="_blank"><i class="fa-solid fa-project-diagram"></i></a>
+        <a href="https://stackoverflow.com/users/25233/stefan-koelle" target="_blank"><i class="fa-brands fa-stack-overflow"></i></a>
+        <a href="https://www.reddit.com/user/stefankoelle/" target="_blank"><i class="fa-brands fa-reddit"></i></a>
+        <a href="https://www.youtube.com/@stefankoelle" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://soundcloud.com/stefan-koelle" target="_blank"><i class="fa-brands fa-soundcloud"></i></a>
+        <a href="https://www.mixcloud.com/stefan-koelle/" target="_blank"><i class="fa-brands fa-mixcloud"></i></a>
+        <a href="https://www.pinterest.com/stefankoelle/" target="_blank"><i class="fa-brands fa-pinterest"></i></a>
+        <a href="https://www.facebook.com/stefan.koelle" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://www.instagram.com/stefankoelle/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.threads.net/@stefankoelle" target="_blank"><i class="fa-brands fa-threads"></i></a>
+        <a href="https://x.com/stefankoelle" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://bsky.app/profile/stefankoelle.bsky.social" target="_blank"><i class="fa-brands fa-bluesky"></i></a>
+        <a rel="me" href="https://mastodon.social/@stefankoelle" target="_blank"><i class="fa-brands fa-mastodon"></i></a>
+      </div>
+
+      <div id="head">
+        <div id="foto"><img src="/assets/stefan-koelle-foto.jpg" alt="Foto von Stefan Koelle" style="width: 100%;"></div>
+      </div>
+
+      <div id="background-image"></div>
+
+      {{ content | safe }}
+
+    </div>
+  </div>
+
+  <script src="/assets/email.js"></script>
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        var href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          var target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+name: Build & Deploy stefankoelle.de
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'stefankoelle/**'
+      - 'shared/**'
+      - '.github/workflows/deploy-stefankoelle.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'stefankoelle/**'
+      - 'shared/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "22"
+
+jobs:
+  build:
+    name: Build stefankoelle.de
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build stefankoelle
+        run: npm run build:stefankoelle
+
+      - name: Validate build output
+        run: |
+          if [ ! -d "dist/stefankoelle" ]; then
+            echo "Error: dist/stefankoelle not found"
+            exit 1
+          fi
+          if [ -z "$(ls -A dist/stefankoelle 2>/dev/null)" ]; then
+            echo "Error: dist/stefankoelle is empty"
+            exit 1
+          fi
+          echo "Build output:"
+          find dist/stefankoelle -type f | head -20
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist-stefankoelle
+          path: dist/stefankoelle
+          retention-days: 7
+
+  deploy:
+    name: Deploy stefankoelle.de
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: dist-stefankoelle
+          path: dist/stefankoelle
+
+      - name: Deploy via SFTP to IONOS
+        uses: wlixcc/sftp-deploy-action@v1
+        with:
+          local_path: './dist/stefankoelle/*'
+          server: ${{ secrets.IONOS_SFTP_HOST }}
+          username: ${{ secrets.IONOS_SFTP_USER }}
+          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          server_path: '/deploy/stefankoelle/'
+          port: 22
+
+  summary:
+    name: Deploy Summary
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Print deployment summary
+        run: |
+          echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ needs.deploy.result }}" = "success" ]; then
+            echo "✅ stefankoelle.de deployed successfully!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Deployment failed. Check the deploy job for details." >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Site" >> $GITHUB_STEP_SUMMARY
+          echo "| Site | URL |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-----|" >> $GITHUB_STEP_SUMMARY
+          echo "| stefankoelle | https://stefankoelle.de |" >> $GITHUB_STEP_SUMMARY
+
+# Required repo secrets:
+#   IONOS_SFTP_HOST     — IONOS SFTP server hostname
+#   IONOS_SFTP_USER     — IONOS SFTP username
+#   IONOS_SFTP_PASSWORD — IONOS SFTP password

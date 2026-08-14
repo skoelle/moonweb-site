@@ -9,13 +9,15 @@
     "dev:smarthome": "npx @11ty/eleventy --config=smarthome/eleventy.config.js --serve --port=8083",
     "dev:code": "npx @11ty/eleventy --config=code/eleventy.config.js --serve --port=8084",
     "dev:retro": "npx @11ty/eleventy --config=retro/eleventy.config.js --serve --port=8085",
-    "dev": "npm run dev:hub & npm run dev:infra & npm run dev:smarthome & npm run dev:code & npm run dev:retro",
+    "dev:stefankoelle": "npx @11ty/eleventy --config=stefankoelle/eleventy.config.js --serve --port=8086",
+    "dev": "npm run dev:hub & npm run dev:infra & npm run dev:smarthome & npm run dev:code & npm run dev:retro & npm run dev:stefankoelle",
     "build:hub": "npx @11ty/eleventy --config=hub/eleventy.config.js",
     "build:infra": "npx @11ty/eleventy --config=infra/eleventy.config.js",
     "build:smarthome": "npx @11ty/eleventy --config=smarthome/eleventy.config.js",
     "build:code": "npx @11ty/eleventy --config=code/eleventy.config.js",
     "build:retro": "npx @11ty/eleventy --config=retro/eleventy.config.js",
-    "build": "npm run build:hub && npm run build:infra && npm run build:smarthome && npm run build:code && npm run build:retro"
+    "build:stefankoelle": "npx @11ty/eleventy --config=stefankoelle/eleventy.config.js",
+    "build": "npm run build:hub && npm run build:infra && npm run build:smarthome && npm run build:code && npm run build:retro && npm run build:stefankoelle"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6"
