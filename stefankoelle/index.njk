@@ -29,12 +29,12 @@ layout: stefankoelle.njk
     <li><b>LED Matrix ESP32 InfluxDB Integration</b><br>Data persistence layer for <a href="/ledmatrix/">LED Matrix ESP32</a> sensor systems (DHT22 temperature/humidity) with InfluxDB 2.x backend. Automated collection at 60-second intervals for historical trend analysis.</li>
     <li><b>Air Quality Dashboard</b><br>Dynamic HTML5 dashboard consuming real-time sensor data from InfluxDB via Flux query API. Displays temperature and humidity across all network locations, accessible via nginx reverse proxy.</li>
     <li><b>Tasmota Energy Monitoring</b><br>Smart plug energy tracking with 8 Tasmota-enabled devices, integrating MQTT data collection and visualization. See also <a href="https://smarthome.moonweb.org/tasmota-energy/">smarthome.moonweb.org</a>.</li>
-    <li><b>Network Hardware & Monitoring</b><br>Four Zyxel GS1200-8HP managed switches (server room, living room, study powerline, study OpenWrt), plus a <a href="https://infra.moonweb.org/openwrt/">Multi-WAN OpenWrt router</a> for failover and VLAN segmentation. All switches integrated into <a href="https://infra.moonweb.org/monitoring/">Prometheus monitoring</a> via SNMP exporters. IoT devices isolated in VLAN 189.</li>
+    <li><b>Network Hardware & Monitoring</b><br>Four Zyxel GS1200-8HP managed switches in the server room, living room, and study, plus a <a href="https://infra.moonweb.org/openwrt/">Multi-WAN OpenWrt router</a> for failover and VLAN segmentation. All switches feed into <a href="https://infra.moonweb.org/monitoring/">Prometheus monitoring</a> via SNMP exporters, and IoT devices are isolated in VLAN 189.</li>
   </ul>
 
   <h3>Retro Computing (2022/2023)</h3>
   <ul>
-    <li>MiSTer and MiST FPGA Systems for preservation — see also <a href="https://retro.moonweb.org/mist-mister-fpga/">retro.moonweb.org</a>.</li>
+    <li>MiSTer and MiST FPGA Systems for preservation (see also <a href="https://retro.moonweb.org/mist-mister-fpga/">retro.moonweb.org</a>).</li>
     <li>DOS System, Amiga System, and Atari ST System with the environment from the early 90s.</li>
   </ul>
 
@@ -48,7 +48,7 @@ layout: stefankoelle.njk
 
   <h3>Home Automation (since 2018)</h3>
   <ul>
-    <li><a href="/ledmatrix/">LED Matrix ESP32</a> for date, time, weather, and status messages (Web API) — every room has its own display.</li>
+    <li><a href="/ledmatrix/">LED Matrix ESP32</a> for date, time, weather, and status messages via Web API, with a display in every room.</li>
     <li>MQTT for message transfer and remote control via Tasmota RF modules (433MHz).</li>
     <li>Power meter monitoring for washing machine and tumbler with info messages on LED matrices when finished.</li>
     <li>MP3 player with automated playback (e.g., bathroom radio when light is on).</li>
@@ -75,12 +75,10 @@ layout: stefankoelle.njk
     <li>Interactive audio playback system utilizing RFID technology.</li>
     <li>Powered by an Arduino Nano for compact and efficient operation.</li>
     <li>Plays specific audio files when RFID-tagged objects or cards are placed on the device.</li>
-    <li>Designed for simplicity and intuitive use, suitable for all ages.</li>
     <li>Customizable: users can upload and assign personalized audio content to RFID tags.</li>
-    <li>Ideal for educational and entertainment purposes.</li>
   </ul>
 
-  <h3>Dotnet Community Activity (2009 - 2011)</h3>
+  <h3>.NET Community Activity (2009 - 2011)</h3>
   <ul>
     <li>Attended multiple .NET Open Spaces, including <a href="https://aztec-project.org/blog/dotnet-openspace-sued-2009.html" target="_blank">Ulm 2009</a> and <a href="https://aztec-project.org/blog/dotnet-openspace-leipzig-2009.html" target="_blank">Leipzig 2009</a>.</li>
     <li>Developed a schema-less object storage system named <a href="https://aztec-project.org" target="_blank">StupidDB</a>.</li>
@@ -95,7 +93,7 @@ layout: stefankoelle.njk
     <li>Included modules for photo galleries, menus, and events.</li>
   </ul>
 
-  <h3>Home-Network Projects during IT Manager Phase (2000 - 2006)</h3>
+  <h3>Home Network Projects during IT Manager Phase (2000 - 2006)</h3>
   <ul>
     <li>Set up a home network with various Linux servers and Windows NT 4.0.</li>
     <li>Implemented a predecessor to the pfSense firewall.</li>
@@ -107,9 +105,9 @@ layout: stefankoelle.njk
 
   <h3>Mailbox/Fidonet (1994 - 2000)</h3>
   <ul>
-    <li>Operated a BBS and Fidonet Node — see also <a href="https://retro.moonweb.org/atari-networking-bbs/">Networking &amp; BBS</a> on retro.moonweb.org.</li>
+    <li>Operated a BBS and Fidonet Node (see also <a href="https://retro.moonweb.org/atari-networking-bbs/">Networking &amp; BBS</a> on retro.moonweb.org).</li>
     <li>Managed a node in Augsburg with an uplink directly to the NC in Munich.</li>
-    <li>Software was running on an OS/2 computer</li>
+    <li>Software was running on an OS/2 computer.</li>
     <li>Utilized 2x ISDN and 1x MODEM connections.</li>
     <li>Had about 20 subnodes and points.</li>
     <li>Served as the Bavaria HUB/HOST for various old networks.</li>
@@ -118,10 +116,10 @@ layout: stefankoelle.njk
 
   <h3>PC Intro / Game / Software Development (1992 - 1994)</h3>
   <ul>
-    <li>Released <a href="https://www.moonweb.org/phobia/" target="_blank">Phobia Welcome Intro (Sourcecode/Picture/Video)</a> for 486 PC in 1994</li>
-    <li>Released <a href="https://www.moonweb.org/tcm/" target="_blank">Tr@anceMission Intros (Sourcecode/Pictures/Videos)</a> in 1992 and 1993</li>
-    <li>Developed Turbo Pascal Graphics Library <a href="https://github.com/skoelle/turbopascal-xlib-unit" target="_blank">X-Lib Unit (Sourcecode)</a></li>
-    <li>Used Turbo Pascal and inline assembler for Development</li>
+    <li>Released <a href="https://www.moonweb.org/phobia/" target="_blank">Phobia Welcome Intro (Sourcecode/Picture/Video)</a> for 486 PC in 1994.</li>
+    <li>Released <a href="https://www.moonweb.org/tcm/" target="_blank">Tr@anceMission Intros (Sourcecode/Pictures/Videos)</a> in 1992 and 1993.</li>
+    <li>Developed Turbo Pascal Graphics Library <a href="https://github.com/skoelle/turbopascal-xlib-unit" target="_blank">X-Lib Unit (Sourcecode)</a>.</li>
+    <li>Used Turbo Pascal and inline assembler for development.</li>
   </ul>
 
   <h3>Atari ST Software Development (1990 - 1992)</h3>
@@ -137,13 +135,13 @@ layout: stefankoelle.njk
   <h2>Programming Languages</h2>
 
   <h3>AI-Assisted Development</h3>
-  <p>I've fully embraced the AI-assisted development paradigm since early 2025. At work, I've taught <strong>Claude Code</strong> a workflow for handling Jira stories end-to-end: it evaluates requirements, provides feedback to the PO, and creates a detailed implementation plan. From there, it's mostly about supervising the plan while the code generation runs largely autonomous. For code review, we use a second AI (e.g., Codex) as a quality gate to catch issues that might slip through. In migration projects, I define the exact plan upfront and Claude Code executes it with increasing independence. The output gain is massive — delivery in a fraction of the time.</p>
-  <p>Privately, I work with <strong><a href="https://opencode.ai">OpenCode</a></strong> paired with OpenCode Zen, Merge Gateway, and OpenRouter — primarily on Python-based home lab and automation projects. See my <a href="https://code.moonweb.org">GitHub projects</a> for examples and the <a href="https://infra.moonweb.org/dev-environment/">Dev VM setup</a> for the infrastructure behind this workflow.</p>
+  <p>I've fully embraced the AI-assisted development paradigm since early 2025. At work, I've taught <strong>Claude Code</strong> a workflow for handling Jira stories end-to-end: it evaluates requirements, provides feedback to the PO, and creates a detailed implementation plan. From there, it's mostly about supervising the plan while the code generation runs largely autonomously. For code review, we use a second AI (e.g., Codex) as a quality gate to catch issues that might slip through. In migration projects, I define the exact plan upfront and Claude Code executes it with increasing independence. The output gain is massive, delivering in a fraction of the time.</p>
+    <p>Privately, I work with <strong><a href="https://opencode.ai">OpenCode</a></strong> paired with OpenCode Zen, Merge Gateway, and OpenRouter, mostly for Python-based home lab and automation projects. See my <a href="https://code.moonweb.org">GitHub projects</a> for examples and the <a href="https://infra.moonweb.org/dev-environment/">Dev VM setup</a> for the infrastructure behind this workflow.</p>
 
   <h3>.NET Core</h3>
   <ul>
     <li>Working with .NET Core since 2018 at stellenanzeigen.de GmbH &amp; Co. KG, which became TENHIL GmbH &amp; Co. KG in 2022, where I migrated the old VB and ASP-Classic applications to modern .NET Core.</li>
-    <li>Built around a dozen microservices, including Jobs Per Mail, JobApply, GeoService, Feedexporter, and Salary Data Service, running first on Azure with Docker, Terraform, Azure Tables, Azure Blobs, S3 buckets, and PostgreSQL as the infrastructure underneath.</li>
+    <li>Built around a dozen microservices, including Jobs Per Mail, JobApply, GeoService, Feedexporter, and Salary Data Service, first hosted on Azure and built with Docker, Terraform, Azure Tables, Azure Blobs, S3 buckets, and PostgreSQL.</li>
     <li>Since this year, all of these microservices run in our self-hosted Kubernetes cluster on AWS machines.</li>
     <li>Introduced Squidex as a headless CMS for the microservice backend, with Sentry and Loki for monitoring and logging, and Quartz.NET, later Hangfire.NET, for scheduled jobs.</li>
   </ul>
@@ -159,7 +157,7 @@ layout: stefankoelle.njk
   <h3>Python</h3>
   <ul>
     <li>Working with Python since 2020 on private projects, home lab tooling, and automation scripts.</li>
-    <li>Since 2026, increasingly using Python for home network projects, with development accelerated by AI-assisted workflows in OpenCode.</li>
+    <li>Since this year, increasingly using Python for home network projects, with development accelerated by AI-assisted workflows in OpenCode.</li>
   </ul>
 
   <h3>.NET Framework</h3>
@@ -198,7 +196,7 @@ layout: stefankoelle.njk
   <h3>PASCAL</h3>
   <ul>
     <li>Started with PASCAL on PC in 1993, using TurboPascal 6.0, 7.0, and Borland Pascal 7.0.</li>
-    <li>Developed DOSMENU software for DOS PCs and tools for Fidonet.</li>
+    <li>Developed DOSMENU, a menu system for DOS, and tools for Fidonet.</li>
     <li>Created two games: a Wheel of Fortune clone and a two-player Tetris.</li>
     <li>Studied PASCAL for one year in school (1994) and one semester on UNIX (Solaris) during studies in 1996.</li>
   </ul>
