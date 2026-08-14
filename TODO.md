@@ -1,6 +1,6 @@
 # TODO — moonweb-site Offene Items
 
-Stand: 2026-08-13
+Stand: 2026-08-14
 
 ## Aktueller Status
 
@@ -10,20 +10,34 @@ Stand: 2026-08-13
 | Phase 1 — Content | ✅ fertig | hub, code, infra, smarthome komplett, retro bewusst rudimentär |
 | Phase 2 — CI/CD | ✅ fertig | build-deploy.yml mit Caching + Validation + Summary |
 | Phase 3 — Launch | ✅ fertig | Cloudflare Pages live, Smoke-Test bestanden |
-| Phase 4 — Deferred | ⏸️ zurückgestellt | Ledmatrix-Migration, 28k8, Analytics |
+| Phase 4 — Deferred | ⏸️ zurückgestellt | 28k8, Analytics |
+| Phase 5 — stefankoelle.de | ✅ fertig | Ins Monorepo migriert, Eleventy-Build, SFTP-Deployment |
 
 ## Offene Items
 
 ### P4 — Deferred (nicht dringend)
 
-- [ ] Ledmatrix-Migration nach smarthome
 - [ ] 28k8.moonweb.org Zukunft klären
 - [ ] Perplexity-Rückkanal
 - [ ] Apex-Domain Redirect (moonweb.org → hub.moonweb.org)
-- [ ] stefankoelle.de in Monorepo portieren
+- [ ] PDF-Build fuer CV (WeasyPrint, lokal testen)
+- [ ] Querverlinkungen stefankoelle.de <-> smarthome
+- [ ] Ledmatrix ggf. nach smarthome verschieben
 
-## Schon erledigt (Stand 2026-08-13)
+## Schon erledigt (Stand 2026-08-14)
 
+### stefankoelle.de Migration (2026-08-14)
+- [x] Eleventy-Config + package.json erweitert
+- [x] Onepager-Layout mit Anchor-Links beibehalten
+- [x] CV-Partial (zentral fuer Web + PDF)
+- [x] CSS ausgelagert + modernisiert (Custom Properties, box-sizing)
+- [x] Assets in assets/ verschoben
+- [x] Ledmatrix als eigene Seite integriert
+- [x] Alte Dateien geloescht (index.html, browserconfig.xml, sitemap.txt)
+- [x] Deployment-Workflow fuer IONOS SFTP
+- [x] Cloudflare-Workflow um stefankoelle erweitert (paths-ignore)
+
+### Vorherige Erledigungen (Stand 2026-08-13)
 - [x] Impressum angelegt + Footer-Link auf allen Sites
 - [x] Favicons (SVG mit Emojis) pro Subdomain — `shared/favicon/*.svg`, per Passthrough Copy
 - [x] Meta descriptions auf allen 33 Seiten
@@ -51,3 +65,7 @@ Alle 5 Sites live auf Cloudflare Pages:
 - ✅ smarthome.moonweb.org — Smart Home Übersicht + Detailseiten
 - ✅ infra.moonweb.org — Infra-Übersicht (redigiert)
 - ✅ retro.moonweb.org — Ehrliche minimale Übersicht (WIP)
+
+stefankoelle.de live auf IONOS (SFTP-Deployment):
+- ✅ stefankoelle.de — Onepager mit CV, Projects, Languages, Impressum
+- ✅ stefankoelle.de/ledmatrix/ — LED Matrix WebServer Dokumentation

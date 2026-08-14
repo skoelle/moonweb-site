@@ -1,0 +1,199 @@
+/* stefankoelle.de — Modernized CSS (visually identical to original) */
+
+:root {
+  --color-text: #665544;
+  --color-text-dark: #333;
+  --color-bg: #f4f4f4;
+  --color-surface: rgba(255, 255, 255, 0.9);
+  --color-surface-solid: #ffffff;
+  --color-link: #333;
+  --color-nav-bg: #eeeeee;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --font-main: 'Roboto', sans-serif;
+  --transition: color 0.3s;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: var(--color-text);
+  font: 1em/1.6 var(--font-main);
+  background-color: var(--color-bg);
+}
+
+a { color: var(--color-link); }
+
+h1 { font-size: 2.5em; }
+h2 { font-size: 2em; margin-bottom: 10px; }
+h3 { font-size: 1.5em; margin-top: 20px; margin-bottom: 10px; }
+
+p { margin-bottom: 10px; }
+
+.profile, .core-technologies, .contact-info {
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+
+/* Navigation */
+#head { display: none; }
+
+#links {
+  padding: 20px;
+  font-size: 1.25em;
+  text-align: center;
+  min-height: 20px;
+  background: var(--color-nav-bg);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.flex-break {
+  flex-basis: 100%;
+}
+
+#links a {
+  color: var(--color-text-dark);
+  text-decoration: none;
+  font-weight: normal;
+  transition: var(--transition);
+}
+
+#links a.separator::after {
+  content: " | ";
+  margin-left: 4px;
+}
+
+#links i.fa-brands {
+  margin-right: 8px;
+}
+
+/* Sections */
+.headlinespace {
+  height: 720px;
+  padding: 80px;
+  position: relative;
+}
+
+#headline {
+  padding: 20px;
+  background: var(--color-surface);
+  width: calc(25% - 20px);
+  position: relative;
+  left: 20px;
+  box-shadow: 0 2px 4px var(--color-shadow);
+}
+
+.space {
+  margin-top: 1060px;
+  padding: 150px;
+  position: relative;
+}
+
+#cvcontent,
+#personalprojectscontent,
+#programminglanguagescontent,
+#impressumcontent {
+  padding: 20px;
+  background: var(--color-surface);
+  width: calc(50% - 20px);
+  position: relative;
+  left: 20px;
+  box-shadow: 0 2px 4px var(--color-shadow);
+}
+
+#impressumcontent {
+}
+
+#cvcontent li,
+#personalprojectscontent li,
+#programminglanguagescontent li {
+  margin-left: 35px;
+}
+
+/* Background */
+#background-image {
+  position: fixed;
+  top: 120px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 120px);
+  background: url('/assets/stefan-koelle-vollbild.jpg') no-repeat top center fixed;
+  background-size: cover;
+  background-position: 0 120px;
+  z-index: -1;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  #container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  body {
+    color: var(--color-text-dark);
+    font-size: 1em;
+  }
+
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.75em; }
+  h3 { font-size: 1.25em; }
+
+  #headline,
+  #cvcontent,
+  #personalprojectscontent,
+  #programminglanguagescontent,
+  #impressumcontent {
+    width: 100%;
+    padding: 20px;
+    left: 0;
+    background: var(--color-surface-solid);
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px var(--color-shadow);
+  }
+
+  #cvcontent li,
+  #personalprojectscontent li,
+  #programminglanguagescontent li {
+    margin-left: 35px;
+  }
+
+  #impressumcontent {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .headlinespace {
+    height: 20px;
+    padding: 20px;
+  }
+
+  .space {
+    margin-top: 40px;
+    width: 20px;
+    padding: 20px;
+  }
+
+  #background-image { display: none; }
+
+  #links {
+    padding: 20px;
+    background: var(--color-nav-bg);
+    position: relative;
+    width: 100%;
+  }
+
+  #head { display: block; padding-top: 20px; }
+}

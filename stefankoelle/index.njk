@@ -1,0 +1,275 @@
+---
+title: "Stefan Koelle"
+description: "Experienced Senior Software Developer and Software Architect with over 20 years of experience. Specialized in .NET Core and Kubernetes, with hands-on experience in AI-assisted development using Claude Code."
+layout: stefankoelle.njk
+---
+<div class="headlinespace">
+  <a id="home"></a>
+</div>
+<div id="headline">
+  <h1>Stefan Kölle</h1>
+  Senior Software Developer & Software&nbsp;Architect
+</div>
+
+<div class="space">
+  <a id="cv"></a>
+</div>
+{% include "cv-content.njk" %}
+
+<div class="space">
+  <a id="personalprojects"></a>
+</div>
+<div id="personalprojectscontent">
+  <h2>Personal Projects</h2>
+
+  <h3>Home Network Projects (2025-2026)</h3>
+  <ul>
+    <li><b>Docker Host VM 110 (Proxmox PVE)</b><br>Deployed new virtualized Docker host (VM 110,) with Debian 12.2 as fresh infrastructure replacement for legacy VM 101. Implemented optimized Docker engine with containerized services including Portainer, Prometheus, Grafana, Gitea, MQTT broker, and monitoring exporters. Successfully migrated nginx-proxy-manager database from Docker to MariaDB LxC for improved stability.</li>
+    <li><b>InfluxDB Time-Series Integration</b><br>Deployed InfluxDB 2.x for sensor data collection from Tasmota smart plugs and HomematicIP thermostats, replacing older MySQL-based storage with modern time-series architecture.</li>
+    <li><b>LED Matrix ESP32 InfluxDB Time-Series Integration</b><br>Implemented data persistence layer for <a href="/ledmatrix/">LED Matrix ESP32</a> sensor systems (DHT22 temperature/humidity) with InfluxDB 2.x backend. Automated collection of matrix display metrics and environmental sensor data at 60-second intervals, enabling historical trend analysis and long-term performance monitoring.</li>
+    <li><b>Interactive Air Quality Dashboard (luftwerte.html)</b><br>Developed dynamic HTML5 dashboard consuming real-time sensor data directly from InfluxDB backend via Flux query API. Displays aggregated temperature and humidity measurements across all network locations with responsive design supporting multiple device form factors. Serves as primary interface for environmental monitoring accessible via nginx reverse proxy.</li>
+    <li><b>Tasmota Energy Monitoring</b><br>Implemented smart plug energy tracking system with 8 Tasmota-enabled devices, integrating MQTT data collection and visualization for home automation monitoring.</li>
+    <li><b>MQTT Broker Migration</b><br>Migrated MQTT infrastructure from Synology NAS to Docker-based VM for improved stability and integration with modern smart home automation, while maintaining backward compatibility with legacy devices.</li>
+    <li><b>Four Managed Zyxel GS1200-8HP Switches</b><br>Deployed four managed Zyxel switches across network topology with SNMP exporter integration for centralized monitoring. Serverraum (192.168.178.250), Wohnzimmer (192.168.178.251), Powerlan (192.168.178.252), and OpenWRT office (192.168.188.250). Each switch monitored via Prometheus with dedicated export ports (9436-9439) providing real-time network traffic and port status visibility.</li>
+    <li><b>Multi-WAN OpenWrt Router (Office Workstation)</b><br>Implemented advanced OpenWrt routing system in office workspace with multi-WAN capabilities, connected as Zyxel switch target (192.168.188.250). Enables intelligent traffic distribution, failover support, and advanced VLAN segmentation for hybrid network connectivity during retro-computing sessions and general office networking.</li>
+    <li><b>Network Monitoring & SNMP Integration</b><br>Extended Prometheus infrastructure with SNMP exporters for all managed switches, enabling unified visibility of hardware statistics, port utilization, and network performance metrics across home network environment.</li>
+    <li><b>IoT VLAN Isolation (VLAN 189)</b><br>Implemented dedicated isolated network segment for IoT devices using Zyxel GS1200-8 switch with OpenWRT, separating smart home devices from legacy systems through VLAN segmentation.</li>
+  </ul>
+
+  <h3>Retro Computing (2022/2023)</h3>
+  <ul>
+    <li>MiSTer and MiST FPGA Systems for preservation.</li>
+    <li>DOS System, Amiga System, and Atari ST System with the environment from the early 90s.</li>
+  </ul>
+
+  <h3>Upgrade of old Atari Mega 4 (2021)</h3>
+  <ul>
+    <li>Gotek Drive</li>
+    <li>More RAM</li>
+    <li>Alternative TOS ROMs</li>
+    <li>SD HDD Adapter</li>
+  </ul>
+
+  <h3>Home Automation (since 2018)</h3>
+  <ul>
+    <li>Arduino/ESP32/Raspberry/Home Automation.</li>
+    <li><a href="/ledmatrix/">LED Matrix ESP32</a> for Date, Time, Weather, and Status messages (Web API).</li>
+    <ul>
+      <li>Attached Light sensor, DHT22 Temperature Sensor (Web API).</li>
+      <li>Every room has its LED matrix.</li>
+    </ul>
+    <li>dotnet core application (Master on iMac and 4 clients on Raspberry PIs).</li>
+    <li>MQTT for message transfer and remote control via Tasmota RF Module (433MHz).</li>
+    <li>Evaluation of power meters from washing machine and tumbler.</li>
+    <li>Info message when finished on LED matrices.</li>
+    <li>MP3 player (e.g., automatic play in the bathroom when the light is on).</li>
+    <li>One Raspberry Pi with pilight and RF433 Module for activating remote control power plugs.</li>
+  </ul>
+
+  <h3>Proxmox Server with Various LxC Linux (since 2020)</h3>
+  <ul>
+    <li>pihole</li>
+    <li>suricata</li>
+    <li>webone</li>
+    <li>minecraft bedrock server (multiple instances)</li>
+    <li>divoom-rest</li>
+  </ul>
+
+  <h3>Various Docker Systems (since 2016)</h3>
+  <ul>
+    <li>portainer</li>
+    <li>nginx</li>
+    <li>grafana</li>
+    <li>prometheus</li>
+    <li>cadvisor</li>
+    <li>nodeexporter</li>
+    <li>gitae</li>
+    <li>stirling-pdf</li>
+    <li>stretto</li>
+    <li>tubearchivist</li>
+    <li>tubesync</li>
+    <li>healthchecks</li>
+    <li>watchtower</li>
+  </ul>
+
+  <h3>Walk-on Song (2019)</h3>
+  <ul>
+    <li>When someone enters the office, their jingle is played.</li>
+    <li>ESP32 scans WiFi, if a known device is found for the first time per day, the jingle is played.</li>
+    <li>MP3 Module for playback on attached speaker.</li>
+  </ul>
+
+  <h3>Kids RFID MP3 Player (2018)</h3>
+  <ul>
+    <li>Interactive audio playback system utilizing RFID technology.</li>
+    <li>Powered by an Arduino Nano for compact and efficient operation.</li>
+    <li>Plays specific audio files when RFID-tagged objects or cards are placed on the device.</li>
+    <li>Designed for simplicity and intuitive use, suitable for all ages.</li>
+    <li>Customizable: users can upload and assign personalized audio content to RFID tags.</li>
+    <li>Ideal for educational and entertainment purposes.</li>
+  </ul>
+
+  <h3>Dotnet Community Activity (2009 - 2011)</h3>
+  <ul>
+    <li>Attended multiple .NET Open Spaces, including <a href="https://aztec-project.org/blog/dotnet-openspace-sued-2009.html" target="_blank">Ulm 2009</a> and <a href="https://aztec-project.org/blog/dotnet-openspace-leipzig-2009.html" target="_blank">Leipzig 2009</a>.</li>
+    <li>Developed a schema-less object storage system named <a href="https://aztec-project.org" target="_blank">StupidDB</a>.</li>
+    <li>Contributed to a <a href="https://aztec-project.org/#blog" target="_blank">developer blog</a> with colleagues.</li>
+    <li>Actively participated in Coding Dojos at AutoScout24.</li>
+  </ul>
+
+  <h3>Owner &amp; Developer, <a href="https://www.inseco.de" target="_blank">inseco.de</a> (2003 - 2008)</h3>
+  <ul>
+    <li>Managed approximately 20 clients, primarily from the gastronomy and club sectors.</li>
+    <li>Developed a CMS system for maintaining their websites, programmed in PHP and MySQL.</li>
+    <li>Included modules for photo galleries, menus, and events.</li>
+  </ul>
+
+  <h3>Home-Network Projects during IT Manager Phase (2000 - 2006)</h3>
+  <ul>
+    <li>Set up a home network with various Linux servers and Windows NT 4.0.</li>
+    <li>Implemented a predecessor to the pfSense firewall.</li>
+    <li>Managed a FreeBSD server with Apache, Sendmail, and Perl scripts.</li>
+    <li>Maintained an NT 4.0 file server.</li>
+    <li>Administered Windows 98 and Windows 2000 hosts.</li>
+    <li>More info at <a href="https://www.moonweb.org/network/" target="_blank">moonweb.org/network/</a></li>
+  </ul>
+
+  <h3>Mailbox/Fidonet (1994 - 2000)</h3>
+  <ul>
+    <li>Operated a BBS and Fidonet Node.</li>
+    <li>Managed a node in Augsburg with an uplink directly to the NC in Munich.</li>
+    <li>Software was running on an OS/2 computer</li>
+    <li>Utilized 2x ISDN and 1x MODEM connections.</li>
+    <li>Had about 20 subnodes and points.</li>
+    <li>Served as the Bavaria HUB/HOST for various old networks.</li>
+    <li>Developed several small software tools in Turbo Pascal for DOS.</li>
+  </ul>
+
+  <h3>PC Intro / Game / Software Development (1992 - 1994)</h3>
+  <ul>
+    <li>Released <a href="https://www.moonweb.org/phobia/" target="_blank">Phobia Welcome Intro (Sourcecode/Picture/Video)</a> for 486 PC in 1994</li>
+    <li>Released <a href="https://www.moonweb.org/tcm/" target="_blank">Tr@anceMission Intros (Sourcecode/Pictures/Videos)</a> in 1992 and 1993</li>
+    <li>Developed Turbo Pascal Graphics Library <a href="https://github.com/skoelle/turbopascal-xlib-unit" target="_blank">X-Lib Unit (Sourcecode)</a></li>
+    <li>Used Turbo Pascal and inline assembler for Development</li>
+  </ul>
+
+  <h3>Atari ST Software Development (1990 - 1992)</h3>
+  <ul>
+    <li>Completed game 'Atom oh no' in 1992 (GFA Basic)</li>
+  </ul>
+</div>
+
+<div class="space">
+  <a id="programminglanguages"></a>
+</div>
+<div id="programminglanguagescontent">
+  <h2>Programming Languages</h2>
+
+  <p>Since 2025, AI-assisted development with Claude Code has become a core part of my workflow. This approach enables faster delivery from idea to production, better documentation artifacts, and cross-technology work across .NET, TypeScript, and Kubernetes.</p>
+
+  <h3>.NET Core</h3>
+  <ul>
+    <li>Intensively worked with .NET Core starting in 2018 at stellenanzeigen.de GmbH &amp; Co. KG and continued at TENHIL GmbH &amp; Co. KG from 2022.</li>
+    <li>Migrated old VB and ASP-Classic applications to modern .NET Core applications.</li>
+    <li>Planned and implemented hosting architecture on Azure.</li>
+    <li>Introduced a CMS based on Squidex.</li>
+    <li>Developed new multi-client microservices for all brands using .NET Core 8, Docker, Terraform, Azure WebApps, Azure Tables, Azure Blobs, Uptrends, Sentry, Loki, and Quartz.NET.</li>
+    <li>Created microservices including Jobs Per Mail, JobApply application service, GeoService, Feedexporter, and Salary Data Service.</li>
+  </ul>
+
+  <h3>TypeScript</h3>
+  <ul>
+    <li>Started using TypeScript in professional projects in 2024 at TENHIL GmbH &amp; Co. KG.</li>
+    <li>Built an MCP (Model Context Protocol) server for ChatGPT integration, developed solo from concept to production in 6 half-days using Claude Code.</li>
+    <li>Implemented a TypeScript-based widget renderer for AI-driven applications, including integration with the OpenAI Chat Kit.</li>
+    <li>Applied TypeScript as the primary language for new AI-focused microservices where it was the right technology choice.</li>
+  </ul>
+
+  <h3>Python</h3>
+  <ul>
+    <li>Using Python since 2020 for private projects and tooling.</li>
+    <li>Applied in various automation scripts and data processing projects in a home lab environment.</li>
+    <li>Since 2026, using Python increasingly in home network projects driven by AI-assisted development with Open Code.</li>
+  </ul>
+
+  <h3>.NET Framework</h3>
+  <ul>
+    <li>Gained experience with the .NET Framework between 2004 and 2010 as CTO at stellenanzeigen.de GmbH &amp; Co. KG.</li>
+    <li>Led the migration from ASP Classic to the .NET Framework.</li>
+    <li>Hosted applications on Windows IIS and used MSSQL as the database.</li>
+    <li>Split software into different layers and enabled communication via SOAP web services.</li>
+    <li>Introduced TDD and DDD, and engaged with the .NET community through OpenSpaces and CodingDojos.</li>
+  </ul>
+
+  <h3>PHP</h3>
+  <ul>
+    <li>Developed a website CMS system (activetool.de) for multiple clients from 2003 to 2008.</li>
+    <li>Created a PHP Ticketing System and worked with MySQL databases.</li>
+  </ul>
+
+  <h3>ASP-Classic</h3>
+  <ul>
+    <li>Started with ASP-Classic on PC (Windows) in 1999 while working as a web developer at IXOS AG.</li>
+    <li>Managed the web development environment and built internal departmental websites.</li>
+    <li>Introduced search functions, request systems, and link checkers to optimize web servers.</li>
+    <li>Developed a Visual Basic application for generating static web pages.</li>
+    <li>Designed and implemented a workflow for maintaining the website using ASP scripts and SQL databases.</li>
+    <li>Led the IT and development department at stellenanzeigen.de GmbH &amp; Co. KG from 2000 to 2003, migrating applications from idc/htx to ASP-Classic and developing a multi-client web frontend for newspaper publishers.</li>
+  </ul>
+
+  <h3>Java</h3>
+  <ul>
+    <li>Began using Java on PC (Windows) in 1998.</li>
+    <li>Participated in a Security Hash Team Project at iXOS Software AG, developing the Java frontend.</li>
+    <li>Utilized development environments such as Kawa and IBM Visual Age.</li>
+  </ul>
+
+  <h3>C++</h3>
+  <ul>
+    <li>First used C++ on PC (Windows) in 1997.</li>
+    <li>Worked on an R/3 Integration Project during practical work at iXOS Software AG.</li>
+    <li>Completed one semester of C++ on UNIX (Solaris) during studies in 1998.</li>
+  </ul>
+
+  <h3>PASCAL</h3>
+  <ul>
+    <li>Started with PASCAL on PC in 1993, using TurboPascal 6.0, 7.0, and Borland Pascal 7.0.</li>
+    <li>Developed DOSMENU software for DOS PCs and tools for Fidonet.</li>
+    <li>Created two games: a Wheel of Fortune clone and a two-player Tetris.</li>
+    <li>Studied PASCAL for one year in school (1994) and one semester on UNIX (Solaris) during studies in 1996.</li>
+  </ul>
+
+  <h3>Assembler</h3>
+  <ul>
+    <li>Began learning Assembler on the Atari ST in 1992, creating simple programs with Pure Assembler, part of the Pure C Pack.</li>
+    <li>Developed a small text mode demo with sound using DevPAK.</li>
+    <li>Gained experience on PC in 1994, creating four demos using inline assembler in TurboPascal.</li>
+  </ul>
+
+  <h3>C</h3>
+  <ul>
+    <li>First encountered C on the Atari ST in 1992, creating simple programs with Pure C, an advanced version of Turbo C.</li>
+    <li>Completed one semester of C during studies in 1997.</li>
+  </ul>
+
+  <h3>BASIC</h3>
+  <ul>
+    <li>Gained initial experience with BASIC on the EPSON HX-20 in 1988 and Atari ST in 1989.</li>
+    <li>Developed two small games (Bowling, LiveStyleCity) using OmicronBasic.</li>
+    <li>Created games such as AtomOhNo (an Atomix clone) and TOPchangethecolor with GFA-Basic and TOPpack.</li>
+    <li>Produced graphic demos on the Atari ST around 1991.</li>
+    <li>Developed simple programs using Amiga Basic in 1991.</li>
+    <li>Studied BASIC for two years in school (1991-1992), including coding a Snake clone during class.</li>
+  </ul>
+</div>
+
+<div class="space">
+  <a id="impressum"></a>
+</div>
+<div id="impressumcontent">
+  <h2>Legal Notice (Impressum, § 5 DDG)</h2>
+  <p>Stefan Kölle<br>Neumarkter Str. 86c<br>81673 München</p>
+  <p>Phone/Fax: +49-(89)-20006547<br>E-Mail: <a id="email-impressum" href="#">[email protected]</a></p>
+  <p>Responsible for content according to § 18 (2) MStV: Stefan Kölle, address as above.</p>
+  <p>Full legal notice & privacy policy for this website and the moonweb.org network: <a href="https://hub.moonweb.org/impressum">hub.moonweb.org/impressum</a>
+</div>

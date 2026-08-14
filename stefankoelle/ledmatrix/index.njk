@@ -1,0 +1,563 @@
+---
+title: "LED Matrix WebServer"
+description: "WiFi-controlled LED display solution with REST API, DHT22 sensor, and OTA updates."
+---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description }}">
+  <meta name="author" content="Stefan Kölle">
+  <title>{{ title }} - ESP32 Projekt</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#" class="logo">🔌 LED Matrix WebServer</a>
+      <ul class="nav-menu">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#hardware">Hardware</a></li>
+        <li><a href="#api">API</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="version-badge">v1.08 (DHT) • January 2026</div>
+        <h1>LED Matrix WebServer</h1>
+        <p>WiFi-controlled LED display solution with REST API, DHT22 sensor, and OTA updates for your home network.</p>
+        <div class="cta-buttons">
+          <a href="#overview" class="btn btn-primary">Project</a>
+          <a href="#api" class="btn btn-secondary">API Dokumentation</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <p style="font-size: 4rem; opacity: 0.9;">📊</p>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section" id="overview">
+      <h2 class="section-title">Overview</h2>
+      <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+        The LED Matrix WebServer system is a fully configurable LED display solution for home networks.
+        It is based on the NodeMCU-32S ESP32 with up to 12 cascaded MAX7219 8x8 LED modules.
+        Using a simple REST API, messages can be displayed, animations controlled, and sensor data queried.
+      </p>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-title">🎯 Easy to use</div>
+          <div class="card-subtitle">Web-based control</div>
+          <div class="card-content">Control your LED matrix via HTTP REST API from anywhere in the network</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🌐 WiFi integrated</div>
+          <div class="card-subtitle">Fritz!Box Mesh compatible</div>
+          <div class="card-content">Automatic WiFi connection and reconnect</div>
+        </div>
+        <div class="card">
+          <div class="card-title">📡 OTA updates</div>
+          <div class="card-subtitle">Update firmware wirelessly</div>
+          <div class="card-content">Update your firmware without a USB connection</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🌡️ Sensors</div>
+          <div class="card-subtitle">DHT22 integrated</div>
+          <div class="card-content">Read temperature and humidity</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔊 Buzzer sounds</div>
+          <div class="card-subtitle">Tone sequences</div>
+          <div class="card-content">Predefined melodies for alarms and notifications</div>
+        </div>
+        <div class="card">
+          <div class="card-title">📦 Extensible</div>
+          <div class="card-subtitle">Analog inputs</div>
+          <div class="card-content">GPIO 34/35/36 available for external sensors</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="hardware">
+      <h2 class="section-title">Hardware Components</h2>
+
+      <div class="specs-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Model / Type</th>
+              <th>Features</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Microcontroller</strong></td>
+              <td>NodeMCU-32S ESP32</td>
+              <td>32-Bit Dual-Core 240MHz, WiFi + Bluetooth</td>
+            </tr>
+            <tr>
+              <td><strong>LED Display</strong></td>
+              <td>12× MAX7219 8x8 Module</td>
+              <td>cascaded</td>
+            </tr>
+            <tr>
+              <td><strong>Sensor</strong></td>
+              <td>DHT22 (AM2302)</td>
+              <td>Temperature ±0.5°C, Humidity ±2%</td>
+            </tr>
+            <tr>
+              <td><strong>Buzzer</strong></td>
+              <td>Passive Buzzer</td>
+              <td>GPIO 16 PWM controlled via NPN transistor</td>
+            </tr>
+            <tr>
+              <td><strong>Power Supply</strong></td>
+              <td>USB-C oder externe 5V PSU</td>
+              <td>5V for MAX7219, 3.3V internal for logic</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--color-primary);">Pin Configuration</h3>
+      <div class="code-block">
+        <div class="code-label">GPIO Pin Assignment</div>
+        <pre>LedMatrix Software V1.08
+NodeMCU-32S ESP32 (USB powered)
+
+POWER SUPPLY:
+  Micro USB ──→ ESP32 (5V regulator generates 3.3V internal)
+
+SPI SIGNALS (MAX7219):
+  VIN 5V  ──→ MAX7219 VCC
+  GND     ──→ MAX7219 GND
+  GPIO 5  ──→ MAX7219 CS  (Chip Select)
+  GPIO 18 ──→ MAX7219 CLK (Clock)
+  GPIO 23 ──→ MAX7219 DIN (Data In)
+  Modul 1 DOUT → Modul 2 DIN → Modul 3 DIN
+
+DHT22 SENSOR:
+  GPIO 27 ──→ DHT22 Data
+  3V3    ──→ DHT22 VCC
+  GND     ──→ DHT22 GND
+
+BUZZER:
+  GPIO 16 ──→ Buzzer Control (via transistor)
+  GPIO 16 ──1kΩ── NPN Transistor BASE
+                    NPN Transistor COLLECTOR ──→ Buzzer +
+                    NPN Transistor EMITTER ──→ GND
+  Buzzer - ──→ GND (ESP32)
+
+ANALOG INPUTS (optional):
+  GPIO 34 ──→ Analog Sensor 1
+  GPIO 35 ──→ Analog Sensor 2
+  GPIO 36 ──→ Analog Sensor 3</pre>
+      </div>
+    </section>
+
+    <section class="section" id="installation">
+      <h2 class="section-title">Installation &amp; Setup</h2>
+      <p style="margin-bottom: 2rem;">
+        Here are photos of various LED Matrix installations in the home network. The systems show different colors and configurations.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+        <div style="background: var(--color-surface); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition);">
+          <img src="assets/ledmatrix.jpg" alt="Red LED Matrix Installation" style="width: 100%; height: auto; display: block;">
+          <div style="padding: 1rem;">
+            <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">Red Installation</h4>
+            <p style="font-size: 0.9rem;">LED Matrix with red backlight on iMac</p>
+          </div>
+        </div>
+
+        <div style="background: var(--color-surface); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition);">
+          <img src="assets/ledmatrix-az.jpg" alt="LED Matrix above AnyCubic Printer" style="width: 100%; height: auto; display: block;">
+          <div style="padding: 1rem;">
+            <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">AnyCubic Printer Setup</h4>
+            <p style="font-size: 0.9rem;">LED Matrix installation above 3D printer</p>
+          </div>
+        </div>
+
+        <div style="background: var(--color-surface); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition);">
+          <img src="assets/ledmatrix-yellow.jpg" alt="Green LED Matrix Installation" style="width: 100%; height: auto; display: block;">
+          <div style="padding: 1rem;">
+            <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">Green-yellow Installation</h4>
+            <p style="font-size: 0.9rem;">LED Matrix with green/yellow LED configuration</p>
+          </div>
+        </div>
+
+        <div style="background: var(--color-surface); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition);">
+          <img src="assets/ledmatrix-kind.jpg" alt="Green LED Matrix Close-up" style="width: 100%; height: auto; display: block;">
+          <div style="padding: 1rem;">
+            <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">Green Close-up</h4>
+            <p style="font-size: 0.9rem;">Detailed view of a green LED Matrix with wiring</p>
+          </div>
+        </div>
+
+        <div style="background: var(--color-surface); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition);">
+          <img src="assets/ledmatrix-blue.jpg" alt="Blue LED Matrix Installation" style="width: 100%; height: auto; display: block;">
+          <div style="padding: 1rem;">
+            <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">Blue Installation</h4>
+            <p style="font-size: 0.9rem;">LED Matrix with blue brightness<br>Many pixels defective</p>
+          </div>
+        </div>
+
+        <div style="background: var(--color-surface); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition);">
+          <img src="assets/ledmatrix-green.jpg" alt="Cyan LED Matrix Installation" style="width: 100%; height: auto; display: block;">
+          <div style="padding: 1rem;">
+            <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">Cyan Installation</h4>
+            <p style="font-size: 0.9rem;">Multiple modules with cyan-colored lighting<br>Some pixels defective</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <h2 class="section-title">Feature Overview</h2>
+
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">📱</div>
+          <div class="feature-text">
+            <h3>REST API</h3>
+            <p>HTTP-based control of all functions from anywhere in the network</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🎬</div>
+          <div class="feature-text">
+            <h3>Animations</h3>
+            <p>MD_Parola Library with various scroll modes</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">💾</div>
+          <div class="feature-text">
+            <h3>EEPROM Storage</h3>
+            <p>Persistently save and load messages</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔄</div>
+          <div class="feature-text">
+            <h3>Asynchronous Web Engine</h3>
+            <p>Non-blocking AsyncWebServer for reliable performance</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🌡️</div>
+          <div class="feature-text">
+            <h3>Sensor Integration</h3>
+            <p>DHT22 read every 60 seconds</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔊</div>
+          <div class="feature-text">
+            <h3>Sounds &amp; Alarms</h3>
+            <p>4 predefined melodies: Error, Done, Warning, Completed</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="api">
+      <h2 class="section-title">REST API Documentation</h2>
+
+      <p style="margin-bottom: 2rem;">
+        All endpoints are accessible via HTTP. The LED Matrix is recognized as <code>ledmatrix.fritz.box</code> in the network.
+      </p>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--color-primary);">Base Endpoints</h3>
+
+      <div class="code-block">
+        <div class="code-label">Welcome Page HTML</div>
+        <pre>GET /
+Response: HTML Welcome Page with menu</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">Firmware-Version</div>
+        <pre>GET /version
+Response: v1.08 (dht)</pre>
+      </div>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--color-primary);">Message &amp; Display</h3>
+
+      <div class="code-block">
+        <div class="code-label">Display message (static)</div>
+        <pre>GET /print?text=Hallo%20Welt
+Displays a static message on the LED matrix (max 75 characters)</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">Message with scroll animation</div>
+        <pre>GET /scroll?text=Scrolling%20Text
+Text scrolls from left to right across the matrix
+Switches back to the last print message afterwards</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">Test display</div>
+        <pre>GET /test
+Displays "Hello world" on the LED matrix</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">Change LED brightness</div>
+        <pre>GET /set?intensity=8
+Value: 0 (dark) to 15 (bright)</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">Turn off display</div>
+        <pre>GET /off
+Turns off the LED matrix (power saving)</pre>
+      </div>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--color-primary);">Sensor Data</h3>
+
+      <div class="code-block">
+        <div class="code-label">Read temperature</div>
+        <pre>GET /temperature
+Response: "23.5" (degrees Celsius)</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">Read humidity</div>
+        <pre>GET /humidity
+Response: "65.2" (percent relative humidity)</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">Read analog inputs</div>
+        <pre>GET /analog34
+GET /analog35
+GET /analog36
+Response: Value between 0-4095
+
+GET /analogvalues
+Response: "1234,2345,3456" (comma-separated values)</pre>
+      </div>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--color-primary);">Sounds &amp; Buzzer</h3>
+
+      <div class="code-block">
+        <div class="code-label">Success melody (Done)</div>
+        <pre>GET /sound/erledigt
+Plays positive tone sequence</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">Warnings melody</div>
+        <pre>GET /sound/warnung
+Plays warning tone sequence</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">Error melody</div>
+        <pre>GET /sound/fehler
+Plays error tone sequence</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">Completed melody</div>
+        <pre>GET /sound/abgeschlossen
+Plays success tone sequence</pre>
+      </div>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--color-primary);">Control &amp; System</h3>
+
+      <div class="code-block">
+        <div class="code-label">Restart system</div>
+        <pre>GET /restart
+ESP32 will be restarted (with display shutdown)</pre>
+      </div>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--color-primary);">curl Examples</h3>
+
+      <div class="code-block">
+        <div class="code-label">curl: display text</div>
+        <pre>curl "http://ledmatrix.fritz.box/print?text=Hallo%20Welt"</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">curl: text with scroll</div>
+        <pre>curl "http://ledmatrix.fritz.box/scroll?text=Breaking%20News"</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">curl: read temperature</div>
+        <pre>curl "http://ledmatrix.fritz.box/temperature"</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">curl: play sound</div>
+        <pre>curl "http://ledmatrix.fritz.box/sound/erledigt"</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">curl: set brightness</div>
+        <pre>curl "http://ledmatrix.fritz.box/set?intensity=10"</pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Technical Specifications</h2>
+
+      <div class="specs-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Value</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Firmware Version</td>
+              <td>v1.08 (DHT)</td>
+              <td>January 2026</td>
+            </tr>
+            <tr>
+              <td>Power Supply</td>
+              <td>USB-C 5V</td>
+              <td>~500mA for logic</td>
+            </tr>
+            <tr>
+              <td>WiFi Standard</td>
+              <td>802.11 b/g/n</td>
+              <td>2.4GHz</td>
+            </tr>
+            <tr>
+              <td>LED Display</td>
+              <td>12× 8x8 Module (96×8 Pixel)</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>DHT22 Range</td>
+              <td>-40°C to +80°C</td>
+              <td>Humidity 0-100% RH</td>
+            </tr>
+            <tr>
+              <td>Update Method</td>
+              <td>OTA (AsyncElegantOTA)</td>
+              <td>Wireless via HTTP</td>
+            </tr>
+            <tr>
+              <td>DHT22 Update Interval</td>
+              <td>60 seconds</td>
+              <td>Minimum read interval</td>
+            </tr>
+            <tr>
+              <td>Message Buffer</td>
+              <td>75 characters</td>
+              <td>Max. length of a message</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Code Quality</h2>
+      <p style="margin-bottom: 1.5rem;">
+        The code has been thoroughly reviewed and classified as production-ready.
+      </p>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-title">✅ Strengths</div>
+          <div class="card-content">
+            <ul style="list-style-position: inside; margin-top: 0.5rem;">
+              <li>Robust WiFi management</li>
+              <li>Non-blocking Async-WebServer</li>
+              <li>Error handling for DHT</li>
+              <li>OTA updates implemented</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">⚠️ Potential for Improvement</div>
+          <div class="card-content">
+            <ul style="list-style-position: inside; margin-top: 0.5rem;">
+              <li>Hard-coded SSID/password</li>
+              <li>Expand input validation</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">📊 Evaluation</div>
+          <div class="card-content">
+            <div style="margin-top: 1rem;">
+              <strong>Grade: A-</strong><br>
+              Production ready<br>
+              Uptime: 30-45 days normal
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Projekt</h4>
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#hardware">Hardware</a></li>
+          <li><a href="#api">API</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Technologie</h4>
+        <ul>
+          <li>ESP32 NodeMCU-32S</li>
+          <li>Arduino IDE</li>
+          <li>MD_Parola Library</li>
+          <li>AsyncWebServer</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>API</h4>
+        <ul>
+          <li><a href="#api">REST Endpoints</a></li>
+          <li>DHT22 Sensors</li>
+          <li>Analog Inputs</li>
+          <li>Sound Control</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 <a href="https://stefankoelle.de/">Stefan Kölle</a>. LED Matrix WebServer v1.08.</p>
+      <p><a href="https://hub.moonweb.org/impressum/">Legal Notice &amp; Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        var href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          var target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

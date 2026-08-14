@@ -1,0 +1,94 @@
+/* cv-style.css — Clean CV layout for PDF print */
+
+:root {
+  --color-text: #333;
+  --color-heading: #1a1a1a;
+  --color-accent: #665544;
+  --color-border: #ddd;
+  --font-main: 'Roboto', sans-serif;
+}
+
+@page {
+  size: A4;
+  margin: 20mm;
+}
+
+body {
+  font-family: var(--font-main);
+  font-size: 10pt;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: 22pt;
+  color: var(--color-heading);
+  margin-bottom: 4pt;
+  border: none;
+}
+
+h2 {
+  font-size: 14pt;
+  color: var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 4pt;
+  margin-top: 16pt;
+  margin-bottom: 8pt;
+  border-left: none;
+}
+
+h3 {
+  font-size: 11pt;
+  color: var(--color-heading);
+  margin-top: 10pt;
+  margin-bottom: 4pt;
+}
+
+p { margin-bottom: 6pt; }
+
+ul {
+  margin: 4pt 0 8pt 16pt;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 3pt;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.contact-info {
+  margin-bottom: 12pt;
+}
+
+.profile, .core-technologies {
+  margin-bottom: 12pt;
+}
+
+/* Hide non-CV elements when generating PDF */
+#links, #head, #background-image,
+.headlinespace, .space,
+#personalprojectscontent,
+#programminglanguagescontent,
+#impressumcontent {
+  display: none !important;
+}
+
+#headline {
+  position: static;
+  width: 100%;
+  box-shadow: none;
+  background: none;
+  padding: 0 0 12pt 0;
+}
+
+#cvcontent {
+  position: static;
+  width: 100%;
+  box-shadow: none;
+  background: none;
+  padding: 0;
+}

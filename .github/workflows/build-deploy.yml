@@ -3,8 +3,14 @@ name: Build & Deploy moonweb-site
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'stefankoelle/**'
+      - '.github/workflows/deploy-stefankoelle.yml'
   pull_request:
     branches: [main]
+    paths-ignore:
+      - 'stefankoelle/**'
+      - '.github/workflows/deploy-stefankoelle.yml'
 
 # Cancel in-progress runs for the same branch
 concurrency:
