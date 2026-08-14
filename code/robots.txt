@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://code.moonweb.org/sitemap.xml

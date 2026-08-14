@@ -1,9 +1,10 @@
-const path = require("path");
-
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addGlobalData("site", { url: "https://retro.moonweb.org" });
+  eleventyConfig.addFilter("date", (d) => d.toISOString());
   eleventyConfig.addPassthroughCopy({ "shared/theme-retro.css": "theme.css" });
   eleventyConfig.addPassthroughCopy({ "shared/base.css": "shared-base.css" });
   eleventyConfig.addPassthroughCopy({ "shared/favicon/retro.svg": "favicon.svg" });
+  eleventyConfig.addPassthroughCopy({ "retro/robots.txt": "robots.txt" });
 
   return {
     dir: {
