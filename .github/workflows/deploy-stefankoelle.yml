@@ -71,13 +71,13 @@ jobs:
           path: dist/stefankoelle
 
       - name: Deploy via SFTP to IONOS
-        uses: wlixcc/sftp-deploy-action@v1
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           local_path: './dist/stefankoelle/*'
           server: ${{ secrets.IONOS_SFTP_HOST }}
           username: ${{ secrets.IONOS_SFTP_USER }}
           password: ${{ secrets.IONOS_SFTP_PASSWORD }}
-          server_path: '/deploy/stefankoelle/'
+          remote_path: '/deploy/stefankoelle/'
           port: 22
 
   summary:
