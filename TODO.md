@@ -24,6 +24,10 @@ Stand: 2026-08-14
 - [ ] Querverlinkungen stefankoelle.de <-> smarthome
 - [ ] Ledmatrix ggf. nach smarthome verschieben
 
+### Offene Entscheidungen
+
+- [ ] **stefankoelle.de SFTP: `delete_remote_files`?** — Derzeit werden beim Deploy nur Dateien hochgeloaden, alte bleiben liegen. Mit `delete_remote_files: true` waere jeder Deploy ein sauberes Image (alles weg + neu). Kurzer Ausfall moeglich. Entscheidung offen.
+
 ## Schon erledigt (Stand 2026-08-14)
 
 ### stefankoelle.de Migration (2026-08-14)
