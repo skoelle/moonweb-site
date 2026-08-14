@@ -70,28 +70,6 @@ jobs:
           name: dist-stefankoelle
           path: dist/stefankoelle
 
-      - name: Debug secrets
-        run: |
-          if [ -z "$IONOS_SFTP_HOST" ]; then
-            echo "HOST is EMPTY"
-          else
-            echo "HOST is set, length=${#IONOS_SFTP_HOST}"
-          fi
-          if [ -z "$IONOS_SFTP_USER" ]; then
-            echo "USER is EMPTY"
-          else
-            echo "USER is set, length=${#IONOS_SFTP_USER}"
-          fi
-          if [ -z "$IONOS_SFTP_PASSWORD" ]; then
-            echo "PASSWORD is EMPTY"
-          else
-            echo "PASSWORD is set, length=${#IONOS_SFTP_PASSWORD}"
-          fi
-        env:
-          IONOS_SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
-          IONOS_SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
-          IONOS_SFTP_PASSWORD: ${{ secrets.IONOS_SFTP_PASSWORD }}
-
       - name: Deploy via SFTP to IONOS
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
@@ -101,6 +79,7 @@ jobs:
           password: ${{ secrets.IONOS_SFTP_PASSWORD }}
           remote_path: '/deploy/stefankoelle/'
           port: 22
+          sftp_only: true
 
   summary:
     name: Deploy Summary
