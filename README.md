@@ -8,34 +8,34 @@ infra.moonweb.org      → 🏗️  Infrastructure overview (Proxmox, Synology, 
 smarthome.moonweb.org  → 🏡 Smart home projects & dashboards
 code.moonweb.org       → 💻 Curated GitHub project catalog
 retro.moonweb.org      → 🕹️  Physical retro hardware collection
+stefankoelle.de        → 👤 CV, career, personal site (LED Matrix docs)
 ```
 
-> **External sites** (not in this monorepo): [stefankoelle.de](https://stefankoelle.de) (CV), [www.moonweb.org](https://www.moonweb.org) (2000s time capsule), [28k8.moonweb.org](https://28k8.moonweb.org) (90s BBS archive).
+> **Other sites** (not in this monorepo): [www.moonweb.org](https://www.moonweb.org) (2000s time capsule), [28k8.moonweb.org](https://28k8.moonweb.org) (90s BBS archive).
 
 ---
 
 ## 📐 Architecture
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    GitHub Actions CI                      │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐  │
-│  │ build:hub │  │build:infra│  │build:smart│  │build:… │  │
-│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └───┬────┘  │
-│       │              │              │             │        │
-│       ▼              ▼              ▼             ▼        │
-│  dist/hub/     dist/infra/   dist/smarthome/  dist/…/   │
-└──────────────────────┬──────────────────────────────────┘
-                       │
-                       ▼
-          ┌────────────────────────┐
-           │   Cloudflare Workers   │
-           │   (Cloudflare Workers) │
-          └────────────────────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-  hub.moonweb.org  infra.moonweb.org  …
+┌─────────────────────────────────────────────────────────────┐
+│                    GitHub Actions CI                          │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐      │
+│  │ build:hub │  │build:infra│  │build:smart│  │build:… │      │
+│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └───┬────┘      │
+│       │              │              │             │            │
+│       ▼              ▼              ▼             ▼            │
+│  dist/hub/     dist/infra/   dist/smarthome/  dist/…/       │
+└──────────────────────┬────────────────────────┬──────────────┘
+                       │                        │
+          ┌────────────┴──────────┐    ┌────────┴────────┐
+          ▼                       ▼    ▼                  │
+  ┌─────────────────┐   ┌──────────────┐                 │
+  │ Cloudflare Pages │   │ IONOS SFTP   │                 │
+  │ (5 sites)        │   │ (stefankoelle│                 │
+  └────────┬────────┘   └──────┬───────┘                 │
+           ▼                    ▼                          │
+    hub / infra / ...     stefankoelle.de                  │
 ```
 
 ---
@@ -90,8 +90,9 @@ npm run dev:infra                  # http://localhost:8082
 npm run dev:smarthome              # http://localhost:8083
 npm run dev:code                   # http://localhost:8084
 npm run dev:retro                  # http://localhost:8085
+npm run dev:stefankoelle           # http://localhost:8086
 
-npm run dev                        # all 5 in parallel
+npm run dev                        # all 6 in parallel
 ```
 
 Each site has its own minimal Eleventy config (`<site>/eleventy.config.js`). Live reload is built in.
@@ -124,6 +125,12 @@ moonweb-site/
 ├── code/                         # 💻 GitHub catalog
 │   └── _data/repos.json          # populated by the aggregator
 ├── retro/                        # 🕹️  Retro hardware (WIP)
+├── stefankoelle/                 # 👤 CV, career, personal site
+│   ├── eleventy.config.js
+│   ├── index.njk                 # Onepager (CV, Projects, Languages)
+│   ├── cv-print.njk              # CV-only for PDF generation
+│   ├── ledmatrix/                # LED Matrix WebServer documentation
+│   └── assets/                   # CSS, JS, images, favicons
 ├── shared/                       # 🔧 Shared components
 │   ├── _includes/
 │   │   ├── base.njk              # base layout (header, site-switcher, footer)
@@ -148,6 +155,8 @@ moonweb-site/
 
 ## 🔄 CI/CD Pipeline
 
+### Cloudflare Pages (moonweb sites)
+
 Defined in `.github/workflows/build-deploy.yml`:
 
 ```
@@ -168,6 +177,25 @@ push to main
 **Required secrets:**
 - `CLOUDFLARE_API_TOKEN` — Workers:Edit permission
 - `CLOUDFLARE_ACCOUNT_ID` — Cloudflare account ID
+
+### IONOS SFTP (stefankoelle.de)
+
+Defined in `.github/workflows/deploy-stefankoelle.yml`:
+
+```
+push to main (paths: stefankoelle/**)
+    │
+    ├── Build stefankoelle
+    │   └── npm run build:stefankoelle
+    │
+    └── Deploy via SFTP
+        └── lftp mirror → IONOS /deploy/stefankoelle/
+```
+
+**Required secrets:**
+- `IONOS_SFTP_HOST`
+- `IONOS_SFTP_USER`
+- `IONOS_SFTP_PASSWORD`
 
 ---
 

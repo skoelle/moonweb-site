@@ -1,6 +1,6 @@
 # moonweb.org — Implementation Plan
 
-Companion to `SPEC.md`. Defines order of work. All five sites (hub, infra, smarthome, code, retro) launch **simultaneously** — no staged rollout by domain.
+Companion to `SPEC.md`. Defines order of work. All sites (hub, infra, smarthome, code, retro, stefankoelle) launch **simultaneously** — no staged rollout by domain.
 
 ## Phase 0 — Repo & tooling setup
 
@@ -29,7 +29,7 @@ Work order within this phase is flexible since all domains launch together; sugg
    - One overview page listing what hardware exists.
    - Add "work in progress" notices for anything that isn't ready — better an honest short page than none.
 5. **hub** — build last within this phase since it links to all the others.
-   - One-line description + link per destination (infra, smarthome, code, retro, and external links to stefankoelle.de, www.moonweb.org, 28k8.moonweb.org).
+   - One-line description + link per destination (infra, smarthome, code, retro, stefankoelle, and external links to www.moonweb.org, 28k8.moonweb.org).
 
 ## Phase 2 — CI/CD
 
@@ -46,18 +46,19 @@ Work order within this phase is flexible since all domains launch together; sugg
 
 ## Phase 4 — Explicitly deferred (not part of this build)
 
-- Migrating `/ledmatrix/` and any other stefankoelle.de sub-pages into smarthome.
 - Deciding on 28k8.moonweb.org's future (stay separate vs. eventual monorepo inclusion).
 - Building any Perplexity-backchannel mechanism for reusing published site content in this project.
 - Redirecting the apex domain from `www.moonweb.org` to `hub.moonweb.org`.
 - Any analytics, "last updated" timestamps, or scheduled/automated content generation beyond the one-time GitHub aggregator run.
-- Porting stefankoelle.de into the monorepo — stays external.
 
 ## Definition of done for this build
 
-- All five sites live on Cloudflare Pages under their intended domains.
+- All sites live on their respective platforms:
+  - hub, infra, smarthome, code, retro on Cloudflare Pages under their intended domains.
+  - stefankoelle.de on IONOS via SFTP deployment.
 - code.moonweb.org reflects the current GitHub repos via the `.moonweb.yml` aggregator, grouped by subcategory.
 - smarthome.moonweb.org gives an accurate picture of what's running on the homelab today, with detail pages only where content already existed.
 - infra.moonweb.org describes the stack shallowly with zero sensitive data leaked.
 - retro.moonweb.org exists with an honest, minimal overview (WIP notices allowed).
-- hub.moonweb.org correctly links everything, including the untouched external sites (stefankoelle.de, www.moonweb.org, 28k8.moonweb.org).
+- hub.moonweb.org correctly links everything, including the external sites (www.moonweb.org, 28k8.moonweb.org).
+- stefankoelle.de is a working onepager with CV, Projects, Languages, Impressum, and the LED Matrix documentation sub-page.

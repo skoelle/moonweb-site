@@ -12,12 +12,11 @@ Für alle Home-Bereich-Sites (infra, smarthome, code, retro) gilt ab jetzt ein k
 
 Das ist ein wichtiger Unterschied zu v3/v4: nicht "alles identisch", sondern **Header konsistent, Content-Layout pro Subseite flexibel**.
 
-## 2. LEDMatrix-Migration — verschoben, nicht Teil des Starts
+## 2. LEDMatrix-Migration — erledigt (Phase 5)
 
-- Keine Migration von `/ledmatrix/` zum Start. Die Seite bleibt vorerst auf stefankoelle.de.
-- Aus smarthome.moonweb.org wird lediglich **nach draußen verlinkt** (Übergangslösung).
-- Migration erfolgt in einer späteren Phase, nicht Teil von Phase 1.
-- **Keine weiteren Einzelseiten-Migrationen zum Start** — bewusste Entscheidung, jetzt mit der Struktur zu beginnen statt weiter Einzelseiten zu pflegen.
+- `/ledmatrix/` wurde vollständig ins Monorepo migriert und liegt unter `stefankoelle/de/ledmatrix/`.
+- Deploy erfolgt über IONOS SFTP alongside dem stefankoelle.de Onepager.
+- Die URL `stefankoelle.de/ledmatrix/` bleibt unverändert bestehen.
 
 ## 3. Detailtiefe pro Domain — final festgelegt
 

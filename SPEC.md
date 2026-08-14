@@ -14,10 +14,10 @@ moonweb-site (monorepo)
 ├── infra/       → infra.moonweb.org      System architecture / stack overview
 ├── smarthome/   → smarthome.moonweb.org  What the homelab actually runs, and why
 ├── code/        → code.moonweb.org       Curated GitHub catalog
-└── retro/       → retro.moonweb.org      Physical retro hardware collection
+├── retro/       → retro.moonweb.org      Physical retro hardware collection
+└── stefankoelle/→ stefankoelle.de        CV, career, personal site (SFTP deploy)
 
 outside the monorepo, untouched:
-├── stefankoelle.de          CV, career, personal (extern gehostet)
 ├── www.moonweb.org          finished, no overlap (2001-style internet time capsule)
 ├── 28k8.moonweb.org         90s BBS/scene archive, separate approach, may migrate later (undecided)
 
@@ -43,7 +43,7 @@ Apex domain `moonweb.org` currently redirects to `www.moonweb.org`. This stays a
 - **Overview (index) pages** use a shared card-grid layout (reference: clean card-grid layout with banner header, grouped card sections, sans-serif, generous whitespace, light theme only, no heavy JS).
 - **Detail/sub-pages** keep the same header but may use a freer layout below it (reference: `/ledmatrix/` on stefankoelle.de today — pin tables, API docs, photos in free layout instead of a rigid card grid).
 
-Note: cv (stefankoelle.de) is external and uses its own independent design — it does not follow this principle.
+Note: stefankoelle.de is now part of the monorepo but uses its own independent design — it does not follow this header-consistent principle.
 
 ### 4.2 Accent colors per domain
 
@@ -57,7 +57,7 @@ Note: cv (stefankoelle.de) is external and uses its own independent design — i
 
 ### 4.3 URL convention
 
-`domain/slug/` — lowercase, hyphenated, trailing slash, matching the existing stefankoelle.de pattern (e.g. `/ledmatrix/`) so future detail pages stay consistent even if content later migrates between sites. cv (stefankoelle.de) follows its own existing URL patterns and is not part of this convention.
+`domain/slug/` — lowercase, hyphenated, trailing slash, matching the existing stefankoelle.de pattern (e.g. `/ledmatrix/`) so future detail pages stay consistent even if content later migrates between sites.
 
 ## 5. Content depth rules (per domain)
 
@@ -70,8 +70,6 @@ Note: cv (stefankoelle.de) is external and uses its own independent design — i
 
 General rule across all domains: **if content is too thin for a good detail page, skip the detail page — don't create a placeholder.**
 
-Note: cv (stefankoelle.de) is external and not subject to these rules.
-
 ## 6. Infra content redaction rule
 
 Because infra must stay shallow and public-safe:
@@ -79,11 +77,11 @@ Because infra must stay shallow and public-safe:
 - **Allowed:** architecture level — Proxmox + Synology + Docker host, VLAN concept without concrete internal IP plans, which service types run, which tools are used.
 - **Not allowed:** concrete IP addresses, WireGuard keys/preshared keys, passwords, internal hostnames that allow inference, backup targets with credentials.
 
-This rule applies to any domain but is most relevant for infra, since the source documents (e.g. Heimnetzwerk-Final-v3.2, GL_Flint2_Final_v2) currently contain real IPs and keys that must be actively stripped during migration. cv (stefankoelle.de) is maintained separately and not subject to this rule.
+This rule applies to any domain but is most relevant for infra, since the source documents (e.g. Heimnetzwerk-Final-v3.2, GL_Flint2_Final_v2) currently contain real IPs and keys that must be actively stripped during migration.
 
 ## 7. Language
 
-All five sites (hub, infra, smarthome, code, retro) are written **entirely in English**. Existing German source documents are translated once during migration via a single AI-assisted pass — not a recurring process. New `.moonweb.yml` metadata and generated content are authored in English from the start. cv (stefankoelle.de) remains in its existing language.
+All sites in the monorepo are written **entirely in English**. Existing German source documents are translated once during migration via a single AI-assisted pass — not a recurring process. New `.moonweb.yml` metadata and generated content are authored in English from the start.
 
 ## 8. GitHub automation (code.moonweb.org)
 
@@ -100,16 +98,15 @@ summary: "Compact MVG/S-Bahn departure monitor with configurable stations."
 repo_url: "https://github.com/skoelle/mvg-departures"
 ```
 
-A local aggregator script reads `.moonweb.yml` from all repos via the GitHub API, an AI pass turns the raw YAML into readable card copy, and the result is committed into `code/_data/repos.json` inside the monorepo. This runs manually, on demand — no scheduled automation for now. cv (stefankoelle.de) is not included in this automation.
+A local aggregator script reads `.moonweb.yml` from all repos via the GitHub API, an AI pass turns the raw YAML into readable card copy, and the result is committed into `code/_data/repos.json` inside the monorepo. This runs manually, on demand — no scheduled automation for now.
 
 ## 9. Content maintenance
 
-- infra, smarthome, retro: **fully manual**, edited in vim, committed via git push. No automation.
+- infra, smarthome, retro, stefankoelle: **fully manual**, edited in vim, committed via git push. No automation.
 - code: the only automated piece is the GitHub aggregator described in §8.
 - No "last updated" timestamps are shown anywhere — the goal is that content is simply kept current, not that staleness is displayed.
-- No analytics/tracking of any kind on any of the five sites.
+- No analytics/tracking of any kind on any site.
 - Images/assets live versioned directly in the monorepo (no external asset host).
-- cv (stefankoelle.de): maintained separately, linked from hub/site-switcher.
 
 ## 10. Repository structure
 
@@ -121,6 +118,12 @@ moonweb-site/
 ├── code/
 │   └── _data/repos.json     # populated by the GitHub aggregator
 ├── retro/
+├── stefankoelle/            # CV, career, personal site
+│   ├── eleventy.config.js
+│   ├── index.njk            # Onepager (CV, Projects, Languages)
+│   ├── cv-print.njk         # CV-only for PDF generation
+│   ├── ledmatrix/           # LED Matrix WebServer documentation
+│   └── assets/              # CSS, JS, images, favicons
 ├── shared/
 │   ├── _includes/
 │   │   ├── base.njk          # shared header + footer layout
@@ -134,25 +137,22 @@ moonweb-site/
 ├── PLAN.md                   # how and in what order
 ├── TODO.md                   # open items and workflow
 └── .github/workflows/
-    └── build-deploy.yml      # builds all sites, deploys each to its Cloudflare Pages project
+    ├── build-deploy.yml      # builds all sites, deploys to Cloudflare Pages
+    └── deploy-stefankoelle.yml # builds stefankoelle, deploys via IONOS SFTP
 ```
-
-Note: `cv/` (stefankoelle.de) is hosted externally and linked from hub/site-switcher — it is not part of this monorepo.
 
 ## 11. Technical stack
 
 - **Static site generator:** Eleventy (11ty) — markdown/YAML-first, minimal JS, `_data` folders map directly onto the `.moonweb.yml` aggregator output, low maintenance for five sites at this scale.
 - **Build:** entirely in GitHub Actions.
-- **Deploy:** Cloudflare Pages — five separate Pages projects (one per public domain: hub, infra, smarthome, code, retro), since Cloudflare Pages binds one custom-domain set per project. One shared GitHub Actions workflow builds all five sites and deploys each output folder to its respective Pages project.
+- **Deploy:** Cloudflare Pages — five separate Pages projects (one per public domain: hub, infra, smarthome, code, retro), since Cloudflare Pages binds one custom-domain set per project. stefankoelle.de deploys via IONOS SFTP. Two GitHub Actions workflows handle deployment.
 - **Runtime:** fully static, no server-side code, no containers for the website itself (distinct from the actual homelab services running on the Docker host).
 - **DNS:** already on Cloudflare — no additional setup step needed for Pages custom domains.
 - **Local preview:** Eleventy's built-in dev server with live reload, run per-site (`npm run dev:<site>`) before any commit.
 
 ## 12. Explicitly out of scope for this build
 
-- Migrating `/ledmatrix/` (and any other existing stefankoelle.de sub-pages) into smarthome — stays linked externally for now, migrates in a later phase.
 - Migrating 28k8.moonweb.org into the monorepo — undecided, revisit later, likely never.
 - Any Perplexity-backchannel mechanism (website content reusable inside this project) — deferred, no time invested now.
 - Analytics of any kind.
 - Automated content generation/translation pipelines beyond the one-time GitHub aggregator for code and the one-time translation pass during migration.
-- Porting stefankoelle.de into the monorepo — stays external.
