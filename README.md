@@ -100,8 +100,9 @@ Each site has its own minimal Eleventy config (`<site>/eleventy.config.js`). Liv
 ### Build
 
 ```bash
-npm run build                      # builds all 5 → dist/<site>/
-npm run build:hub                  # build single site
+npm run prebuild                     # pre-build tasks (CV PDF)
+npm run build                        # builds all 5 → dist/<site>/
+npm run build:hub                    # build single site
 ```
 
 ---

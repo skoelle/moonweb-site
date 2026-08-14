@@ -77,6 +77,7 @@ moonweb-site/
 
 ```bash
 npm install
+npm run prebuild             # Pre-Build Tasks (CV PDF generieren)
 npm run dev:hub              # localhost:8081
 npm run dev:infra            # localhost:8082
 npm run dev:smarthome        # localhost:8083
@@ -103,6 +104,23 @@ npm run build                # Alle Sites bauen
 - Deploy via SFTP auf IONOS `/deploy/stefankoelle/`
 - CV-Partial zentral pflegbar (einmal aendern → Web + PDF aktualisieren)
 - LED Matrix als eigene Seite unter stefankoelle.de/ledmatrix/
+
+### CV PDF Generierung
+
+Das CV-PDF wird via WeasyPrint generiert:
+
+```bash
+npm run pdf:cv               # Einzelnes PDF generieren
+npm run prebuild             # Alle Pre-Build Tasks (inkl. CV PDF)
+```
+
+Dateien:
+- `stefankoelle/pdf/cv-style.css` — WeasyPrint-Stylesheet (A4, Typografie)
+- `stefankoelle/pdf/build-pdf.sh` — Shell-Skript für PDF-Generierung
+- `stefankoelle/cv-print.njk` — Standalone HTML-Template (nur CV-Content)
+- `stefankoelle/pdf/cv.pdf` — Generiertes PDF (Output)
+
+Wichtig: Das PDF wird via Eleventy-Passthrough ins Build-Output kopiert (`dist/stefankoelle/pdf/cv.pdf`).
 
 ### CSS Cache-Busting
 
@@ -133,6 +151,5 @@ Benötigte Secrets:
 ## Offene Punkte
 
 - retro/ ist bewusst rudimentär gehalten
-- PDF-Build fuer CV (WeasyPrint) — lokal testen, spaeter in CI integrieren
 - Querverlinkungen stefankoelle.de <-> smarthome (zukuenftig)
 - Ledmatrix ggf. nach smarthome verschieben (when ready)
