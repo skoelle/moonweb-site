@@ -5,6 +5,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "shared/base.css": "shared-base.css" });
   eleventyConfig.addPassthroughCopy({ "shared/favicon/hub.svg": "favicon.svg" });
   eleventyConfig.addPassthroughCopy({ "hub/robots.txt": "robots.txt" });
+  eleventyConfig.addPassthroughCopy({ "hub/stefan-koelle-foto.jpg": "stefan-koelle-foto.jpg" });
 
   return {
     dir: {

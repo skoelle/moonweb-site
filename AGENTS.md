@@ -189,6 +189,10 @@ python3 -m venv .venv
 .venv/bin/python scripts/github-aggregator/aggregate.py
 ```
 
+## Text / Stil
+
+- Keine Em-Dashes (—) verwenden, stattdessen umformulieren (Komma, Satzzeichen, neu formulieren)
+
 ## Python / pip
 
 - Niemals `pip install` direkt ausführen
