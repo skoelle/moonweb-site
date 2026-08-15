@@ -40,6 +40,13 @@ body {
 
 main { max-width: 1100px; margin: 0 auto; padding: 2rem; }
 
+.site-intro {
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
 .intro {
   display: flex;
   gap: 2.5rem;
