@@ -214,6 +214,22 @@
     "summary": "Automated iCloud contacts sync to MariaDB via CardDAV delta sync, with a multi-user account mapping, birthday email digest, and an internal read-only API/web view behind Authelia."
   },
   {
+    "title": "28k8 tHE tEMPLE BBS",
+    "emoji": "💾",
+    "category": "code",
+    "subcategory": "Web Projects",
+    "status": "active",
+    "stack": [
+      "Astro",
+      "React",
+      "TypeScript",
+      "Cloudflare Pages"
+    ],
+    "repo": "28k8-moonweb-org",
+    "repo_url": "https://github.com/skoelle/28k8-moonweb-org",
+    "summary": "A 90s BBS/demoscene retro hub built with Astro — emulating the \"tHE tEMPLE bBS\" terminal experience in the browser."
+  },
+  {
     "title": "moonweb-site",
     "emoji": "🌐",
     "category": "code",
@@ -226,6 +242,6 @@
     ],
     "repo": "moonweb-site",
     "repo_url": "https://github.com/skoelle/moonweb-site",
-    "summary": "Monorepo for moonweb.org — my personal homelab hub. Five static sites (Eleventy) covering infrastructure, smart home, code, and retro hardware. Deployed to Cloudflare Pages."
+    "summary": "Monorepo for moonweb.org - my personal homelab hub. Six static sites (Eleventy) covering infrastructure, smart home, code, and retro hardware. Deployed to Cloudflare Pages or IONOS."
   }
 ]
