@@ -230,6 +230,23 @@
     "summary": "A 90s BBS/demoscene retro hub built with Astro — emulating the \"tHE tEMPLE bBS\" terminal experience in the browser."
   },
   {
+    "title": "build broken",
+    "emoji": "🗄️",
+    "category": "code",
+    "subcategory": "Web Projects",
+    "status": "active",
+    "stack": [
+      "Hugo",
+      "Go Templates",
+      "Markdown",
+      "Vanilla CSS",
+      "Cloudflare Workers"
+    ],
+    "repo": "buildbroken-blog-archive",
+    "repo_url": "https://github.com/skoelle/buildbroken-blog-archive",
+    "summary": "Static archive of \"build broken\", a defunct .NET/software-craftsmanship blog (aztec-project.org). Rebuilt with Hugo from Wayback Machine snapshots, all content, images, and comments hosted locally as a self-contained static site."
+  },
+  {
     "title": "moonweb-site",
     "emoji": "🌐",
     "category": "code",
