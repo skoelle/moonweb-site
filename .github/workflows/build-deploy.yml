@@ -95,6 +95,7 @@ jobs:
           echo '' >> wrangler.toml
           echo '[assets]' >> wrangler.toml
           echo 'directory = "./dist/${{ matrix.site }}"' >> wrangler.toml
+          echo 'not_found_handling = "404.html"' >> wrangler.toml
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v4
