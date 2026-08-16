@@ -243,5 +243,21 @@
     "repo": "moonweb-site",
     "repo_url": "https://github.com/skoelle/moonweb-site",
     "summary": "Monorepo for moonweb.org - my personal homelab hub. Six static sites (Eleventy) covering infrastructure, smart home, code, and retro hardware. Deployed to Cloudflare Pages or IONOS."
+  },
+  {
+    "title": "www.moonweb.org",
+    "emoji": "🌙",
+    "category": "code",
+    "subcategory": "Web Projects",
+    "status": "active",
+    "stack": [
+      "Node.js",
+      "Eleventy",
+      "Nunjucks",
+      "Markdown"
+    ],
+    "repo": "moonweb-www",
+    "repo_url": "https://github.com/skoelle/moonweb-www",
+    "summary": "Archived early 2000s internet projects, networking & engineering - a personal web presence from the dawn of the millennium, finally on GitHub"
   }
 ]

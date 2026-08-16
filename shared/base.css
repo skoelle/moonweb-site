@@ -197,3 +197,20 @@ main { max-width: 1100px; margin: 0 auto; padding: 2rem; }
   color: #fff;
   border-color: var(--accent);
 }
+
+.error-page {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+.error-page h1 {
+  font-size: 6rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 1rem;
+  line-height: 1;
+}
+.error-page p {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0 0 2rem;
+}
