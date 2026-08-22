@@ -39,6 +39,29 @@
     {% endif %}
   }
   </script>
+  {% if section == 'hub' and not parent %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Stefan Koelle",
+    "url": "https://hub.moonweb.org",
+    "image": "https://hub.moonweb.org/stefan-koelle-foto.jpg",
+    "jobTitle": "Senior Software Developer & Architect",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Munich",
+      "addressCountry": "DE"
+    },
+    "sameAs": [
+      "https://stefankoelle.de",
+      "https://www.linkedin.com/in/stefankoelle/",
+      "https://github.com/skoelle",
+      "https://www.xing.com/profile/Stefan_Koelle"
+    ]
+  }
+  </script>
+  {% endif %}
 </head>
 <body>
   <header class="site-header">
