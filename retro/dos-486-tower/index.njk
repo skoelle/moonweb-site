@@ -16,6 +16,9 @@ parent: "/"
 <h2>The MiSTer recreation</h2>
 <p>The AO486 core on MiSTer FPGA reproduces the original hardware with near-perfect accuracy. The key was not just getting the hardware emulation right, but rebuilding the exact software environment: the same MS-DOS version, the same memory managers (HIMEM.SYS, EMM386), the same Sound Blaster drivers, and the same AUTOEXEC.BAT and CONFIG.SYS tuning that made the original machine run smoothly. Even the directory structure and file names match the original setup.</p>
 
+<h2>Context: DOSMENU</h2>
+<p>A key part of the preserved environment is <strong>DOSMENU</strong>, a boot configuration utility written in Turbo Pascal 6.0 in 1994 — originally developed specifically for this Colani 486 machine. DOSMENU let you choose at boot time which AUTOEXEC.BAT and CONFIG.SYS commands to load — a critical feature in the DOS era, where memory management was manual and games often required different driver configurations. Features included saveable presets, a built-in MOD player, PCX picture display, and a DoubleSpace memory unloader. The original source: ~50k of Turbo Pascal, roughly 1900 lines plus some inline assembler.</p>
+
 <h2>Why a 1:1 recreation</h2>
 <p>The point isn't just to play DOS games — it's to preserve the exact computing experience from that era. The way DOS memory management worked, the way sound drivers had to be configured manually, the way batch files chained together to create a usable environment. This level of detail is lost when you just launch a DOS game from a modern frontend. The MiSTer setup recreates the entire boot process, from BIOS POST to the C:\> prompt, just as it was in the mid-90s.</p>
 
@@ -24,6 +27,7 @@ parent: "/"
 <li><strong>DOS boot environment</strong> — the exact AUTOEXEC.BAT and CONFIG.SYS from the original machine, including memory manager configuration and Sound Blaster IRQ settings.</li>
 <li><strong>Game installations</strong> — original game installations with their setup utilities, configuration files, and saved games, all in the same directory paths as the original.</li>
 <li><strong>System utilities</strong> — Norton Commander, PKZIP, the usual toolkit of the era, all configured the way they were used daily.</li>
+<li><strong>DOSMENU</strong> — a custom boot configuration utility written specifically for this Colani 486 in 1994. Built in Turbo Pascal, it let you choose at boot time which AUTOEXEC.BAT and CONFIG.SYS commands to load — essential for managing DOS memory across different games and applications.</li>
 <li><strong>The quirks</strong> — the specific workarounds and tweaks that were needed to get everything running together, the kind of institutional knowledge that only exists on a well-used personal machine.</li>
 </ul>
 
