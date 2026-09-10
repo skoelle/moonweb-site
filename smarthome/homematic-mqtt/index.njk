@@ -29,11 +29,39 @@ sensor state changes to MQTT.</p>
 <li>Grafana reads from InfluxDB for the temperature/humidity dashboards.</li>
 </ol>
 
+<h2>The Home Assistant automations</h2>
+<p>Each room has its own automation in Home Assistant that listens for
+state changes on the corresponding HomematicIP thermostat entity. When
+the temperature or humidity changes, the automation publishes the new
+values to MQTT topics like <code>homematic/livingroom/temperature</code>
+and <code>homematic/livingroom/humidity</code>. The automations are
+simple YAML configurations, not custom code, which makes them easy to
+maintain and debug.</p>
+
+<h2>The InfluxDB writer</h2>
+<p>A small .NET background service runs as a Docker container and
+subscribes to all <code>homematic/+/+</code> MQTT topics. When a
+message arrives, it parses the room name and measurement type from the
+topic, converts the value to a float, and writes it into InfluxDB with
+appropriate tags. The service handles connection drops and reconnection
+automatically, and logs all write operations for debugging.</p>
+
+<h2>Dashboard integration</h2>
+<p>Grafana queries InfluxDB using Flux to display real-time temperature
+and humidity charts for each room. The dashboards show current values,
+24-hour trends, and historical averages. This data is also used in the
+home dashboard to display room temperatures alongside other sensor data
+like air quality and power consumption.</p>
+
 <h2>Why this is worth documenting</h2>
 <ul>
 <li>No extra Docker container or unmaintained library dependency.</li>
 <li>Cloud-API changes are absorbed by Home Assistant's own maintainers, not by custom code.</li>
 <li>The MQTT bridge is just configuration (automations), not a service that needs its own uptime monitoring.</li>
+<li>The entire chain is observable: MQTT topics can be monitored with any MQTT client, InfluxDB has its own explorer, and Grafana dashboards show the data flow end-to-end.</li>
 </ul>
+
+<h2>Lessons learned</h2>
+<p>The original approach of running a dedicated exporter was more "architecturally pure" but fragile in practice. When the Python library stopped working, the entire sensor pipeline broke. The Home Assistant approach is more robust because it leverages a well-maintained integration and uses MQTT as a simple, well-understood transport layer. The lesson: for home automation, prefer integrations that are actively maintained over custom code that needs constant attention.</p>
 
 </div>

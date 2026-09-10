@@ -214,3 +214,30 @@ main { max-width: 1100px; margin: 0 auto; padding: 2rem; }
   color: #666;
   margin: 0 0 2rem;
 }
+
+.about-expanded {
+  margin-top: 3rem;
+  max-width: 800px;
+}
+.about-expanded h2 {
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin: 2rem 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--card-border);
+}
+.about-expanded h2:first-child {
+  margin-top: 0;
+}
+.about-expanded p {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.7;
+  margin: 0 0 1rem;
+}
+.about-expanded a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.about-expanded a:hover { color: var(--text); }

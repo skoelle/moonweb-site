@@ -10,7 +10,9 @@ layout: base.njk
 
 <p>Power monitoring across the flat runs on a mix of Tasmota-flashed smart
 plugs, tracking accumulated kWh per device and feeding daily usage
-figures into the home dashboard.</p>
+figures into the home dashboard. The setup uses 8 Tasmota-enabled devices
+covering kitchen appliances, office equipment, entertainment systems,
+and LED matrix displays.</p>
 
 <h2>What's metered</h2>
 <table>
@@ -35,11 +37,30 @@ well-documented community process. It occasionally fails on the first
 attempt due to a transient Wi-Fi handshake issue — retrying resolves it
 without any special handling.</p>
 
+<h2>How the data flows</h2>
+<p>Each Tasmota plug publishes its power readings to MQTT via the
+ Mosquitto broker running on the Docker host. A small subscription
+service picks up the per-device topics and writes the values into
+InfluxDB 2.x, tagged by device name, room, and measurement type
+(power, energy, voltage). The home dashboard then queries InfluxDB
+via Flux to display real-time and historical usage charts.</p>
+
 <h2>What this data is used for</h2>
 <ul>
 <li>Spotting appliances with unexpectedly high standby draw.</li>
 <li>Sanity-checking that "turned off" devices are actually drawing near-zero power.</li>
 <li>Feeding the home dashboard's live power figures alongside the climate sensors.</li>
+<li>Tracking long-term energy trends to identify efficiency improvements.</li>
+<li>Alerting when a device draws significantly more than its baseline (e.g., a failing appliance).</li>
 </ul>
+
+<h2>Why Tasmota over alternatives</h2>
+<p>Tasmota was chosen over alternatives like ESPHome or Tuya firmware for
+several reasons. The local-only control means no cloud dependency — the
+plugs work even if the internet is down. The MQTT integration is mature
+and well-documented. The energy monitoring sensors are accurate enough
+for home use (typically within 5% of a dedicated energy meter). And the
+firmware supports a wide range of hardware, making it easy to find
+compatible plugs at reasonable prices.</p>
 
 </div>

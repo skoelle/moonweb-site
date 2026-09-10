@@ -59,3 +59,20 @@ sections:
 </div>
 
 {% include "card-grid.njk" %}
+
+<section class="about-expanded">
+  <h2>What this site is about</h2>
+  <p>moonweb is a collection of personal projects that have grown over the past 25 years. What started as a single 486 running a BBS in the mid-90s has turned into a full homelab with Proxmox, Docker, smart home automation, and a growing collection of retro hardware. The name "moonweb" comes from the original domain moonweb.org, which has been online since 2000.</p>
+  <p>Each section of this site documents a different part of the setup. The <a href="https://infra.moonweb.org">infrastructure section</a> covers the Proxmox cluster, Synology NAS, Docker containers, networking, and backup strategies. The <a href="https://smarthome.moonweb.org">smart home section</a> shows what automation projects are running, from Tasmota energy monitoring to MQTT sensors and AirPlay audio. The <a href="https://code.moonweb.org">code section</a> lists the public GitHub projects that power these setups, and the <a href="https://retro.moonweb.org">retro section</a> documents the hardware collection.</p>
+
+  <h2>What I do professionally</h2>
+  <p>I work as a Senior Software Developer &amp; Architect at TENHIL GmbH (formerly stellenanzeigen.de), where I build and maintain microservices on .NET Core and Kubernetes. My day job involves designing cloud-native architectures, building APIs, and migrating legacy applications to modern stacks. I've been working with .NET since the early 2000s and have used everything from ASP Classic to the latest .NET 8 features.</p>
+  <p>Since early 2025, I've fully embraced AI-assisted development. I use Claude Code for most of my private projects and at work for Jira story implementation. The productivity gains are massive, and it's changed how I approach software development entirely. I also use OpenCode with OpenRouter for Python-based home lab projects.</p>
+
+  <h2>The homelab</h2>
+  <p>The homelab has been evolving since the mid-90s. Today it runs on a Proxmox cluster with a Synology DS918+ NAS, multiple Docker hosts, and an OpenWrt router for multi-WAN failover. The setup includes Prometheus and Grafana for monitoring, InfluxDB for time-series data from smart home sensors, and a full backup strategy covering NAS snapshots, offsite copies, and cloud storage.</p>
+  <p>The smart home side includes HomematicIP thermostats bridged to MQTT, Tasmota smart plugs for energy monitoring, AirPlay multi-room audio on Raspberry Pi devices, and various ESP32-based dashboards and LED matrix displays. Everything is documented in the respective sections of this site.</p>
+
+  <h2>Retro computing</h2>
+  <p>Outside of work, I collect and maintain retro hardware. The collection includes Atari ST machines (a Mega ST 4 fleet and a Mega ST 2), Amiga systems, a 486 DX2-66 tower, and various MiSTer and MiST FPGA setups for preservation. I also run Batocera in the living room for casual retro gaming. The retro section documents the hardware, the maintenance, and the occasional deep-dive into compatibility issues like the 15kHz monitor problem on the Atari ST.</p>
+</section>
