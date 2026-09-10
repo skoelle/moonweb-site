@@ -37,7 +37,7 @@ layout: stefankoelle.njk
     <li><b>Docker Host (Proxmox PVE)</b><br>Virtualized Docker host with Debian 12.2 running containerized services including Portainer, Prometheus, Grafana, Gitea, monitoring exporters, and more. Full architecture documented on <a href="https://infra.moonweb.org/docker/">infra.moonweb.org</a>.</li>
     <li><b>InfluxDB Time-Series Integration</b><br>Deployed InfluxDB 2.x for sensor data collection from Tasmota smart plugs and HomematicIP thermostats, replacing older MySQL-based storage with modern time-series architecture.</li>
     <li><b>LED Matrix ESP32 InfluxDB Integration</b><br>Data persistence layer for <a href="/ledmatrix/">LED Matrix ESP32</a> sensor systems (DHT22 temperature/humidity) with InfluxDB 2.x backend. Automated collection at 60-second intervals for historical trend analysis.</li>
-    <li><b>Air Quality Dashboard</b><br>Dynamic HTML5 dashboard consuming real-time sensor data from InfluxDB via Flux query API. Displays temperature and humidity across all network locations, accessible via nginx reverse proxy.</li>
+    <li><b>Air Quality Dashboard</b><br>Dynamic HTML5 dashboard consuming real-time sensor data from InfluxDB via Flux query API. Displays temperature and humidity across all network locations, accessible via nginx reverse proxy. See also <a href="https://smarthome.moonweb.org/air-quality/">smarthome.moonweb.org</a>.</li>
     <li><b>Tasmota Energy Monitoring</b><br>Smart plug energy tracking with 8 Tasmota-enabled devices, integrating MQTT data collection and visualization. See also <a href="https://smarthome.moonweb.org/tasmota-energy/">smarthome.moonweb.org</a>.</li>
     <li><b>Network Hardware & Monitoring</b><br>Four Zyxel GS1200-8HP managed switches in the server room, living room, and study, plus a <a href="https://infra.moonweb.org/openwrt/">Multi-WAN OpenWrt router</a> for failover and VLAN segmentation. All switches feed into <a href="https://infra.moonweb.org/monitoring/">Prometheus monitoring</a> via SNMP exporters, and IoT devices are isolated in VLAN 189.</li>
   </ul>
@@ -45,7 +45,7 @@ layout: stefankoelle.njk
   <h3>Retro Computing (2022/2023)</h3>
   <ul>
     <li>MiSTer and MiST FPGA Systems for preservation (see also <a href="https://retro.moonweb.org/mist-mister-fpga/">retro.moonweb.org</a>).</li>
-    <li>DOS System, Amiga System, and Atari ST System with the environment from the early 90s.</li>
+    <li><a href="https://retro.moonweb.org/dos-486-tower/">DOS System</a>, <a href="https://retro.moonweb.org/the-a1200/">Amiga System</a>, and <a href="https://retro.moonweb.org/atari-mega-st-fleet/">Atari ST System</a> with the environment from the early 90s.</li>
   </ul>
 
   <h3>Upgrade of old <a href="https://retro.moonweb.org/atari-mega-st-fleet/">Atari Mega 4</a> (2021)</h3>
@@ -67,10 +67,10 @@ layout: stefankoelle.njk
 
   <h3>Various Docker Systems (since 2016)</h3>
   <ul>
-    <li><b>Monitoring:</b> Prometheus, Grafana, InfluxDB, cAdvisor, Node Exporter, SNMP exporters</li>
-    <li><b>Smart Home:</b> Mosquitto MQTT broker, Home Assistant</li>
+    <li><b>Monitoring:</b> <a href="https://infra.moonweb.org/monitoring/">Prometheus, Grafana, InfluxDB</a>, cAdvisor, Node Exporter, SNMP exporters</li>
+    <li><b>Smart Home:</b> Mosquitto MQTT broker, <a href="https://smarthome.moonweb.org/homematic-mqtt/">Home Assistant</a></li>
     <li><b>Infrastructure:</b> Portainer, Nginx Proxy Manager, Authelia (SSO), Watchtower, Healthchecks</li>
-    <li><b>Applications:</b> Gitea (GitHub mirror), Stirling PDF, TubeArchivist, TubeSync, SearXNG</li>
+    <li><b>Applications:</b> Gitea (GitHub mirror), <a href="https://infra.moonweb.org/docker/">Stirling PDF</a>, <a href="https://smarthome.moonweb.org/tubearchivist/">TubeArchivist</a>, <a href="https://smarthome.moonweb.org/tubearchivist/">TubeSync</a>, <a href="https://infra.moonweb.org/docker/">SearXNG</a></li>
   </ul>
 
   <h3>Walk-on Song (2019)</h3>

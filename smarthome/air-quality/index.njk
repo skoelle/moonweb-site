@@ -1,0 +1,38 @@
+---
+title: "Air Quality Dashboard"
+section: "smarthome"
+parent: "/"
+description: "Real-time temperature and humidity monitoring across all rooms, powered by InfluxDB and Chart.js."
+layout: base.njk
+---
+<h1>Air Quality Dashboard</h1>
+<div class="detail-content">
+
+<p>A custom HTML5 dashboard that displays real-time temperature and humidity readings from sensors across the apartment. It consumes data from InfluxDB via the Flux query API and visualizes it with Chart.js, auto-refreshing every 30 seconds.</p>
+
+<h2>Architecture</h2>
+<p>The dashboard sits at the end of a sensor data pipeline that starts at physical devices scattered around the flat:</p>
+<ul>
+<li><strong>Sensors</strong> HomematicIP room sensors and ESP32 devices with DHT22 sensors publish temperature and humidity readings via MQTT.</li>
+<li><strong>MQTT broker</strong> Mosquitto receives the per-device topics and makes them available for subscription.</li>
+<li><strong>Write layer</strong> A small subscription service picks up the MQTT messages and writes them into InfluxDB 2.x, tagged by room, device, and measurement type.</li>
+<li><strong>InfluxDB</strong> Stores the time-series data in a <code>sensoren</code> bucket, organized by org <code>Heimnetzwerk</code>.</li>
+<li><strong>Dashboard</strong> A static HTML page queries InfluxDB via Flux every 30 seconds, rendering current values and 24-hour historical charts per room.</li>
+</ul>
+
+<h2>Rooms covered</h2>
+<p>The dashboard monitors 10 rooms across the apartment: server room, balcony, living room (desk and iMac areas), kitchen, bathroom, hallway, study, children's room, and bedroom. Each room shows current temperature and humidity, with optional pressure and light-level readings where sensors support it.</p>
+
+<h2>Dashboard features</h2>
+<ul>
+<li><strong>Current values grid</strong> at-a-glance temperature and humidity for every room.</li>
+<li><strong>Historical charts</strong> 24-hour temperature and humidity graphs per room with min/max stats.</li>
+<li><strong>Auto-refresh</strong> Data updates every 30 seconds without page reload.</li>
+<li><strong>Error handling</strong> Graceful fallback when InfluxDB is unreachable, with loading indicators during initial fetch.</li>
+<li><strong>Responsive design</strong> Works on phones, tablets, and desktop browsers.</li>
+</ul>
+
+<h2>Relationship to other dashboards</h2>
+<p>The air quality dashboard is a standalone page, separate from the main home dashboard and the Tasmota energy monitoring setup. It shares the same InfluxDB instance and MQTT infrastructure but queries different measurement types (temperature/humidity vs. power/energy). The home dashboard shows a summary of room temperatures alongside energy data, while this dashboard provides the detailed view with historical charts for climate monitoring specifically.</p>
+
+</div>

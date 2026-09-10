@@ -1,55 +1,43 @@
 ---
-title: "TubeArchivist"
+title: "YouTube Archiving: TubeArchivist & TubeSync"
 section: "smarthome"
 parent: "/"
-description: "Self-hosted YouTube archiving and media management running on the Synology NAS."
+description: "Self-hosted YouTube archiving and media management running on the Synology NAS, comparing TubeArchivist and TubeSync."
 layout: base.njk
 ---
-<h1>TubeArchivist</h1>
+<h1>YouTube Archiving: TubeArchivist &amp; TubeSync</h1>
 <div class="detail-content">
 
-<p>TubeArchivist runs on the Synology NAS via Docker Compose, self-hosting
-a searchable archive of downloaded YouTube content (Elasticsearch +
-Redis + the TubeArchivist app itself). It's used to archive channels
-worth rewatching — tutorials, long-form content, and anything that might
-disappear behind copyright strikes or channel deletions.</p>
+<p>Two self-hosted YouTube tools run on the Synology NAS via Docker Compose, each taking a different approach to the same goal: keeping offline copies of channels worth rewatching. TubeArchivist provides a full archive with search and metadata, while TubeSync focuses on automatic synchronization of playlists into a media server library.</p>
 
-<h2>Why this needed real troubleshooting</h2>
-<p>Running Elasticsearch on Synology's DSM kernel isn't fully
-straightforward: newer Elasticsearch releases require a Linux kernel
-feature (SECCOMP) that Synology's kernel doesn't compile in. The fix is
-version-pinning Elasticsearch to the last release that still works
-without it, rather than fighting the kernel.</p>
+<h2>TubeArchivist</h2>
+<p>TubeArchivist self-hosts a searchable archive of downloaded YouTube content (Elasticsearch, Redis, and the TubeArchivist app itself). It's used to archive channels worth rewatching, including tutorials, long-form content, and anything that might disappear behind copyright strikes or channel deletions.</p>
 
-<h2>Other Synology-specific quirks</h2>
+<h3>Synology-specific troubleshooting</h3>
+<p>Running Elasticsearch on Synology's DSM kernel isn't fully straightforward: newer Elasticsearch releases require a Linux kernel feature (SECCOMP) that Synology's kernel doesn't compile in. The fix is version-pinning Elasticsearch to the last release that still works without it, rather than fighting the kernel.</p>
 <ul>
-<li>Synology's Container Manager doesn't always auto-join containers to the same Docker network even when they're defined in one Compose file — an explicit named network avoids silent connectivity failures between the app, Elasticsearch, and Redis.</li>
+<li>Synology's Container Manager doesn't always auto-join containers to the same Docker network even when they're defined in one Compose file, so an explicit named network avoids silent connectivity failures between the app, Elasticsearch, and Redis.</li>
 <li>A version upgrade of the app itself required a very specific step-by-step path (skipping versions breaks the database migration) rather than jumping straight to the latest release.</li>
-<li>Initial indexing of large channels takes significant time — Elasticsearch needs to build and optimize indices for full-text search across video titles, descriptions, and metadata.</li>
+<li>Initial indexing of large channels takes significant time: Elasticsearch needs to build and optimize indices for full-text search across video titles, descriptions, and metadata.</li>
 </ul>
 
-<h2>How it fits into the backup strategy</h2>
-<p>TubeArchivist data is split into two categories with different backup
-priorities. The downloaded media files and Elasticsearch metadata are
-backed up as part of the NAS backup volumes, since they take significant
-time to re-download and re-index. The Redis cache is excluded — it only
-holds session data and can be safely rebuilt on restart.</p>
+<h3>Playlist detection problems</h3>
+<p>The main frustration with TubeArchivist is automatic playlist detection. New playlists added to subscribed channels are not always recognized by the app, meaning videos in those playlists get skipped during automatic downloads. The workaround is manually submitting individual videos or playlists through the TubeArchivist web interface using the built-in submission tool, which works but defeats the purpose of automated archiving. This issue remains unresolved.</p>
 
-<h2>What's backed up</h2>
+<h2>TubeSync</h2>
+<p>TubeSync takes a simpler approach: it syncs YouTube playlists directly into a media server library (like Jellyfin or Plex) without the full archive UI. Everything is manual: playlists must be added by URL, and there's no automatic discovery of new content from subscribed channels. It's a pure download-and-organize tool rather than a searchable archive.</p>
+
+<h2>Current state</h2>
+<p>Both tools run in parallel on docker-host-nas, each with different strengths. TubeArchivist provides the better archive and search experience but has the playlist detection gap. TubeSync is more reliable for syncing specific playlists but requires manual curation. Neither has fully replaced the other yet, and the ideal solution of shutting one down hasn't been found.</p>
+
+<h2>How it fits into the backup strategy</h2>
+<p>Downloaded media files and Elasticsearch metadata are backed up as part of the NAS backup volumes, since they take significant time to re-download and re-index. The Redis cache is excluded, as it only holds session data and can be safely rebuilt on restart.</p>
+
 <table>
 <tr><th>Data</th><th>Included in NAS backup?</th></tr>
 <tr><td>Downloaded media files</td><td>Yes, via the NAS's own backup volumes</td></tr>
 <tr><td>Elasticsearch metadata/index</td><td>Yes, via the NAS's own backup volumes</td></tr>
-<tr><td>Redis cache</td><td>No — safe to delete/rebuild, only holds session data</td></tr>
+<tr><td>Redis cache</td><td>No, safe to delete/rebuild, only holds session data</td></tr>
 </table>
-
-<h2>Day-to-day usage</h2>
-<p>Channels are added via the TubeArchivist web interface, which provides
-a YouTube-like browsing experience for the archived content. New videos
-from subscribed channels are automatically downloaded on a schedule. The
-search function indexes titles, descriptions, and metadata, making it
-easy to find specific videos in a large archive. The system runs headless
-on the NAS with no dedicated display — all interaction happens through the
-web interface or the companion mobile app.</p>
 
 </div>
