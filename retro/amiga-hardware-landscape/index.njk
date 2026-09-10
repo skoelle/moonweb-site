@@ -8,7 +8,7 @@ parent: "/"
 <h1>Running AmigaOS in 2026: MiSTer FPGA vs Amiberry on Pi</h1>
 <div class="detail-content">
 
-<p>AmigaOS 3.2.3 runs beautifully both on FPGA and on modern ARM boards — the question is which trade-offs you're willing to accept.</p>
+<p>AmigaOS 3.2.3 runs beautifully both on FPGA and on modern ARM boards — the question is which trade-offs you're willing to accept. Both approaches have their place, and the choice often comes down to what you're trying to do: run demos at perfect timing, or tinker with software at higher resolutions.</p>
 
 <h2>Two Roads to the Same Workbench</h2>
 <ul>
@@ -17,6 +17,30 @@ parent: "/"
 <li><strong>The HDF minefield</strong> — hard disk image files either carry an RDB partition table or they don't, and getting the geometry parameters (surfaces/sectors/reserved blocks) wrong produces the classic "Not a DOS disk in device DH0" error. Reformatting through HDToolBox from a fresh install is often faster than debugging geometry math.</li>
 <li><strong>Picking a monitor</strong> — a 4:3 panel at native 1280×1024 (like an older NEC MultiSync) gives the most period-accurate Workbench experience; anything widescreen needs scaling compromises.</li>
 </ul>
+
+<h2>When to choose MiSTer</h2>
+<p>The MiSTer shines when timing accuracy matters. Demos that rely on
+cycle-exact raster effects, games that use custom hardware tricks, and
+software that depends on precise interrupt timing all benefit from the
+FPGA's hardware-level reproduction. The Minimig-AGA core also provides
+a more authentic floppy drive experience, including the characteristic
+drive sounds and seek times that software sometimes depends on for
+loading screens and copy protection.</p>
+
+<h2>When to choose Amiberry on Pi</h2>
+<p>The Pi is better for productivity and development work. Higher RTG
+resolutions make Workbench usable on modern monitors. The ability to
+easily swap between AmigaOS versions and hard disk images makes it
+ideal for testing software. And the lower cost means you can dedicate
+a Pi to Amiga development without tying up expensive FPGA hardware.</p>
+
+<h2>The compatibility question</h2>
+<p>Most Amiga software works on both platforms, but there are edge cases.
+Some demos use raster tricks that only work on real AGA hardware or the
+MiSTer's FPGA core. Some productivity software depends on specific
+accelerator card features that neither platform emulates perfectly.
+And the perennial question of Kickstart ROM versions — 3.1 for
+compatibility, 3.2 for features — applies equally to both setups.</p>
 
 <p class="redacted-note">Both setups now run side by side without any real winner — MiSTer for authenticity and demos, the Pi for tinkering and RTG resolutions.</p>
 </div>

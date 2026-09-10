@@ -18,5 +18,14 @@ parent: "/"
 <li><strong>The focus, unmistakably</strong> — Amiga and Atari ST are the heart of the collection; everything else (DOS, arcade, handhelds) exists to fill in the gaps around those two platforms.</li>
 </ul>
 
+<h2>The office setup in detail</h2>
+<p>The office houses the main retro computing workstation. The three Mega ST 4 machines each have a defined role: one runs GEM-based productivity software, one is set up for MIDI music production with a connected synthesizer, and one serves as the development machine for ST software. The Mega ST 2 is the backup and testing machine. The MiSTer FPGA handles Amiga and DOS emulation with near-perfect timing accuracy, while the MiST provides a dedicated Atari ST experience without the overhead of the MiSTer's larger feature set.</p>
+
+<h2>The living room setup</h2>
+<p>The Batocera box in the living room takes a completely different approach — it's not about hardware authenticity, it's about convenience. A compact PC boots directly into the Batocera frontend, providing a console-like experience for casual retro gaming on the TV. Controllers are wireless, the interface is controller-friendly, and the focus is on games that work well from a couch rather than demos or productivity software that needs a keyboard and mouse.</p>
+
+<h2>How it all connects</h2>
+<p>All machines share the same network infrastructure, with FTP access to the NAS for file transfers. Disk images and software archives are stored centrally and served to individual machines as needed. The MiSTer and MiST both use SD cards for storage, while the original hardware uses CompactFlash adapters or SCSI-to-IDE bridges depending on the machine. The Raspberry Pi 400 accesses the same NFS shares as the other Pis in the flat.</p>
+
 <p class="redacted-note">The honest status update: several open items remain — documenting the exact handheld models, and waiting on the A1200 Mini pre-order. Retro computing, it turns out, is never really "done."</p>
 </div>

@@ -36,3 +36,15 @@ sections:
 <p class="site-intro">A peek under the hood of my homelab. Proxmox, Synology, Docker, and how everything is wired together.</p>
 
 {% include "card-grid.njk" %}
+
+<section class="about-expanded">
+  <h2>The setup at a glance</h2>
+  <p>The infrastructure runs on three main machines: a Proxmox VE host (Intel NUC, 64GB RAM) as the primary compute node, a Synology DS918+ NAS for storage and Docker services, and a Xubuntu VM on Proxmox for development. An OpenWrt router handles multi-WAN failover with WiFi and Powerline backhaul, and four Zyxel GS1200-8HP managed switches distribute the network across the flat.</p>
+  <p>The whole stack is monitored via Prometheus and Grafana, with node exporters on every machine, cAdvisor for container metrics, and SNMP exporters for network hardware. Backups follow a 3-2-1 strategy: local snapshots, NAS copies, offsite sync to a Raspberry Pi in a different room, and cloud archive for worst-case scenarios.</p>
+
+  <h2>Why Proxmox</h2>
+  <p>Proxmox VE was chosen over alternatives like ESXi or plain Docker for several reasons. The open-source model means no licensing headaches. LXC containers provide near-native performance for lightweight services without the overhead of full VMs. The web UI makes it easy to manage snapshots, backups, and migrations. And the ZFS support on the underlying Debian system gives us reliable snapshots and send/receive for the backup chain.</p>
+
+  <h2>How services are organized</h2>
+  <p>The general rule: stateful services (databases, media archives, monitoring data) run on the Synology NAS where they benefit from the integrated backup and snapshot system. Stateless services and compute-heavy workloads run on the Proxmox Docker VM. LXC containers handle lightweight always-on services like Pi-hole and MariaDB. This separation makes it easy to tear down and recreate Docker containers without worrying about data loss.</p>
+</section>

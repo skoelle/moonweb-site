@@ -11,7 +11,10 @@ layout: base.njk
 <p>A Raspberry Pi Zero W mounted near the balcony acts as a small,
 self-contained smart-balcony controller: light control, an internet
 radio player, sensor readings, and its own backup/monitoring, all on
-very modest hardware.</p>
+very modest hardware. The goal is to make the balcony a more pleasant
+space — light control when it gets dark, background music while sitting
+outside, and temperature readings to know what to expect before stepping
+out.</p>
 
 <h2>What it does</h2>
 <ul>
@@ -20,6 +23,16 @@ very modest hardware.</p>
 <li><strong>HTTP communication</strong> with an ESP32-based balcony light controller.</li>
 <li><strong>Internet radio</strong> via a lightweight command-line audio player, controlled by a small custom tool ported from an earlier bathroom-Pi project.</li>
 </ul>
+
+<h2>Hardware details</h2>
+<p>The Pi Zero W is connected to an ESP32 microcontroller that handles
+the actual light switching via a relay module. Communication happens
+over HTTP — the Pi sends a simple request to toggle the relay, and the
+ESP32 responds with the current light state. The ESP32 also reads a
+DHT22 temperature and humidity sensor, publishing the values to MQTT
+for the home dashboard. This split makes sense: the Pi handles the
+user-facing logic (audio, buttons, internet radio), while the ESP32
+handles the real-time hardware control.</p>
 
 <h2>Monitoring & backup, even on tiny hardware</h2>
 <p>Despite the very limited RAM, this Pi still participates in the same
@@ -33,6 +46,7 @@ configuration to the NAS over the internal network.</p>
 <ul>
 <li>Adding a USB webcam stream, mirroring the pattern already used for the 3D printer.</li>
 <li>Migrating onto the planned isolated IoT network segment once that's fully set up.</li>
+<li>Adding weather data from the DHT22 sensor to the LED matrix displays around the flat.</li>
 </ul>
 
 </div>

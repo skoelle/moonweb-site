@@ -72,3 +72,15 @@ sections:
 <p class="site-intro">The heart of the homelab. Home Assistant, MQTT sensors, dashboards, and automation projects that make everyday life a little more interesting.</p>
 
 {% include "card-grid.njk" %}
+
+<section class="about-expanded">
+  <h2>The stack</h2>
+  <p>Everything connects through MQTT. HomematicIP thermostats report room temperatures via Home Assistant automations, Tasmota smart plugs feed energy data, and various ESP32 and Raspberry Pi devices publish sensor readings. InfluxDB stores the time-series data, and Grafana dashboards visualize it all in real time.</p>
+  <p>The home dashboard runs on multiple touch displays around the flat: an ESP32-S3 WT32-SC01 in the living room and an M5Stack in the study. Both show room temperatures, energy usage, and quick-action buttons for lighting and music control.</p>
+
+  <h2>Automation philosophy</h2>
+  <p>The goal is subtle automation that improves daily life without being intrusive. Lights turn on when someone enters a room, music starts playing in the bathroom when the light switches on, and LED matrix displays show the time, weather, and laundry status. But nothing talks unless spoken to — no voice assistants, no always-on microphones, just simple sensor-driven automation that runs locally without cloud dependencies.</p>
+
+  <h2>Self-hosted services</h2>
+  <p>Beyond hardware automation, several self-hosted services run on the Synology NAS: TubeArchivist for YouTube archiving, OctoPrint for remote 3D printer control, iCloud Contacts Sync for keeping the address book up to date, and a Google Calendar sync for dashboard widgets. Each service is containerized and backed up as part of the NAS backup strategy.</p>
+</section>

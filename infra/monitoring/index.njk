@@ -9,7 +9,9 @@ layout: base.njk
 <div class="detail-content">
 
 <p>Prometheus and Grafana form the central monitoring stack for the whole
-homelab, running as Docker containers on the NAS.</p>
+homelab, running as Docker containers on the NAS. Every machine in the
+flat — Proxmox host, Docker VM, Synology NAS, and Raspberry Pi devices —
+feeds metrics into this central instance.</p>
 
 <h2>What's monitored</h2>
 <ul>
@@ -26,6 +28,23 @@ homelab, running as Docker containers on the NAS.</p>
 <tr><td>Docker container monitoring</td><td>Per-container CPU/memory/network/disk</td></tr>
 <tr><td>Network printer</td><td>Toner level, page count, online/offline status via SNMP</td></tr>
 </table>
+
+<h2>How it's deployed</h2>
+<p>Prometheus runs as a Docker container on the Synology NAS with a
+bind-mounted data directory for persistence. Grafana is deployed as a
+sibling container, connected to Prometheus as its primary datasource.
+Both containers are defined in a single Docker Compose file and managed
+via Portainer. The Prometheus configuration file defines scrape targets,
+scrape intervals (15 seconds for hosts, 60 seconds for network devices),
+and retention policies.</p>
+
+<h2>Alerting</h2>
+<p>Basic alerting is configured through Prometheus Alertmanager, which
+sends notifications to a dedicated Telegram channel for critical events
+like host-down or disk-full conditions. The dead-man's-switch pattern
+ensures that if Prometheus itself stops scraping, an alert fires within
+minutes. More sophisticated alerting rules (disk space prediction,
+temperature thresholds) are planned but not yet implemented.</p>
 
 <h2>Open items</h2>
 <ul>

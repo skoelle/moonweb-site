@@ -10,7 +10,9 @@ layout: base.njk
 
 <p>TubeArchivist runs on the Synology NAS via Docker Compose, self-hosting
 a searchable archive of downloaded YouTube content (Elasticsearch +
-Redis + the TubeArchivist app itself).</p>
+Redis + the TubeArchivist app itself). It's used to archive channels
+worth rewatching — tutorials, long-form content, and anything that might
+disappear behind copyright strikes or channel deletions.</p>
 
 <h2>Why this needed real troubleshooting</h2>
 <p>Running Elasticsearch on Synology's DSM kernel isn't fully
@@ -23,7 +25,15 @@ without it, rather than fighting the kernel.</p>
 <ul>
 <li>Synology's Container Manager doesn't always auto-join containers to the same Docker network even when they're defined in one Compose file — an explicit named network avoids silent connectivity failures between the app, Elasticsearch, and Redis.</li>
 <li>A version upgrade of the app itself required a very specific step-by-step path (skipping versions breaks the database migration) rather than jumping straight to the latest release.</li>
+<li>Initial indexing of large channels takes significant time — Elasticsearch needs to build and optimize indices for full-text search across video titles, descriptions, and metadata.</li>
 </ul>
+
+<h2>How it fits into the backup strategy</h2>
+<p>TubeArchivist data is split into two categories with different backup
+priorities. The downloaded media files and Elasticsearch metadata are
+backed up as part of the NAS backup volumes, since they take significant
+time to re-download and re-index. The Redis cache is excluded — it only
+holds session data and can be safely rebuilt on restart.</p>
 
 <h2>What's backed up</h2>
 <table>
@@ -32,5 +42,14 @@ without it, rather than fighting the kernel.</p>
 <tr><td>Elasticsearch metadata/index</td><td>Yes, via the NAS's own backup volumes</td></tr>
 <tr><td>Redis cache</td><td>No — safe to delete/rebuild, only holds session data</td></tr>
 </table>
+
+<h2>Day-to-day usage</h2>
+<p>Channels are added via the TubeArchivist web interface, which provides
+a YouTube-like browsing experience for the archived content. New videos
+from subscribed channels are automatically downloaded on a schedule. The
+search function indexes titles, descriptions, and metadata, making it
+easy to find specific videos in a large archive. The system runs headless
+on the NAS with no dedicated display — all interaction happens through the
+web interface or the companion mobile app.</p>
 
 </div>

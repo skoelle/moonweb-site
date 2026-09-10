@@ -10,7 +10,9 @@ layout: base.njk
 
 <p>A Raspberry Pi 3B runs OctoPrint for remote 3D-printer control, plus a
 live camera stream so print progress can be checked without walking over
-to the printer.</p>
+to the printer. This eliminates the need to stand next to the printer
+watching the first layer — a quality-of-life improvement that's hard to
+go back from once you've experienced it.</p>
 
 <h2>Current setup</h2>
 <ul>
@@ -18,6 +20,14 @@ to the printer.</p>
 <li><strong>Camera streaming</strong> is handled by a lightweight camera-server project, exposing both an HLS stream and an MJPEG stream, the latter wired directly into OctoPrint's webcam panel.</li>
 <li><strong>Container management</strong> (Portainer, cAdvisor, a node exporter) runs alongside, giving the same monitoring pattern as the rest of the fleet.</li>
 </ul>
+
+<h2>Camera and streaming</h2>
+<p>The camera setup uses a standard USB webcam connected to the Pi. The
+camera-server project provides two streaming modes: MJPEG for the
+OctoPrint dashboard (low latency, works in any browser) and HLS for
+remote viewing over slower connections. The MJPEG stream is the primary
+way to check on prints — it loads quickly and updates in real time in the
+OctoPrint web interface.</p>
 
 <h2>History</h2>
 <p>This Pi originally also had a small status display attached; the
@@ -30,6 +40,16 @@ that point to better reflect its now-singular focus on the printer.</p>
 <p>After moving this Pi to a newer OS release, boot configuration files
 moved to a new path — editing the old path silently does nothing, which
 is an easy trap when following older notes or tutorials for the same
-hardware.</p>
+hardware. The lesson: always verify that configuration changes actually
+take effect, especially after OS upgrades on embedded hardware.</p>
+
+<h2>Why Docker on a Pi</h2>
+<p>Running OctoPrint in Docker on a Pi 3B might seem like overkill, but
+it provides consistency with the rest of the fleet. The same Portainer
+interface manages this container alongside the NAS services, the same
+monitoring stack collects its metrics, and the same backup strategy
+covers its configuration. The overhead of Docker on ARM is minimal for a
+single-container setup, and the operational benefits justify the small
+resource cost.</p>
 
 </div>
