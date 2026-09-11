@@ -34,21 +34,21 @@ layout: stefankoelle.njk
 
   <h3>Home Network Projects (2025-2026)</h3>
   <ul>
-    <li><b>Docker Host (Proxmox PVE)</b><br>Virtualized Docker host with Debian 12.2 running containerized services including Portainer, Prometheus, Grafana, Gitea, monitoring exporters, and more. Full architecture documented on <a href="https://www.moonweb.org/infra//docker/">infra.moonweb.org</a>.</li>
+    <li><b>Docker Host (Proxmox PVE)</b><br>Virtualized Docker host with Debian 12.2 running containerized services including Portainer, Prometheus, Grafana, Gitea, monitoring exporters, and more. Full architecture documented on <a href="https://www.moonweb.org/infra/docker/">infra.moonweb.org</a>.</li>
     <li><b>InfluxDB Time-Series Integration</b><br>Deployed InfluxDB 2.x for sensor data collection from Tasmota smart plugs and HomematicIP thermostats, replacing older MySQL-based storage with modern time-series architecture.</li>
     <li><b>LED Matrix ESP32 InfluxDB Integration</b><br>Data persistence layer for <a href="/ledmatrix/">LED Matrix ESP32</a> sensor systems (DHT22 temperature/humidity) with InfluxDB 2.x backend. Automated collection at 60-second intervals for historical trend analysis.</li>
-    <li><b>Air Quality Dashboard</b><br>Dynamic HTML5 dashboard consuming real-time sensor data from InfluxDB via Flux query API. Displays temperature and humidity across all network locations, accessible via nginx reverse proxy. See also <a href="https://www.moonweb.org/smarthome//air-quality/">smarthome.moonweb.org</a>.</li>
-    <li><b>Tasmota Energy Monitoring</b><br>Smart plug energy tracking with 8 Tasmota-enabled devices, integrating MQTT data collection and visualization. See also <a href="https://www.moonweb.org/smarthome//tasmota-energy/">smarthome.moonweb.org</a>.</li>
-    <li><b>Network Hardware & Monitoring</b><br>Four Zyxel GS1200-8HP managed switches in the server room, living room, and study, plus a <a href="https://www.moonweb.org/infra//openwrt/">Multi-WAN OpenWrt router</a> for failover and VLAN segmentation. All switches feed into <a href="https://www.moonweb.org/infra//monitoring/">Prometheus monitoring</a> via SNMP exporters, and IoT devices are isolated in VLAN 189.</li>
+    <li><b>Air Quality Dashboard</b><br>Dynamic HTML5 dashboard consuming real-time sensor data from InfluxDB via Flux query API. Displays temperature and humidity across all network locations, accessible via nginx reverse proxy. See also <a href="https://www.moonweb.org/smarthome/air-quality/">smarthome.moonweb.org</a>.</li>
+    <li><b>Tasmota Energy Monitoring</b><br>Smart plug energy tracking with 8 Tasmota-enabled devices, integrating MQTT data collection and visualization. See also <a href="https://www.moonweb.org/smarthome/tasmota-energy/">smarthome.moonweb.org</a>.</li>
+    <li><b>Network Hardware & Monitoring</b><br>Four Zyxel GS1200-8HP managed switches in the server room, living room, and study, plus a <a href="https://www.moonweb.org/infra/openwrt/">Multi-WAN OpenWrt router</a> for failover and VLAN segmentation. All switches feed into <a href="https://www.moonweb.org/infra/monitoring/">Prometheus monitoring</a> via SNMP exporters, and IoT devices are isolated in VLAN 189.</li>
   </ul>
 
   <h3>Retro Computing (2022/2023)</h3>
   <ul>
-    <li>MiSTer and MiST FPGA Systems for preservation (see also <a href="https://www.moonweb.org/retro//mist-mister-fpga/">retro.moonweb.org</a>).</li>
-    <li><a href="https://www.moonweb.org/retro//dos-486-tower/">DOS System</a>, <a href="https://www.moonweb.org/retro//the-a1200/">Amiga System</a>, and <a href="https://www.moonweb.org/retro//atari-mega-st-fleet/">Atari ST System</a> with the environment from the early 90s.</li>
+    <li>MiSTer and MiST FPGA Systems for preservation (see also <a href="https://www.moonweb.org/retro/mist-mister-fpga/">retro.moonweb.org</a>).</li>
+    <li><a href="https://www.moonweb.org/retro/dos-486-tower/">DOS System</a>, <a href="https://www.moonweb.org/retro/the-a1200/">Amiga System</a>, and <a href="https://www.moonweb.org/retro/atari-mega-st-fleet/">Atari ST System</a> with the environment from the early 90s.</li>
   </ul>
 
-  <h3>Upgrade of old <a href="https://www.moonweb.org/retro//atari-mega-st-fleet/">Atari Mega 4</a> (2021)</h3>
+  <h3>Upgrade of old <a href="https://www.moonweb.org/retro/atari-mega-st-fleet/">Atari Mega 4</a> (2021)</h3>
   <ul>
     <li>Gotek Drive</li>
     <li>More RAM</li>
@@ -67,10 +67,10 @@ layout: stefankoelle.njk
 
   <h3>Various Docker Systems (since 2016)</h3>
   <ul>
-    <li><b>Monitoring:</b> <a href="https://www.moonweb.org/infra//monitoring/">Prometheus, Grafana, InfluxDB</a>, cAdvisor, Node Exporter, SNMP exporters</li>
-    <li><b>Smart Home:</b> Mosquitto MQTT broker, <a href="https://www.moonweb.org/smarthome//homematic-mqtt/">Home Assistant</a></li>
+    <li><b>Monitoring:</b> <a href="https://www.moonweb.org/infra/monitoring/">Prometheus, Grafana, InfluxDB</a>, cAdvisor, Node Exporter, SNMP exporters</li>
+    <li><b>Smart Home:</b> Mosquitto MQTT broker, <a href="https://www.moonweb.org/smarthome/homematic-mqtt/">Home Assistant</a></li>
     <li><b>Infrastructure:</b> Portainer, Nginx Proxy Manager, Authelia (SSO), Watchtower, Healthchecks</li>
-    <li><b>Applications:</b> Gitea (GitHub mirror), <a href="https://www.moonweb.org/infra//docker/">Stirling PDF</a>, <a href="https://www.moonweb.org/smarthome//tubearchivist/">TubeArchivist</a>, <a href="https://www.moonweb.org/smarthome//tubearchivist/">TubeSync</a>, <a href="https://www.moonweb.org/infra//docker/">SearXNG</a></li>
+    <li><b>Applications:</b> Gitea (GitHub mirror), <a href="https://www.moonweb.org/infra/docker/">Stirling PDF</a>, <a href="https://www.moonweb.org/smarthome/tubearchivist/">TubeArchivist</a>, <a href="https://www.moonweb.org/smarthome/tubearchivist/">TubeSync</a>, <a href="https://www.moonweb.org/infra/docker/">SearXNG</a></li>
   </ul>
 
   <h3>Walk-on Song (2019)</h3>
@@ -80,7 +80,7 @@ layout: stefankoelle.njk
     <li>MP3 Module for playback on attached speaker.</li>
   </ul>
 
-  <h3><a href="https://www.moonweb.org/smarthome//kids-rfid-player/">Kids RFID MP3 Player</a> (2018)</h3>
+  <h3><a href="https://www.moonweb.org/smarthome/kids-rfid-player/">Kids RFID MP3 Player</a> (2018)</h3>
   <ul>
     <li>Interactive audio playback system utilizing RFID technology.</li>
     <li>Powered by an Arduino Nano for compact and efficient operation.</li>
@@ -110,7 +110,7 @@ layout: stefankoelle.njk
     <li>Managed a FreeBSD server with Apache, Sendmail, and Perl scripts.</li>
     <li>Maintained an NT 4.0 file server.</li>
     <li>Administered Windows 98 and Windows 2000 hosts.</li>
-    <li>More info at <a href="https://www.moonweb.org/network/" target="_blank">moonweb.org/network/</a></li>
+    <li>More info at <a href="https://www.moonweb.org/timecapsule/network/" target="_blank">moonweb.org/timecapsule/network/</a></li>
   </ul>
 
   <h3>Mailbox/Fidonet (1994 - 2000)</h3>
@@ -146,7 +146,7 @@ layout: stefankoelle.njk
 
   <h3>AI-Assisted Development</h3>
   <p>I've fully embraced the AI-assisted development paradigm since early 2025. At work, I've taught <strong>Claude Code</strong> a workflow for handling Jira stories end-to-end: it evaluates requirements, provides feedback to the PO, and creates a detailed implementation plan. From there, it's mostly about supervising the plan while the code generation runs largely autonomously. For code review, we use a second AI (e.g., Codex) as a quality gate to catch issues that might slip through. In migration projects, I define the exact plan upfront and Claude Code executes it with increasing independence. The output gain is massive, delivering in a fraction of the time.</p>
-    <p>Privately, I work with <strong><a href="https://opencode.ai">OpenCode</a></strong> paired with OpenCode Zen, Merge Gateway, and OpenRouter, mostly for Python-based home lab and automation projects. See my <a href="https://www.moonweb.org/code/">GitHub projects</a> for examples and the <a href="https://www.moonweb.org/infra//dev-environment/">Dev VM setup</a> for the infrastructure behind this workflow.</p>
+    <p>Privately, I work with <strong><a href="https://opencode.ai">OpenCode</a></strong> paired with OpenCode Zen, Merge Gateway, and OpenRouter, mostly for Python-based home lab and automation projects. See my <a href="https://www.moonweb.org/code/">GitHub projects</a> for examples and the <a href="https://www.moonweb.org/infra/dev-environment/">Dev VM setup</a> for the infrastructure behind this workflow.</p>
 
   <h3>.NET Core</h3>
   <ul>
@@ -243,5 +243,5 @@ layout: stefankoelle.njk
   <p>Stefan Kölle<br>Neumarkter Str. 86c<br>81673 München</p>
   <p>Phone/Fax: +49-(89)-20006547<br>E-Mail: <a id="email-impressum" href="#">[email protected]</a></p>
   <p>Responsible for content according to § 18 (2) MStV: Stefan Kölle, address as above.</p>
-  <p>Full legal notice & privacy policy for this website and the moonweb.org network: <a href="https://www.moonweb.org//impressum/">hub.moonweb.org/impressum</a>
+  <p>Full legal notice & privacy policy for this website and the moonweb.org network: <a href="https://www.moonweb.org/impressum/">hub.moonweb.org/impressum</a>
 </div>
