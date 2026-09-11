@@ -10,6 +10,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addGlobalData("site", { url: "https://www.moonweb.org" });
   eleventyConfig.addFilter("date", (d) => d.toISOString());
 
+  // Exclude the standalone sites from the root (moonweb) build
+  eleventyConfig.ignores.add("stefankoelle/**");
+  eleventyConfig.ignores.add("timecapsule/**");
+
   // Computed pathPrefix based on page's section front matter
   eleventyConfig.addGlobalData("eleventyComputed", {
     pathPrefix: (data) => SITES[data.section]?.pathPrefix ?? "",
