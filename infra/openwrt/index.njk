@@ -9,13 +9,13 @@ layout: base.njk
 <h1>OpenWrt Multi-WAN Router</h1>
 <div class="detail-content">
 
-<p>The study has historically suffered from unreliable network connectivity. To solve this, I set up an OpenWrt router that combines two WAN paths — WiFi and a dedicated Powerline link back to the server room — with automatic failover between them.</p>
+<p>The study has historically suffered from unreliable network connectivity. To solve this, I set up an OpenWrt router that combines two WAN paths, WiFi and a dedicated Powerline link back to the server room, with automatic failover between them.</p>
 
 <h2>Multi-WAN setup</h2>
 <ul>
-<li><strong>WAN 1 — WiFi (802.11ac)</strong> — higher throughput but less stable, used for bulk transfers and general traffic.</li>
-<li><strong>WAN 2 — Powerline (Ethernet backhaul)</strong> — lower throughput but rock-solid, carries latency-sensitive traffic like VPN tunnels and Teams calls.</li>
-<li><strong>Failover</strong> — both paths are active simultaneously; if one drops, traffic automatically shifts to the remaining path. This provides redundancy in both directions.</li>
+<li><strong>WAN 1, WiFi (802.11ac)</strong>, higher throughput but less stable, used for bulk transfers and general traffic.</li>
+<li><strong>WAN 2, Powerline (Ethernet backhaul)</strong>, lower throughput but rock-solid, carries latency-sensitive traffic like VPN tunnels and Teams calls.</li>
+<li><strong>Failover</strong>, both paths are active simultaneously; if one drops, traffic automatically shifts to the remaining path. This provides redundancy in both directions.</li>
 </ul>
 
 <p>Traffic is routed intelligently based on connection quality: VPN and real-time communication prefer the stable Powerline path, while everything else benefits from the higher WiFi throughput when available.</p>
@@ -28,7 +28,7 @@ layout: base.njk
 </ul>
 
 <h2>IoT VLAN 189</h2>
-<p>A dedicated, isolated network segment for IoT devices, running on a separate small WiFi access point on a different channel. This keeps smart home hardware — including the balcony sensors and light controller — off the main network while maintaining full connectivity to the homelab services.</p>
+<p>A dedicated, isolated network segment for IoT devices, running on a separate small WiFi access point on a different channel. This keeps smart home hardware, including the balcony sensors and light controller, off the main network while maintaining full connectivity to the homelab services.</p>
 <ul>
 <li><strong>VLAN ID:</strong> 189</li>
 <li><strong>Purpose:</strong> Isolate IoT/smart home devices from general network traffic.</li>

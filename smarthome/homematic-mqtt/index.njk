@@ -18,7 +18,7 @@ deliberately low-tech bridge: <strong>Home Assistant → MQTT → InfluxDB</stro
 Docker container, but the underlying Python library lost compatibility
 with HomematicIP's cloud API and hasn't been maintained since 2022. Home
 Assistant, on the other hand, ships an actively maintained HomematicIP
-Cloud integration — so instead of chasing a broken exporter, the bridge
+Cloud integration, so instead of chasing a broken exporter, the bridge
 now runs as native Home Assistant automations that simply republish
 sensor state changes to MQTT.</p>
 

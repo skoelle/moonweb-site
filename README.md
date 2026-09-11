@@ -1,6 +1,6 @@
 # moonweb-site
 
-Monorepo for the **moonweb.org** homelab — six static sites built with [Eleventy](https://www.11ty.dev/), deployed to [IONOS SFTP](https://www.ionos.de/).
+Monorepo for the **moonweb.org** homelab, six static sites built with [Eleventy](https://www.11ty.dev/), deployed to [IONOS SFTP](https://www.ionos.de/).
 
 ```
 www.moonweb.org/           -> Central index & gateway

@@ -1,4 +1,4 @@
-# AGENTS.md — moonweb-site
+# AGENTS.md, moonweb-site
 
 ## Projektuebersicht
 
@@ -23,8 +23,8 @@ Monorepo fuer 6 statische Websites unter www.moonweb.org + stefankoelle.de, basi
 
 ### Andere Sites (nicht im Monorepo)
 
-- 28k8.moonweb.org — 90er BBS/Scene-Archiv
-- buildbroken.moonweb.org — .NET Open Space Blog Archiv
+- 28k8.moonweb.org, 90er BBS/Scene-Archiv
+- buildbroken.moonweb.org, .NET Open Space Blog Archiv
 
 ## Dateistruktur
 
@@ -101,23 +101,23 @@ npm run build:moonweb           # Moonweb + Timecapsule (fuer Deployment)
 
 ## Design-Prinzipien
 
-1. **Header konsistent** — Identischer Site-Switcher auf allen Home-Sites
-2. **Content flexibel** — Detailseiten duerfen eigenes Layout haben
+1. **Header konsistent**, Identischer Site-Switcher auf allen Home-Sites
+2. **Content flexibel**, Detailseiten duerfen eigenes Layout haben
 3. **Accent-Farben:** hub=#3b6ea5, infra=#99333A, smarthome=#1f8a8a, code=#3E5098, retro=#8a6d3b (inlined in base.njk)
-4. **Englisch** — Alle Sites komplett auf Englisch
-5. **Keine Analytics** — Keine Tracking-Tools
-6. **Sensible Daten** — Infra-Content wird manuell redigiert (keine IPs, Keys, Passwoerter)
+4. **Englisch**, Alle Sites komplett auf Englisch
+5. **Keine Analytics**, Keine Tracking-Tools
+6. **Sensible Daten**, Infra-Content wird manuell redigiert (keine IPs, Keys, Passwoerter)
 
 ## URL-Struktur
 
 Alle Sites sind unter `www.moonweb.org` als Subverzeichnisse erreichbar:
-- `www.moonweb.org/` — Hub (Root)
-- `www.moonweb.org/infra/` — Infra
-- `www.moonweb.org/smarthome/` — Smarthome
-- `www.moonweb.org/code/` — Code
-- `www.moonweb.org/retro/` — Retro
-- `www.moonweb.org/timecapsule/` — Timecapsule (2001 Design)
-- `www.moonweb.org/impressum/` — Impressum
+- `www.moonweb.org/`, Hub (Root)
+- `www.moonweb.org/infra/`, Infra
+- `www.moonweb.org/smarthome/`, Smarthome
+- `www.moonweb.org/code/`, Code
+- `www.moonweb.org/retro/`, Retro
+- `www.moonweb.org/timecapsule/`, Timecapsule (2001 Design)
+- `www.moonweb.org/impressum/`, Impressum
 
 Cloudflare Redirects leiten alte Subdomains weiter:
 - `hub.moonweb.org/*` → `www.moonweb.org/*`
@@ -145,10 +145,10 @@ npm run prebuild:cv             # Alle Pre-Build Tasks (inkl. CV PDF)
 ```
 
 Dateien:
-- `stefankoelle/pdf/cv-style.css` — WeasyPrint-Stylesheet (A4, Typografie)
-- `stefankoelle/pdf/build-pdf.sh` — Shell-Skript fuer PDF-Generierung
-- `stefankoelle/cv-print.njk` — Standalone HTML-Template (nur CV-Content)
-- `stefankoelle/pdf/cv.pdf` — Generiertes PDF (Output)
+- `stefankoelle/pdf/cv-style.css`, WeasyPrint-Stylesheet (A4, Typografie)
+- `stefankoelle/pdf/build-pdf.sh`, Shell-Skript fuer PDF-Generierung
+- `stefankoelle/cv-print.njk`, Standalone HTML-Template (nur CV-Content)
+- `stefankoelle/pdf/cv.pdf`, Generiertes PDF (Output)
 
 Wichtig: Das PDF wird via Eleventy-Passthrough ins Build-Output kopiert (`dist/stefankoelle/pdf/cv.pdf`).
 

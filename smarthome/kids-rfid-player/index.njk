@@ -9,43 +9,43 @@ layout: base.njk
 <h1>Kids RFID MP3 Player</h1>
 <div class="detail-content">
 
-<p>An Arduino-based MP3 player where kids select audio content by holding RFID cards against the device. No screen, no menus, no WiFi — just tap a card and music plays. Built together with my son in 2018 as a cheaper, more flexible alternative to commercial products like the Hoerbert or Tonuino.</p>
+<p>An Arduino-based MP3 player where kids select audio content by holding RFID cards against the device. No screen, no menus, no WiFi, just tap a card and music plays. Built together with my son in 2018 as a cheaper, more flexible alternative to commercial products like the Hoerbert or Tonuino.</p>
 
 <h2>Why this exists</h2>
 <p>Commercial kids' audio players have trade-offs. The Hoerbert only offers 9 direct-select buttons with color-coded cards that aren't very intuitive for very young children. The Tonuino uses expensive RFID figures and relies on WiFi streaming, which introduces latency and dependency on network availability. This project aimed for the best of both worlds: RFID-based content selection with local-only playback, analog volume control, and minimal buttons.</p>
 
 <h2>Hardware</h2>
 <ul>
-<li><strong>Arduino</strong> — the microcontroller running the custom firmware.</li>
-<li><strong>RFID module</strong> — reads MIFARE cards to trigger audio playback.</li>
-<li><strong>DFPlayer Mini</strong> — compact MP3 player module with built-in amplifier, handling audio decoding and playback directly from an SD card.</li>
-<li><strong>Pololu power switch</strong> — handles auto-shutdown to prevent battery drain, replacing a manual toggle switch that a child would forget to turn off.</li>
-<li><strong>Analog volume knob</strong> — a rotary potentiometer for tactile volume control, deliberately chosen over digital buttons.</li>
-<li><strong>3 LEDs</strong> — green (playing), yellow (paused), red (stopped/at end).</li>
+<li><strong>Arduino</strong>, the microcontroller running the custom firmware.</li>
+<li><strong>RFID module</strong>, reads MIFARE cards to trigger audio playback.</li>
+<li><strong>DFPlayer Mini</strong>, compact MP3 player module with built-in amplifier, handling audio decoding and playback directly from an SD card.</li>
+<li><strong>Pololu power switch</strong>, handles auto-shutdown to prevent battery drain, replacing a manual toggle switch that a child would forget to turn off.</li>
+<li><strong>Analog volume knob</strong>, a rotary potentiometer for tactile volume control, deliberately chosen over digital buttons.</li>
+<li><strong>3 LEDs</strong>, green (playing), yellow (paused), red (stopped/at end).</li>
 </ul>
 
 <h2>How it works</h2>
-<p>Each RFID card is mapped to a specific audio file on the SD card. Hold a card against the reader and the corresponding story or song starts playing. Hold the RFID keychain against the reader to pause; hold it again to resume. No other buttons exist on the device — the design intentionally minimizes interaction points so even a toddler can use it independently.</p>
+<p>Each RFID card is mapped to a specific audio file on the SD card. Hold a card against the reader and the corresponding story or song starts playing. Hold the RFID keychain against the reader to pause; hold it again to resume. No other buttons exist on the device, the design intentionally minimizes interaction points so even a toddler can use it independently.</p>
 
 <h2>Auto-shutdown behavior</h2>
 <p>The power management distinguishes between two states to avoid unnecessary battery drain:</p>
 <ul>
-<li><strong>Stopped</strong> (playback reached the end) — the device shuts down after 5 minutes.</li>
-<li><strong>Paused</strong> (user paused via RFID) — the device stays on for 1 hour before shutting down, allowing easy resumption.</li>
+<li><strong>Stopped</strong> (playback reached the end), the device shuts down after 5 minutes.</li>
+<li><strong>Paused</strong> (user paused via RFID), the device stays on for 1 hour before shutting down, allowing easy resumption.</li>
 </ul>
 
 <h2>The case</h2>
-<p>The enclosure is a custom-built retro-style wooden box, painted by hand. The name "Rocky Box" came from my son, who painted a Paw Patrol character on the front. The design is deliberately quirky and homemade rather than polished — it has character.</p>
+<p>The enclosure is a custom-built retro-style wooden box, painted by hand. The name "Rocky Box" came from my son, who painted a Paw Patrol character on the front. The design is deliberately quirky and homemade rather than polished, it has character.</p>
 
 <h2>What's missing (by design)</h2>
 <ul>
-<li>No resume after power-off — turning the device off mid-playback means starting the story over from the beginning.</li>
-<li>No skip forward/backward within a track — stories play start to finish.</li>
+<li>No resume after power-off, turning the device off mid-playback means starting the story over from the beginning.</li>
+<li>No skip forward/backward within a track, stories play start to finish.</li>
 </ul>
 <p>Both omissions are intentional. Young children don't need seeking functionality, and keeping the interface to just "tap card, listen" reduces confusion.</p>
 
 <h2>Setup</h2>
-<p>All 100 RFID cards were pre-programmed once and labeled with numbers. No card learning or reprogramming is needed after initial setup — just hand a child a numbered card and they know which story it triggers.</p>
+<p>All 100 RFID cards were pre-programmed once and labeled with numbers. No card learning or reprogramming is needed after initial setup, just hand a child a numbered card and they know which story it triggers.</p>
 
 <h2>Code</h2>
 <p>The Arduino firmware is not yet published on GitHub. It's a custom implementation (not Tonuino), written in C++ for the Arduino platform. The code may be uploaded in the future.</p>

@@ -9,30 +9,30 @@ parent: "/retro/"
 <h1>The 486 DX2-66: Rebuilding a DOS Era on MiSTer FPGA</h1>
 <div class="detail-content">
 
-<p>Long before Atari ST and Amiga took over the retro corner, a Vobis-Highscreen 486 DX2-66 in its distinctive Colani-designed tower case was the main PC. The original hardware is long gone, but the entire setup has been recreated 1:1 on MiSTer FPGA — same DOS version, same drivers, same AUTOEXEC.BAT and CONFIG.SYS, same directory structure.</p>
+<p>Long before Atari ST and Amiga took over the retro corner, a Vobis-Highscreen 486 DX2-66 in its distinctive Colani-designed tower case was the main PC. The original hardware is long gone, but the entire setup has been recreated 1:1 on MiSTer FPGA, same DOS version, same drivers, same AUTOEXEC.BAT and CONFIG.SYS, same directory structure.</p>
 
 <h2>The original hardware</h2>
-<p>The Vobis-Highscreen was a premium PC in its day — the Colani design gave it a distinctive curved case that still looks futuristic. Inside it ran an Intel 486 DX2 at 66MHz with 8MB of RAM, a Sound Blaster 16, and a Tseng ET4000 graphics card. A 200MB hard drive and a 3.5" floppy drive completed the setup. The machine was the go-to system for early-90s classics like Doom, Wing Commander, Duke Nukem 3D, and Lemmings.</p>
+<p>The Vobis-Highscreen was a premium PC in its day, the Colani design gave it a distinctive curved case that still looks futuristic. Inside it ran an Intel 486 DX2 at 66MHz with 8MB of RAM, a Sound Blaster 16, and a Tseng ET4000 graphics card. A 200MB hard drive and a 3.5" floppy drive completed the setup. The machine was the go-to system for early-90s classics like Doom, Wing Commander, Duke Nukem 3D, and Lemmings.</p>
 
 <h2>The MiSTer recreation</h2>
 <p>The AO486 core on MiSTer FPGA reproduces the original hardware with near-perfect accuracy. The key was not just getting the hardware emulation right, but rebuilding the exact software environment: the same MS-DOS version, the same memory managers (HIMEM.SYS, EMM386), the same Sound Blaster drivers, and the same AUTOEXEC.BAT and CONFIG.SYS tuning that made the original machine run smoothly. Even the directory structure and file names match the original setup.</p>
 
 <h2>Context: DOSMENU</h2>
-<p>A key part of the preserved environment is <strong><a href="https://28k8.moonweb.org/bbs/pc/dosmenu/">DOSMENU</a></strong>, a boot configuration utility written in Turbo Pascal 6.0 in 1994 — originally developed specifically for this Colani 486 machine. DOSMENU let you choose at boot time which AUTOEXEC.BAT and CONFIG.SYS commands to load — a critical feature in the DOS era, where memory management was manual and games often required different driver configurations. Features included saveable presets, a built-in MOD player, PCX picture display, and a DoubleSpace memory unloader. The original source: ~50k of Turbo Pascal, roughly 1900 lines plus some inline assembler.</p>
+<p>A key part of the preserved environment is <strong><a href="https://28k8.moonweb.org/bbs/pc/dosmenu/">DOSMENU</a></strong>, a boot configuration utility written in Turbo Pascal 6.0 in 1994, originally developed specifically for this Colani 486 machine. DOSMENU let you choose at boot time which AUTOEXEC.BAT and CONFIG.SYS commands to load, a critical feature in the DOS era, where memory management was manual and games often required different driver configurations. Features included saveable presets, a built-in MOD player, PCX picture display, and a DoubleSpace memory unloader. The original source: ~50k of Turbo Pascal, roughly 1900 lines plus some inline assembler.</p>
 
 <h2>Why a 1:1 recreation</h2>
-<p>The point isn't just to play DOS games — it's to preserve the exact computing experience from that era. The way DOS memory management worked, the way sound drivers had to be configured manually, the way batch files chained together to create a usable environment. This level of detail is lost when you just launch a DOS game from a modern frontend. The MiSTer setup recreates the entire boot process, from BIOS POST to the C:\> prompt, just as it was in the mid-90s.</p>
+<p>The point isn't just to play DOS games, it's to preserve the exact computing experience from that era. The way DOS memory management worked, the way sound drivers had to be configured manually, the way batch files chained together to create a usable environment. This level of detail is lost when you just launch a DOS game from a modern frontend. The MiSTer setup recreates the entire boot process, from BIOS POST to the C:\> prompt, just as it was in the mid-90s.</p>
 
 <h2>What's preserved</h2>
 <ul>
-<li><strong>DOS boot environment</strong> — the exact AUTOEXEC.BAT and CONFIG.SYS from the original machine, including memory manager configuration and Sound Blaster IRQ settings.</li>
-<li><strong>Game installations</strong> — original game installations with their setup utilities, configuration files, and saved games, all in the same directory paths as the original.</li>
-<li><strong>System utilities</strong> — Norton Commander, PKZIP, the usual toolkit of the era, all configured the way they were used daily.</li>
-<li><strong><a href="https://28k8.moonweb.org/bbs/pc/dosmenu/">DOSMENU</a></strong> — a custom boot configuration utility written specifically for this Colani 486 in 1994. Built in Turbo Pascal, it let you choose at boot time which AUTOEXEC.BAT and CONFIG.SYS commands to load — essential for managing DOS memory across different games and applications.</li>
-<li><strong>The quirks</strong> — the specific workarounds and tweaks that were needed to get everything running together, the kind of institutional knowledge that only exists on a well-used personal machine.</li>
+<li><strong>DOS boot environment</strong>, the exact AUTOEXEC.BAT and CONFIG.SYS from the original machine, including memory manager configuration and Sound Blaster IRQ settings.</li>
+<li><strong>Game installations</strong>, original game installations with their setup utilities, configuration files, and saved games, all in the same directory paths as the original.</li>
+<li><strong>System utilities</strong>, Norton Commander, PKZIP, the usual toolkit of the era, all configured the way they were used daily.</li>
+<li><strong><a href="https://28k8.moonweb.org/bbs/pc/dosmenu/">DOSMENU</a></strong>, a custom boot configuration utility written specifically for this Colani 486 in 1994. Built in Turbo Pascal, it let you choose at boot time which AUTOEXEC.BAT and CONFIG.SYS commands to load, essential for managing DOS memory across different games and applications.</li>
+<li><strong>The quirks</strong>, the specific workarounds and tweaks that were needed to get everything running together, the kind of institutional knowledge that only exists on a well-used personal machine.</li>
 </ul>
 
 <h2>AO486 vs real hardware</h2>
-<p>The MiSTer AO486 core handles the emulation convincingly. Timing accuracy is good enough for games that rely on cycle-sensitive behavior. Sound Blaster emulation covers the standard OPL3 FM synthesis and digital audio. The main trade-off is that some hardware-specific quirks — like the exact timing of the ET4000 graphics card or the behavior of specific ISA bus peripherals — aren't perfectly replicated. But for the purpose of preserving a working DOS environment, it's more than sufficient.</p>
+<p>The MiSTer AO486 core handles the emulation convincingly. Timing accuracy is good enough for games that rely on cycle-sensitive behavior. Sound Blaster emulation covers the standard OPL3 FM synthesis and digital audio. The main trade-off is that some hardware-specific quirks, like the exact timing of the ET4000 graphics card or the behavior of specific ISA bus peripherals, aren't perfectly replicated. But for the purpose of preserving a working DOS environment, it's more than sufficient.</p>
 
 </div>

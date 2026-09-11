@@ -9,18 +9,18 @@ parent: "/retro/"
 <h1>Getting a 40-Year-Old Computer Online: Atari ST Networking and BBS Access</h1>
 <div class="detail-content">
 
-<p>The Atari ST predates the consumer internet entirely, yet a surprising amount of retrofitted networking hardware exists to get one talking to a modern network — or to a bulletin board system straight out of the dial-up era.</p>
+<p>The Atari ST predates the consumer internet entirely, yet a surprising amount of retrofitted networking hardware exists to get one talking to a modern network, or to a bulletin board system straight out of the dial-up era.</p>
 
 <h2>The Toolbox</h2>
 <ul>
-<li><strong>STinG</strong> — the classic TCP/IP stack for TOS, still the backbone for anything network-related on an original machine, from Telnet sessions to FTP transfers.</li>
-<li><strong>ESP32-based Wi-Fi modules</strong> — small serial-attached boards that emulate a modem over Wi-Fi. Results vary wildly between firmware projects: one variant handles HTTP downloads fine but can't do Telnet, another supports full modem emulation but drops connections unpredictably during longer BBS sessions.</li>
-<li><strong>Terminal software quirks</strong> — ANSI art and special characters routinely render incorrectly in period terminal clients, an ongoing annoyance when connecting to text-heavy BBS systems.</li>
-<li><strong>File transfer the easy way</strong> — a plain FTP client on the Atari talking to a NAS on the local network sidesteps most of the internet-connectivity headaches entirely, especially for moving disk images and software archives back and forth.</li>
+<li><strong>STinG</strong>, the classic TCP/IP stack for TOS, still the backbone for anything network-related on an original machine, from Telnet sessions to FTP transfers.</li>
+<li><strong>ESP32-based Wi-Fi modules</strong>, small serial-attached boards that emulate a modem over Wi-Fi. Results vary wildly between firmware projects: one variant handles HTTP downloads fine but can't do Telnet, another supports full modem emulation but drops connections unpredictably during longer BBS sessions.</li>
+<li><strong>Terminal software quirks</strong>, ANSI art and special characters routinely render incorrectly in period terminal clients, an ongoing annoyance when connecting to text-heavy BBS systems.</li>
+<li><strong>File transfer the easy way</strong>, a plain FTP client on the Atari talking to a NAS on the local network sidesteps most of the internet-connectivity headaches entirely, especially for moving disk images and software archives back and forth.</li>
 </ul>
 
 <h2>Why connect a 40-year-old computer to the internet</h2>
-<p>The obvious question is "why bother?" — the Atari ST was never designed
+<p>The obvious question is "why bother?", the Atari ST was never designed
 for the internet, and the experience of using it online is objectively
 worse than any modern device. But that's not the point. The real
 satisfaction comes from making old hardware do things it was never
@@ -31,9 +31,9 @@ original hardware.</p>
 <h2>The BBS experience</h2>
 <p>Bulletin board systems from the dial-up era are still running today,
 maintained by enthusiasts who keep the old software alive. Connecting to
-one from an original Atari ST — via a Wi-Fi modem emulation — is a
+one from an original Atari ST, via a Wi-Fi modem emulation, is a
 genuinely nostalgic experience. The ANSI art login screens, the message
-boards, the file sections, the door games — it's all exactly as it was
+boards, the file sections, the door games, it's all exactly as it was
 in the early 1990s. The main difference: instead of tying up a phone
 line, the connection goes over Wi-Fi to a BBS that's accessible from
 anywhere in the world.</p>
@@ -41,7 +41,7 @@ anywhere in the world.</p>
 <h2>Lessons learned</h2>
 <p>The biggest lesson: networking on retro hardware is 90% patience and
 10% actual configuration. The STinG stack is well-documented but
-fragile — wrong TCP/IP settings silently break connections without
+fragile, wrong TCP/IP settings silently break connections without
 useful error messages. The ESP32 Wi-Fi modules are cheap and flexible
 but require careful firmware selection for the specific use case. And
 terminal emulation is a rabbit hole of character sets, escape sequences,
