@@ -1,54 +1,63 @@
 ---
-title: "The A1200: What We Know Before It Ships"
+title: "The A1200: Release Date, Specs and What's Included"
 section: "retro"
 tags: "retro"
-description: "A close look at Retro Games Ltd.'s upcoming Amiga 1200 console, based on everything public so far."
+description: "The A1200 by Retro Games ships 4 December 2026 with Workbench 3.1, AGA/OCS/ECS/RTG emulation and 25 pre-installed games. All the confirmed specs, as of September 2026."
 layout: base.njk
 parent: "/retro/"
 ---
-<h1>The A1200: What We Know Before It Ships</h1>
+<h1>The A1200: Release Date, Specs and What's Included</h1>
 <div class="detail-content">
 
-<p>Retro Games Ltd. opened pre-orders for The A1200 in November 2025, with delivery slated for June 2026 at a suggested price of 189.99 Euro. As with their previous mini-consoles, official details have trickled out slowly, deliberately, it seems.</p>
+<p>Retro Games Ltd. has been drip-feeding details about The A1200, a full-size reimagining of the classic Amiga 1200, for well over a year. Since the summer, most of the open questions have been answered officially, so this is a summary of everything that's now confirmed, as of September 2026.</p>
 
-<h2>What's Confirmed So Far</h2>
+<h2>Release date and price</h2>
+<p>The A1200 was originally announced with a June 2026 delivery, but was pushed back several times. It now launches on <strong>Friday 4 December 2026</strong> at a suggested price of <strong>189.99 Euro</strong>. A USB-C power cable is included, but the AC adapter is not, so you'll need your own power supply or a phone charger.</p>
+
+<h2>Workbench and software</h2>
+<p>The biggest addition since the initial announcement is that the machine ships with <strong>Workbench 3.1</strong> pre-installed and ready to boot. This means it's not just a games machine, you can also run Amiga productivity and creative software right out of the box. Via a USB stick you can load other Workbench versions, so a preferred release can be selected.</p>
+
+<h2>Emulation coverage</h2>
+<p>Rather than a single fixed core, The A1200 emulates several Amiga configurations:</p>
 <ul>
-<li><strong>Games</strong>, 25 titles pre-installed in total, with only 9 officially confirmed at time of writing: the Turrican trilogy, Defender of the Crown I & II, Beneath a Steel Sky, Lure of the Temptress, Ruff 'n' Tumble, and The Settlers II. The rest are being held back, likely on purpose, as a marketing drip-feed.</li>
-<li><strong>Hardware essentials</strong>, a fully functional keyboard in the original design, a CD32-style gamepad, a tank-mouse replica, HDMI output, USB-A ports, and USB sideloading support for ADF/HDF game files.</li>
-<li><strong>The mystery SD slot</strong>, a slot spotted at Gamescom 2025 in the position of the original floppy drive, widely speculated to be for SD-card-based game loading, but not officially confirmed.</li>
-<li><strong>Expected internals</strong>, likely an Allwinner ARM SoC running Amiberry underneath (following the pattern of the earlier A500 Mini), rather than genuine 68EC020 silicon.</li>
+<li><strong>Amiga 1200 (AGA)</strong>, the headline machine.</li>
+<li><strong>Amiga 500 (OCS)</strong>, <strong>Amiga 600 (ECS)</strong> and the <strong>CD32</strong>.</li>
+<li><strong>RTG support</strong>, a newly developed feature that lets compatible software run at higher screen resolutions than the original chipset allowed.</li>
+<li>RAM, CPU and chipset settings are adjustable, so different Amiga hardware configurations can be reproduced.</li>
+</ul>
+
+<h2>Games</h2>
+<p>There are 25 games pre-installed, launched from a simple carousel. The line-up includes Defender of the Crown I &amp; II, the Turrican trilogy, Beneath a Steel Sky, Lure of the Temptress, Ruff 'n' Tumble, The Settlers II, Slam Tilt, Rocket Ranger and the newer Amiga title Reshoot Proxima 3.</p>
+<p>Each game gets four save slots, while The Settlers II adds six in-game save slots. Controls can be remapped, assigning controller buttons and analogue inputs to keyboard, mouse and joystick functions.</p>
+
+<h2>Loading your own software</h2>
+<p>Legally acquired Amiga software can be sideloaded via USB stick. This includes full <strong>WHDLoad</strong> support as well as floppy, hard-drive and CD-ROM images. Games can be saved and resumed at any time, which helps with the punishingly difficult classics.</p>
+
+<h2>Hardware and ports</h2>
+<p>The A1200 keeps the original full-size design with a fully working keyboard. There are <strong>four USB-A ports</strong> for gamepads, joysticks, mice and USB flash drives, and third-party controllers and keyboards are supported. With an appropriate adapter, even original Amiga peripherals can be used.</p>
+<p>For display output it offers 50 Hz PAL and 60 Hz NTSC, plus scaling modes, CRT effects, smart crop and aspect ratio settings over HDMI.</p>
+
+<h2>What's in the box</h2>
+<ul>
+<li>The A1200 home computer</li>
+<li>THEMOUSE, a 2-button USB mouse</li>
+<li>THEGAMEPAD, an 8-button USB gamepad</li>
+<li>USB-C power supply cable (AC adapter not included)</li>
+<li>HDMI cable</li>
+<li>Quickstart manual</li>
 </ul>
 
 <h2>Context: where this fits in the retro landscape</h2>
-<p>The A1200 sits in a growing market of mini-consoles and FPGA recreations.
-Unlike MiSTer FPGA, which aims for cycle-accurate hardware reproduction,
-the A1200 is a software emulation box, similar to the A500 Mini that
-Retro Games Ltd. released in 2022. The A500 Mini was well-received but
-had its quirks: limited game selection, no keyboard support, and an
-emulation layer that didn't quite match the original hardware in all
-cases. The A1200 appears to address some of these criticisms, particularly
-with the keyboard and expanded I/O.</p>
-
-<h2>How it compares to alternatives</h2>
-<p>For someone who wants to run Amiga software today, there are several
-options. A real A1200 with a compact flash adapter and a modern LCD
-monitor is the purist approach, but requires maintenance and debugging.
-MiSTer FPGA offers near-perfect hardware reproduction but costs
-significantly more. Amiberry on a Raspberry Pi is the budget option,
-with good compatibility but occasional timing issues. The A1200
-positions itself as a plug-and-play alternative, set it up in minutes,
-no configuration required, at the cost of some flexibility.</p>
+<p>The A1200 sits in a growing market of mini-consoles and FPGA recreations. Unlike MiSTer FPGA, which aims for cycle-accurate hardware reproduction, the A1200 is a software emulation box, similar to the A500 Mini that Retro Games Ltd. released in 2022. The A500 Mini was well-received but had its quirks, and the A1200 addresses some of those criticisms, particularly with the working keyboard and expanded I/O.</p>
+<p>There's a legitimate debate about software emulation versus FPGA in 2026, and some of the Amiga community is waiting for a full FPGA-based Amiga. But at 189.99 Euro, the A1200 is an approachable plug-and-play entry point that ships with a real Workbench and strong sideloading support.</p>
 
 <h2>What this means for the Amiga community</h2>
-<p>If the A1200 ships on time and delivers on the promised feature set,
-it could become the default entry point for people curious about the
-Amiga. The original hardware is getting harder to find in good condition,
-and the capacitor-bomb motherboard issue means that even working units need
-recapping. A modern, reliable reproduction, even if it's software
-emulation, lowers the barrier significantly. The 25 pre-installed games
-give newcomers a curated starting point, and the USB sideloading support
-means the library can be expanded without hardware modifications.</p>
+<p>The original hardware is getting harder to find in good condition, and the capacitor-bomb motherboard issue means that even working units need recapping. A modern, reliable reproduction, even as software emulation, lowers the barrier significantly. The 25 pre-installed games give newcomers a curated starting point, and the USB sideloading support means the library can be expanded without hardware modifications.</p>
 
-<p class="redacted-note">Worth a heads-up if you're pre-ordering: not every regional shop went live on launch day, and lesser-known international retailers sometimes get product photos and details before the official site does. With a seven-month wait to delivery, there's no rush to jump on the very first listing you find.</p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://retrogames.biz/products/thea1200/" target="_blank">Retro Games: official THEA1200 product page</a></li>
+<li><a href="https://www.gamersglobal.de/news/347901/the-a1200-infos-zu-betriebssystem-unterstuetzter-peripherie-und-mehr" target="_blank">GamersGlobal: Workbench, supported peripherals and more (July 2026)</a></li>
+<li><a href="https://collectors-junkies.com/retro-games-thea1200-ab-dezember-2026/" target="_blank">Collectors-Junkies: THEA1200 from December 2026 (August 2026)</a></li>
+</ul>
 </div>
-
