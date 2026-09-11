@@ -1,0 +1,58 @@
+name: Setup Cloudflare Redirects
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Action to perform"
+        required: true
+        default: "apply"
+        type: choice
+        options:
+          - apply
+          - status
+          - dry-run
+          - delete
+
+env:
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+
+jobs:
+  redirects:
+    name: Cloudflare Redirects
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Validate secrets
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "Error: CLOUDFLARE_API_TOKEN secret is not set"
+            exit 1
+          fi
+          if [ -z "$CLOUDFLARE_ZONE_ID" ]; then
+            echo "Error: CLOUDFLARE_ZONE_ID secret is not set"
+            exit 1
+          fi
+
+      - name: Run ${{ inputs.action }}
+        run: |
+          case "${{ inputs.action }}" in
+            status)
+              ./scripts/cloudflare/setup-redirects.sh --status
+              ;;
+            dry-run)
+              ./scripts/cloudflare/setup-redirects.sh --dry-run
+              ;;
+            delete)
+              ./scripts/cloudflare/setup-redirects.sh --delete
+              ;;
+            *)
+              ./scripts/cloudflare/setup-redirects.sh
+              ;;
+          esac
+
+# Required repo secrets:
+#   CLOUDFLARE_API_TOKEN — API token with Dynamic Redirects Write permission
+#   CLOUDFLARE_ZONE_ID   — Zone ID for moonweb.org (found in Cloudflare dashboard)
