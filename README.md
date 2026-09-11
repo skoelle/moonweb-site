@@ -28,10 +28,10 @@ stefankoelle.de            -> CV, career, personal site (LED Matrix docs)
 |           |                        |                               |
 |           v                        v                               |
 |    npm run build            npm run build:stefankoelle             |
-|    + build:timecapsule                                        |                   |
-|           |                        |                               |
-|           v                        v                               |
-|      dist/                  dist/stefankoelle/                    |
+|    + build:timecapsule      |                                     |
+|           |                 |                                     |
+|           v                 v                                     |
+|    dist/moonweb/       dist/stefankoelle/                        |
 +-----------+------------------------+-------------------------------+
             |                        |
             v                        v
