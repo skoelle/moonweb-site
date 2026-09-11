@@ -1,0 +1,36 @@
+---
+title: "NetUSBee: STinG, Real Internet and USB for the Mega ST"
+section: "retro"
+tags: "retro"
+description: "How the NetUSBee adds STinG networking, real internet and a USB port to my Atari Mega ST 4 'High', plus FAT16 USB stick transfer with Windows."
+layout: base.njk
+parent: "/retro/"
+---
+<h1>NetUSBee: STinG, Real Internet and USB for the Mega ST</h1>
+<div class="detail-content">
+
+<p>My <a href="/retro/atari-mega-st-fleet/">Mega ST 4 "High"</a> workstation uses a NetUSBee, a network card with two USB ports that plugs into the Atari's cartridge (ROM) port. It's what gives the machine real internet access via STinG, and the USB port lets me swap data with a modern Windows PC using a simple FAT16 USB stick.</p>
+
+<h2>What the NetUSBee adds</h2>
+<ul>
+<li><strong>Ethernet networking</strong>, a RTL8019AS network chip (the same one used by EtherNEC), giving the ST genuine network and internet access.</li>
+<li><strong>Two USB ports</strong>, an ISP1160 USB controller (as used in EtherNAT), supporting USB mice, keyboards and, importantly, USB mass storage.</li>
+<li><strong>Optional IRQ line</strong>, to speed up transfers and free up CPU time for applications.</li>
+<li><strong>Compatibility</strong>, works with ST(e), Mega ST(e), Falcon and TT, connecting via the cartridge/ROM port.</li>
+</ul>
+
+<h2>Real Internet with STinG</h2>
+<p>For networking I use the STinG TCP/IP stack together with the <code>enec.stx</code> (or <code>enec3.stx</code> for 68030) network card driver. Once configured, the Mega ST gets a real IP address on the network and can reach the internet, connecting the 1980s machine to modern services. The original NetUSBee was developed by Candle'O'Sin, and the current production runs are sold by Lotharek in a sturdy grey metal case that matches the Atari look.</p>
+
+<h2>Exchanging Data with Windows via USB</h2>
+<p>The USB port is particularly handy for data exchange. I use a FAT16-formatted USB stick, which the ST can read and write through the USB mass-storage driver. Because FAT16 is also readable on a modern Windows PC, I can transfer files between the Atari and a Windows machine just by moving the stick between them, no special cables or network tricks required.</p>
+
+<h2>My Setup</h2>
+<p>In my Mega ST 4 "High" machine the NetUSBee sits in the cartridge port, working alongside the <a href="/retro/monsterboard/">MonSTerBoard</a> that handles IDE storage and Alt-RAM. It rounds out the machine as a true workstation: real internet via STinG, USB storage for file exchange, fast IDE boot from a CompactFlash card, and the ET4000 driving a dedicated monitor.</p>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.jungsi.de/retro-atari-st-netusbee/" target="_blank">NetUSBee [Atari ST] - Jungsi's Corner (installation guide)</a></li>
+<li><a href="https://lotharek.pl/productdetail.php?id=46" target="_blank">Netusbee - Lotharek (order page, firmware and drivers)</a></li>
+</ul>
+</div>
