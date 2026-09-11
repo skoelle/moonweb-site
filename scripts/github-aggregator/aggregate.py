@@ -14,7 +14,7 @@ import urllib.request
 GITHUB_USER = "skoelle"
 API_ROOT = "https://api.github.com"
 OUTPUT_PATH = os.path.join(
-    os.path.dirname(__file__), "..", "..", "code", "_data", "repos.json"
+    os.path.dirname(__file__), "..", "..", "_data", "repos.json"
 )
 
 
