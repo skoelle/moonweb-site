@@ -35,7 +35,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("retro/et4000-experiment/*.jpg");
 
   // Retro: STPSU page images + manual PDF
-  eleventyConfig.addPassthroughCopy("retro/stpsu/*.png");
   eleventyConfig.addPassthroughCopy("retro/stpsu/*.pdf");
 
   // Retro: page-specific photo galleries (MonSTerBoard, Gotek, Eiffel, STPSU)
