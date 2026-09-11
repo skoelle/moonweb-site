@@ -34,6 +34,10 @@ module.exports = function (eleventyConfig) {
   // Retro: ET4000 page images
   eleventyConfig.addPassthroughCopy("retro/et4000-experiment/*.jpg");
 
+  // Retro: STPSU page images + manual PDF
+  eleventyConfig.addPassthroughCopy("retro/stpsu/*.png");
+  eleventyConfig.addPassthroughCopy("retro/stpsu/*.pdf");
+
   // Root-level shared assets
   eleventyConfig.addPassthroughCopy({ "shared/base.css": "shared-base.css" });
   eleventyConfig.addPassthroughCopy({ "shared/favicon/hub.svg": "favicon.svg" });
