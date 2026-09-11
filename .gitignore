@@ -17,3 +17,4 @@ dist/
 *.swo
 timecapsule/_site/
 timecapsule/node_modules/
+.tmp/

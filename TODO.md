@@ -50,9 +50,9 @@ Alle moonweb.org Sites (hub, infra, smarthome, code, retro, timecapsule) unter `
 - [x] 4.2 Alten Workflow .github/workflows/build-deploy.yml entfernen
 - [ ] 4.3 Alten deploy-moonweb.yml in moonweb-www deaktivieren
 
-## Phase 5: Cloudflare Redirects (manuell nach Deploy)
+## Phase 5: Cloudflare Redirects
 
-- [ ] 5.1 Redirect-Regeln einrichten:
+- [x] 5.1 Redirect-Regeln einrichten (via GitHub Action)
 
 | Quell-Domain | Ziel-URL | Type |
 |-------------|----------|------|
@@ -61,6 +61,9 @@ Alle moonweb.org Sites (hub, infra, smarthome, code, retro, timecapsule) unter `
 | `smarthome.moonweb.org/*` | `https://www.moonweb.org/smarthome/$1` | 301 |
 | `code.moonweb.org/*` | `https://www.moonweb.org/code/$1` | 301 |
 | `retro.moonweb.org/*` | `https://www.moonweb.org/retro/$1` | 301 |
+
+**Umsetzung:** `scripts/cloudflare/setup-redirects.sh` + GitHub Action `cloudflare-redirects.yml`
+**Benötigte Secrets:** `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ZONE_ID`
 
 ## Phase 6: SEO
 
