@@ -66,7 +66,7 @@
 <body>
   <header class="site-header">
     <div class="site-banner">
-      <span class="site-title">{{ section }}.moonweb.org</span>
+      <span class="site-title">moonweb.org{% if section and section != 'hub' %}/{{ section }}{% endif %}</span>
     </div>
     <nav class="site-switcher">
       <a href="/">hub</a>
