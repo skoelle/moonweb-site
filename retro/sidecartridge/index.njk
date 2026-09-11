@@ -1,0 +1,34 @@
+---
+title: "SidecarTridge Multi-device: An Apps Platform in a Cartridge"
+section: "retro"
+tags: "retro"
+description: "How the SidecarTridge Multi-device turns the cartridge port of my Atari Mega ST 4 'Low' into an apps platform for floppy, hard disk, ROM and Wi-Fi."
+layout: base.njk
+parent: "/retro/"
+---
+<h1>SidecarTridge Multi-device: An Apps Platform in a Cartridge</h1>
+<div class="detail-content">
+
+<p>My <a href="/retro/atari-mega-st-fleet/">Mega ST 4 "Low"</a> machine uses a SidecarTridge Multi-device, a small board with a Raspberry Pi Pico W inside that plugs into the cartridge port and turns the Atari into an apps platform. It brings Wi-Fi and a microSD slot to the machine and runs a growing catalog of modular apps, no soldering and no internal mods required.</p>
+
+<h2>What it does</h2>
+<p>The SidecarTridge Multi-device works in any Atari ST, STE, Mega, TT or Falcon. A Raspberry Pi Pico W inside brings Wi-Fi and a microSD slot, and the board interacts with the cartridge bus in real time to emulate a range of devices:</p>
+<ul>
+<li><strong>ROM emulation</strong>, load 64K or 128K cartridge ROMs from microSD or over Wi-Fi and swap them on the fly.</li>
+<li><strong>Drives emulator</strong>, floppy and hard-disk emulation from a microSD card, so you can boot any image without a mechanical floppy drive.</li>
+<li><strong>Browser</strong>, search floppy images directly from the ST over Wi-Fi and boot them, with no PC in the middle.</li>
+<li><strong>MIDI-to-IP</strong>, bridge the ST's MIDI port to the internet, so networked MIDI works against players anywhere.</li>
+<li><strong>Real-time clock</strong>, plus other apps, all switchable without reflashing.</li>
+</ul>
+
+<h2>An apps platform, not just an emulator</h2>
+<p>Firmware V2 reworks the device into an apps platform. Instead of one fixed mode, it runs a catalog of modular apps you can switch between in seconds, with over-the-air updates and per-app configuration. The hardware and firmware are open source on GitHub, so the community keeps adding new apps and the Atari keeps gaining capabilities.</p>
+
+<h2>How it works</h2>
+<p>Setup takes about ten minutes. Slide the Multi-device into the cartridge port, power on, and on first boot it exposes its own SIDECART Wi-Fi network. You join it from a phone or laptop, pick your home Wi-Fi, and from then on the device joins your network automatically. Once connected it shows a QR code with its IP, which opens a web UI listing every installed app, and you pick what your ST should become. On the "Low" machine I use it for the ROM and floppy side of things, alongside the <a href="/retro/storm-cloudy/">Cloudy/Storm ST combo</a> and the Gotek for disk-image swapping.</p>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="https://sidecartridge.com/products/sidecartridge-multidevice-atari-st/" target="_blank">SidecarTridge Multi-device for Atari ST - official product page</a></li>
+</ul>
+</div>
