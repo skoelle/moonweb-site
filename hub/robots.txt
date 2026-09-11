@@ -2,8 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.moonweb.org/sitemap.xml
-Sitemap: https://www.moonweb.org/infra/sitemap.xml
-Sitemap: https://www.moonweb.org/smarthome/sitemap.xml
-Sitemap: https://www.moonweb.org/code/sitemap.xml
-Sitemap: https://www.moonweb.org/retro/sitemap.xml
 Sitemap: https://www.moonweb.org/timecapsule/sitemap.xml

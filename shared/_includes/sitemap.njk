@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{%- set sitemapPages = collections[sitemapCollection] if sitemapCollection else collections.all %}
-{%- for page in sitemapPages %}
+{%- for page in collections.all %}
   {%- if not page.url.includes("404") %}
   <url>
-    <loc>{{ site.url }}{{ pathPrefix }}{{ page.url }}</loc>
+    <loc>{{ site.url }}{{ page.url }}</loc>
     <lastmod>{{ page.date | date }}</lastmod>
     <changefreq>{% if page.url == "/" %}weekly{% else %}monthly{% endif %}</changefreq>
     <priority>{% if page.url == "/" %}1.0{% elif parent %}0.8{% else %}0.7{% endif %}</priority>

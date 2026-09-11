@@ -27,15 +27,13 @@ module.exports = function (eleventyConfig) {
   // Root-level shared assets
   eleventyConfig.addPassthroughCopy({ "shared/base.css": "shared-base.css" });
   eleventyConfig.addPassthroughCopy({ "shared/favicon/hub.svg": "favicon.svg" });
+  eleventyConfig.addPassthroughCopy({ "hub/robots.txt": "robots.txt" });
 
-  // Per-section assets: favicon, robots.txt
+  // Per-section assets: favicon
   for (const [section, cfg] of Object.entries(SITES)) {
     const prefix = cfg.pathPrefix || ".";
     eleventyConfig.addPassthroughCopy({
       [`shared/favicon/${section}.svg`]: `${prefix}/favicon.svg`,
-    });
-    eleventyConfig.addPassthroughCopy({
-      [`${section}/robots.txt`]: `${prefix}/robots.txt`,
     });
   }
 
