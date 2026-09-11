@@ -38,6 +38,12 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("retro/stpsu/*.png");
   eleventyConfig.addPassthroughCopy("retro/stpsu/*.pdf");
 
+  // Retro: page-specific photo galleries (MonSTerBoard, Gotek, Eiffel, STPSU)
+  eleventyConfig.addPassthroughCopy("retro/monsterboard/*.jpg");
+  eleventyConfig.addPassthroughCopy("retro/gotek/*.jpg");
+  eleventyConfig.addPassthroughCopy("retro/eiffel/*.jpg");
+  eleventyConfig.addPassthroughCopy("retro/stpsu/*.jpg");
+
   // Root-level shared assets
   eleventyConfig.addPassthroughCopy({ "shared/base.css": "shared-base.css" });
   eleventyConfig.addPassthroughCopy({ "shared/favicon/hub.svg": "favicon.svg" });
