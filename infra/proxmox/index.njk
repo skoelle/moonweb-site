@@ -14,7 +14,7 @@ layout: base.njk
 <h2>Hardware</h2>
 <ul>
 <li><strong>PVE (main server)</strong>, a Beelink S12 Pro, running as the primary Proxmox host. It has a 500GB SSD for VM and container storage, and connects to the network via the server-room Zyxel switch.</li>
-<li><strong>pve2 (test server)</strong>, a second Proxmox host, physically located in the study and connected via the OpenWRT-side Zyxel switch. It's dedicated purely to testing and development, running the third <a href="/infra/docker/">Docker host VM (docker-host-pve2)</a> plus experimental setups without risking the production environment.</li>
+<li><strong>pve2 (test server)</strong>, a second Proxmox host, physically located in the study and connected via the OpenWrt-side Zyxel switch. It's dedicated purely to testing and development, running the third <a href="/infra/docker/">Docker host VM (docker-host-pve2)</a> plus experimental setups without risking the production environment.</li>
 <li><strong>Backups</strong>, nightly VM backups from PVE run at 00:30 to an NFS share on the Synology (<code>nas:/volume1/backup</code>), with retention of the last 3 daily, 3 monthly and 1 yearly backup.</li>
 </ul>
 
