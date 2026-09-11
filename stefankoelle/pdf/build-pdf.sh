@@ -17,7 +17,6 @@ echo "==> Installing WeasyPrint..."
 pip install -q -r "$REQUIREMENTS"
 
 echo "==> Building stefankoelle with Eleventy..."
-# Temporarily hide .eleventyignore so the standalone stefankoelle build works
 IGNORE_FILE="$PROJECT_DIR/.eleventyignore"
 if [ -f "$IGNORE_FILE" ]; then
   mv "$IGNORE_FILE" "$IGNORE_FILE.bak"
