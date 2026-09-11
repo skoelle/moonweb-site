@@ -2,28 +2,29 @@
 title: "The Retro Corner Today: A Snapshot of the Whole Setup"
 section: "retro"
 tags: "retro"
-description: "A tour through every retro system currently active across the home, room by room."
+description: "A tour through every retro system currently in the home, which ones are set up and running, and which are boxed and ready to use."
 layout: base.njk
 parent: "/retro/"
 ---
 <h1>The Retro Corner Today: A Snapshot of the Whole Setup</h1>
 <div class="detail-content">
 
-<p>What started with childhood memories of an Atari ST and an Amiga 500 turned into a full-blown home retro-computing corner after 2020. Here's what's actually running right now, spread across two rooms plus a handful of portable devices.</p>
+<p>What started with childhood memories of an Atari ST and an Amiga 500 turned into a full-blown home retro-computing corner after 2020. Here's a snapshot of the whole setup, which machines are actually set up and running right now, and which are boxed and ready to use on demand.</p>
 
-<h2>Room by Room</h2>
+<h2>The study</h2>
+<p>The study holds the bulk of the serious gear. The <a href="/retro/mist-mister-fpga/">MiSTer FPGA</a> and the MiST FPGA are set up here, both connected to a NEC 1970NXp. The <a href="/retro/atari-mega-st-fleet/">Mega ST 4 "Low"</a> machine is set up and running on a Dell monitor that can handle 15kHz, serving as the demo- and game-machine.</p>
+<p>The rest of the Atari hardware is stored here but not set up, mainly for lack of space:</p>
 <ul>
-<li><strong>The office</strong>, home base for the serious gear: three <a href="/retro/atari-mega-st-fleet/">Atari Mega ST 4</a> machines plus a Mega ST 2, a <a href="/retro/mist-mister-fpga/">MiSTer FPGA</a> covering Amiga/DOS/arcade cores, and a MiST FPGA dedicated to Atari ST. A Raspberry Pi 400 running Hatari and <a href="/retro/pimiga-journey/">PiMiga</a> rounds things out as the flexible, high-resolution alternative to hardware that can't quite keep up on screen quality.</li>
-<li><strong>The living room</strong>, a <a href="/retro/batocera-living-room/">Batocera box</a> for casual, couch-friendly sessions across dozens of systems, from Atari ST to arcade to consoles, no FPGA timing precision required.</li>
-<li><strong>On the move</strong>, a small collection of <a href="/retro/mini-arcade-handheld-roundup/">handheld emulation devices</a> for retro gaming away from a screen.</li>
-<li><strong>The focus, unmistakably</strong>, Amiga and Atari ST are the heart of the collection; everything else (DOS, arcade, handhelds) exists to fill in the gaps around those two platforms. For how I run AmigaOS itself on modern hardware, see <a href="/retro/amiga-hardware-landscape/">MiSTer FPGA vs Amiberry</a>.</li>
+<li><strong>The Mega ST 4 "High"</strong>, the upgraded workstation, is boxed and can be set up on demand. It has its own EIZO monitor (1024×768) for the ET4000, and when I use it I set it up in the living room on the dining table.</li>
+<li><strong>The heirloom Mega ST 4</strong>, kept factory-original, is not set up.</li>
+<li><strong>The Mega ST 2</strong>, the spare and donor machine, is not set up.</li>
 </ul>
 
-<h2>The office setup in detail</h2>
-<p>The office houses the main retro computing workstation. The three <a href="/retro/atari-mega-st-fleet/">Mega ST 4</a> machines each have a defined role (see the <a href="/retro/atari-mega-st-fleet/">Mega ST fleet</a> for the full breakdown): one is kept as a factory-original heirloom reference, one is the modded demo- and game-machine, and one is the upgraded workstation running Geneva. The Mega ST 2 is the spare and donor machine. The <a href="/retro/mist-mister-fpga/">MiSTer FPGA</a> handles Amiga and DOS emulation with near-perfect timing accuracy, including my Amiga on the Minimig core (see <a href="/retro/amiga-modern-platforms/">how I run my Amiga today</a>), while the MiST provides a dedicated Atari ST experience without the overhead of the MiSTer's larger feature set.</p>
+<h2>The living room</h2>
+<p>The <a href="/retro/batocera-living-room/">Batocera box</a> is the couch-friendly setup for casual sessions across dozens of systems, no FPGA timing precision required. The Raspberry Pi 400 (running Hatari and <a href="/retro/pimiga-journey/">PiMiga</a>) also lives here, connected to a small NEC 18-inch monitor as the flexible, high-resolution alternative to the original hardware. The <a href="/retro/the-a1200/">A1200</a> console is on pre-order and will join this setup.</p>
 
-<h2>The living room setup</h2>
-<p>The Batocera box in the living room takes a completely different approach, it's not about hardware authenticity, it's about convenience. A compact PC boots directly into the Batocera frontend, providing a console-like experience for casual retro gaming on the TV. Controllers are wireless, the interface is controller-friendly, and the focus is on games that work well from a couch rather than demos or productivity software that needs a keyboard and mouse.</p>
+<h2>On the move</h2>
+<p>Outside the two rooms there's a small collection of <a href="/retro/mini-arcade-handheld-roundup/">handheld emulation devices</a> for retro gaming away from a screen.</p>
 
 <h2>How it all connects</h2>
 <p>All machines share the same network infrastructure, with FTP access to the NAS for file transfers. Disk images and software archives are stored centrally and served to individual machines as needed. The MiSTer and MiST both use SD cards for storage, while the original hardware uses CompactFlash adapters or SCSI-to-IDE bridges depending on the machine. The Raspberry Pi 400 accesses the same NFS shares as the other Pis in the flat.</p>
