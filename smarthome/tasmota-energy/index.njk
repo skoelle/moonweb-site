@@ -56,7 +56,7 @@ via Flux to display real-time and historical usage charts.</p>
 </ul>
 
 <h2>Air quality and climate data</h2>
-<p>The same InfluxDB instance also stores temperature and humidity readings from HomematicIP room sensors and ESP32 DHT22 devices. These feed the <a href="/air-quality/">air quality dashboard</a>, which visualizes 24-hour climate history across 10 rooms. The energy and climate data share the MQTT-to-InfluxDB pipeline but live in separate measurement categories, keeping power monitoring and environmental sensing cleanly separated.</p>
+<p>The same InfluxDB instance also stores temperature and humidity readings from HomematicIP room sensors and ESP32 DHT22 devices. These feed the <a href="/smarthome/air-quality/">air quality dashboard</a>, which visualizes 24-hour climate history across 10 rooms. The energy and climate data share the MQTT-to-InfluxDB pipeline but live in separate measurement categories, keeping power monitoring and environmental sensing cleanly separated.</p>
 
 <h2>Why Tasmota over alternatives</h2>
 <p>Tasmota was chosen over alternatives like ESPHome or Tuya firmware for
