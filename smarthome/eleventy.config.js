@@ -1,5 +1,5 @@
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addGlobalData("site", { url: "https://smarthome.moonweb.org" });
+  eleventyConfig.addGlobalData("site", { url: "https://www.moonweb.org" });
   eleventyConfig.addFilter("date", (d) => d.toISOString());
   eleventyConfig.addPassthroughCopy({ "shared/theme-smarthome.css": "theme.css" });
   eleventyConfig.addPassthroughCopy({ "shared/base.css": "shared-base.css" });

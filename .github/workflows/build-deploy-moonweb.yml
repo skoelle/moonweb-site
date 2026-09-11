@@ -1,0 +1,195 @@
+name: Build & Deploy moonweb.org
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'stefankoelle/**'
+      - '.github/workflows/deploy-stefankoelle.yml'
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - 'stefankoelle/**'
+      - '.github/workflows/deploy-stefankoelle.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "22"
+
+jobs:
+  build:
+    name: Build ${{ matrix.site }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        site: [hub, infra, smarthome, code, retro]
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build ${{ matrix.site }}
+        run: npm run build:${{ matrix.site }}
+
+      - name: Validate build output
+        run: |
+          if [ ! -d "dist/${{ matrix.site }}" ]; then
+            echo "Error: dist/${{ matrix.site }} not found"
+            exit 1
+          fi
+          if [ -z "$(ls -A dist/${{ matrix.site }} 2>/dev/null)" ]; then
+            echo "Error: dist/${{ matrix.site }} is empty"
+            exit 1
+          fi
+          echo "Build output:"
+          find dist/${{ matrix.site }} -type f | head -20
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist-${{ matrix.site }}
+          path: dist/${{ matrix.site }}
+          retention-days: 7
+
+  build-timecapsule:
+    name: Build timecapsule
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install timecapsule dependencies
+        run: cd timecapsule && npm ci
+
+      - name: Build timecapsule
+        run: npm run build:timecapsule
+
+      - name: Validate build output
+        run: |
+          if [ ! -d "dist/timecapsule" ]; then
+            echo "Error: dist/timecapsule not found"
+            exit 1
+          fi
+          if [ -z "$(ls -A dist/timecapsule 2>/dev/null)" ]; then
+            echo "Error: dist/timecapsule is empty"
+            exit 1
+          fi
+          echo "Build output:"
+          find dist/timecapsule -type f | head -20
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist-timecapsule
+          path: dist/timecapsule
+          retention-days: 7
+
+  merge:
+    name: Merge all sites
+    needs: [build, build-timecapsule]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v8
+        with:
+          path: artifacts/
+
+      - name: Merge into dist/
+        run: |
+          mkdir -p dist
+
+          # Hub becomes root
+          cp -r artifacts/dist-hub/* dist/
+
+          # Subdirectories
+          for site in infra smarthome code retro timecapsule; do
+            if [ -d "artifacts/dist-$site" ]; then
+              cp -r "artifacts/dist-$site" "dist/$site"
+            fi
+          done
+
+          # Copy shared CSS to root (accessible from all subdirectories)
+          cp shared/base.css dist/shared-base.css
+          cp shared/favicon/hub.svg dist/favicon.svg
+
+          echo "Final structure:"
+          find dist -maxdepth 2 -type f | sort | head -40
+          echo "..."
+          echo "Total files:"
+          find dist -type f | wc -l
+
+      - name: Upload merged artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist-moonweb-merged
+          path: dist/
+          retention-days: 7
+
+  deploy:
+    name: Deploy to IONOS
+    needs: merge
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Download merged artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: dist-moonweb-merged
+          path: dist/
+
+      - name: Deploy via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          local_path: './dist/*'
+          server: ${{ secrets.IONOS_SFTP_HOST }}
+          username: ${{ secrets.IONOS_SFTP_USER }}
+          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          remote_path: '/websites/moonweb/'
+          port: 22
+          sftp_only: true
+
+  summary:
+    name: Deploy Summary
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Print deployment summary
+        run: |
+          echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ needs.deploy.result }}" = "success" ]; then
+            echo "moonweb.org deployed successfully!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Deployment failed. Check the deploy jobs for details." >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Sites" >> $GITHUB_STEP_SUMMARY
+          echo "| Site | URL |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-----|" >> $GITHUB_STEP_SUMMARY
+          echo "| hub | https://www.moonweb.org/ |" >> $GITHUB_STEP_SUMMARY
+          echo "| infra | https://www.moonweb.org/infra/ |" >> $GITHUB_STEP_SUMMARY
+          echo "| smarthome | https://www.moonweb.org/smarthome/ |" >> $GITHUB_STEP_SUMMARY
+          echo "| code | https://www.moonweb.org/code/ |" >> $GITHUB_STEP_SUMMARY
+          echo "| retro | https://www.moonweb.org/retro/ |" >> $GITHUB_STEP_SUMMARY
+          echo "| timecapsule | https://www.moonweb.org/timecapsule/ |" >> $GITHUB_STEP_SUMMARY
+
+# Required repo secrets:
+#   IONOS_SFTP_HOST     — IONOS SFTP server hostname
+#   IONOS_SFTP_USER     — IONOS SFTP username
+#   IONOS_SFTP_PASSWORD — IONOS SFTP password

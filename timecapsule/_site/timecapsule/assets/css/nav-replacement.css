@@ -1,0 +1,104 @@
+/* Ersetzt den Bild-Hover-Tausch aus menu.js OHNE Javascript. */
+
+/* Fix: inline <img> in table cells with explicit height creates 2px baseline gap */
+table.quicknav-table img { display: block; }
+
+a.menu-item {
+  display: inline-block;
+  width: 76px;
+  height: 15px;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+
+a.menu-beginning {
+  background-image: url("/timecapsule/assets/menu/beginning.gif");
+}
+a.menu-beginning:hover {
+  background-image: url("/timecapsule/assets/menu/beginning_h.gif");
+}
+a.menu-beginning.active {
+  background-image: url("/timecapsule/assets/menu/beginning_a.gif");
+}
+
+a.menu-projects {
+  background-image: url("/timecapsule/assets/menu/projects.gif");
+}
+a.menu-projects:hover {
+  background-image: url("/timecapsule/assets/menu/projects_h.gif");
+}
+a.menu-projects.active {
+  background-image: url("/timecapsule/assets/menu/projects_a.gif");
+}
+
+a.menu-products {
+  background-image: url("/timecapsule/assets/menu/products.gif");
+}
+a.menu-products:hover {
+  background-image: url("/timecapsule/assets/menu/products_h.gif");
+}
+a.menu-products.active {
+  background-image: url("/timecapsule/assets/menu/products_a.gif");
+}
+
+a.menu-acoustics {
+  background-image: url("/timecapsule/assets/menu/acoustics.gif");
+}
+a.menu-acoustics:hover {
+  background-image: url("/timecapsule/assets/menu/acoustics_h.gif");
+}
+a.menu-acoustics.active {
+  background-image: url("/timecapsule/assets/menu/acoustics_a.gif");
+}
+
+a.menu-location {
+  background-image: url("/timecapsule/assets/menu/location.gif");
+}
+a.menu-location:hover {
+  background-image: url("/timecapsule/assets/menu/location_h.gif");
+}
+a.menu-location.active {
+  background-image: url("/timecapsule/assets/menu/location_a.gif");
+}
+
+a.menu-background {
+  background-image: url("/timecapsule/assets/menu/background.gif");
+}
+a.menu-background:hover {
+  background-image: url("/timecapsule/assets/menu/background_h.gif");
+}
+a.menu-background.active {
+  background-image: url("/timecapsule/assets/menu/background_a.gif");
+}
+
+a.menu-partners {
+  background-image: url("/timecapsule/assets/menu/partners.gif");
+}
+a.menu-partners:hover {
+  background-image: url("/timecapsule/assets/menu/partners_h.gif");
+}
+a.menu-partners.active {
+  background-image: url("/timecapsule/assets/menu/partners_a.gif");
+}
+
+a.menu-contact {
+  background-image: url("/timecapsule/assets/menu/contact.gif");
+}
+a.menu-contact:hover {
+  background-image: url("/timecapsule/assets/menu/contact_h.gif");
+}
+a.menu-contact.active {
+  background-image: url("/timecapsule/assets/menu/contact_a.gif");
+}
+
+
+/* Mobile: Navigation als Text statt Bilder */
+@media (max-width: 768px) {
+  a.menu-item {
+    background-image: none !important;
+    text-indent: 0 !important;
+    overflow: visible !important;
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "moonweb-timecapsule",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Timecapsule: 2000s retro moonweb.org website",
+  "scripts": {
+    "dev": "npx @11ty/eleventy --serve --port=8087",
+    "build": "npx @11ty/eleventy"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "markdown-it": "^14.1.0"
+  }
+}

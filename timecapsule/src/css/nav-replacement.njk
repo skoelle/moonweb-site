@@ -1,0 +1,38 @@
+---
+permalink: "/timecapsule/assets/css/nav-replacement.css"
+eleventyExcludeFromCollections: true
+---
+/* Ersetzt den Bild-Hover-Tausch aus menu.js OHNE Javascript. */
+
+/* Fix: inline <img> in table cells with explicit height creates 2px baseline gap */
+table.quicknav-table img { display: block; }
+
+a.menu-item {
+  display: inline-block;
+  width: 76px;
+  height: 15px;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+{% for group in nav %}{% for item in group %}
+a.menu-{{ item }} {
+  background-image: url("/timecapsule/assets/menu/{{ item }}.gif");
+}
+a.menu-{{ item }}:hover {
+  background-image: url("/timecapsule/assets/menu/{{ item }}_h.gif");
+}
+a.menu-{{ item }}.active {
+  background-image: url("/timecapsule/assets/menu/{{ item }}_a.gif");
+}
+{% endfor %}{% endfor %}
+
+/* Mobile: Navigation als Text statt Bilder */
+@media (max-width: 768px) {
+  a.menu-item {
+    background-image: none !important;
+    text-indent: 0 !important;
+    overflow: visible !important;
+  }
+}

@@ -1,0 +1,12 @@
+---
+permalink: "/timecapsule/sitemap.xml"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for page in collections.all %}{% if page.data.layout != "redirect.njk" and page.data.permalink != "/sitemap.xml" and page.url != "/404/" %}
+  <url>
+    <loc>{{ site.domain }}{{ page.url }}</loc>{% if page.data.lastChanged %}
+    <lastmod>{{ page.data.lastChanged | toIsoDate }}</lastmod>{% endif %}
+  </url>{% endif %}{% endfor %}
+</urlset>

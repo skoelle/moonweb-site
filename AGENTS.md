@@ -1,18 +1,19 @@
 # AGENTS.md — moonweb-site
 
-## Projektübersicht
+## Projektuebersicht
 
-Monorepo für 5 statische Websites unter moonweb.org + stefankoelle.de, basierend auf Eleventy (11ty).
+Monorepo fuer 6 statische Websites unter www.moonweb.org + stefankoelle.de, basierend auf Eleventy (11ty).
 
-### Websites (Cloudflare Pages)
+### Websites (IONOS SFTP)
 
-| Site | Domain | Zweck | Status |
-|------|--------|-------|--------|
-| hub | hub.moonweb.org | Zentrale Indexseite, verlinkt alles | Fertig |
-| infra | infra.moonweb.org | Infrastruktur-Übersicht (Proxmox, Synology, Netzwerk) | Übersicht + 3 Detailseiten |
-| smarthome | smarthome.moonweb.org | Smart Home Projekte und Dashboards | Übersicht + 6 Detailseiten |
-| code | code.moonweb.org | GitHub-Projekte (aggregiert via .moonweb.yml) | Fertig (14 Repos) |
-| retro | retro.moonweb.org | Physische Retro-Hardware | Nur Übersicht (WIP) |
+| Site | URL | Zweck | Status |
+|------|-----|-------|--------|
+| hub | www.moonweb.org/ | Zentrale Indexseite, verlinkt alles | Fertig |
+| infra | www.moonweb.org/infra/ | Infrastruktur-Uebersicht (Proxmox, Synology, Netzwerk) | Uebersicht + 8 Detailseiten |
+| smarthome | www.moonweb.org/smarthome/ | Smart Home Projekte und Dashboards | Uebersicht + 9 Detailseiten |
+| code | www.moonweb.org/code/ | GitHub-Projekte (aggregiert via .moonweb.yml) | Fertig |
+| retro | www.moonweb.org/retro/ | Physische Retro-Hardware | Uebersicht + 13 Detailseiten |
+| timecapsule | www.moonweb.org/timecapsule/ | 2000er Internet-Zeitkapsel (altes Design) | Fertig |
 
 ### Externe Sites (SFTP-Deployment)
 
@@ -22,19 +23,23 @@ Monorepo für 5 statische Websites unter moonweb.org + stefankoelle.de, basieren
 
 ### Andere Sites (nicht im Monorepo)
 
-- www.moonweb.org — 2000er Internet-Zeitkapsel
 - 28k8.moonweb.org — 90er BBS/Scene-Archiv
+- buildbroken.moonweb.org — .NET Open Space Blog Archiv
 
 ## Dateistruktur
 
 ```
 moonweb-site/
 ├── hub/                    # Eleventy-Config + index.njk
-├── infra/                  # Eleventy-Config + index.njk + 3 Subseiten
-├── smarthome/              # Eleventy-Config + index.njk + 6 Subseiten
+├── infra/                  # Eleventy-Config + index.njk + 8 Subseiten
+├── smarthome/              # Eleventy-Config + index.njk + 9 Subseiten
 ├── code/                   # Eleventy-Config + index.njk
 │   └── _data/repos.json
-├── retro/                  # Eleventy-Config + index.njk
+├── retro/                  # Eleventy-Config + index.njk + 13 Subseiten
+├── timecapsule/            # Eleventy 2.x (eigene Config)
+│   ├── eleventy.config.js
+│   ├── package.json
+│   └── src/                # 2001er Retro-Content
 ├── stefankoelle/           # Eleventy-Config + Onepager
 │   ├── eleventy.config.js
 │   ├── _includes/
@@ -52,10 +57,11 @@ moonweb-site/
 │   ├── base.css
 │   └── theme-*.css
 ├── scripts/
-│   └── github-aggregator/
+│   ├── github-aggregator/
+│   └── merge-moonweb.sh    # Merge-Skript fuer Deployment
 ├── .github/workflows/
-│   ├── build-deploy.yml            # CI/CD: Cloudflare Pages (5 Sites)
-│   └── deploy-stefankoelle.yml     # CI/CD: IONOS SFTP (stefankoelle.de)
+│   ├── build-deploy-moonweb.yml   # CI/CD: IONOS SFTP (www.moonweb.org)
+│   └── deploy-stefankoelle.yml    # CI/CD: IONOS SFTP (stefankoelle.de)
 ├── DESIGN.md
 ├── SPEC.md
 ├── PLAN.md
@@ -66,10 +72,11 @@ moonweb-site/
 
 ## Technischer Stack
 
-- **SSG:** Eleventy (11ty) v3.1.6
+- **SSG:** Eleventy (11ty) v3.1.6 (hub, infra, smarthome, code, retro)
+- **SSG:** Eleventy v2.0.1 (timecapsule - retro 2001 Design)
 - **Templates:** Nunjucks (.njk)
 - **CSS:** Variables-basiert mit Accent-Farben pro Site
-- **Deploy (moonweb):** Cloudflare Pages (5 separate Projects)
+- **Deploy (moonweb):** IONOS SFTP
 - **Deploy (stefankoelle):** IONOS SFTP
 - **CI/CD:** GitHub Actions (2 Workflows)
 
@@ -77,32 +84,54 @@ moonweb-site/
 
 ```bash
 npm install
-npm run prebuild             # Pre-Build Tasks (CV PDF generieren)
-npm run dev:hub              # localhost:8081
-npm run dev:infra            # localhost:8082
-npm run dev:smarthome        # localhost:8083
-npm run dev:code             # localhost:8084
-npm run dev:retro            # localhost:8085
-npm run dev:stefankoelle     # localhost:8086
-npm run build                # Alle Sites bauen
+cd timecapsule && npm install   # Timecapsule Dependencies
+npm run prebuild                # Pre-Build Tasks (CV PDF generieren)
+npm run dev:hub                 # localhost:8081
+npm run dev:infra               # localhost:8082
+npm run dev:smarthome           # localhost:8083
+npm run dev:code                # localhost:8084
+npm run dev:retro               # localhost:8085
+npm run dev:stefankoelle        # localhost:8086
+npm run dev:timecapsule         # localhost:8087
+npm run build                   # Alle Sites bauen
+npm run build:moonweb           # Nur moonweb Sites (ohne stefankoelle)
+npm run merge:moonweb           # Sites mergen fuer Deployment
 ```
 
 ## Design-Prinzipien
 
 1. **Header konsistent** — Identischer Site-Switcher auf allen Home-Sites
-2. **Content flexibel** — Detailseiten dürfen eigenes Layout haben
+2. **Content flexibel** — Detailseiten duerfen eigenes Layout haben
 3. **Accent-Farben:** hub=#3b6ea5, infra=#99333A, smarthome=#1f8a8a, code=#3E5098, retro=#8a6d3b
 4. **Englisch** — Alle Sites komplett auf Englisch
 5. **Keine Analytics** — Keine Tracking-Tools
-6. **Sensible Daten** — Infra-Content wird manuell redigiert (keine IPs, Keys, Passwörter)
+6. **Sensible Daten** — Infra-Content wird manuell redigiert (keine IPs, Keys, Passwoerter)
+
+## URL-Struktur
+
+Alle Sites sind unter `www.moonweb.org` als Subverzeichnisse erreichbar:
+- `www.moonweb.org/` — Hub (Root)
+- `www.moonweb.org/infra/` — Infra
+- `www.moonweb.org/smarthome/` — Smarthome
+- `www.moonweb.org/code/` — Code
+- `www.moonweb.org/retro/` — Retro
+- `www.moonweb.org/timecapsule/` — Timecapsule (2001 Design)
+- `www.moonweb.org/impressum/` — Impressum
+
+Cloudflare Redirects leiten alte Subdomains weiter:
+- `hub.moonweb.org/*` → `www.moonweb.org/*`
+- `infra.moonweb.org/*` → `www.moonweb.org/infra/*`
+- `smarthome.moonweb.org/*` → `www.moonweb.org/smarthome/*`
+- `code.moonweb.org/*` → `www.moonweb.org/code/*`
+- `retro.moonweb.org/*` → `www.moonweb.org/retro/*`
 
 ## stefankoelle.de
 
 - Eigene Eleventy-Config (nicht shared base.njk)
 - Eigenes CSS-Design (nicht moonweb design system)
 - Onepager mit Anchor-Links (bleibt so)
-- Deploy via SFTP auf IONOS `/deploy/stefankoelle/`
-- CV-Partial zentral pflegbar (einmal aendern → Web + PDF aktualisieren)
+- Deploy via SFTP auf IONOS `/websites/stefankoelle/`
+- CV-Partial zentral pflegbar (einmal aendern -> Web + PDF aktualisieren)
 - LED Matrix als eigene Seite unter stefankoelle.de/ledmatrix/
 
 ### CV PDF Generierung
@@ -116,7 +145,7 @@ npm run prebuild             # Alle Pre-Build Tasks (inkl. CV PDF)
 
 Dateien:
 - `stefankoelle/pdf/cv-style.css` — WeasyPrint-Stylesheet (A4, Typografie)
-- `stefankoelle/pdf/build-pdf.sh` — Shell-Skript für PDF-Generierung
+- `stefankoelle/pdf/build-pdf.sh` — Shell-Skript fuer PDF-Generierung
 - `stefankoelle/cv-print.njk` — Standalone HTML-Template (nur CV-Content)
 - `stefankoelle/pdf/cv.pdf` — Generiertes PDF (Output)
 
@@ -124,21 +153,22 @@ Wichtig: Das PDF wird via Eleventy-Passthrough ins Build-Output kopiert (`dist/s
 
 ### CSS Cache-Busting
 
-CSS-Dateien werden als Passthrough kopiert (kein Hash im Dateinamen). Bei CSS-Änderungen muss der Query-String in der `?v=N` Inkludierung erhöht werden:
+CSS-Dateien werden als Passthrough kopiert (kein Hash im Dateinamen). Bei CSS-Aenderungen muss der Query-String in der `?v=N` Inkludierung erhoeht werden:
 
 - `stefankoelle/index.njk`: `<link rel="stylesheet" href="/assets/style.css?v=N">`
 - `stefankoelle/ledmatrix/index.njk`: `<link rel="stylesheet" href="assets/style.css?v=N">`
 
-Bei jeder CSS-Anpassung `?v=N` um 1 erhöhen, sonst cached der Browser die alte Datei.
+Bei jeder CSS-Anpassung `?v=N` um 1 erhoehen, sonst cached der Browser die alte Datei.
 
 ## CI/CD
 
-### Cloudflare Pages (moonweb)
-`.github/workflows/build-deploy.yml` baut hub, infra, smarthome, code, retro.
+### IONOS SFTP (www.moonweb.org)
+`.github/workflows/build-deploy-moonweb.yml` baut alle moonweb Sites (hub, infra, smarthome, code, retro, timecapsule) und deployed per SFTP.
 
 Benötigte Secrets:
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
+- `IONOS_SFTP_HOST`
+- `IONOS_SFTP_USER`
+- `IONOS_SFTP_PASSWORD`
 
 ### IONOS SFTP (stefankoelle.de)
 `.github/workflows/deploy-stefankoelle.yml` baut stefankoelle.de und deployed per SFTP.
@@ -150,9 +180,11 @@ Benötigte Secrets:
 
 ## Offene Punkte
 
-- retro/ ist bewusst rudimentär gehalten
+- retro/ ist bewusst rudimentaer gehalten
 - Querverlinkungen stefankoelle.de <-> smarthome (zukuenftig)
 - Ledmatrix ggf. nach smarthome verschieben (when ready)
+- Cloudflare Redirects einrichten (nach Deploy)
+- Google Search Console: Neue Property www.moonweb.org
 
 ## GitHub Aggregator
 
@@ -191,10 +223,10 @@ python3 -m venv .venv
 
 ## Text / Stil
 
-- Keine Em-Dashes (—) verwenden, stattdessen umformulieren (Komma, Satzzeichen, neu formulieren)
+- Keine Em-Dashes verwenden, stattdessen umformulieren (Komma, Satzzeichen, neu formulieren)
 
 ## Python / pip
 
-- Niemals `pip install` direkt ausführen
+- Niemals `pip install` direkt ausfuehren
 - Immer ein virtuelles Umfeld (`.venv`) anlegen und darin arbeiten
 - `python3 -m venv .venv` im Projektverzeichnis
