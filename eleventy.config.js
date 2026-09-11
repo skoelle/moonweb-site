@@ -28,6 +28,9 @@ module.exports = function (eleventyConfig) {
 
   // --- Passthrough copies ---
 
+  // Retro: Storm ST / Cloudy ST page images
+  eleventyConfig.addPassthroughCopy("retro/storm-cloudy/*.jpg");
+
   // Root-level shared assets
   eleventyConfig.addPassthroughCopy({ "shared/base.css": "shared-base.css" });
   eleventyConfig.addPassthroughCopy({ "shared/favicon/hub.svg": "favicon.svg" });
