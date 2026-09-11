@@ -30,12 +30,11 @@ Monorepo fuer 6 statische Websites unter www.moonweb.org + stefankoelle.de, basi
 
 ```
 moonweb-site/
-├── hub/                    # Eleventy-Config + index.njk
-├── infra/                  # Eleventy-Config + index.njk + 8 Subseiten
-├── smarthome/              # Eleventy-Config + index.njk + 9 Subseiten
-├── code/                   # Eleventy-Config + index.njk
-│   └── _data/repos.json
-├── retro/                  # Eleventy-Config + index.njk + 13 Subseiten
+├── hub/                    # Index + Redirects (.htm) + impressum.njk
+├── infra/                  # Index.njk + 8 Subseiten
+├── smarthome/              # Index.njk + 9 Subseiten
+├── code/                   # Index.njk
+├── retro/                  # Index.njk + 13 Subseiten
 ├── timecapsule/            # Eleventy 2.x (eigene Config)
 │   ├── eleventy.config.js
 │   ├── package.json
@@ -53,15 +52,20 @@ moonweb-site/
 ├── shared/                 # Gemeinsame Komponenten
 │   ├── _includes/
 │   │   ├── base.njk        # Basis-Layout (Header, Site-Switcher, Footer)
-│   │   └── card-grid.njk   # Card-Grid Template
-│   ├── base.css
-│   └── theme-*.css
+│   │   ├── card-grid.njk   # Card-Grid Template
+│   │   └── sitemap.njk     # Zentrale Sitemap
+│   ├── base.css             # Shared CSS (Layout, Cards, Typografie)
+│   └── favicon/             # Favicon-SVGs pro Section
+├── _data/
+│   └── repos.json           # GitHub-Aggregator Output
 ├── scripts/
-│   ├── github-aggregator/
-│   └── merge-moonweb.sh    # Merge-Skript fuer Deployment
+│   ├── github-aggregator/   # Python: liest .moonweb.yml -> repos.json
+│   └── cloudflare/          # Redirect-Setup fuer alte Subdomains
 ├── .github/workflows/
 │   ├── build-deploy-moonweb.yml   # CI/CD: IONOS SFTP (www.moonweb.org)
 │   └── deploy-stefankoelle.yml    # CI/CD: IONOS SFTP (stefankoelle.de)
+├── eleventy.config.js       # Zentrale Eleventy-Config (alle moonweb Sites)
+├── .eleventyignore          # Schliesst stefankoelle/, timecapsule/ aus
 ├── DESIGN.md
 ├── SPEC.md
 ├── PLAN.md
@@ -72,10 +76,10 @@ moonweb-site/
 
 ## Technischer Stack
 
-- **SSG:** Eleventy (11ty) v3.1.6 (hub, infra, smarthome, code, retro)
+- **SSG:** Eleventy (11ty) v3.1.6 (hub, infra, smarthome, code, retro) - zentrale Config
 - **SSG:** Eleventy v2.0.1 (timecapsule - retro 2001 Design)
 - **Templates:** Nunjucks (.njk)
-- **CSS:** Variables-basiert mit Accent-Farben pro Site
+- **CSS:** Variables-basiert mit Accent-Farben (inlined in base.njk)
 - **Deploy (moonweb):** IONOS SFTP
 - **Deploy (stefankoelle):** IONOS SFTP
 - **CI/CD:** GitHub Actions (2 Workflows)
@@ -86,23 +90,20 @@ moonweb-site/
 npm install
 cd timecapsule && npm install   # Timecapsule Dependencies
 npm run prebuild                # Pre-Build Tasks (CV PDF generieren)
-npm run dev:hub                 # localhost:8081
-npm run dev:infra               # localhost:8082
-npm run dev:smarthome           # localhost:8083
-npm run dev:code                # localhost:8084
-npm run dev:retro               # localhost:8085
-npm run dev:stefankoelle        # localhost:8086
-npm run dev:timecapsule         # localhost:8087
-npm run build                   # Alle Sites bauen
-npm run build:moonweb           # Nur moonweb Sites (ohne stefankoelle)
-npm run merge:moonweb           # Sites mergen fuer Deployment
+npm run dev                     # Moonweb Sites (localhost:8081)
+npm run dev:stefankoelle        # stefankoelle.de (localhost:8086)
+npm run dev:timecapsule         # Timecapsule (localhost:8087)
+npm run build                   # Alle moonweb Sites
+npm run build:stefankoelle      # Nur stefankoelle
+npm run build:timecapsule       # Nur timecapsule
+npm run build:moonweb           # Moonweb + Timecapsule (fuer Deployment)
 ```
 
 ## Design-Prinzipien
 
 1. **Header konsistent** — Identischer Site-Switcher auf allen Home-Sites
 2. **Content flexibel** — Detailseiten duerfen eigenes Layout haben
-3. **Accent-Farben:** hub=#3b6ea5, infra=#99333A, smarthome=#1f8a8a, code=#3E5098, retro=#8a6d3b
+3. **Accent-Farben:** hub=#3b6ea5, infra=#99333A, smarthome=#1f8a8a, code=#3E5098, retro=#8a6d3b (inlined in base.njk)
 4. **Englisch** — Alle Sites komplett auf Englisch
 5. **Keine Analytics** — Keine Tracking-Tools
 6. **Sensible Daten** — Infra-Content wird manuell redigiert (keine IPs, Keys, Passwoerter)
@@ -188,7 +189,7 @@ Benötigte Secrets:
 
 ## GitHub Aggregator
 
-Das Skript `scripts/github-aggregator/aggregate.py` liest aus jedem public Repo unter `skoelle` die `.moonweb.yml` und generiert `code/_data/repos.json`.
+Das Skript `scripts/github-aggregator/aggregate.py` liest aus jedem public Repo unter `skoelle` die `.moonweb.yml` und generiert `_data/repos.json`.
 
 ### .moonweb.yml Format
 

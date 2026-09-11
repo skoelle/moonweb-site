@@ -1,87 +1,76 @@
-# TODO: Consolidation zu www.moonweb.org
+# TODO: moonweb-site
 
-## Uebersicht
+## Status: Consolidation Complete
 
-Alle moonweb.org Sites (hub, infra, smarthome, code, retro, timecapsule) unter `www.moonweb.org` als Subverzeichnisse vereinen. Deployment von Cloudflare Pages zu IONOS SFTP migrieren.
-
-**URL-Struktur nach Migration:**
-| URL | Inhalt |
-|-----|--------|
-| `www.moonweb.org/` | Hub (neue Root) |
-| `www.moonweb.org/infra/` | Infra |
-| `www.moonweb.org/smarthome/` | Smarthome |
-| `www.moonweb.org/code/` | Code |
-| `www.moonweb.org/retro/` | Retro |
-| `www.moonweb.org/timecapsule/` | Altes www (2001-Retro) |
-| `stefankoelle.de/` | CV (bleibt separat) |
+All moonweb.org sites are consolidated under `www.moonweb.org` as subdirectories, deployed via IONOS SFTP. PR #3 merged to main.
 
 ---
 
-## Phase 1: Timecapsule in Monorepo integrieren
+## Completed
 
-- [x] 1.1 Dateien aus ../moonweb-www/src/ nach timecapsule/src/ kopieren
-- [x] 1.2 timecapsule/eleventy.config.js erstellen (Eleventy 2.x)
-- [x] 1.3 timecapsule/package.json erstellen (eigene Dependencies)
-- [x] 1.4 timecapsule/src/_data/site.json anpassen (Domain mit /timecapsule/)
-- [x] 1.5 Alle internen Pfade mit /timecapsule/ prefixieren
-- [x] 1.6 Passthrough Copy in eleventy.config.js anpassen
-- [x] 1.7 Build-Output pruefen (dist/timecapsule/)
+### Phase 1: Timecapsule Integration
+- [x] Copy files from moonweb-www/src/ to timecapsule/src/
+- [x] Create timecapsule/eleventy.config.js (Eleventy 2.x)
+- [x] Create timecapsule/package.json (own dependencies)
+- [x] Adapt timecapsule internal paths with /timecapsule/ prefix
 
-## Phase 2: Eleventy-Configs aller Sites anpassen
+### Phase 2: Single Eleventy Config
+- [x] Create root eleventy.config.js with computed pathPrefix per section
+- [x] Delete 5 per-site eleventy.config.js files (hub, infra, smarthome, code, retro)
+- [x] Delete scripts/merge-moonweb.sh
+- [x] Update shared/_includes/base.njk (inlined accent colors, root CSS path)
+- [x] Update hub/index.njk card hrefs (relative paths)
+- [x] Update hub/impressum.njk (hosting sections correct)
+- [x] Update parent values in detail pages to include section prefix
+- [x] Add tags to all pages for Eleventy collections
 
-- [x] 2.1 hub/eleventy.config.js: site.url auf www.moonweb.org
-- [x] 2.2 infra/eleventy.config.js: site.url auf www.moonweb.org
-- [x] 2.3 smarthome/eleventy.config.js: site.url auf www.moonweb.org
-- [x] 2.4 code/eleventy.config.js: site.url auf www.moonweb.org
-- [x] 2.5 retro/eleventy.config.js: site.url auf www.moonweb.org
-- [x] 2.6 shared/_includes/base.njk anpassen
-- [x] 2.7 hub/index.njk: Card-Hrefs relativieren
-- [x] 2.8 hub/impressum.njk: Domain-Liste aktualisieren
+### Phase 3: Build & Deploy
+- [x] Create .github/workflows/build-deploy-moonweb.yml (single build job, SFTP deploy)
+- [x] Delete old build-deploy.yml (matrix builds)
+- [x] Update .eleventyignore (exclude stefankoelle/, timecapsule/, markdown)
+- [x] Fix build-pdf.sh to temporarily rename .eleventyignore for stefankoelle build
+- [x] Fix timecapsule build path (../dist/ not ../../dist/)
 
-## Phase 3: Build-System anpassen
+### Phase 4: Redirects & SEO
+- [x] Create 20 redirect .htm files in hub/ for old www.moonweb.org paths
+- [x] Create central sitemap.xml (36 pages)
+- [x] Create single robots.txt at root
+- [x] Set up Cloudflare redirect rules script (scripts/cloudflare/)
 
-- [x] 3.1 package.json: Neue Scripts fuer timecapsule + merge
-- [x] 3.2 scripts/merge-moonweb.sh erstellen
-- [x] 3.3 Lokal Build testen (alle Sites)
+### Phase 5: Bug Fixes
+- [x] Fix card links on index pages (add section prefix to local hrefs)
+- [x] Fix code repos missing (move repos.json to root _data/)
+- [x] Fix favicons (use section-specific favicon.svg per site)
+- [x] Fix header (show moonweb.org/smarthome instead of smarthome.moonweb.org)
+- [x] Rename hub link to home in site-switcher nav
+- [x] Remove redundant 404 pages, keep only root 404
+- [x] Add missing beginning subpage redirects (news, report, sitemap)
+- [x] Fix double-slash URLs in stefankoelle/index.njk
+- [x] Remove unused theme-*.css files
+- [x] Update stefankoelle link texts (replace old subdomain names with new paths)
 
-## Phase 4: Deployment umstellen
-
-- [x] 4.1 Neuen Workflow .github/workflows/build-deploy-moonweb.yml erstellen
-- [x] 4.2 Alten Workflow .github/workflows/build-deploy.yml entfernen
-- [ ] 4.3 Alten deploy-moonweb.yml in moonweb-www deaktivieren
-
-## Phase 5: Cloudflare Redirects
-
-- [x] 5.1 Redirect-Regeln einrichten (via GitHub Action)
-
-| Quell-Domain | Ziel-URL | Type |
-|-------------|----------|------|
-| `hub.moonweb.org/*` | `https://www.moonweb.org/$1` | 301 |
-| `infra.moonweb.org/*` | `https://www.moonweb.org/infra/$1` | 301 |
-| `smarthome.moonweb.org/*` | `https://www.moonweb.org/smarthome/$1` | 301 |
-| `code.moonweb.org/*` | `https://www.moonweb.org/code/$1` | 301 |
-| `retro.moonweb.org/*` | `https://www.moonweb.org/retro/$1` | 301 |
-
-**Umsetzung:** `scripts/cloudflare/setup-redirects.sh` + GitHub Action `cloudflare-redirects.yml`
-**Benötigte Secrets:** `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ZONE_ID`
-
-## Phase 6: SEO
-
-- [ ] 6.1 Google Search Console: Neue Property www.moonweb.org
-- [ ] 6.2 Sitemap submiten
-
-## Phase 7: Cleanup
-
-- [ ] 7.1 moonweb-www Repository archivieren
-- [ ] 7.2 Cloudflare Pages Projects loeschen (nach Redirect-Test)
+### Phase 6: Documentation
+- [x] Update AGENTS.md for new structure
+- [x] Update README.md for new structure
+- [x] Update SPEC.md for new structure
+- [x] Update PLAN.md for new structure
 
 ---
 
-## Abgeschlossen
+## Remaining
 
-Alle Code-Aenderungen sind fertig. Nächste Schritte:
-1. Commit auf feature/consolidate-www Branch
-2. Push und PR erstellen
-3. Deployen
-4. Cloudflare Redirects einrichten
-5. Google Search Console aktualisieren
+### Cloudflare Redirects
+- [ ] Activate redirect rules (needs `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ZONE_ID` secrets, or manual dashboard setup)
+- [ ] Verify redirects work after activation
+
+### SEO
+- [ ] Create Google Search Console property for www.moonweb.org
+- [ ] Submit sitemap
+
+### Cleanup
+- [ ] Archive moonweb-www repository
+- [ ] Delete Cloudflare Pages projects (after redirect verification)
+
+### Future
+- [ ] Cross-linking stefankoelle.de <-> smarthome
+- [ ] Consider moving LED Matrix to smarthome (when ready)

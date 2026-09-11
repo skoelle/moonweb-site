@@ -21,21 +21,26 @@ stefankoelle.de            -> CV, career, personal site (LED Matrix docs)
 ```
 +-------------------------------------------------------------------+
 |                     GitHub Actions CI                              |
-|  +-----------+ +------------+ +-------------+ +---------+ +------+ |
-|  | build:hub | |build:infra | | build:smart | | build:... | | build:timecapsule | |
-|  +-----+-----+ +-----+------+ +------+------+ +----+----+ +----+----+ +--------+ |
-|        |             |               |             |        |          |        |
-|        v             v               v              v        v          v        |
-|   dist/hub/    dist/infra/   dist/smarthome/    dist/.../  dist/timecapsule/     |
-+--------+---------------------------------------------------+--------------------+
-         |                                                   |
-         v                                                   v
-+------------------+                               +------------------+
-|    IONOS SFTP    |                               |    IONOS SFTP    |
-| (www.moonweb.org)|                               | (stefankoelle.de)|
-+--------+---------+                               +--------+---------+
-         v                                                   v
-  www.moonweb.org/*                              stefankoelle.de
+|  +-------------------+  +---------------------+                   |
+|  | build-deploy-     |  | deploy-stefankoelle |                   |
+|  | moonweb           |  |                     |                   |
+|  +--------+----------+  +----------+----------+                   |
+|           |                        |                               |
+|           v                        v                               |
+|    npm run build            npm run build:stefankoelle             |
+|    + build:timecapsule                                        |                   |
+|           |                        |                               |
+|           v                        v                               |
+|      dist/                  dist/stefankoelle/                    |
++-----------+------------------------+-------------------------------+
+            |                        |
+            v                        v
++------------------+       +------------------+
+|    IONOS SFTP    |       |    IONOS SFTP    |
+| (www.moonweb.org)|       | (stefankoelle.de)|
++--------+---------+       +--------+---------+
+         v                          v
+  www.moonweb.org/*         stefankoelle.de
 ```
 
 ---
@@ -47,9 +52,9 @@ stefankoelle.de            -> CV, career, personal site (LED Matrix docs)
 | **SSG** | [Eleventy 3.1.6](https://www.11ty.dev/) | Markdown/YAML-first, minimal JS, `_data` folders map directly to aggregator output |
 | **SSG (timecapsule)** | [Eleventy 2.0.1](https://www.11ty.dev/) | Legacy 2001 design, CommonJS config |
 | **Templates** | [Nunjucks](https://mozilla.github.io/nunjucks/) | Shared `base.njk` layout with site-switcher header, `card-grid.njk` for index pages |
-| **Styling** | Custom CSS (variables-based) | `base.css` for shared layout, `theme-*.css` per domain accent color |
+| **Styling** | Custom CSS (variables-based) | `base.css` for shared layout, accent colors inlined in `base.njk` |
 | **Fonts** | [Lobster](https://fonts.google.com/specimen/Lobster) (Google Fonts) | Distinctive heading font across all sites |
-| **CI/CD** | [GitHub Actions](https://github.com/features/actions) | Matrix build for all sites, artifact upload, merge step, parallel deploy |
+| **CI/CD** | [GitHub Actions](https://github.com/features/actions) | Single build job, parallel SFTP deploy |
 | **Deploy** | IONOS SFTP | Static hosting via SFTP upload |
 | **DNS** | Cloudflare | DNS management + redirects from old subdomains |
 | **GitHub Catalog** | Python aggregator | Reads `.moonweb.yml` from each repo, outputs `repos.json` |
@@ -63,27 +68,19 @@ stefankoelle.de            -> CV, career, personal site (LED Matrix docs)
 npm install                        # install Eleventy + deps
 cd timecapsule && npm install      # timecapsule has own deps (Eleventy 2.x)
 
-npm run dev:hub                    # http://localhost:8081
-npm run dev:infra                  # http://localhost:8082
-npm run dev:smarthome              # http://localhost:8083
-npm run dev:code                   # http://localhost:8084
-npm run dev:retro                  # http://localhost:8085
-npm run dev:stefankoelle           # http://localhost:8086
-npm run dev:timecapsule            # http://localhost:8087
-
-npm run dev                        # all 7 in parallel
+npm run dev                        # moonweb sites (localhost:8081)
+npm run dev:stefankoelle           # stefankoelle.de (localhost:8086)
+npm run dev:timecapsule            # timecapsule (localhost:8087)
 ```
-
-Each site has its own minimal Eleventy config (`<site>/eleventy.config.js`). Live reload is built in.
 
 ### Build
 
 ```bash
 npm run prebuild                     # pre-build tasks (CV PDF)
-npm run build                        # builds all sites
-npm run build:moonweb                # builds moonweb sites only (excludes stefankoelle)
-npm run build:hub                    # build single site
-npm run merge:moonweb                # merge all moonweb sites into dist/ for deployment
+npm run build                        # builds all moonweb sites (hub, infra, smarthome, code, retro)
+npm run build:stefankoelle           # builds stefankoelle.de
+npm run build:timecapsule            # builds timecapsule
+npm run build:moonweb                # builds moonweb + timecapsule (for deployment)
 ```
 
 ---
@@ -92,18 +89,10 @@ npm run merge:moonweb                # merge all moonweb sites into dist/ for de
 
 ```
 moonweb-site/
-├── hub/                          # Central index & gateway
+├── hub/                          # Central index + redirect .htm files
 ├── infra/                        # Infra overview + 8 detail pages
-│   ├── backup-strategy/
-│   ├── monitoring/
-│   ├── dev-environment/
-│   └── ...
 ├── smarthome/                    # Smart home overview + 9 detail pages
-│   ├── homematic-mqtt/
-│   ├── tasmota-energy/
-│   └── ...
 ├── code/                         # GitHub catalog
-│   └── _data/repos.json          # populated by the aggregator
 ├── retro/                        # Retro hardware + 13 detail pages
 ├── timecapsule/                  # 2000s retro design (Eleventy 2.x)
 │   ├── eleventy.config.js
@@ -111,27 +100,32 @@ moonweb-site/
 │   └── src/
 ├── stefankoelle/                 # CV, career, personal site
 │   ├── eleventy.config.js
-│   ├── index.njk                 # Onepager (CV, Projects, Languages)
-│   ├── cv-print.njk              # CV-only for PDF generation
-│   ├── ledmatrix/                # LED Matrix WebServer documentation
-│   └── assets/                   # CSS, JS, images, favicons
+│   ├── index.njk
+│   ├── cv-print.njk
+│   ├── ledmatrix/
+│   └── assets/
 ├── shared/                       # Shared components
 │   ├── _includes/
 │   │   ├── base.njk              # base layout (header, site-switcher, footer)
-│   │   └── card-grid.njk         # card-grid template with emoji support
-│   ├── base.css                  # shared CSS (layout, cards, typography)
-│   └── theme-*.css               # accent colors per domain
+│   │   ├── card-grid.njk         # card-grid template
+│   │   └── sitemap.njk           # central sitemap template
+│   ├── base.css                  # shared CSS
+│   └── favicon/                  # favicon SVGs per section
+├── _data/
+│   └── repos.json                # populated by the GitHub aggregator
 ├── scripts/
 │   ├── github-aggregator/        # Python: reads .moonweb.yml -> repos.json
-│   └── merge-moonweb.sh          # Merge script for deployment
+│   └── cloudflare/               # redirect setup for old subdomains
 ├── .github/workflows/
-│   ├── build-deploy-moonweb.yml  # CI/CD: build + deploy to IONOS SFTP
-│   └── deploy-stefankoelle.yml   # CI/CD: stefankoelle.de to IONOS SFTP
-├── DESIGN.md                     # Initial concept
-├── SPEC.md                       # Full specification
-├── PLAN.md                       # Implementation plan
-├── TODO.md                       # Open items & workflow
-└── package.json                  # npm scripts for dev/build
+│   ├── build-deploy-moonweb.yml  # CI/CD: IONOS SFTP (www.moonweb.org)
+│   └── deploy-stefankoelle.yml   # CI/CD: IONOS SFTP (stefankoelle.de)
+├── eleventy.config.js            # single config for all moonweb sites
+├── .eleventyignore               # excludes stefankoelle/, timecapsule/
+├── DESIGN.md
+├── SPEC.md
+├── PLAN.md
+├── TODO.md
+└── package.json
 ```
 
 ---
@@ -145,24 +139,12 @@ Defined in `.github/workflows/build-deploy-moonweb.yml`:
 ```
 push to main
     |
-    +-- Build (matrix: hub, infra, smarthome, code, retro)
+    +-- Build
     |   +-- checkout -> setup-node (22) -> npm ci
-    |   +-- npm run build:<site>
-    |   +-- validate dist/<site>/ exists & non-empty
-    |   +-- upload artifact (7-day retention)
-    |
-    +-- Build timecapsule
-    |   +-- cd timecapsule && npm ci
+    |   +-- npm run build (all moonweb sites in one Eleventy run)
     |   +-- npm run build:timecapsule
-    |   +-- upload artifact
-    |
-    +-- Merge
-    |   +-- download all artifacts
-    |   +-- merge into dist/ (hub=root, others=subdirs)
-    |   +-- upload merged artifact
     |
     +-- Deploy
-        +-- download merged artifact
         +-- SFTP upload to IONOS /websites/moonweb/
 ```
 
@@ -223,7 +205,7 @@ Cloudflare redirects forward old subdomains:
 2. Reads `.moonweb.yml` from each repo root
 3. Filters for `category: code` entries
 4. Sorts by subcategory + title
-5. Writes combined result to `code/_data/repos.json`
+5. Writes combined result to `_data/repos.json`
 
 ### `.moonweb.yml` schema
 
@@ -241,8 +223,9 @@ repo_url: "https://github.com/skoelle/mvg-departures"
 ### Manual run
 
 ```bash
-export GITHUB_TOKEN=ghp_xxx
-python scripts/github-aggregator/aggregate.py
+python3 -m venv .venv
+.venv/bin/pip install pyyaml
+.venv/bin/python scripts/github-aggregator/aggregate.py
 ```
 
 ---
@@ -276,6 +259,7 @@ All moonweb sites are written **entirely in English**. The timecapsule uses the 
 | `PLAN.md` | Phased implementation plan |
 | `TODO.md` | Open items, workflow, and current status |
 | `README.md` | This file - project overview for GitHub |
+| `AGENTS.md` | AI agent instructions for this codebase |
 
 ---
 
