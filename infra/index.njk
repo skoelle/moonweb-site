@@ -41,7 +41,7 @@ sections:
 
 <section class="about-expanded">
   <h2>The setup at a glance</h2>
-  <p>The infrastructure runs on three main machines: a Proxmox VE host (Beelink S12 Pro, 32GB RAM) as the primary compute node, a Synology DS918+ NAS for storage and Docker services, and a Xubuntu VM on Proxmox for development. An OpenWrt router handles multi-WAN failover with WiFi and Powerline backhaul, and four Zyxel GS1200-8HP managed switches distribute the network across the flat.</p>
+  <p>The infrastructure runs on three physical machines: a Beelink S12 Pro running Proxmox as the primary host, a second Beelink running Proxmox as a test host, and a Synology DS918+ NAS for storage and Docker services. Development runs in a Xubuntu VM on the Proxmox hosts. An OpenWrt router handles multi-WAN failover with WiFi and Powerline backhaul, and four Zyxel GS1200-8HP managed switches distribute the network across the flat.</p>
   <p>The whole stack is monitored via Prometheus and Grafana, with node exporters on every machine, cAdvisor for container metrics, and SNMP exporters for network hardware. Backups follow a layered strategy: local snapshots, NAS copies, offsite sync to a Raspberry Pi in a different room, and cloud archive for worst-case scenarios.</p>
 
   <h2>Why Proxmox</h2>
