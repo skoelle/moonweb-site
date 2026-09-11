@@ -1,0 +1,40 @@
+---
+title: "Gotek Floppy Emulator: USB Stick Drive for the Atari ST"
+section: "retro"
+tags: "retro"
+description: "Using cheap Gotek floppy emulator clones with HxC firmware to replace floppy drives with USB stick images on the Atari Mega ST."
+layout: base.njk
+parent: "/retro/"
+---
+<h1>Gotek Floppy Emulator: USB Stick Drive for the Atari ST</h1>
+<div class="detail-content">
+
+<p>Floppy drives and disks get unreliable after decades, so I picked up two cheap Gotek floppy emulator clones from AliExpress and followed the guides to bring USB stick disk images to the Atari. One is installed in my <a href="/retro/atari-mega-st-fleet/">Mega ST 4 "Low"</a>, the other is still unbuilt.</p>
+
+<h2>What a Gotek is</h2>
+<p>A Gotek is a cheap floppy drive emulator sold by the Chinese company of the same name, available in many variants on AliExpress, eBay and Amazon for around 20 Euro. To the Atari it looks like a normal floppy drive, but the disk data actually lives as disk-image files on a USB stick. That makes it easy to archive and preserve many old disks in little space, and to exchange data with a modern PC.</p>
+
+<h2>The HxC firmware upgrade</h2>
+<p>On their own, stock Gotek drives are of limited use on the Atari. The trick is to flash them with <a href="https://hxc2001.com/floppy_drive_emulator/" target="_blank">Jean-François del Nero's HxC firmware</a>, which dramatically expands their capabilities and makes them properly usable with the ST. Installing it involves flashing a new bootloader over a serial connection, then the firmware itself is loaded from the USB stick. The full steps are covered in the <a href="https://www.chzsoft.de/site/hardware/usb-stick-floppy-emulator-am-atari-st/" target="_blank">CHZ-Soft guide</a> and the <a href="https://www.jungsi.de/hxc-floppy-emulator-hardware/" target="_blank">HxC overview on Jungsi's Corner</a>.</p>
+
+<h2>Modes and image formats</h2>
+<p>The HxC firmware reads disk images in HFE format, a bit-for-bit copy of a disk's magnetisation that can even emulate unusual floppy formats. The emulator can run in several modes:</p>
+<ul>
+<li><strong>Indexed mode</strong>, loads files like DSKA0000.HFE, DSKA0001.HFE from the stick's root, selected with the drive's buttons.</li>
+<li><strong>Autoboot mode</strong>, offers 16 image slots, with slot 0 holding the AUTOBOOT.HFE configuration program.</li>
+<li><strong>File selector mode</strong>, needs an extra LCD display to browse and select images directly.</li>
+</ul>
+<p>Using the HxC software you can convert common Atari ST, MSA and other disk formats into HFE, create new images, and transfer files between the images and a PC. Always use double-density (DD) recording for the ST, and set the interface mode to Atari ST.</p>
+
+<h2>Installation</h2>
+<p>For the drive to work in the Atari, it has to be jumpered to drive select 0 (S0). Whether it runs as internal drive A: or external drive B:, the wiring inside a floppy station uses the usual power and data cables, though the data cable isn't keyed, so check pin 1. The front bezel of the floppy station may need cutting out to fit the emulator mechanically.</p>
+
+<h2>My Setup</h2>
+<p>One of the Gotek emulators is installed in my Mega ST 4 "Low" machine, giving it reliable disk-image storage on a USB stick alongside the <a href="/retro/storm-cloudy/">Cloudy/Storm ST combo</a>, the <a href="/retro/sidecartridge/">SidecarTridge</a> and the <a href="/retro/atari-networking-bbs/">Wi-Fi modem</a>. The second Gotek is still unbuilt, waiting to go into another machine or to serve as a spare.</p>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.chzsoft.de/site/hardware/usb-stick-floppy-emulator-am-atari-st/" target="_blank">USB-Stick-Floppy-Emulator am Atari ST - CHZ-Soft (installation guide)</a></li>
+<li><a href="https://www.jungsi.de/hxc-floppy-emulator-hardware/" target="_blank">HxC Floppy Emulator [Retro] - Jungsi's Corner</a></li>
+</ul>
+</div>
