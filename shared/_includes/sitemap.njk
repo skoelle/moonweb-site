@@ -3,7 +3,7 @@
 {%- for page in collections.all %}
   {%- if not page.url.includes("404") %}
   <url>
-    <loc>{{ site.url }}{{ page.url }}</loc>
+    <loc>{{ site.url }}{{ site.pathPrefix | default("") }}{{ page.url }}</loc>
     <lastmod>{{ page.date | date }}</lastmod>
     <changefreq>{% if page.url == "/" %}weekly{% else %}monthly{% endif %}</changefreq>
     <priority>{% if page.url == "/" %}1.0{% elif parent %}0.8{% else %}0.7{% endif %}</priority>

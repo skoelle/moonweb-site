@@ -1,5 +1,5 @@
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addGlobalData("site", { url: "https://www.moonweb.org" });
+  eleventyConfig.addGlobalData("site", { url: "https://www.moonweb.org", pathPrefix: "/infra" });
   eleventyConfig.addFilter("date", (d) => d.toISOString());
   eleventyConfig.addPassthroughCopy({ "shared/theme-infra.css": "theme.css" });
   eleventyConfig.addPassthroughCopy({ "shared/base.css": "shared-base.css" });
