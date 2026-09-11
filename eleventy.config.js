@@ -76,6 +76,12 @@ module.exports = function (eleventyConfig) {
       [`hub/${dir}/index.htm`]: `${dir}/index.html`,
     });
   }
+  const beginningSubpages = ["news", "report", "sitemap"];
+  for (const name of beginningSubpages) {
+    eleventyConfig.addPassthroughCopy({
+      [`hub/beginning/${name}.htm`]: `beginning/${name}.html`,
+    });
+  }
 
   return {
     dir: {
