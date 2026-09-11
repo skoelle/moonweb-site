@@ -1,0 +1,17 @@
+stefankoelle/
+timecapsule/
+scripts/
+.tmp/
+
+# Root markdown files (not templates)
+/*.md
+
+# Hub static redirect files (handled by passthrough copy)
+hub/hardware.html
+hub/users.html
+hub/index2.html
+hub/index3.html
+hub/new.html
+hub/links.html
+hub/infos.html
+hub/start.html

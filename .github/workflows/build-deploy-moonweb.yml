@@ -21,12 +21,8 @@ env:
 
 jobs:
   build:
-    name: Build ${{ matrix.site }}
+    name: Build moonweb sites
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        site: [hub, infra, smarthome, code, retro]
     steps:
       - uses: actions/checkout@v7
 
@@ -38,118 +34,45 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build ${{ matrix.site }}
-        run: npm run build:${{ matrix.site }}
-
-      - name: Validate build output
-        run: |
-          if [ ! -d "dist/${{ matrix.site }}" ]; then
-            echo "Error: dist/${{ matrix.site }} not found"
-            exit 1
-          fi
-          if [ -z "$(ls -A dist/${{ matrix.site }} 2>/dev/null)" ]; then
-            echo "Error: dist/${{ matrix.site }} is empty"
-            exit 1
-          fi
-          echo "Build output:"
-          find dist/${{ matrix.site }} -type f | head -20
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: dist-${{ matrix.site }}
-          path: dist/${{ matrix.site }}
-          retention-days: 7
-
-  build-timecapsule:
-    name: Build timecapsule
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-
-      - uses: actions/setup-node@v7
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install timecapsule dependencies
-        run: cd timecapsule && npm ci
+      - name: Build all moonweb sites
+        run: npm run build
 
       - name: Build timecapsule
         run: npm run build:timecapsule
 
       - name: Validate build output
         run: |
-          if [ ! -d "dist/timecapsule" ]; then
-            echo "Error: dist/timecapsule not found"
-            exit 1
-          fi
-          if [ -z "$(ls -A dist/timecapsule 2>/dev/null)" ]; then
-            echo "Error: dist/timecapsule is empty"
-            exit 1
-          fi
           echo "Build output:"
-          find dist/timecapsule -type f | head -20
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: dist-timecapsule
-          path: dist/timecapsule
-          retention-days: 7
-
-  merge:
-    name: Merge all sites
-    needs: [build, build-timecapsule]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-
-      - name: Download all artifacts
-        uses: actions/download-artifact@v8
-        with:
-          path: artifacts/
-
-      - name: Merge into dist/
-        run: |
-          mkdir -p dist
-
-          # Hub becomes root
-          cp -r artifacts/dist-hub/* dist/
-
-          # Subdirectories
-          for site in infra smarthome code retro timecapsule; do
-            if [ -d "artifacts/dist-$site" ]; then
-              cp -r "artifacts/dist-$site" "dist/$site"
-            fi
-          done
-
-          # Copy shared CSS to root (accessible from all subdirectories)
-          cp shared/base.css dist/shared-base.css
-          cp shared/favicon/hub.svg dist/favicon.svg
-
-          echo "Final structure:"
           find dist -maxdepth 2 -type f | sort | head -40
           echo "..."
           echo "Total files:"
           find dist -type f | wc -l
 
-      - name: Upload merged artifact
+          # Verify key directories exist
+          for dir in "" infra smarthome code retro timecapsule; do
+            if [ -n "$dir" ] && [ ! -d "dist/$dir" ]; then
+              echo "Error: dist/$dir not found"
+              exit 1
+            fi
+          done
+
+      - name: Upload build artifact
         uses: actions/upload-artifact@v7
         with:
-          name: dist-moonweb-merged
+          name: dist-moonweb
           path: dist/
           retention-days: 7
 
   deploy:
     name: Deploy to IONOS
-    needs: merge
+    needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
-      - name: Download merged artifact
+      - name: Download build artifact
         uses: actions/download-artifact@v8
         with:
-          name: dist-moonweb-merged
+          name: dist-moonweb
           path: dist/
 
       - name: Deploy via SFTP
