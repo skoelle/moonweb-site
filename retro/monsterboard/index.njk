@@ -1,0 +1,49 @@
+---
+title: "The MonSTerBoard: Alt-RAM, IDE and Flashable TOS for the Mega ST"
+section: "retro"
+tags: "retro"
+description: "How the MonSTerBoard adds 8 MB of TT-RAM, dual IDE and flashable TOS to my Atari Mega ST 4 'High' workstation."
+layout: base.njk
+parent: "/retro/"
+---
+<h1>The MonSTerBoard: Alt-RAM, IDE and Flashable TOS for the Mega ST</h1>
+<div class="detail-content">
+
+<p>My <a href="/retro/atari-mega-st-fleet/">Mega ST 4 "High"</a> workstation is built around the MonSTerBoard, an upgrade board from Alan Hourihane that sits on the MegaBus and adds 8 MB of TT-RAM, dual IDE interfaces and a 2 MB flashable TOS to any Atari ST, STe, Mega ST or Mega STe, hence the name. It's the board that turns the "High" machine into a genuine multitasking workstation.</p>
+
+<h2>What the MonSTerBoard adds</h2>
+<ul>
+<li><strong>8 MB of TT-RAM</strong>, alternate memory usable with TOS 2.06, MiNT and MagiC. Configurable via the M_ALTRAM program, which then goes into the auto-start folder.</li>
+<li><strong>Dual IDE interfaces</strong>, two IDE connections on the board, ideal for a CompactFlash or IDE-SD adapter as mass storage.</li>
+<li><strong>Flashable TOS (2 MB)</strong>, a 2 MB flash chip that can hold up to four TOS images, so you can switch operating systems in software.</li>
+<li><strong>Optional real-time clock</strong>, a connector for an RTC module based on the Dallas DS1338 (already present on Mega ST/Mega STE mainboards).</li>
+<li><strong>512K EmuTOS and flash disk support</strong>, the spare flash space can even hold a fast boot disk or an EmuTOS image.</li>
+</ul>
+
+<p>The heart of the board is a Xilinx XC9572XL CPLD that ties it all together. For a Mega ST, the board needs a separate MegaBus adapter board, also available from Alan.</p>
+
+<h2>Installation</h2>
+<p>Installation is fairly straightforward. For a Mega ST, plug the MonSTerBoard together with the adapter onto the MegaBus, connect the power supply and run a cable to pin 10 of the ACSI port. One thing that catches people out: the original TOS ROMs on the mainboard must be removed, otherwise the machine keeps booting the old TOS instead of the one on the flash board.</p>
+
+<h2>The jumper block</h2>
+<p>The board has an 18-pin jumper block. The top row is 3.3V, the bottom row is GND, and combined with the middle row they set the options. From left to right: TOSSEL, FLASHSW, FLASHON, IDESW, SCL and SDA.</p>
+<ul>
+<li><strong>TOSSEL</strong>, for STFM/Mega ST with TOS 1.xx: jumper to GND boots from 0xE00000 (e.g. TOS 2.xx), jumper to 3.3V boots from 0xFC0000 (e.g. TOS 1.xx).</li>
+<li><strong>FLASHSW</strong>, swaps the second 1 MB of the flash chip between the 0xE00000 and 0xFC0000 windows, so you can flash the other operating system.</li>
+<li><strong>FLASHON</strong>, disables access to the flash for recovery mode, so the original ROMs can be reinstalled if needed.</li>
+<li><strong>IDESW</strong>, swaps the first and second IDE interfaces.</li>
+<li><strong>SCL/SDA</strong>, connection for the RTC module.</li>
+</ul>
+
+<h2>Software</h2>
+<p>Alan provides three programs for the MonSTerBoard: M_FLASH.ZIP to write the onboard flash, M_ALTRAM.ZIP to configure the RAM (2, 4, 6 or 8 MB, then placed in the auto-start folder), and M_RTC.ZIP for the Dallas RTC module. In total you can install four TOS versions: two 192 KB and two 256 KB images.</p>
+
+<h2>My Setup</h2>
+<p>In my Mega ST 4 "High" machine the MonSTerBoard provides the 8 MB of TT-RAM that TOS 2.06 and Geneva use for real multitasking, plus IDE storage for the mass storage. Combined with the <a href="/retro/et4000-experiment/">ET4000 graphics card</a> and its dedicated monitor, it's the most capable machine in the fleet.</p>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.jungsi.de/monster-atari-st/" target="_blank">MonSTer [Atari ST] - Jungsi's Corner (installation guide)</a></li>
+<li><a href="https://www.atarikit.co.uk/monster/monster.html" target="_blank">MonSTer order form - AtariKit (official page)</a></li>
+</ul>
+</div>
