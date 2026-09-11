@@ -25,26 +25,26 @@ layout: stefankoelle.njk
   <h3>moonweb.org (since 2020)</h3>
   <p>My personal corner on the internet, documenting the homelab, smart home setups, infrastructure experiments, retro hardware, and the code that ties it all together. Everything runs on a homelab that has been evolving since the mid-90s.</p>
   <ul>
-    <li><b><a href="https://www.moonweb.org/">hub.moonweb.org</a></b>: Overview of all sites and projects.</li>
-    <li><b><a href="https://www.moonweb.org/infra/">infra.moonweb.org</a></b>: Proxmox cluster, Synology NAS, Docker containers, networking, and backup strategies.</li>
-    <li><b><a href="https://www.moonweb.org/smarthome/">smarthome.moonweb.org</a></b>: Home Assistant, MQTT sensors, AirPlay audio, energy monitoring, and ESP32 dashboards.</li>
-    <li><b><a href="https://www.moonweb.org/code/">code.moonweb.org</a></b>: Curated catalog of public GitHub projects, sorted by topic.</li>
-    <li><b><a href="https://www.moonweb.org/retro/">retro.moonweb.org</a></b>: Atari ST, Amiga, DOS, MiSTer FPGA, and the retro computing corner.</li>
+    <li><b><a href="https://www.moonweb.org/">moonweb.org</a></b>: Overview of all sites and projects.</li>
+    <li><b><a href="https://www.moonweb.org/infra/">moonweb.org/infra</a></b>: Proxmox cluster, Synology NAS, Docker containers, networking, and backup strategies.</li>
+    <li><b><a href="https://www.moonweb.org/smarthome/">moonweb.org/smarthome</a></b>: Home Assistant, MQTT sensors, AirPlay audio, energy monitoring, and ESP32 dashboards.</li>
+    <li><b><a href="https://www.moonweb.org/code/">moonweb.org/code</a></b>: Curated catalog of public GitHub projects, sorted by topic.</li>
+    <li><b><a href="https://www.moonweb.org/retro/">moonweb.org/retro</a></b>: Atari ST, Amiga, DOS, MiSTer FPGA, and the retro computing corner.</li>
   </ul>
 
   <h3>Home Network Projects (2025-2026)</h3>
   <ul>
-    <li><b>Docker Host (Proxmox PVE)</b><br>Virtualized Docker host with Debian 12.2 running containerized services including Portainer, Prometheus, Grafana, Gitea, monitoring exporters, and more. Full architecture documented on <a href="https://www.moonweb.org/infra/docker/">infra.moonweb.org</a>.</li>
+    <li><b>Docker Host (Proxmox PVE)</b><br>Virtualized Docker host with Debian 12.2 running containerized services including Portainer, Prometheus, Grafana, Gitea, monitoring exporters, and more. Full architecture documented on <a href="https://www.moonweb.org/infra/docker/">moonweb.org/infra</a>.</li>
     <li><b>InfluxDB Time-Series Integration</b><br>Deployed InfluxDB 2.x for sensor data collection from Tasmota smart plugs and HomematicIP thermostats, replacing older MySQL-based storage with modern time-series architecture.</li>
     <li><b>LED Matrix ESP32 InfluxDB Integration</b><br>Data persistence layer for <a href="/ledmatrix/">LED Matrix ESP32</a> sensor systems (DHT22 temperature/humidity) with InfluxDB 2.x backend. Automated collection at 60-second intervals for historical trend analysis.</li>
-    <li><b>Air Quality Dashboard</b><br>Dynamic HTML5 dashboard consuming real-time sensor data from InfluxDB via Flux query API. Displays temperature and humidity across all network locations, accessible via nginx reverse proxy. See also <a href="https://www.moonweb.org/smarthome/air-quality/">smarthome.moonweb.org</a>.</li>
-    <li><b>Tasmota Energy Monitoring</b><br>Smart plug energy tracking with 8 Tasmota-enabled devices, integrating MQTT data collection and visualization. See also <a href="https://www.moonweb.org/smarthome/tasmota-energy/">smarthome.moonweb.org</a>.</li>
+    <li><b>Air Quality Dashboard</b><br>Dynamic HTML5 dashboard consuming real-time sensor data from InfluxDB via Flux query API. Displays temperature and humidity across all network locations, accessible via nginx reverse proxy. See also <a href="https://www.moonweb.org/smarthome/air-quality/">moonweb.org/smarthome</a>.</li>
+    <li><b>Tasmota Energy Monitoring</b><br>Smart plug energy tracking with 8 Tasmota-enabled devices, integrating MQTT data collection and visualization. See also <a href="https://www.moonweb.org/smarthome/tasmota-energy/">moonweb.org/smarthome</a>.</li>
     <li><b>Network Hardware & Monitoring</b><br>Four Zyxel GS1200-8HP managed switches in the server room, living room, and study, plus a <a href="https://www.moonweb.org/infra/openwrt/">Multi-WAN OpenWrt router</a> for failover and VLAN segmentation. All switches feed into <a href="https://www.moonweb.org/infra/monitoring/">Prometheus monitoring</a> via SNMP exporters, and IoT devices are isolated in VLAN 189.</li>
   </ul>
 
   <h3>Retro Computing (2022/2023)</h3>
   <ul>
-    <li>MiSTer and MiST FPGA Systems for preservation (see also <a href="https://www.moonweb.org/retro/mist-mister-fpga/">retro.moonweb.org</a>).</li>
+    <li>MiSTer and MiST FPGA Systems for preservation (see also <a href="https://www.moonweb.org/retro/mist-mister-fpga/">moonweb.org/retro</a>).</li>
     <li><a href="https://www.moonweb.org/retro/dos-486-tower/">DOS System</a>, <a href="https://www.moonweb.org/retro/the-a1200/">Amiga System</a>, and <a href="https://www.moonweb.org/retro/atari-mega-st-fleet/">Atari ST System</a> with the environment from the early 90s.</li>
   </ul>
 
@@ -243,5 +243,5 @@ layout: stefankoelle.njk
   <p>Stefan Kölle<br>Neumarkter Str. 86c<br>81673 München</p>
   <p>Phone/Fax: +49-(89)-20006547<br>E-Mail: <a id="email-impressum" href="#">[email protected]</a></p>
   <p>Responsible for content according to § 18 (2) MStV: Stefan Kölle, address as above.</p>
-  <p>Full legal notice & privacy policy for this website and the moonweb.org network: <a href="https://www.moonweb.org/impressum/">hub.moonweb.org/impressum</a>
+  <p>Full legal notice & privacy policy for this website and the moonweb.org network: <a href="https://www.moonweb.org/impressum/">moonweb.org/impressum</a>
 </div>
