@@ -43,6 +43,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("retro/eiffel/*.jpg");
   eleventyConfig.addPassthroughCopy("retro/stpsu/*.jpg");
   eleventyConfig.addPassthroughCopy("retro/acsi2stm/*.jpg");
+  eleventyConfig.addPassthroughCopy("retro/atari-vga/*.jpg");
 
   // Root-level shared assets
   eleventyConfig.addPassthroughCopy({ "shared/base.css": "shared-base.css" });

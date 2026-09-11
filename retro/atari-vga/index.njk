@@ -1,0 +1,36 @@
+---
+title: "Atari to VGA: Getting the ST Onto a Modern Monitor"
+section: "retro"
+tags: "retro"
+description: "How I connect the Atari Mega ST machines to modern VGA monitors, with three different RGB-to-VGA adapters."
+layout: base.njk
+parent: "/retro/"
+---
+<h1>Atari to VGA: Getting the ST Onto a Modern Monitor</h1>
+<div class="detail-content">
+
+<p>To get the Atari ST onto a modern monitor, I use RGB-to-VGA adapters. I have three of them: a passive MCSWITCH adapter on the "Low" machine, a self-built adapter on the "High" machine, and a newer active ST2VGA Enhanced that isn't in use yet.</p>
+
+<h2>The MCSWITCH (Low machine)</h2>
+<p>The <a href="/retro/atari-mega-st-fleet/">Mega ST 4 "Low"</a> uses an <a href="http://www.albersdoerfer.de/erweiterungen/stvga.htm" target="_blank">MCSWITCH</a> adapter (ATARI Monochrome &amp; Color VGA Adapter) by Olivier Gossuin. It shows all three ST resolutions on a suitable VGA monitor, with a switch for mono and color, an A/V connector, and volume buttons. It's documented on <a href="http://www.albersdoerfer.de/erweiterungen/stvga.htm" target="_blank">albersdoerfer.de</a>.</p>
+
+<h2>The self-built adapter (High machine)</h2>
+<p>The <a href="/retro/atari-mega-st-fleet/">Mega ST 4 "High"</a> uses a self-built adapter. I followed the guide at <a href="https://pest.atari.org/www.logicsays.com/atari/mono/docs/atari_vga.htm" target="_blank">pest.atari.org</a> to build a simple RGB-to-VGA adapter for the Atari monitor port.</p>
+
+<h2>The ST2VGA Enhanced (not yet in use)</h2>
+<p>I also bought a new active <a href="https://sidecartridge.com/products/st2vga-atari-st/" target="_blank">ST2VGA Enhanced</a> from SidecarTridge, but it isn't in use yet. Unlike the passive adapters, the Enhanced adds an active amplifier and filter stage for early or noisy Atari machines, and carries its own +5V supply over micro-USB. It's designed for machines with weak video output, visible "jailbars", or picky LCD inputs that fail to lock to the signal.</p>
+
+<h2>A note on monitors</h2>
+<p>Passive RGB-to-VGA adapters output the Atari's native timings, so color modes (ST Low and ST Medium) need a monitor that can lock to a 15 kHz horizontal sync signal. See my <a href="/retro/atari-monitor-compatibility/">monitor compatibility</a> page for which modern panels actually work. Mono mode (ST High) works on any standard VGA display.</p>
+
+<h2>Gallery</h2>
+<img src="stvga-low.jpg" alt="The MCSWITCH VGA adapter connected to the Atari" width="640" height="640">
+<p class="caption">The MCSWITCH adapter on the Mega ST 4 "Low" machine.</p>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="http://www.albersdoerfer.de/erweiterungen/stvga.htm" target="_blank">MCSWITCH (ATARI Monochrome &amp; Color VGA Adapter) - albersdoerfer.de</a></li>
+<li><a href="https://pest.atari.org/www.logicsays.com/atari/mono/docs/atari_vga.htm" target="_blank">Atari to VGA adapter build guide - pest.atari.org</a></li>
+<li><a href="https://sidecartridge.com/products/st2vga-atari-st/" target="_blank">ST2VGA Adapter - SidecarTridge (product page)</a></li>
+</ul>
+</div>
