@@ -38,6 +38,17 @@ parent: "/retro/"
 <h2>Software</h2>
 <p>Alan provides three programs for the MonSTerBoard: M_FLASH.ZIP to write the onboard flash, M_ALTRAM.ZIP to configure the RAM (2, 4, 6 or 8 MB, then placed in the auto-start folder), and M_RTC.ZIP for the Dallas RTC module. In total you can install four TOS versions: two 192 KB and two 256 KB images.</p>
 
+<h2>TOS selection via the jumpers</h2>
+<p>The TOSSEL and FLASHSW jumpers pick which TOS the machine boots from the flash. A common setup maps them like this:</p>
+<table>
+<tr><th>TOSSEL</th><th>FLASHSW</th><th>Boots</th></tr>
+<tr><td>off</td><td>off</td><td>EmuTOS</td></tr>
+<tr><td>on</td><td>off</td><td>PP's modified TOS 1.04</td></tr>
+<tr><td>off</td><td>on</td><td>TOS 2.06</td></tr>
+<tr><td>on</td><td>on</td><td>Kaos TOS 1.4.3</td></tr>
+</table>
+<p>The MonSTerBoard is generally blitter-agnostic and works with all common Mega ST blitter variants, as long as the bus signals are clean. Common symptoms like a white screen with no boot are, in practice, usually caused by contact issues at sockets or incorrect jumper settings, not a defective blitter.</p>
+
 <h2>My Setup</h2>
 <p>In my Mega ST 4 "High" machine the MonSTerBoard provides the 8 MB of TT-RAM that TOS 2.06 and Geneva use for real multitasking. For storage I use the dual IDE interface, booting the system directly from a CompactFlash card. I started with a 4 GB card, but that didn't work reliably, so I switched to a 1 GB card, which works fine. There's no ACSI hard drive connected in this machine; the IDE boot is noticeably faster than an ACSI drive would be. Combined with the <a href="/retro/et4000-experiment/">ET4000 graphics card</a> and its dedicated monitor, it's the most capable machine in the fleet.</p>
 
