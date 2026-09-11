@@ -88,7 +88,6 @@ module.exports = function (eleventyConfig) {
       input: ".",
       includes: "shared/_includes",
       output: "dist/moonweb",
-      excludes: ["stefankoelle", "timecapsule"],
     },
     serverOptions: {
       host: "0.0.0.0",
