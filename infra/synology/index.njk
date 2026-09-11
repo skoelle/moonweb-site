@@ -13,8 +13,8 @@ layout: base.njk
 
 <h2>Storage</h2>
 <ul>
-<li><strong>Bays</strong>, 4 drive slots, populated with a mix of large-capacity HDDs rather than a single uniform set, which SHR was specifically chosen to support.</li>
-<li><strong>RAID type</strong>, SHR (Synology Hybrid RAID), giving single-drive fault tolerance while allowing disks of different sizes to be mixed and later upgraded one at a time without rebuilding the whole array from scratch.</li>
+<li><strong>Bays</strong>, 4 drive slots, populated with a mix of large-capacity HDDs rather than a single uniform set.</li>
+<li><strong>RAID type</strong>, SHR (Synology Hybrid RAID), giving single-drive fault tolerance while allowing drives to be upgraded one at a time without rebuilding the whole array from scratch.</li>
 <li><strong>Snapshots</strong>, Btrfs snapshot replication is used for file versioning instead of the classic recycle bin, taken hourly with a retention schedule of 7 days, 3 weeks, 3 months and 1 year.</li>
 </ul>
 
@@ -29,7 +29,7 @@ layout: base.njk
 <ul>
 <li><strong>Central storage hub</strong>, single source of truth for files and backups that every other host in the network (Proxmox VMs, exporters, workstations) can write to or read from.</li>
 <li><strong>Built-in snapshotting</strong>, Btrfs-based snapshots give point-in-time recovery without the overhead of a separate versioning package.</li>
-<li><strong>Flexible RAID</strong>, SHR allows disks to be swapped and capacity to grow over time without needing matched drive sizes from day one.</li>
+<li><strong>Flexible RAID</strong>, SHR allows capacity to grow over time by swapping in larger drives.</li>
 <li><strong>Lightweight virtualization</strong>, running a single purpose-built Docker VM on the NAS keeps storage-adjacent workloads close to the data, without turning the NAS itself into a general-purpose application server.</li>
 </ul>
 
