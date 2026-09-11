@@ -25,7 +25,7 @@ speaker app.</p>
 a software mixer stage (<code>+20&nbsp;dB</code> via an ALSA softvol plugin) sits between
 shairport-sync and the hardware. The hardware mixer itself is deliberately
 left fixed at 100% / 0&nbsp;dB, and shairport-sync only ever adjusts its own
-internal software volume, this avoids the volume jumps and mixer
+internal software volume. This avoids the volume jumps and mixer
 conflicts that show up when multiple layers all try to control loudness.</p>
 
 <h2>Bathroom-specific integration</h2>

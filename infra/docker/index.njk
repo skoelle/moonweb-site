@@ -9,7 +9,7 @@ layout: base.njk
 <h1>Docker Container Strategy</h1>
 <div class="detail-content">
 
-<p>My homelab runs almost entirely on Docker, spread across three dedicated Debian VMs instead of installing containers directly on bare metal or on the NAS operating system itself. Each VM is a clean, disposable Docker host that can be snapshotted and backed up as a whole through Proxmox, and every service is defined declaratively as a Docker Compose file living under <code>/docker-data/compose/&lt;service&gt;/</code>. This keeps the setup portable, reproducible, and easy to document, if a host dies, restoring a VM snapshot brings every container definition back with it.</p>
+<p>My homelab runs almost entirely on Docker, spread across three dedicated Debian VMs instead of installing containers directly on bare metal or on the NAS operating system itself. Each VM is a clean, disposable Docker host that can be snapshotted and backed up as a whole through Proxmox, and every service is defined declaratively as a Docker Compose file living under <code>/docker-data/compose/&lt;service&gt;/</code>. This keeps the setup portable, reproducible, and easy to document. If a host dies, restoring a VM snapshot brings every container definition back with it.</p>
 
 <h2>The three Docker hosts</h2>
 <ul>

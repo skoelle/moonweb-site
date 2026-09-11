@@ -9,7 +9,7 @@ layout: base.njk
 <h1>LXC Container Strategy</h1>
 <div class="detail-content">
 
-<p>Alongside the Docker-based setup, I run a small number of Linux Containers (LXC) directly on the main Proxmox host (PVE). An LXC is an OS-level virtualization container, unlike a Docker container, which packages a single application and its dependencies, an LXC behaves like a full lightweight Linux system with its own init process, systemd services and package manager, but without the overhead of a full virtual machine. Proxmox manages LXCs natively as first-class citizens, right next to VMs, with their own snapshotting, backup and resource-limit tooling. I use far fewer LXCs than Docker containers, reserving them for cases where a persistent, OS-like environment or tight integration with Proxmox itself makes more sense than a containerized app.</p>
+<p>Alongside the Docker-based setup, I run a small number of Linux Containers (LXC) directly on the main Proxmox host (PVE). An LXC is an OS-level virtualization container. Unlike a Docker container, which packages a single application and its dependencies, an LXC behaves like a full lightweight Linux system with its own init process, systemd services, and package manager, but without the overhead of a full virtual machine. Proxmox manages LXCs natively as first-class citizens, right next to VMs, with their own snapshotting, backup and resource-limit tooling. I use far fewer LXCs than Docker containers, reserving them for cases where a persistent, OS-like environment or tight integration with Proxmox itself makes more sense than a containerized app.</p>
 
 <h2>Why LXC instead of Docker here</h2>
 <ul>
