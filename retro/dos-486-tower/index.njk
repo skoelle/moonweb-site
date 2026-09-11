@@ -12,7 +12,7 @@ parent: "/retro/"
 <p>Long before Atari ST and Amiga took over the retro corner, a Vobis-Highscreen 486 DX2-66 in its distinctive Colani-designed tower case was the main PC. The original hardware is long gone, and I never kept a backup, so this MiSTer FPGA build isn't a byte-for-byte copy. It's a rebuild from memory, set up the way I remember it and the way it felt to use back then, the DOS version, the drivers, and the AUTOEXEC.BAT and CONFIG.SYS that got everything working.</p>
 
 <h2>The original hardware</h2>
-<p>The Vobis-Highscreen was a premium PC in its day, the Colani design gave it a distinctive curved case that still looks futuristic. Inside it ran an Intel 486 DX2 at 66MHz with 8MB of RAM, a Sound Blaster 16, and a Tseng ET4000 graphics card. A 200MB hard drive and a 3.5" floppy drive completed the setup. The machine was the go-to system for early-90s classics like Doom, Wing Commander, Duke Nukem 3D, and Lemmings.</p>
+<p>The Vobis-Highscreen was a premium PC in its day, the Colani design gave it a distinctive curved case that still looks futuristic. Inside it ran an Intel 486 DX2 at 66MHz with 8MB of RAM and a Sound Blaster 16. A 200MB hard drive and a 3.5" floppy drive completed the setup. The machine was the go-to system for early-90s classics like Doom, Wing Commander, Duke Nukem 3D, and Lemmings.</p>
 
 <h2>The MiSTer recreation</h2>
 <p>The AO486 core on MiSTer FPGA handles the hardware convincingly. The real work was rebuilding the software environment from memory: the MS-DOS version, the memory managers (HIMEM.SYS, EMM386), the Sound Blaster drivers, and the AUTOEXEC.BAT and CONFIG.SYS tuning that made the original machine run smoothly.</p>
@@ -33,6 +33,6 @@ parent: "/retro/"
 </ul>
 
 <h2>AO486 vs real hardware</h2>
-<p>The MiSTer AO486 core handles the emulation convincingly. Timing accuracy is good enough for games that rely on cycle-sensitive behavior. Sound Blaster emulation covers the standard OPL3 FM synthesis and digital audio. The main trade-off is that some hardware-specific quirks, like the exact timing of the ET4000 graphics card or the behavior of specific ISA bus peripherals, aren't perfectly replicated. But since this is a rebuild from memory rather than an exact copy anyway, that's more than good enough for a working DOS environment.</p>
+<p>The MiSTer AO486 core handles the emulation convincingly. Timing accuracy is good enough for games that rely on cycle-sensitive behavior. Sound Blaster emulation covers the standard OPL3 FM synthesis and digital audio. The main trade-off is that some hardware-specific quirks, like the behavior of specific ISA bus peripherals, aren't perfectly replicated. But since this is a rebuild from memory rather than an exact copy anyway, that's more than good enough for a working DOS environment.</p>
 
 </div>
