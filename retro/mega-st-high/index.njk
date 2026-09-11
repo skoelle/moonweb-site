@@ -1,0 +1,56 @@
+---
+title: "Mega ST 4 High: The Workstation"
+section: "retro"
+tags: "retro"
+description: "The high-end Mega ST 4 workstation with MonSTerBoard, ET4000, NetUSBee, Eiffel interface and a modern STPSU, running Geneva."
+layout: base.njk
+parent: "/retro/"
+---
+<h1>Mega ST 4 High: The Workstation</h1>
+<div class="detail-content">
+
+<p>Received for free in 2026, this Mega ST 4 was fully rebuilt and is today my primary workstation. It's the most capable machine in the fleet, running Geneva as a real multitasking environment.</p>
+
+<h2>Work Performed</h2>
+<ul>
+<li><strong>Blitter patch</strong>, removed an existing patch and carefully bridged the severed trace with wire, verifying it with a continuity test. The installed blitter (marked S9012 / MM9092V, a National variant from week 12/1990) belongs to an unproblematic batch where the classic Mega ST blitter patch is generally no longer needed.</li>
+<li><strong>CPU socket</strong>, soldered in a 68000 socket and checked all connections to the board with a multimeter.</li>
+<li><strong>TOS</strong>, removed the onboard TOS from its sockets to avoid conflicts with the external flash TOS on the MonSTerBoard.</li>
+<li><strong>Power supply</strong>, replaced with a modern <a href="/retro/stpsu/">STPSU</a> for clean, stable power, which matters especially for the ET4000.</li>
+</ul>
+
+<h2>MonSTerBoard</h2>
+<p>The <a href="/retro/monsterboard/">MonSTerBoard</a> is plugged onto the 68000 socket, with jumpers set so TOS 2.06 is used from its flash. It provides up to 8 MB of AltRAM (TT-compatible range, activated via <code>m_altram.prg</code>), an IDE interface for CF/IDE storage, and a flash ROM holding multiple TOS images. I boot from a 1 GB CompactFlash card over IDE, which is noticeably faster than an ACSI drive.</p>
+
+<h2>Peripherals in Use</h2>
+<ul>
+<li><strong><a href="/retro/et4000-experiment/">ET4000 graphics card</a></strong> in the MegaBus, providing higher resolutions and better display quality with Geneva/NVDI, driving a dedicated monitor.</li>
+<li><strong><a href="/retro/netusb/">NetUSBee</a></strong> on the ROM port, giving real internet via STinG and a USB port for FAT16 data exchange with Windows.</li>
+<li><strong><a href="/retro/eiffel/">Eiffel interface</a></strong> for a PS/2 keyboard and mouse, a much better typing feel than the original hardware.</li>
+<li><strong>Self-built <a href="/retro/atari-vga/">VGA adapter</a></strong>, a short cable to a small box with the VGA connector and mono/color switch, since a standard adapter would block the ET4000's VGA output.</li>
+</ul>
+
+<h2>Role</h2>
+<p>Workstation machine with multitasking (Geneva), AltRAM, IDE/CF boot, USB and network connectivity, and high-resolution display. My primary system for programming and productive work.</p>
+
+<h2>Gallery</h2>
+<img src="high-1.jpg" alt="The Mega ST 4 High machine" width="640" height="640">
+<p class="caption">The Mega ST 4 "High" workstation.</p>
+<img src="high-2.jpg" alt="Mega ST 4 High internal view" width="640" height="640">
+<p class="caption">Inside the "High" machine.</p>
+<img src="high-3.jpg" alt="Mega ST 4 High detail" width="640" height="640">
+<p class="caption">A detail of the "High" setup.</p>
+<img src="high-4.jpg" alt="Mega ST 4 High expansion" width="640" height="640">
+<p class="caption">Expansion boards in the "High" machine.</p>
+<img src="high-5.jpg" alt="Mega ST 4 High close-up" width="640" height="640">
+<p class="caption">Close-up of the "High" machine.</p>
+<img src="high-6.jpg" alt="Mega ST 4 High running" width="640" height="640">
+<p class="caption">The "High" machine in operation.</p>
+<img src="high-7.jpg" alt="Mega ST 4 High setup" width="640" height="640">
+<p class="caption">The "High" workstation setup.</p>
+<img src="high-8.jpg" alt="Mega ST 4 High board" width="640" height="640">
+<p class="caption">Board detail of the "High" machine.</p>
+<img src="high-9.jpg" alt="Mega ST 4 High final" width="640" height="640">
+<p class="caption">The finished "High" machine.</p>
+
+</div>
