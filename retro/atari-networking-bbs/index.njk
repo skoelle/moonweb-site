@@ -1,52 +1,33 @@
 ---
-title: "Getting a 40-Year-Old Computer Online: Atari ST Networking and BBS Access"
+title: "Dialing Into BBSs with a Wi-Fi Modem on the Atari ST"
 section: "retro"
 tags: "retro"
-description: "Connecting an Atari ST to the modern internet and to dial-up-era bulletin board systems, warts and all."
+description: "Using dhansel's WifiModem on the Atari Mega ST 4 'Low' to dial into telnet bulletin board systems with terminal software, no real phone line required."
 layout: base.njk
 parent: "/retro/"
 ---
-<h1>Getting a 40-Year-Old Computer Online: Atari ST Networking and BBS Access</h1>
+<h1>Dialing Into BBSs with a Wi-Fi Modem on the Atari ST</h1>
 <div class="detail-content">
 
-<p>The Atari ST predates the consumer internet entirely, yet a surprising amount of retrofitted networking hardware exists to get one talking to a modern network, or to a bulletin board system straight out of the dial-up era.</p>
+<p>My <a href="/retro/atari-mega-st-fleet/">Mega ST 4 "Low"</a> uses a ready-built Wi-Fi modem based on <a href="https://github.com/dhansel/WifiModem" target="_blank">dhansel's WifiModem</a> firmware, an ESP8266 module that connects a serial port to Wi-Fi. With it, the machine can dial into telnet-based bulletin board systems using its own terminal software, recreating the dial-up BBS experience without a real phone line.</p>
 
-<h2>The Toolbox</h2>
+<h2>The WifiModem</h2>
+<p>dhansel's WifiModem is firmware for the ESP8266 that makes a serial port talk to Wi-Fi. It does this in two ways, and they're mutually exclusive:</p>
 <ul>
-<li><strong>STinG</strong>, the classic TCP/IP stack for TOS, still the backbone for anything network-related on an original machine, from Telnet sessions to FTP transfers.</li>
-<li><strong>ESP32-based Wi-Fi modules</strong>, small serial-attached boards that emulate a modem over Wi-Fi. Results vary wildly between firmware projects: one variant handles HTTP downloads fine but can't do Telnet, another supports full modem emulation but drops connections unpredictably during longer BBS sessions.</li>
-<li><strong>Terminal software quirks</strong>, ANSI art and special characters routinely render incorrectly in period terminal clients, an ongoing annoyance when connecting to text-heavy BBS systems.</li>
-<li><strong>File transfer the easy way</strong>, a plain FTP client on the Atari talking to a NAS on the local network sidesteps most of the internet-connectivity headaches entirely, especially for moving disk images and software archives back and forth.</li>
+<li><strong>Modem emulation</strong>, the computer on the serial port talks to the module as if it were a Hayes-compatible modem, sending AT commands. It can "dial" an IP address or hostname, and the module connects to that host over Telnet. This is what lets a vintage computer dial into telnet BBSs.</li>
+<li><strong>Telnet server</strong>, a computer on the Wi-Fi network can connect to the module's port 23 and the module passes communication through to the serial connection, letting you reach the Atari itself over Wi-Fi.</li>
 </ul>
+<p>For dialing out to BBSs, the modem emulation mode is the relevant one. The module understands Hayes-style commands like <code>ATDT</code> followed by a hostname or IP address, and can even limit the line speed via the S37 register for an authentic slow-modem feel. Since the ESP8266 only has RX/TX pins, there are no hardware control lines, but the module handles the "+++" escape sequence to return to command mode during a call.</p>
 
-<h2>Why connect a 40-year-old computer to the internet</h2>
+<h2>Dialing the DarkForce! BBS</h2>
+<p>To put it to the test, I dialed into <a href="https://www.telnetbbsguide.com/bbs/dark-force-bbs/" target="_blank">the DarkForce! BBS</a>, an Atari-centric system that has been running since the early 90s on a Mega ST4 with BBS Express! ST software. It's a fitting target for an Atari ST, since it's a fellow Atari machine at heart. With the terminal software on the Mega ST sending <code>ATDT</code> to the Wi-Fi modem, the connection to <code>darkforce-bbs.dyndns.org</code> over Telnet worked, and the ANSI login screen, message boards and file sections of a real BBS came up on the original hardware, no phone line involved.</p>
+
+<h2>Why do it</h2>
 <p>The obvious question is "why bother?", the Atari ST was never designed
-for the internet, and the experience of using it online is objectively
-worse than any modern device. But that's not the point. The real
-satisfaction comes from making old hardware do things it was never
-designed to do, understanding the networking stack at a level that modern
-abstractions hide, and experiencing the dial-up era's BBS culture on
-original hardware.</p>
-
-<h2>The BBS experience</h2>
-<p>Bulletin board systems from the dial-up era are still running today,
-maintained by enthusiasts who keep the old software alive. Connecting to
-one from an original Atari ST, via a Wi-Fi modem emulation, is a
-genuinely nostalgic experience. The ANSI art login screens, the message
-boards, the file sections, the door games, it's all exactly as it was
-in the early 1990s. The main difference: instead of tying up a phone
-line, the connection goes over Wi-Fi to a BBS that's accessible from
-anywhere in the world.</p>
-
-<h2>Lessons learned</h2>
-<p>The biggest lesson: networking on retro hardware is 90% patience and
-10% actual configuration. The STinG stack is well-documented but
-fragile, wrong TCP/IP settings silently break connections without
-useful error messages. The ESP32 Wi-Fi modules are cheap and flexible
-but require careful firmware selection for the specific use case. And
-terminal emulation is a rabbit hole of character sets, escape sequences,
-and display quirks that haven't been relevant for decades but still
-matter when connecting to a BBS that renders ANSI art.</p>
+for networking, and a modern device does all this far more easily. But
+that's not the point. There's real satisfaction in making old hardware do
+things it was never meant to do, and in experiencing the dial-up era's BBS
+culture on original hardware, over Wi-Fi instead of a phone line.</p>
 
 <p class="note">If you're chasing BBS nostalgia on real hardware: budget far more patience for the networking layer than for the actual computer. The 1980s hardware is the easy part; convincing 2020s Wi-Fi and modern BBS ANSI dialects to cooperate is the real challenge.</p>
 </div>
