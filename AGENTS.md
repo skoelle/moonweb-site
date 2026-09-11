@@ -89,7 +89,7 @@ moonweb-site/
 ```bash
 npm install
 cd timecapsule && npm install   # Timecapsule Dependencies
-npm run prebuild                # Pre-Build Tasks (CV PDF generieren)
+npm run prebuild:cv            # Pre-Build Tasks (CV PDF generieren)
 npm run dev                     # Moonweb Sites (localhost:8081)
 npm run dev:stefankoelle        # stefankoelle.de (localhost:8086)
 npm run dev:timecapsule         # Timecapsule (localhost:8087)
@@ -141,7 +141,7 @@ Das CV-PDF wird via WeasyPrint generiert:
 
 ```bash
 npm run pdf:cv               # Einzelnes PDF generieren
-npm run prebuild             # Alle Pre-Build Tasks (inkl. CV PDF)
+npm run prebuild:cv             # Alle Pre-Build Tasks (inkl. CV PDF)
 ```
 
 Dateien:

@@ -43,15 +43,15 @@ jobs:
       - name: Validate build output
         run: |
           echo "Build output:"
-          find dist -maxdepth 2 -type f | sort | head -40
+          find dist/moonweb -maxdepth 2 -type f | sort | head -40
           echo "..."
           echo "Total files:"
-          find dist -type f | wc -l
+          find dist/moonweb -type f | wc -l
 
           # Verify key directories exist
           for dir in "" infra smarthome code retro timecapsule; do
-            if [ -n "$dir" ] && [ ! -d "dist/$dir" ]; then
-              echo "Error: dist/$dir not found"
+            if [ -n "$dir" ] && [ ! -d "dist/moonweb/$dir" ]; then
+              echo "Error: dist/moonweb/$dir not found"
               exit 1
             fi
           done
@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: dist-moonweb
-          path: dist/
+          path: dist/moonweb
           retention-days: 7
 
   deploy:
@@ -73,12 +73,12 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           name: dist-moonweb
-          path: dist/
+          path: dist/moonweb
 
       - name: Deploy via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
-          local_path: './dist/*'
+          local_path: './dist/moonweb/*'
           server: ${{ secrets.IONOS_SFTP_HOST }}
           username: ${{ secrets.IONOS_SFTP_USER }}
           password: ${{ secrets.IONOS_SFTP_PASSWORD }}
@@ -99,7 +99,7 @@ jobs:
           if [ "${{ needs.deploy.result }}" = "success" ]; then
             echo "moonweb.org deployed successfully!" >> $GITHUB_STEP_SUMMARY
           else
-            echo "Deployment failed. Check the deploy jobs for details." >> $GITHUB_STEP_SUMMARY
+            echo "Deployment failed. Check the deploy job for details." >> $GITHUB_STEP_SUMMARY
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Sites" >> $GITHUB_STEP_SUMMARY

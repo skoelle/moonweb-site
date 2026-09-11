@@ -87,7 +87,7 @@ module.exports = function (eleventyConfig) {
     dir: {
       input: ".",
       includes: "shared/_includes",
-      output: "dist",
+      output: "dist/moonweb",
     },
     serverOptions: {
       host: "0.0.0.0",

@@ -76,7 +76,7 @@ npm run dev:timecapsule            # timecapsule (localhost:8087)
 ### Build
 
 ```bash
-npm run prebuild                     # pre-build tasks (CV PDF)
+npm run prebuild:cv                     # pre-build tasks (CV PDF)
 npm run build                        # builds all moonweb sites (hub, infra, smarthome, code, retro)
 npm run build:stefankoelle           # builds stefankoelle.de
 npm run build:timecapsule            # builds timecapsule
