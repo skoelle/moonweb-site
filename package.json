@@ -9,7 +9,7 @@
     "dev:timecapsule": "cd timecapsule && npx @11ty/eleventy --serve --port=8087",
     "build": "npx @11ty/eleventy",
     "build:stefankoelle": "npx @11ty/eleventy --config=stefankoelle/eleventy.config.js",
-    "build:timecapsule": "cd timecapsule && npx @11ty/eleventy && mkdir -p ../../dist/timecapsule && cp -r _site/timecapsule/* ../../dist/timecapsule/",
+    "build:timecapsule": "cd timecapsule && npx @11ty/eleventy && mkdir -p ../dist/timecapsule && cp -r _site/timecapsule/* ../dist/timecapsule/",
     "build:moonweb": "npm run build && npm run build:timecapsule",
     "pdf:cv": "bash stefankoelle/pdf/build-pdf.sh",
     "prebuild": "bash prebuild.sh"
