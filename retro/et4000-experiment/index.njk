@@ -1,17 +1,17 @@
 ---
-title: "Why an ET4000 Graphics Card and a Mega ST Don't Mix (Yet)"
+title: "The ET4000 in a Mega ST: Higher Resolutions, Eventually Working"
 section: "retro"
 tags: "retro"
-description: "A cautionary tale about pushing 1980s power supplies past their limits with a modern-ish graphics card."
+description: "How an ET4000 ISA graphics card ended up working in a heavily upgraded Atari Mega ST, and what it took to get there."
 layout: base.njk
 parent: "/retro/"
 ---
-<h1>Why an ET4000 Graphics Card and a Mega ST Don't Mix (Yet)</h1>
+<h1>The ET4000 in a Mega ST: Higher Resolutions, Eventually Working</h1>
 <div class="detail-content">
 
-<p>An ET4000 ISA graphics card, adapted to the Atari MegaBus, promises higher resolutions and more colors than the native Shifter chip can dream of. In practice, bolting one onto a heavily upgraded Mega ST turned into a lesson in power supply physics.</p>
+<p>An ET4000 ISA graphics card, adapted to the Atari MegaBus, promises higher resolutions and more colors than the native Shifter chip can dream of. Getting one running in a heavily upgraded Mega ST turned out to be a genuine hardware battle, but the ET4000 now works in my Mega ST 4 "High" machine.</p>
 
-<h2>What Went Wrong</h2>
+<h2>What Made It Difficult</h2>
 <ul>
 <li><strong>Power supply overload</strong>, the stock Mega ST PSU simply wasn't designed to feed a MonSTerBoard, an ET4000, and a MegaBus adapter at the same time. The 5V and 12V rails ended up right at their instability limit.</li>
 <li><strong>The missing -12V</strong>, the ET4000 needs -12V for its output drivers, usually tapped from the RS-232 port, adding yet another drain on an already stressed supply.</li>
@@ -19,8 +19,11 @@ parent: "/retro/"
 <li><strong>Signal integrity issues</strong>, the ISA-to-MegaBus adapter introduces reflections at higher frequencies, and access to ET4000 RAM is roughly 65% slower than native ST RAM, with no hardware BitBLT to make up for it.</li>
 </ul>
 
-<h2>The Practical Fallback</h2>
-<p>FPGA cores on MiSTer and MiST only emulate the native ST Shifter, there's no ET4000 emulation on the horizon given the FPGA resources it would require. The real answer for higher resolutions turned out to be software: Hatari running in VDI mode on a Raspberry Pi 400, which comfortably delivers 1280×768 with far more colors and zero PSU drama.</p>
+<h2>How It Got Working</h2>
+<p>Solving it came down to giving the supply the headroom it needed. With a properly beefed-up power supply to cover the 5V and 12V rails, plus a cooling solution for the card, the stability problems went away. The ET4000 now drives higher resolutions and more colors than the Shifter chip can natively produce, turning the "High" machine into a genuine workstation.</p>
 
-<p class="note">Lesson learned: "just add a graphics card" on 40-year-old hardware is never "just" anything. The ET4000 project isn't dead, but it's shelved until there's a properly beefed-up power supply and cooling solution to go with it.</p>
+<h2>The Context</h2>
+<p>FPGA cores on MiSTer and MiST still only emulate the native ST Shifter, with no ET4000 emulation on the horizon given the FPGA resources it would require. So the real hardware approach remains the only way to get those higher resolutions, and now it works in the Mega ST 4 "High" machine with its dedicated monitor.</p>
+
+<p class="note">Lesson learned: "just add a graphics card" on 40-year-old hardware is never "just" anything. But with the power supply and cooling sorted, the ET4000 now runs where I always hoped it would.</p>
 </div>
