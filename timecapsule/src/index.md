@@ -11,7 +11,7 @@ quicknav:
   - { label: "sitemap", url: "/beginning/sitemap.html" }
 ---
 
-Welcome to the new <b>moonweb.org</b> website. After <b>2 years</b> of part-time development, it is finally <b>here</b>.
+Welcome to the new <b>moonweb.org</b> website by <b>Stefan</b>. After <b>2 years</b> of part-time development, it is finally <b>here</b>.
 
 ## The Idea
 
@@ -21,7 +21,7 @@ Since computer education in schools or colleges here in Germany isn't very compr
 ## The Website
 
 This page mostly describes <b>my life</b>, the <b>products I have developed</b>, and the <b>projects I have been part of</b>.
-You can also find some general information about the person who played a <b>major role in my IT learning process</b>, Matthias. Together, we took our first steps in <b>computer programming in 1988</b> on an Atari STFM 1040, a great machine.
+You can also find some general information about the person who played a <b>major role in Stefan's IT learning process</b>, Matthias. Together, we took our first steps in <b>computer programming in 1988</b> on an Atari STFM 1040, a great machine.
 
 ## The Person
 
