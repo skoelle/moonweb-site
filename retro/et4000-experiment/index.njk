@@ -2,19 +2,25 @@
 title: "The ET4000 in a Mega ST: Higher Resolutions, Eventually Working"
 section: "retro"
 tags: "retro"
-description: "How an ET4000 ISA graphics card ended up working in a heavily upgraded Atari Mega ST, and what it took to get there."
+description: "How an ET4000 ISA graphics card ended up working in a heavily upgraded Atari Mega ST, via a STGA adapter, and what it took to get there."
 layout: base.njk
 parent: "/retro/"
 ---
 <h1>The ET4000 in a Mega ST: Higher Resolutions, Eventually Working</h1>
 <div class="detail-content">
 
-<p>An ET4000 ISA graphics card, adapted to the Atari MegaBus, promises higher resolutions and more colors than the native Shifter chip can dream of. Getting one running in a heavily upgraded Mega ST turned out to be a genuine hardware battle, but the ET4000 now works in my Mega ST 4 "High" machine.</p>
+<p>An ET4000 ISA graphics card, adapted to the Atari MegaBus, promises higher resolutions and more colors than the native Shifter chip can dream of. Getting one running in my heavily upgraded <a href="/retro/atari-mega-st-fleet/">Mega ST 4 "High"</a> machine turned out to be a genuine hardware battle, but it now works like a charm.</p>
+
+<h2>The STGA Adapter</h2>
+<p>The key to running an ET4000 in an Atari ST is a <a href="http://www.harbaum.org/till/atari/index.html" target="_blank">STGA adapter</a>, a design published by Till Harbaum in the ST-Magazin (issues 5, 6 and 7 in '93) that lets you drive an ET4000 VGA card in an Atari ST. I found a nice STGA adapter for ET4000 cards on ebay-kleinanzeigen.de, reproduced by an Atari forum user. After some research into which type of ET4000 could work, I bought one on ebay.de, and here it is running in my Atari Mega 4.</p>
+
+<h2>The Card and Driver</h2>
+<p>I can confirm that a card with the RAMDAC SC11487CN works with the Nova T8 and T6 drivers. And importantly, this particular card does not need -12V, which simplifies the wiring considerably. The STGA adapter comes with its own VDI (STGA_VDI.SYS, v1.3b), a control panel as a CPX module, and a ROM module that switches to the VGA automatically at boot.</p>
 
 <h2>What Made It Difficult</h2>
 <ul>
 <li><strong>Power supply overload</strong>, the stock Mega ST PSU simply wasn't designed to feed a MonSTerBoard, an ET4000, and a MegaBus adapter at the same time. The 5V and 12V rails ended up right at their instability limit.</li>
-<li><strong>The missing -12V</strong>, the ET4000 needs -12V for its output drivers, usually tapped from the RS-232 port, adding yet another drain on an already stressed supply.</li>
+<li><strong>The missing -12V</strong>, many ET4000 cards need -12V for their output drivers, usually tapped from the RS-232 port, adding yet another drain on an already stressed supply. The card I used avoids this.</li>
 <li><strong>Heat with nowhere to go</strong>, the card runs hot, and the Mega ST case has zero provision for active cooling.</li>
 <li><strong>Signal integrity issues</strong>, the ISA-to-MegaBus adapter introduces reflections at higher frequencies, and access to ET4000 RAM is roughly 65% slower than native ST RAM, with no hardware BitBLT to make up for it.</li>
 </ul>
@@ -23,7 +29,28 @@ parent: "/retro/"
 <p>Solving it came down to giving the supply the headroom it needed. With a properly beefed-up power supply to cover the 5V and 12V rails, plus a cooling solution for the card, the stability problems went away. The ET4000 now drives higher resolutions and more colors than the Shifter chip can natively produce, turning the "High" machine into a genuine workstation.</p>
 
 <h2>The Context</h2>
-<p>FPGA cores on MiSTer and MiST still only emulate the native ST Shifter, with no ET4000 emulation on the horizon given the FPGA resources it would require. So the real hardware approach remains the only way to get those higher resolutions, and now it works in the Mega ST 4 "High" machine with its dedicated monitor.</p>
+<p>FPGA cores on MiSTer and MiST still only emulate the native ST Shifter, with no ET4000 emulation on the horizon given the FPGA resources it would require. So the real hardware approach remains the only way to get those higher resolutions, and now it works in the Mega ST 4 "High" machine with its dedicated <a href="/retro/atari-monitor-compatibility/">monitor</a>.</p>
 
-<p class="note">Lesson learned: "just add a graphics card" on 40-year-old hardware is never "just" anything. But with the power supply and cooling sorted, the ET4000 now runs where I always hoped it would.</p>
+<h2>Gallery</h2>
+<img src="et4000-1.jpg" alt="The ET4000 graphics card with STGA adapter" width="590" height="443">
+<p class="caption">The ET4000 graphics card ready for installation.</p>
+
+<img src="et4000-2.jpg" alt="ET4000 card installed in the Mega ST" width="590" height="443">
+<p class="caption">The ET4000 installed in the Mega ST.</p>
+
+<img src="et4000-3.jpg" alt="ET4000 card detail and wiring" width="590" height="443">
+<p class="caption">Close-up of the card and its wiring.</p>
+
+<img src="et4000-4.jpg" alt="ET4000 running at higher resolution" width="590" height="443">
+<p class="caption">The ET4000 driving a higher resolution desktop.</p>
+
+<img src="et4000-5.jpg" alt="ET4000 final setup in the workstation" width="590" height="443">
+<p class="caption">The finished ET4000 setup in the workstation.</p>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="http://www.harbaum.org/till/atari/index.html" target="_blank">Till Harbaum's Atari page - STGA adapter</a></li>
+</ul>
+
+<p class="note">Lesson learned: "just add a graphics card" on 40-year-old hardware is never "just" anything. But with the right STGA adapter, a compatible card, and the power supply and cooling sorted, the ET4000 now runs where I always hoped it would.</p>
 </div>

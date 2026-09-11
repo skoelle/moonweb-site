@@ -31,6 +31,9 @@ module.exports = function (eleventyConfig) {
   // Retro: Storm ST / Cloudy ST page images
   eleventyConfig.addPassthroughCopy("retro/storm-cloudy/*.jpg");
 
+  // Retro: ET4000 page images
+  eleventyConfig.addPassthroughCopy("retro/et4000-experiment/*.jpg");
+
   // Root-level shared assets
   eleventyConfig.addPassthroughCopy({ "shared/base.css": "shared-base.css" });
   eleventyConfig.addPassthroughCopy({ "shared/favicon/hub.svg": "favicon.svg" });
