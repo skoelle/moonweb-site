@@ -40,5 +40,5 @@ layout: base.njk
 <li><strong>Advantage</strong>, simple backup via <code>mysqldump</code>, straightforward remote access configuration (bind-address, dedicated service users per consuming application), and one central database that multiple Docker containers on other hosts can connect to over the network instead of each running their own database container.</li>
 </ul>
 
-<p class="redacted-note">All three LXCs run exclusively on the main Proxmox host (PVE), not on pve2 or the Synology, they're intentionally kept centralized since they're few in number and don't need the multi-host redundancy that the Docker setup has. IPs, credentials and specific VMIDs are omitted here; only the reasoning behind the LXC-vs-Docker choice is shown.</p>
+<p class="note">All three LXCs run exclusively on the main Proxmox host (PVE), not on pve2 or the Synology, they're intentionally kept centralized since they're few in number and don't need the multi-host redundancy that the Docker setup has. IPs, credentials and specific VMIDs are omitted here; only the reasoning behind the LXC-vs-Docker choice is shown.</p>
 </div>
