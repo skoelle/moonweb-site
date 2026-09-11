@@ -9,7 +9,7 @@ parent: "/retro/"
 <h1>SidecarTridge Multi-device: An Apps Platform in a Cartridge</h1>
 <div class="detail-content">
 
-<p>My <a href="/retro/atari-mega-st-fleet/">Mega ST 4 "Low"</a> machine uses a SidecarTridge Multi-device, a small board with a Raspberry Pi Pico W inside that plugs into the cartridge port and turns the Atari into an apps platform. It brings Wi-Fi and a microSD slot to the machine and runs a growing catalog of modular apps, no soldering and no internal mods required.</p>
+<p>My <a href="/retro/atari-mega-st-fleet/">Mega ST 4 "Low"</a> machine uses a SidecarTridge Multi-device, a small board with a Raspberry Pi Pico W inside that plugs into the cartridge port and turns the Atari into an apps platform. It brings Wi-Fi and a microSD slot to the machine and runs a growing catalog of modular apps, no soldering and no internal mods required. I bought the original Revision 0 back in late 2023/early 2024, and I've since picked up the new Revision 3 as well.</p>
 
 <h2>What it does</h2>
 <p>The SidecarTridge Multi-device works in any Atari ST, STE, Mega, TT or Falcon. A Raspberry Pi Pico W inside brings Wi-Fi and a microSD slot, and the board interacts with the cartridge bus in real time to emulate a range of devices:</p>
@@ -26,6 +26,19 @@ parent: "/retro/"
 
 <h2>How it works</h2>
 <p>Setup takes about ten minutes. Slide the Multi-device into the cartridge port, power on, and on first boot it exposes its own SIDECART Wi-Fi network. You join it from a phone or laptop, pick your home Wi-Fi, and from then on the device joins your network automatically. Once connected it shows a QR code with its IP, which opens a web UI listing every installed app, and you pick what your ST should become. On the "Low" machine I use it for the ROM and floppy side of things, alongside the <a href="/retro/storm-cloudy/">Cloudy/Storm ST combo</a> and the Gotek for disk-image swapping.</p>
+
+<h2>Revision 0 vs. Revision 3</h2>
+<p>My Revision 0 is the very first version sold at the end of 2023/start of 2024, and it's the one in use on the "Low" machine. The new Revision 3 is a complete redesign that addresses feedback from early buyers. Functionally both run the same firmware and do the same things, but the v3 is noticeably improved:</p>
+<ul>
+<li><strong>Size and stability</strong>, the Rev 0 was a long, wide 2-layer board that stuck out and could flex if knocked. The v3 is a much more compact 4-layer board that sits more discreetly and doesn't flex.</li>
+<li><strong>Signal quality</strong>, the Rev 0 used simple tinned (HASL) contacts, which can oxidise over time on the sensitive Mega ST bus and cause sudden crashes. The v3 uses a high-quality ENIG gold finish plus two inner copper layers for cleaner power, so transfers run flawlessly.</li>
+<li><strong>Wi-Fi reception</strong>, on the Rev 0 the antenna sat over normal traces that dampened the radio signal, so the connection could drop if the ST was in a bad spot. The v3 has a copper clearance area under the antenna for a stronger, more stable connection.</li>
+<li><strong>Power draw</strong>, the Rev 0 loads the aging 5V rail a bit more. The v3 was optimised to draw noticeably less and run more efficiently.</li>
+<li><strong>Layout and Pico W mounting</strong>, on the Rev 0 the buttons and connectors were in the original spots and the Pico W had to be soldered on tall pin headers. The v3 repositions the buttons ergonomically and lets the Pico W be soldered flat, plus adds JST sockets for external buttons without soldering.</li>
+</ul>
+
+<h2>My Setup</h2>
+<p>The original Revision 0 SidecarTridge is in use on the Mega ST 4 "Low" machine. The new Revision 3 I've bought but not yet installed, so it's still sitting alongside the other uninstalled extensions until I decide where to use it.</p>
 
 <h2>Sources</h2>
 <ul>
