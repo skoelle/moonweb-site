@@ -1,76 +1,87 @@
-# TODO — moonweb-site Offene Items
+# TODO: Consolidation zu www.moonweb.org
 
-Stand: 2026-08-14
+## Uebersicht
 
-## Aktueller Status
+Alle moonweb.org Sites (hub, infra, smarthome, code, retro, timecapsule) unter `www.moonweb.org` als Subverzeichnisse vereinen. Deployment von Cloudflare Pages zu IONOS SFTP migrieren.
 
-| Phase | Status | Bemerkung |
-|-------|--------|-----------|
-| Phase 0 — Repo & Tooling | ✅ fertig | Eleventy 3.1.6, CI/CD, .gitignore erweitert |
-| Phase 1 — Content | ✅ fertig | hub, code, infra, smarthome komplett, retro bewusst rudimentär |
-| Phase 2 — CI/CD | ✅ fertig | build-deploy.yml mit Caching + Validation + Summary |
-| Phase 3 — Launch | ✅ fertig | Cloudflare Pages live, Smoke-Test bestanden |
-| Phase 4 — Deferred | ⏸️ zurückgestellt | 28k8, Analytics |
-| Phase 5 — stefankoelle.de | ✅ fertig | Ins Monorepo migriert, Eleventy-Build, SFTP-Deployment |
+**URL-Struktur nach Migration:**
+| URL | Inhalt |
+|-----|--------|
+| `www.moonweb.org/` | Hub (neue Root) |
+| `www.moonweb.org/infra/` | Infra |
+| `www.moonweb.org/smarthome/` | Smarthome |
+| `www.moonweb.org/code/` | Code |
+| `www.moonweb.org/retro/` | Retro |
+| `www.moonweb.org/timecapsule/` | Altes www (2001-Retro) |
+| `stefankoelle.de/` | CV (bleibt separat) |
 
-## Offene Items
+---
 
-### P4 — Deferred (nicht dringend)
+## Phase 1: Timecapsule in Monorepo integrieren
 
-- [ ] 28k8.moonweb.org Zukunft klären
-- [ ] Perplexity-Rückkanal
-- [ ] Apex-Domain Redirect (moonweb.org → hub.moonweb.org)
-- [ ] PDF-Build fuer CV (WeasyPrint, lokal testen)
-- [ ] Querverlinkungen stefankoelle.de <-> smarthome
-- [ ] Ledmatrix ggf. nach smarthome verschieben
-- [ ] **Dotnet Home-Automation-Projekt beschreiben** — Interne .NET Core Software für Kommunikation auf buttons.html und InfluxDB. Code muss erst aufgeraeumt und nach GitHub publiziert werden, dann Beschreibung auf stefankoelle.de und ggf. smarthome ergänzen.
+- [x] 1.1 Dateien aus ../moonweb-www/src/ nach timecapsule/src/ kopieren
+- [x] 1.2 timecapsule/eleventy.config.js erstellen (Eleventy 2.x)
+- [x] 1.3 timecapsule/package.json erstellen (eigene Dependencies)
+- [x] 1.4 timecapsule/src/_data/site.json anpassen (Domain mit /timecapsule/)
+- [x] 1.5 Alle internen Pfade mit /timecapsule/ prefixieren
+- [x] 1.6 Passthrough Copy in eleventy.config.js anpassen
+- [x] 1.7 Build-Output pruefen (dist/timecapsule/)
 
-### Offene Entscheidungen
+## Phase 2: Eleventy-Configs aller Sites anpassen
 
-- [ ] **stefankoelle.de SFTP: `delete_remote_files`?** — Derzeit werden beim Deploy nur Dateien hochgeloaden, alte bleiben liegen. Mit `delete_remote_files: true` waere jeder Deploy ein sauberes Image (alles weg + neu). Kurzer Ausfall moeglich. Entscheidung offen.
+- [x] 2.1 hub/eleventy.config.js: site.url auf www.moonweb.org
+- [x] 2.2 infra/eleventy.config.js: site.url auf www.moonweb.org
+- [x] 2.3 smarthome/eleventy.config.js: site.url auf www.moonweb.org
+- [x] 2.4 code/eleventy.config.js: site.url auf www.moonweb.org
+- [x] 2.5 retro/eleventy.config.js: site.url auf www.moonweb.org
+- [x] 2.6 shared/_includes/base.njk anpassen
+- [x] 2.7 hub/index.njk: Card-Hrefs relativieren
+- [x] 2.8 hub/impressum.njk: Domain-Liste aktualisieren
 
-## Schon erledigt (Stand 2026-08-14)
+## Phase 3: Build-System anpassen
 
-### stefankoelle.de Migration (2026-08-14)
-- [x] Eleventy-Config + package.json erweitert
-- [x] Onepager-Layout mit Anchor-Links beibehalten
-- [x] CV-Partial (zentral fuer Web + PDF)
-- [x] CSS ausgelagert + modernisiert (Custom Properties, box-sizing)
-- [x] Assets in assets/ verschoben
-- [x] Ledmatrix als eigene Seite integriert
-- [x] Alte Dateien geloescht (index.html, browserconfig.xml, sitemap.txt)
-- [x] Deployment-Workflow fuer IONOS SFTP
-- [x] Cloudflare-Workflow um stefankoelle erweitert (paths-ignore)
+- [x] 3.1 package.json: Neue Scripts fuer timecapsule + merge
+- [x] 3.2 scripts/merge-moonweb.sh erstellen
+- [x] 3.3 Lokal Build testen (alle Sites)
 
-### Vorherige Erledigungen (Stand 2026-08-13)
-- [x] Impressum angelegt + Footer-Link auf allen Sites
-- [x] Favicons (SVG mit Emojis) pro Subdomain — `shared/favicon/*.svg`, per Passthrough Copy
-- [x] Meta descriptions auf allen 33 Seiten
-- [x] CSS @import-Kette bereinigt (kein Render-Blocking mehr)
-- [x] .gitignore erweitert (.env*, Zertifikate, Swap-Files)
-- [x] Placeholder-Cards `"#"` bereinigt — keine mehr vorhanden
-- [x] README.md überarbeitet (Emojis, Architektur, Tech-Stack, CI/CD)
-- [x] Lizenz hinzugefügt (CC BY-NC-SA 4.0)
-- [x] Content-Review — alle Seiten geprüft, alles passt
-- [x] Cloudflare Pages Projects erstellt (moonweb-hub, -infra, -smarthome, -code, -retro)
-- [x] DNS & Custom Domains gebunden
-- [x] Secrets konfiguriert (CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID)
-- [x] Smoke-Test Cross-Linking — alles funktioniert auf live
+## Phase 4: Deployment umstellen
 
-## Workflow für neue Contexts
+- [x] 4.1 Neuen Workflow .github/workflows/build-deploy-moonweb.yml erstellen
+- [x] 4.2 Alten Workflow .github/workflows/build-deploy.yml entfernen
+- [ ] 4.3 Alten deploy-moonweb.yml in moonweb-www deaktivieren
 
-Wenn du einen neuen Context öffnest, lies diese Datei und prüfe:
-1. Welche P4-Items sind relevant? → Nur wenn angefordert
+## Phase 5: Cloudflare Redirects
 
-## Definition of done
+- [x] 5.1 Redirect-Regeln einrichten (via GitHub Action)
 
-Alle 5 Sites live auf Cloudflare Pages:
-- ✅ hub.moonweb.org — verlinkt alles (+ stefankoelle.de extern)
-- ✅ code.moonweb.org — GitHub-Katalog via Aggregator
-- ✅ smarthome.moonweb.org — Smart Home Übersicht + Detailseiten
-- ✅ infra.moonweb.org — Infra-Übersicht (redigiert)
-- ✅ retro.moonweb.org — Ehrliche minimale Übersicht (WIP)
+| Quell-Domain | Ziel-URL | Type |
+|-------------|----------|------|
+| `hub.moonweb.org/*` | `https://www.moonweb.org/$1` | 301 |
+| `infra.moonweb.org/*` | `https://www.moonweb.org/infra/$1` | 301 |
+| `smarthome.moonweb.org/*` | `https://www.moonweb.org/smarthome/$1` | 301 |
+| `code.moonweb.org/*` | `https://www.moonweb.org/code/$1` | 301 |
+| `retro.moonweb.org/*` | `https://www.moonweb.org/retro/$1` | 301 |
 
-stefankoelle.de live auf IONOS (SFTP-Deployment):
-- ✅ stefankoelle.de — Onepager mit CV, Projects, Languages, Impressum
-- ✅ stefankoelle.de/ledmatrix/ — LED Matrix WebServer Dokumentation
+**Umsetzung:** `scripts/cloudflare/setup-redirects.sh` + GitHub Action `cloudflare-redirects.yml`
+**Benötigte Secrets:** `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ZONE_ID`
+
+## Phase 6: SEO
+
+- [ ] 6.1 Google Search Console: Neue Property www.moonweb.org
+- [ ] 6.2 Sitemap submiten
+
+## Phase 7: Cleanup
+
+- [ ] 7.1 moonweb-www Repository archivieren
+- [ ] 7.2 Cloudflare Pages Projects loeschen (nach Redirect-Test)
+
+---
+
+## Abgeschlossen
+
+Alle Code-Aenderungen sind fertig. Nächste Schritte:
+1. Commit auf feature/consolidate-www Branch
+2. Push und PR erstellen
+3. Deployen
+4. Cloudflare Redirects einrichten
+5. Google Search Console aktualisieren

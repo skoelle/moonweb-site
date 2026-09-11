@@ -15,3 +15,6 @@ dist/
 .DS_Store
 *.swp
 *.swo
+timecapsule/_site/
+timecapsule/node_modules/
+.tmp/

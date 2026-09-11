@@ -17,6 +17,12 @@ echo "==> Installing WeasyPrint..."
 pip install -q -r "$REQUIREMENTS"
 
 echo "==> Building stefankoelle with Eleventy..."
+# Temporarily hide .eleventyignore so the standalone stefankoelle build works
+IGNORE_FILE="$PROJECT_DIR/.eleventyignore"
+if [ -f "$IGNORE_FILE" ]; then
+  mv "$IGNORE_FILE" "$IGNORE_FILE.bak"
+  trap 'mv "$IGNORE_FILE.bak" "$IGNORE_FILE"' EXIT
+fi
 npx @11ty/eleventy --config="$PROJECT_DIR/stefankoelle/eleventy.config.js"
 
 echo "==> Generating PDF..."

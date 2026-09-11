@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hub.moonweb.org/sitemap.xml
+Sitemap: https://www.moonweb.org/sitemap.xml
+Sitemap: https://www.moonweb.org/timecapsule/sitemap.xml

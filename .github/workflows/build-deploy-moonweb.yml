@@ -1,0 +1,118 @@
+name: Build & Deploy moonweb.org
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'stefankoelle/**'
+      - '.github/workflows/deploy-stefankoelle.yml'
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - 'stefankoelle/**'
+      - '.github/workflows/deploy-stefankoelle.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: "22"
+
+jobs:
+  build:
+    name: Build moonweb sites
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build all moonweb sites
+        run: npm run build
+
+      - name: Build timecapsule
+        run: npm run build:timecapsule
+
+      - name: Validate build output
+        run: |
+          echo "Build output:"
+          find dist -maxdepth 2 -type f | sort | head -40
+          echo "..."
+          echo "Total files:"
+          find dist -type f | wc -l
+
+          # Verify key directories exist
+          for dir in "" infra smarthome code retro timecapsule; do
+            if [ -n "$dir" ] && [ ! -d "dist/$dir" ]; then
+              echo "Error: dist/$dir not found"
+              exit 1
+            fi
+          done
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist-moonweb
+          path: dist/
+          retention-days: 7
+
+  deploy:
+    name: Deploy to IONOS
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: dist-moonweb
+          path: dist/
+
+      - name: Deploy via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          local_path: './dist/*'
+          server: ${{ secrets.IONOS_SFTP_HOST }}
+          username: ${{ secrets.IONOS_SFTP_USER }}
+          password: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          remote_path: '/websites/moonweb/'
+          port: 22
+          sftp_only: true
+
+  summary:
+    name: Deploy Summary
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Print deployment summary
+        run: |
+          echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ needs.deploy.result }}" = "success" ]; then
+            echo "moonweb.org deployed successfully!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Deployment failed. Check the deploy jobs for details." >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Sites" >> $GITHUB_STEP_SUMMARY
+          echo "| Site | URL |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-----|" >> $GITHUB_STEP_SUMMARY
+          echo "| hub | https://www.moonweb.org/ |" >> $GITHUB_STEP_SUMMARY
+          echo "| infra | https://www.moonweb.org/infra/ |" >> $GITHUB_STEP_SUMMARY
+          echo "| smarthome | https://www.moonweb.org/smarthome/ |" >> $GITHUB_STEP_SUMMARY
+          echo "| code | https://www.moonweb.org/code/ |" >> $GITHUB_STEP_SUMMARY
+          echo "| retro | https://www.moonweb.org/retro/ |" >> $GITHUB_STEP_SUMMARY
+          echo "| timecapsule | https://www.moonweb.org/timecapsule/ |" >> $GITHUB_STEP_SUMMARY
+
+# Required repo secrets:
+#   IONOS_SFTP_HOST     — IONOS SFTP server hostname
+#   IONOS_SFTP_USER     — IONOS SFTP username
+#   IONOS_SFTP_PASSWORD — IONOS SFTP password

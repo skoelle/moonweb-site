@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="{{ description }}">
+<meta property="og:title" content="{{ pageTitle | default('The ' + section) }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ site.domain }}{{ permalink }}">
+<meta property="og:site_name" content="moonweb.org">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ pageTitle | default('The ' + section) }}">
+<meta name="twitter:description" content="{{ description }}">
+<link rel="canonical" href="{{ site.domain }}{{ permalink }}">
+<title>moonweb.org - {{ pageTitle | default("The " + section) }}</title>
+<link rel="stylesheet" type="text/css" href="/timecapsule/assets/css/moonweb.css">
+<link rel="stylesheet" type="text/css" href="/timecapsule/assets/css/nav-replacement.css">
+<link rel="icon" href="/timecapsule/assets/images/favicon.ico">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "moonweb.org",
+  "url": "{{ site.domain }}",
+  "description": "{{ description }}"
+}
+</script>
+</head>
+<body background="/timecapsule/assets/images/background.gif" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
+
+<div class="mobile-header">
+<img src="/timecapsule/assets/images/logomobile.gif" alt="M O O N W E B" class="mobile-logo">
+<div class="mobile-nav-row">
+<img src="/timecapsule/assets/pageImage/{{ section }}.jpg" alt="{{ section }}" border="0" class="mobile-pageimage">
+{% include "nav.njk" %}
+</div>
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0" width="750" height="100%" class="layout-main"><tr><td valign="top" class="sidebar-left">
+
+<table border="0" cellpadding="0" cellspacing="0" width="108">
+<tr><td>
+<img src="/timecapsule/assets/pageImage/{{ section }}.jpg" alt="{{ section }}" height="162" width="108" border="0">
+</td></tr>
+<tr><td align="left">
+&nbsp;
+{% if quicknav %}{% include "quicknav.njk" %}{% endif %}
+</td></tr>
+</table>
+
+</td><td valign="top" class="content-area">
+<table border="0" cellpadding="7" cellspacing="0" width="492"><tr><td>
+
+<h1>{{ pageTitle | default("The " + section) }}</h1>
+
+{{ content | safe }}
+
+</td></tr></table>
+</td><td valign="top" class="sidebar-right">
+
+<table border="0" cellpadding="0" cellspacing="0" width="150">
+<tr height="20"><td>&nbsp;</td></tr>
+<tr height="295"><td>
+<table border="0" cellpadding="0" cellspacing="0"><tr>
+<td width="130" valign="top">
+{% include "nav.njk" %}
+</td>
+<td width="60"><img src="/timecapsule/assets/images/logo.gif" height="295" width="61" alt="M O O N W E B"></td>
+</tr></table>
+</td></tr>
+</table>
+
+</td></tr>
+<tr><td align="center"></td><td colspan="2">
+{% if quicknav %}
+<div class="mobile-footer-quicknav">
+{% for entry in quicknav %}<a href="{{ entry.url }}" class="quicknav">{{ entry.label }}</a>{% if not loop.last %} - {% endif %}{% endfor %}
+</div>
+{% endif %}
+<table border="0" cellpadding="10" cellspacing="0" width="610"><tr><td>
+<hr>
+<p class="footer">
+  {% if lastChanged %}last changed {{ lastChanged }} - {% endif %}
+  <a href="/timecapsule/legal-notice/">Legal Notice</a> - (c) 2001-2026 moonweb.org<br>
+  Part of the <a href="/">moonweb.org</a> homelab.
+</p>
+</td></tr></table>
+</td></tr>
+</table>
+</body>
+</html>

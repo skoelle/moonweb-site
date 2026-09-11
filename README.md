@@ -1,88 +1,67 @@
-# 🌙 moonweb-site
+# moonweb-site
 
-Monorepo for the **moonweb.org** homelab — five static sites built with [Eleventy](https://www.11ty.dev/), deployed to [Cloudflare Pages](https://pages.cloudflare.com/).
+Monorepo for the **moonweb.org** homelab — six static sites built with [Eleventy](https://www.11ty.dev/), deployed to [IONOS SFTP](https://www.ionos.de/).
 
 ```
-hub.moonweb.org        → 🏠 Central index & gateway
-infra.moonweb.org      → 🏗️  Infrastructure overview (Proxmox, Synology, Docker)
-smarthome.moonweb.org  → 🏡 Smart home projects & dashboards
-code.moonweb.org       → 💻 Curated GitHub project catalog
-retro.moonweb.org      → 🕹️  Physical retro hardware collection
-stefankoelle.de        → 👤 CV, career, personal site (LED Matrix docs)
+www.moonweb.org/           -> Central index & gateway
+www.moonweb.org/infra/     -> Infrastructure overview (Proxmox, Synology, Docker)
+www.moonweb.org/smarthome/ -> Smart home projects & dashboards
+www.moonweb.org/code/      -> Curated GitHub project catalog
+www.moonweb.org/retro/     -> Physical retro hardware collection
+www.moonweb.org/timecapsule/ -> 2000s internet time capsule (retro design)
+stefankoelle.de            -> CV, career, personal site (LED Matrix docs)
 ```
 
-> **Other sites** (not in this monorepo): [www.moonweb.org](https://www.moonweb.org) (2000s time capsule), [28k8.moonweb.org](https://28k8.moonweb.org) (90s BBS archive).
+> **Other sites** (not in this monorepo): [28k8.moonweb.org](https://28k8.moonweb.org) (90s BBS archive), [buildbroken.moonweb.org](https://buildbroken.moonweb.org) (.NET Open Space blog).
 
 ---
 
-## 📐 Architecture
+## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     GitHub Actions CI                       │
-│  ┌───────────┐ ┌────────────┐ ┌─────────────┐ ┌─────────┐   │
-│  │ build:hub │ │build:infra │ │ build:smart │ │ build:… │   │
-│  └─────┬─────┘ └─────┬──────┘ └──────┬──────┘ └────┬────┘   │
-│        │             │               │             │        │
-│        ▼             ▼               ▼              ▼       │
-│   dist/hub/    dist/infra/   dist/smarthome/    dist/…/     │
-└────────┬───────────────────────────────────────────┬────────┘
-         │                                           │
-         ▼                                           ▼
-┌──────────────────┐                       ┌─────────────────┐
-│ Cloudflare Pages │                       │   IONOS SFTP    │
-│    (5 sites)     │                       │ (stefankoelle)  │
-└────────┬─────────┘                       └────────┬────────┘
-         ▼                                          ▼
-  hub / infra / ...                        stefankoelle.de
++-------------------------------------------------------------------+
+|                     GitHub Actions CI                              |
+|  +-----------+ +------------+ +-------------+ +---------+ +------+ |
+|  | build:hub | |build:infra | | build:smart | | build:... | | build:timecapsule | |
+|  +-----+-----+ +-----+------+ +------+------+ +----+----+ +----+----+ +--------+ |
+|        |             |               |             |        |          |        |
+|        v             v               v              v        v          v        |
+|   dist/hub/    dist/infra/   dist/smarthome/    dist/.../  dist/timecapsule/     |
++--------+---------------------------------------------------+--------------------+
+         |                                                   |
+         v                                                   v
++------------------+                               +------------------+
+|    IONOS SFTP    |                               |    IONOS SFTP    |
+| (www.moonweb.org)|                               | (stefankoelle.de)|
++--------+---------+                               +--------+---------+
+         v                                                   v
+  www.moonweb.org/*                              stefankoelle.de
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology | Why |
 |-------|-----------|-----|
-| **SSG** | [Eleventy 3.1.6](https://www.11ty.dev/) | Markdown/YAML-first, minimal JS, `_data` folders map directly to aggregator output, low maintenance for 5 sites |
+| **SSG** | [Eleventy 3.1.6](https://www.11ty.dev/) | Markdown/YAML-first, minimal JS, `_data` folders map directly to aggregator output |
+| **SSG (timecapsule)** | [Eleventy 2.0.1](https://www.11ty.dev/) | Legacy 2001 design, CommonJS config |
 | **Templates** | [Nunjucks](https://mozilla.github.io/nunjucks/) | Shared `base.njk` layout with site-switcher header, `card-grid.njk` for index pages |
-| **Styling** | Custom CSS (variables-based) | `base.css` for shared layout, `theme-*.css` per domain accent color, no build step needed |
+| **Styling** | Custom CSS (variables-based) | `base.css` for shared layout, `theme-*.css` per domain accent color |
 | **Fonts** | [Lobster](https://fonts.google.com/specimen/Lobster) (Google Fonts) | Distinctive heading font across all sites |
-| **CI/CD** | [GitHub Actions](https://github.com/features/actions) | Matrix build for all 5 sites, artifact upload, parallel deploy |
-| **Deploy** | [Cloudflare Workers](https://workers.cloudflare.com/) | Static asset hosting via `wrangler pages deploy`, one worker per site |
-| **DNS** | Cloudflare | Already managing DNS — zero additional setup for Pages custom domains |
+| **CI/CD** | [GitHub Actions](https://github.com/features/actions) | Matrix build for all sites, artifact upload, merge step, parallel deploy |
+| **Deploy** | IONOS SFTP | Static hosting via SFTP upload |
+| **DNS** | Cloudflare | DNS management + redirects from old subdomains |
 | **GitHub Catalog** | Python aggregator | Reads `.moonweb.yml` from each repo, outputs `repos.json` |
-| **Runtime** | Fully static | No server-side code, no containers, no database — pure HTML/CSS/JS |
+| **Runtime** | Fully static | No server-side code, no containers, no database |
 
 ---
 
-## 🎨 Design System
-
-### Header-consistent, content-flexible
-
-- **Header is identical** across all home-section sites: site-switcher (hub · infra · smarthome · code · retro · cv), domain accent color, Lobster title font.
-- **Index pages** use a shared card-grid layout with grouped sections.
-- **Detail pages** keep the same header but use a freer layout below it (e.g., pin tables, API docs, photos in free arrangement).
-
-### Accent colors
-
-| Domain | Color | Hex |
-|--------|-------|-----|
-| hub | Neutral blue | `#3b6ea5` |
-| infra | Grey-blue | `#99333A` |
-| smarthome | Teal | `#1f8a8a` |
-| code | Violet | `#3E5098` |
-| retro | Warm brown | `#8a6d3b` |
-
-### Emojis
-
-Each card on index pages has an emoji for visual navigation — consistent across hub, infra, smarthome, code, and retro.
-
----
-
-## 🚀 Local Development
+## Local Development
 
 ```bash
 npm install                        # install Eleventy + deps
+cd timecapsule && npm install      # timecapsule has own deps (Eleventy 2.x)
 
 npm run dev:hub                    # http://localhost:8081
 npm run dev:infra                  # http://localhost:8082
@@ -90,8 +69,9 @@ npm run dev:smarthome              # http://localhost:8083
 npm run dev:code                   # http://localhost:8084
 npm run dev:retro                  # http://localhost:8085
 npm run dev:stefankoelle           # http://localhost:8086
+npm run dev:timecapsule            # http://localhost:8087
 
-npm run dev                        # all 6 in parallel
+npm run dev                        # all 7 in parallel
 ```
 
 Each site has its own minimal Eleventy config (`<site>/eleventy.config.js`). Live reload is built in.
@@ -100,83 +80,96 @@ Each site has its own minimal Eleventy config (`<site>/eleventy.config.js`). Liv
 
 ```bash
 npm run prebuild                     # pre-build tasks (CV PDF)
-npm run build                        # builds all 5 → dist/<site>/
+npm run build                        # builds all sites
+npm run build:moonweb                # builds moonweb sites only (excludes stefankoelle)
 npm run build:hub                    # build single site
+npm run merge:moonweb                # merge all moonweb sites into dist/ for deployment
 ```
 
 ---
 
-## 📦 Project Structure
+## Project Structure
 
 ```
 moonweb-site/
-├── hub/                          # 🏠 Central index & gateway
-├── infra/                        # 🏗️  Infra overview + 3 detail pages
+├── hub/                          # Central index & gateway
+├── infra/                        # Infra overview + 8 detail pages
 │   ├── backup-strategy/
 │   ├── monitoring/
-│   └── dev-environment/
-├── smarthome/                    # 🏡 Smart home overview + 6 detail pages
+│   ├── dev-environment/
+│   └── ...
+├── smarthome/                    # Smart home overview + 9 detail pages
 │   ├── homematic-mqtt/
 │   ├── tasmota-energy/
-│   ├── balkonpi/
-│   ├── airplay-audio/
-│   ├── octoprint/
-│   └── tubearchivist/
-├── code/                         # 💻 GitHub catalog
+│   └── ...
+├── code/                         # GitHub catalog
 │   └── _data/repos.json          # populated by the aggregator
-├── retro/                        # 🕹️  Retro hardware (WIP)
-├── stefankoelle/                 # 👤 CV, career, personal site
+├── retro/                        # Retro hardware + 13 detail pages
+├── timecapsule/                  # 2000s retro design (Eleventy 2.x)
+│   ├── eleventy.config.js
+│   ├── package.json
+│   └── src/
+├── stefankoelle/                 # CV, career, personal site
 │   ├── eleventy.config.js
 │   ├── index.njk                 # Onepager (CV, Projects, Languages)
 │   ├── cv-print.njk              # CV-only for PDF generation
 │   ├── ledmatrix/                # LED Matrix WebServer documentation
 │   └── assets/                   # CSS, JS, images, favicons
-├── shared/                       # 🔧 Shared components
+├── shared/                       # Shared components
 │   ├── _includes/
 │   │   ├── base.njk              # base layout (header, site-switcher, footer)
 │   │   └── card-grid.njk         # card-grid template with emoji support
 │   ├── base.css                  # shared CSS (layout, cards, typography)
 │   └── theme-*.css               # accent colors per domain
 ├── scripts/
-│   └── github-aggregator/        # 🐍 Python: reads .moonweb.yml → repos.json
-│       ├── aggregate.py
-│       ├── example.moonweb.yml
-│       └── README.md
+│   ├── github-aggregator/        # Python: reads .moonweb.yml -> repos.json
+│   └── merge-moonweb.sh          # Merge script for deployment
 ├── .github/workflows/
-│   └── build-deploy.yml          # ⚙️ CI/CD: build + deploy to Cloudflare
-├── DESIGN.md                     # 📋 Initial concept (German)
-├── SPEC.md                       # 📋 Full specification (English, 159 lines)
-├── PLAN.md                       # 📋 Implementation plan
-├── TODO.md                       # 📋 Open items & workflow
+│   ├── build-deploy-moonweb.yml  # CI/CD: build + deploy to IONOS SFTP
+│   └── deploy-stefankoelle.yml   # CI/CD: stefankoelle.de to IONOS SFTP
+├── DESIGN.md                     # Initial concept
+├── SPEC.md                       # Full specification
+├── PLAN.md                       # Implementation plan
+├── TODO.md                       # Open items & workflow
 └── package.json                  # npm scripts for dev/build
 ```
 
 ---
 
-## 🔄 CI/CD Pipeline
+## CI/CD Pipeline
 
-### Cloudflare Pages (moonweb sites)
+### IONOS SFTP (www.moonweb.org)
 
-Defined in `.github/workflows/build-deploy.yml`:
+Defined in `.github/workflows/build-deploy-moonweb.yml`:
 
 ```
 push to main
-    │
-    ├── Build (matrix: hub, infra, smarthome, code, retro)
-    │   ├── checkout → setup-node (22) → npm ci
-    │   ├── npm run build:<site>
-    │   ├── validate dist/<site>/ exists & non-empty
-    │   └── upload artifact (7-day retention)
-    │
-    └── Deploy (matrix: 5 Cloudflare Workers)
-        ├── download artifact
-        ├── generate wrangler.toml
-        └── wrangler pages deploy
+    |
+    +-- Build (matrix: hub, infra, smarthome, code, retro)
+    |   +-- checkout -> setup-node (22) -> npm ci
+    |   +-- npm run build:<site>
+    |   +-- validate dist/<site>/ exists & non-empty
+    |   +-- upload artifact (7-day retention)
+    |
+    +-- Build timecapsule
+    |   +-- cd timecapsule && npm ci
+    |   +-- npm run build:timecapsule
+    |   +-- upload artifact
+    |
+    +-- Merge
+    |   +-- download all artifacts
+    |   +-- merge into dist/ (hub=root, others=subdirs)
+    |   +-- upload merged artifact
+    |
+    +-- Deploy
+        +-- download merged artifact
+        +-- SFTP upload to IONOS /websites/moonweb/
 ```
 
 **Required secrets:**
-- `CLOUDFLARE_API_TOKEN` — Workers:Edit permission
-- `CLOUDFLARE_ACCOUNT_ID` — Cloudflare account ID
+- `IONOS_SFTP_HOST`
+- `IONOS_SFTP_USER`
+- `IONOS_SFTP_PASSWORD`
 
 ### IONOS SFTP (stefankoelle.de)
 
@@ -184,12 +177,12 @@ Defined in `.github/workflows/deploy-stefankoelle.yml`:
 
 ```
 push to main (paths: stefankoelle/**)
-    │
-    ├── Build stefankoelle
-    │   └── npm run build:stefankoelle
-    │
-    └── Deploy via SFTP
-        └── lftp mirror → IONOS /deploy/stefankoelle/
+    |
+    +-- Build stefankoelle
+    |   +-- npm run build:stefankoelle
+    |
+    +-- Deploy via SFTP
+        +-- SFTP upload to IONOS /websites/stefankoelle/
 ```
 
 **Required secrets:**
@@ -199,7 +192,30 @@ push to main (paths: stefankoelle/**)
 
 ---
 
-## 🐍 GitHub Aggregator (code.moonweb.org)
+## URL Structure
+
+All moonweb.org sites are accessible under `www.moonweb.org` as subdirectories:
+
+| URL | Content |
+|-----|---------|
+| `www.moonweb.org/` | Hub (root) |
+| `www.moonweb.org/infra/` | Infrastructure |
+| `www.moonweb.org/smarthome/` | Smart Home |
+| `www.moonweb.org/code/` | Code catalog |
+| `www.moonweb.org/retro/` | Retro hardware |
+| `www.moonweb.org/timecapsule/` | 2000s time capsule |
+| `www.moonweb.org/impressum/` | Legal notice |
+
+Cloudflare redirects forward old subdomains:
+- `hub.moonweb.org/*` -> `www.moonweb.org/*`
+- `infra.moonweb.org/*` -> `www.moonweb.org/infra/*`
+- `smarthome.moonweb.org/*` -> `www.moonweb.org/smarthome/*`
+- `code.moonweb.org/*` -> `www.moonweb.org/code/*`
+- `retro.moonweb.org/*` -> `www.moonweb.org/retro/*`
+
+---
+
+## GitHub Aggregator (www.moonweb.org/code/)
 
 `scripts/github-aggregator/aggregate.py` automatically builds the project catalog:
 
@@ -214,7 +230,7 @@ push to main (paths: stefankoelle/**)
 ```yaml
 title: "MVG Departures"
 category: code              # code | smarthome | infra
-subcategory: "Web Apps"     # drives grouping on code.moonweb.org
+subcategory: "Web Apps"     # drives grouping on www.moonweb.org/code/
 status: active
 stack: [Python, FastAPI]
 hosted_on: "Docker Host Debian (PVE)"
@@ -229,42 +245,41 @@ export GITHUB_TOKEN=ghp_xxx
 python scripts/github-aggregator/aggregate.py
 ```
 
-> **Deliberately manual** — no scheduled CI job. The catalog is refreshed on demand, not on every push.
-
 ---
 
-## 📏 Content Rules
+## Content Rules
 
 | Site | Detail pages? | Rule |
 |------|--------------|------|
-| smarthome | ✅ Yes | When enough content exists — no placeholder cards |
-| infra | ⚠️ Rarely | Deliberately shallow — sensitive data (IPs, keys, passwords) stripped |
-| code | ❌ Never | Overview cards + GitHub links only — no README duplication |
-| retro | 🔨 Minimal | Still WIP — honest minimal overview, no over-investment |
+| smarthome | Yes | When enough content exists - no placeholder cards |
+| infra | Rarely | Deliberately shallow - sensitive data (IPs, keys, passwords) stripped |
+| code | Never | Overview cards + GitHub links only - no README duplication |
+| retro | Minimal | Honest minimal overview, no over-investment |
+| timecapsule | Static | 1:1 migration of original 2001 design, no changes |
 
 **Infra redaction rule:** Architecture-level only (Proxmox, Synology, Docker, VLAN concept). No concrete IPs, WireGuard keys, passwords, internal hostnames.
 
 ---
 
-## 🌍 Language
+## Language
 
-All five sites are written **entirely in English**. German source documents are translated once during migration (AI-assisted). New content is authored in English from the start.
+All moonweb sites are written **entirely in English**. The timecapsule uses the original 2001 English content.
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 | File | Purpose |
 |------|---------|
-| `DESIGN.md` | Initial concept and design decisions (German) |
-| `SPEC.md` | Complete specification — what gets built (English) |
+| `DESIGN.md` | Initial concept and design decisions |
+| `SPEC.md` | Complete specification - what gets built |
 | `PLAN.md` | Phased implementation plan |
 | `TODO.md` | Open items, workflow, and current status |
-| `README.md` | This file — project overview for GitHub |
+| `README.md` | This file - project overview for GitHub |
 
 ---
 
-## 📄 License
+## License
 
 [![CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
