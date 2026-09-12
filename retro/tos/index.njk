@@ -14,14 +14,33 @@ parent: "/retro/"
 <h2>What TOS actually is</h2>
 <p>TOS combines a compact kernel (GEMDOS, providing file and process handling similar to CP/M and MS-DOS) with GEM (Graphical Environment Manager), the graphical desktop and windowing system that gives the Atari ST its familiar look with icons, windows and drop-down menus.</p>
 
-<h2>Versions that matter</h2>
-<p>TOS 1.00 shipped with the earliest STs, while later revisions like TOS 1.04 added bug fixes and Blitter support. TOS 1.62 was the STE-only revision, and TOS 2.06, used on the Mega STE and commonly flashed onto expanded Mega STs today, added support for higher resolutions and better compatibility overall.</p>
-
-<h2>TOS today</h2>
-<p>Modern replacements and alternatives like EmuTOS (a free, open-source reimplementation) and Kaos TOS are frequently used on modified machines to fix compatibility issues, add features, or simply avoid depending on scarce original ROM chips. PP's improved iTOS 1.04 is another popular option, adding real FAT16 filesystem support for much better hard disk handling. These are exactly the kind of setups used across the machines documented on this site.</p>
-
 <h2>TOS vs. GEM</h2>
 <p>TOS and GEM are often mentioned together, but they're two distinct layers. TOS is the whole operating system, and it has two main parts: GEMDOS, the low-level kernel handling files, disks and processes, and GEM, the graphical environment. GEM (Graphical Environment Manager) is the desktop and windowing layer itself, providing the icons, windows and drop-down menus, plus its application programming interface. So GEM is a component of TOS, not a separate system. Its origins go back to Digital Research's GEM for the PC, which Atari adapted for the ST.</p>
+
+<h2>The official Atari TOS versions</h2>
+<p>The official Atari TOS versions are proprietary and were developed over the years for successive hardware generations. The most important ones:</p>
+<table>
+<tr><th>Version</th><th>Year</th><th>Highlights and target hardware</th></tr>
+<tr><td>TOS 1.00 / 1.02</td><td>1985/86</td><td>The original versions for the first ST models (192 KB ROM), still with many bugs and simple file handling. TOS 1.02 added Blitter and clock support.</td></tr>
+<tr><td>TOS 1.04</td><td>1989</td><td>The legendary "Rainbow TOS" with massive bug fixes, an improved file selector, real file moving on the desktop, and a faster GEM.</td></tr>
+<tr><td>TOS 1.62</td><td>1991</td><td>Adapted to the new STe hardware (sound DMA, hardware scrolling), fixing bugs of the problematic TOS 1.6.</td></tr>
+<tr><td>TOS 2.06</td><td>1991</td><td>A big step (512 KB ROM) for Mega STE/STe: built-in hard disk boot, scrolling file windows, optimised design and extended keyboard mappings.</td></tr>
+<tr><td>TOS 3.06</td><td>1990</td><td>Developed specifically for the Motorola 68030-based Atari TT030 (uses TT-RAM and higher resolutions).</td></tr>
+<tr><td>TOS 4.04</td><td>1992</td><td>The last official Atari version, for the Falcon030 with True-Color graphics modes and DSP support.</td></tr>
+</table>
+
+<h2>EmuTOS: a modern replacement</h2>
+<p><a href="https://emutos.sourceforge.io/" target="_blank">EmuTOS</a> is a modern, free, open-source replacement operating system, in contrast to the proprietary official Atari TOS versions. It's a complete reimplementation that in many ways goes beyond what the original Atari ROMs can do:</p>
+<ul>
+<li><strong>Built-in hard disk driver</strong>, unlike the original TOS, which often needed external driver software in the AUTO folder, EmuTOS ships with universal drivers for ACSI, SCSI and IDE devices.</li>
+<li><strong>Built-in command interpreter (EmuCon)</strong>, the larger ROM variants include a command line for entering DOS-like text commands directly.</li>
+<li><strong>Wide language and keyboard support</strong>, EmuTOS supports noticeably more languages and keyboard layouts than most regionally limited original TOS ROMs.</li>
+<li><strong>Modern filesystem compatibility</strong>, optimised support for DOS-compatible FAT16 partitions, which makes data exchange with modern PCs very easy.</li>
+<li><strong>Flexibility and updates</strong>, it can be run on real hardware as a ROM replacement, from floppy, or even as a program from within a running original TOS, without having to burn the physical chips.</li>
+</ul>
+
+<h2>Other alternatives</h2>
+<p>Besides EmuTOS, Kaos TOS and PP's improved iTOS 1.04 are popular options on modified machines. iTOS 1.04 adds real FAT16 filesystem support for much better hard disk handling. These are exactly the kind of setups used across the machines documented on this site.</p>
 
 <h2>Adding multitasking: Geneva and MiNT</h2>
 <p>Plain Atari TOS is a single-tasking system: only one main program runs at a time. Two well-known add-ons change that.</p>
