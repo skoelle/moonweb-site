@@ -23,6 +23,15 @@ parent: "/retro/"
 <h2>A note on monitors</h2>
 <p>Passive RGB-to-VGA adapters output the Atari's native timings, so color modes (ST Low and ST Medium) need a monitor that can lock to a 15 kHz horizontal sync signal. See my <a href="/retro/atari-monitor-compatibility/">monitor compatibility</a> page for which modern panels actually work. Mono mode (ST High) works on any standard VGA display.</p>
 
+<h2>VGA switch setup</h2>
+<p>A 3-port VGA switch box routes the shared Dell monitor between the different machines:</p>
+<table>
+<tr><th>Port</th><th>VGA</th><th>USB</th></tr>
+<tr><td>1</td><td>Atari Mega 4 "High" (direct)</td><td>Raspberry Pi (not connected, otherwise no reboot)</td></tr>
+<tr><td>2</td><td>MiST</td><td>MiST</td></tr>
+<tr><td>3</td><td>MiSTer</td><td>MiSTer</td></tr>
+</table>
+
 <h2>Gallery</h2>
 <img src="stvga-low.jpg" alt="The MCSWITCH VGA adapter connected to the Atari" width="640" height="640" loading="lazy">
 <p class="caption">The MCSWITCH adapter on the Mega ST 4 "Low" machine.</p>
