@@ -3,8 +3,8 @@ const markdownIt = require("markdown-it");
 const md = new markdownIt({ html: true, breaks: true });
 
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addPassthroughCopy({ "src/assets": "/timecapsule/assets" });
-  eleventyConfig.addPassthroughCopy({ "src/.htaccess": "/timecapsule/.htaccess" });
+  eleventyConfig.addPassthroughCopy({ "assets": "/timecapsule/assets" });
+  eleventyConfig.addPassthroughCopy({ ".htaccess": "/timecapsule/.htaccess" });
 
   eleventyConfig.setLibrary("md", md);
 
