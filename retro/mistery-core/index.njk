@@ -1,0 +1,41 @@
+---
+title: "MiSTery Core on MIST: An FPGA Backup for the Mega ST 4"
+section: "retro"
+tags: "retro"
+description: "Running the MiSTery Core on the MIST FPGA board as a preserve for the Mega ST 4 Low, with five configurations from original TOS to Viking graphics."
+layout: base.njk
+parent: "/retro/"
+---
+<h1>MiSTery Core on MIST: An FPGA Backup for the Mega ST 4</h1>
+<div class="detail-content">
+
+<p>After getting the <a href="/retro/mega-st-low/">Mega ST 4 "Low"</a> fully configured, I cloned its entire UltraSatan SD card for the <a href="/retro/mist-mister-fpga/">MIST</a> FPGA board. The MiSTery Core on the MIST can access SD cards directly, so every partition from the UltraSatan is available right away, no HDD images needed. I can pull the SD card out of the MIST, put it into my computer and copy data straight onto it, just like with the UltraSatan. That keeps the MIST and the "Low" in sync and makes backups and data transfers very easy.</p>
+
+<h2>Why do it</h2>
+<p>The main reason is preservation. If the real Mega ST 4 ever breaks down, the MiSTery Core on the MIST can take over. It's not a replacement for the real hardware, but it means a dead Mega 4 doesn't leave me without a working setup.</p>
+
+<h2>The SD card workflow</h2>
+<p>The MIST reads the same SD card layout as the UltraSatan. Since the MiSTery Core supports direct SD card access, all partitions are immediately available. There's no need to convert partitions into HDD images or mount them through an emulator menu. The card comes out of the MIST and goes straight into a PC card reader. That makes it trivially easy to move data between the MIST and the real machine, and to keep backups current.</p>
+
+<h2>My configurations</h2>
+<p>I've prepared five configurations, each for a different use case:</p>
+
+<h3>1. iTOS 1.04 (same as the Low)</h3>
+<p>The same setup as on the <a href="/retro/mega-st-low/">Mega ST 4 "Low"</a>. With iTOS, pressing a number key and then space during boot selects the boot drive: 1 boots from D (GAMES), 2 from E (DEMOS), 3 from F (Medium Resolution). Exactly the way I have it on the real machine.</p>
+
+<h3>2. 68020 14 MB with Viking Card</h3>
+<p>This is the most interesting configuration. On the real Mega 4 "Low", high resolution is limited to 640x400, which always felt small to me, hence the <a href="/retro/et4000-experiment/">ET4000</a> experiments and eventually the <a href="/retro/mega-st-high/">Mega ST 4 "High"</a>. On the MiSTery Core, I can activate an FPGA recreation of the Viking graphics card. The original Viking had 1280x900, the FPGA version uses 1280x1024, which matches exactly the native resolution of my <a href="/retro/atari-monitor-compatibility/">NEC monitor</a>. Unlike the ET4000, which gives me 256 colours, the Viking is black and white only. But paired with Geneva and the faster 68020 processor, it's genuinely pleasant to work on. The core also emulates an EtherNEC and I have STinG configured for networking.</p>
+
+<h3>3. 68000 8 MB</h3>
+<p>A slightly improved version of my high resolution configuration without the Viking card. I use this one for testing only.</p>
+
+<h3>4. ST TOS 1.04</h3>
+<p>As close to the original ST as possible. For playing floppy games and demos in a native configuration.</p>
+
+<h3>5. STE TOS 1.62</h3>
+<p>Same idea, but for STE-specific content. Original floppy games and demos that need STE hardware.</p>
+
+<h2>How it compares to the real Low</h2>
+<p>The MiSTery Core is an accurate FPGA recreation, so it behaves very much like the real hardware. The biggest practical differences are the Viking card option, which the real Mega ST 4 doesn't have, and the fact that the MIST has no physical MegaBus or ACSI port. But for the core use cases, preserving the "Low" setup and running floppy content, it's a solid stand-in.</p>
+
+</div>
