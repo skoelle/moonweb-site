@@ -48,8 +48,13 @@ parent: "/retro/"
 <li><strong>RAM optimisation for games (Raw Image Access / RIA)</strong>, special code in the ROM can stream games directly from hard disk or SD card as an image, so even large 1 MB games run on machines that would otherwise have too little memory for hard disk loaders.</li>
 </ul>
 
+<h2>KAOS TOS</h2>
+<p>KAOS TOS is a comprehensive software patch for the Atari ST's TOS, developed from 1990 to fix bugs and boost performance. It's not a standalone operating system but a patch for the original Atari TOS, mainly based on TOS 1.02 and TOS 1.04. The developers corrected over 80 known programming errors in the original system. KAOS 1.2 was published in the c't magazine, while the later KAOS 1.4.2 was sold commercially.</p>
+<p>It ran noticeably faster, and although critics claimed this was only from disabling visual effects, re-enabling them disproved that. Since the Atari ST keeps its operating system in ROM, KAOS was often burned onto EPROM chips and physically installed in the machine. Most cleanly written applications ran without problems, with special helper patches for the few incompatible ones. Atari never officially licensed the project but tolerated it on the market. It was shaped by Andreas Kromke and Normen Kowalewski, among others, and became well known in the Atari community through coverage in the ST-Magazin.</p>
+<p>KAOS TOS is also installed on my <a href="/retro/mega-st-low/">"Low"</a> machine, though I rarely use it. Theoretically it's there and available if needed.</p>
+
 <h2>Other alternatives</h2>
-<p>Besides EmuTOS, Kaos TOS is another popular option on modified machines. These are exactly the kind of setups used across the machines documented on this site.</p>
+<p>Besides EmuTOS and KAOS, these are exactly the kind of setups used across the machines documented on this site.</p>
 
 <h2>Adding multitasking: Geneva and MiNT</h2>
 <p>Plain Atari TOS is a single-tasking system: only one main program runs at a time. Two well-known add-ons change that.</p>
@@ -57,5 +62,12 @@ parent: "/retro/"
 <p>Geneva is a resource-friendly, self-contained multitasking environment for the Atari ST. It runs on top of normal TOS and replaces or extends GEM, letting several GEM programs and accessories run in parallel, even on older and weaker Atari models without a big performance hit. It needs little memory and stays very compatible with older software that was never written for multitasking, which is why I run it on the <a href="/retro/mega-st-high/">"High"</a> workstation.</p>
 <h3>MiNT</h3>
 <p>MiNT (originally "MiNT is Not TOS", later "MiNT is Now TOS") is a much more powerful, Unix-like replacement kernel. It swaps GEMDOS for a Unix-style memory and process management layer, and together with a graphical shell like XaAES or N.AES it enables true, modern multitasking, today usually known as FreeMiNT. The catch is that it often needs stronger hardware, ideally a processor with a memory-management unit (PMMU) such as the Motorola 68030 in the TT or Falcon, and tends to run slowly on a bare old ST. I haven't managed to get MiNT running reliably on any of my machines, which is exactly why the "High" machine uses Geneva instead.</p>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="https://emutos.sourceforge.io/" target="_blank">EmuTOS - official project page</a></li>
+<li><a href="http://www.mbernstein.de/atari/system/kaos.htm" target="_blank">KAOS TOS - mbernstein.de</a></li>
+<li><a href="https://atari.8bitchip.info/tosimprgu.html" target="_blank">TOS improving (iTOS) - PP's Atari page</a></li>
+</ul>
 
 </div>
