@@ -39,8 +39,17 @@ parent: "/retro/"
 <li><strong>Flexibility and updates</strong>, it can be run on real hardware as a ROM replacement, from floppy, or even as a program from within a running original TOS, without having to burn the physical chips.</li>
 </ul>
 
+<h2>PP's improved iTOS 1.04</h2>
+<p>The versions of TOS 1.04 modified by Pera Putnik ("PPera") add deep, unofficial system extensions that were never part of the original Atari TOS. While the original TOS 1.04 mainly fixed bugs, PPeras version breaks through the old Atari ST's hardware limits. This is the TOS I use on the <a href="/retro/mega-st-low/">"Low"</a> machine. The main additions:</p>
+<ul>
+<li><strong>Built-in IDE and ACSI hard disk driver (autoboot)</strong>, normal TOS 1.04 can't boot directly from IDE drives or modern SD-card adapters without first loading a driver (like HDDRIVER) from floppy. PPeras version has universal hard disk drivers built directly into the TOS ROM, so the ST boots immediately and very fast from modern storage like an UltraSatan or IDE modification.</li>
+<li><strong>FAT32 support and huge partitions</strong>, the original TOS 1.04 only supports the old FAT16 filesystem and is limited to small partitions (roughly 16 to 32 MB per drive). With PPeras patches, TOS 1.04 handles much larger partitions, making data exchange with modern PCs via SD card very easy.</li>
+<li><strong>"Chimera" versions (TOS 1.04 with the TOS 2.06 desktop)</strong>, these combine the stable, highly compatible core of TOS 1.04 with the more modern desktop of TOS 2.06. You get the comfort of TOS 2.06 (better file windows, desktop shortcuts) while keeping the near-100% game compatibility of the old TOS 1.04.</li>
+<li><strong>RAM optimisation for games (Raw Image Access / RIA)</strong>, special code in the ROM can stream games directly from hard disk or SD card as an image, so even large 1 MB games run on machines that would otherwise have too little memory for hard disk loaders.</li>
+</ul>
+
 <h2>Other alternatives</h2>
-<p>Besides EmuTOS, Kaos TOS and PP's improved iTOS 1.04 are popular options on modified machines. iTOS 1.04 adds real FAT16 filesystem support for much better hard disk handling. These are exactly the kind of setups used across the machines documented on this site.</p>
+<p>Besides EmuTOS, Kaos TOS is another popular option on modified machines. These are exactly the kind of setups used across the machines documented on this site.</p>
 
 <h2>Adding multitasking: Geneva and MiNT</h2>
 <p>Plain Atari TOS is a single-tasking system: only one main program runs at a time. Two well-known add-ons change that.</p>
