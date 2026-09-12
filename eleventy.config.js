@@ -46,6 +46,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("retro/atari-vga/*.jpg");
   eleventyConfig.addPassthroughCopy("retro/laser-mouse/*.jpg");
   eleventyConfig.addPassthroughCopy("retro/mega-st-high/*.jpg");
+  eleventyConfig.addPassthroughCopy("retro/dos-486-tower/*.jpg");
   eleventyConfig.addPassthroughCopy("retro/mistery-core/*.jpg");
 
   // Standalone demo group archives (static HTML)

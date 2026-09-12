@@ -16,9 +16,19 @@ parent: "/retro/"
 
 <h2>The MiSTer recreation</h2>
 <p>The AO486 core on MiSTer FPGA handles the hardware convincingly. The real work was rebuilding the software environment from memory: the MS-DOS version, the memory managers (HIMEM.SYS, EMM386), the Sound Blaster drivers, and the AUTOEXEC.BAT and CONFIG.SYS tuning that made the original machine run smoothly.</p>
+<img src="mister.jpg" alt="MiSTer menu on NEC MultiSync" loading="lazy">
+<p class="caption">MiSTer menu on the NEC MultiSync LCD, the same monitor that drives the real retro hardware.</p>
 
 <h2>Context: DOSMENU</h2>
 <p>A key part of the preserved environment is <strong><a href="https://28k8.moonweb.org/bbs/pc/dosmenu/">DOSMENU</a></strong>, a boot configuration utility written in Turbo Pascal 6.0 in 1994, originally developed specifically for this Colani 486 machine. DOSMENU let you choose at boot time which AUTOEXEC.BAT and CONFIG.SYS commands to load, a critical feature in the DOS era, where memory management was manual and games often required different driver configurations. Features included saveable presets, a built-in MOD player, PCX picture display, and a DoubleSpace memory unloader. The original source: ~50k of Turbo Pascal, roughly 1900 lines plus some inline assembler.</p>
+<img src="mister_486_boot1_dosmenu.jpg" alt="DOSMENU Version 2.0 title screen" loading="lazy">
+<p class="caption">DOSMENU Version 2.0 title screen, the boot configuration utility.</p>
+<img src="mister_486_boot2_dosmenu.jpg" alt="DOSMENU configuration interface" loading="lazy">
+<p class="caption">The DOSMENU configuration interface showing system info, AUTOEXEC.BAT and CONFIG.SYS content, and saveable presets (F01-F10) for different boot configurations.</p>
+<img src="mister_486_boot3_dosmenu.jpg" alt="DOSMENU boot sequence" loading="lazy">
+<p class="caption">DOSMENU boot sequence showing the QEMM386 memory manager loading, registered to Stefan Koelle.</p>
+<img src="mister_486_boot4_dosmenu.jpg" alt="DOSMENU loading DOS Navigator" loading="lazy">
+<p class="caption">DOSMENU unregistered version with DOS Navigator 1.51 (by RIT Research Labs) loading at the C:\> prompt.</p>
 
 <h2>Why a rebuild from memory</h2>
 <p>The point isn't just to play DOS games, it's to recapture the computing experience from that era. The way DOS memory management worked, the way sound drivers had to be configured manually, the way batch files chained together to create a usable environment. This level of detail is lost when you just launch a DOS game from a modern frontend. The MiSTer setup recreates the whole boot process, from BIOS POST to the C:\> prompt, the way I remember it from the mid-90s.</p>
@@ -31,6 +41,12 @@ parent: "/retro/"
 <li><strong><a href="https://28k8.moonweb.org/bbs/pc/dosmenu/">DOSMENU</a></strong>, a custom boot configuration utility written specifically for this Colani 486 in 1994. Built in Turbo Pascal, it let you choose at boot time which AUTOEXEC.BAT and CONFIG.SYS commands to load, essential for managing DOS memory across different games and applications.</li>
 <li><strong>The quirks</strong>, the specific workarounds and tweaks that were needed to get everything running together, the kind of institutional knowledge that only exists on a well-used personal machine.</li>
 </ul>
+<img src="mister_486_prg1_shell.jpg" alt="X-OS file manager" loading="lazy">
+<p class="caption">X-OS (eXtended Operating System), my Norton Commander clone for DOS, browsing the SkyLINE source directory.</p>
+<img src="mister_486_prg2_diskinfo.jpg" alt="DiskInfo V1.0" loading="lazy">
+<p class="caption">DiskInfo V1.0, a freeware disk space visualizer I wrote in 1993 for SkyLINE.</p>
+<img src="mister_486_prg3_tetris.jpg" alt="Tetris Competition" loading="lazy">
+<p class="caption">Tetris Competition, a two-player Tetris game I wrote for SkyLINE.</p>
 
 <h2>AO486 vs real hardware</h2>
 <p>The MiSTer AO486 core handles the emulation convincingly. Timing accuracy is good enough for games that rely on cycle-sensitive behavior. Sound Blaster emulation covers the standard OPL3 FM synthesis and digital audio. The main trade-off is that some hardware-specific quirks, like the behavior of specific ISA bus peripherals, aren't perfectly replicated. But since this is a rebuild from memory rather than an exact copy anyway, that's more than good enough for a working DOS environment.</p>
