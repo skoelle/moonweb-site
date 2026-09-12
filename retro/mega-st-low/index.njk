@@ -26,6 +26,16 @@ parent: "/retro/"
 <li><strong>Peripherals</strong>, a <a href="/retro/sidecartridge/">SidecarTridge Multi-device</a> on the ROM port, a <a href="/retro/atari-networking-bbs/">Wi-Fi modem</a> for dialing into BBSs, an original Atari keyboard with a <a href="/retro/mouster/">mouSTer</a> and USB mouse, and an <a href="/retro/atari-vga/">MCSWITCH</a> adapter for VGA output.</li>
 </ul>
 
+<h2>Booting</h2>
+<p>Switching between High Res and Low Res is done at the VGA adapter, not in software. The iTOS 1.04 boot options select which drive to boot from:</p>
+<ul>
+<li><strong>High Res</strong>, switch to EmuTOS on the Cloudy, then set the VGA adapter to Mono. Let it boot through.</li>
+<li><strong>Low Res</strong>, switch to iTOS 1.04i on the Cloudy, then set the VGA adapter to Color. At the boot prompt:</li>
+<li><strong>1 + Space</strong>, boot from <code>C:\BT\1</code>, opens D: GAMES</li>
+<li><strong>2 + Space</strong>, boot from <code>C:\BT\2</code>, opens E: DEMOS</li>
+<li><strong>3 + Space</strong>, boot from <code>C:\BT\3</code>, opens F: Med-Res</li>
+</ul>
+
 <h2>Role</h2>
 <p>Focused on LowRes demos and games, with convenient image handling via the Gotek and SidecarTridge. No need for complex productivity software or precise keyboard layouts here. The entire SD card has been cloned to the <a href="/retro/mistery-core/">MiSTery Core on the MIST</a> as a backup and for easy data transfer between the real machine and the FPGA.</p>
 
