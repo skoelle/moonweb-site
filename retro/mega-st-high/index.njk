@@ -2,7 +2,7 @@
 title: "Mega ST 4 High: The Workstation"
 section: "retro"
 tags: "retro"
-description: "The high-end Mega ST 4 workstation with MonSTerBoard, ET4000, NetUSBee, Eiffel interface and a modern STPSU, running Geneva."
+description: "The high-end Mega ST 4 workstation with MonSTerBoard, ET4000, NetUSBee, Eiffel interface, a modern STPSU and patched TOS 2.06, running Geneva."
 layout: base.njk
 parent: "/retro/"
 ---
@@ -20,7 +20,7 @@ parent: "/retro/"
 </ul>
 
 <h2>MonSTerBoard</h2>
-<p>The <a href="/retro/monsterboard/">MonSTerBoard</a> is plugged onto the 68000 socket, with jumpers set so TOS 2.06 is used from its flash. It provides up to 8 MB of AltRAM (TT-compatible range, activated via <code>m_altram.prg</code>), an IDE interface for CF/IDE storage, and a flash ROM holding multiple TOS images. I boot from a 1 GB CompactFlash card over IDE, which is noticeably faster than an ACSI drive.</p>
+<p>The <a href="/retro/monsterboard/">MonSTerBoard</a> is plugged onto the 68000 socket, with jumpers set so TOS 2.06 is used from its flash. The TOS 2.06 is patched to skip the memory check, which noticeably speeds up the boot process. KAOS TOS is also installed on the flash, though currently I always run Geneva under TOS 2.06. No TOS switcher is wired up yet, so the machine is fixed to TOS 2.06 for now. The MonSTerBoard provides up to 8 MB of AltRAM (TT-compatible range, activated via <code>m_altram.prg</code>), an IDE interface for CF/IDE storage, and a flash ROM holding multiple TOS images. I boot from a 1 GB CompactFlash card over IDE, which is noticeably faster than an ACSI drive.</p>
 
 <h2>Peripherals in Use</h2>
 <ul>
