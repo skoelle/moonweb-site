@@ -1,23 +1,44 @@
 ---
-title: "Mini Arcades and Handhelds: Sorting the Real Deal from the Bootlegs"
+title: "Handheld Emulation Devices: ODROID-GO, PocketGo and RG35XX"
 section: "retro"
 tags: "retro"
-description: "A buyer's guide to compact retro gaming devices, and why the cheapest option is almost never the right one."
+description: "Three handheld emulation devices for retro gaming on the move, from an ESP32-based ODROID-GO to a pocketable PocketGo and a powerful RG35XX."
 layout: base.njk
 parent: "/retro/"
 ---
-<h1>Mini Arcades and Handhelds: Sorting the Real Deal from the Bootlegs</h1>
+<h1>Handheld Emulation Devices: ODROID-GO, PocketGo and RG35XX</h1>
 <div class="detail-content">
 
-<p>The market for tiny plug-and-play arcade cabinets is full of traps. Some devices ship with genuinely licensed classics; others are dressed-up bootleg NES clones with unfamiliar Chinese ROM hacks pretending to be arcade games.</p>
+<p>For retro gaming away from a screen, I use three handheld emulation devices. Each one covers a different sweet spot in the trade-off between size, power and convenience. The key difference is what systems each one can actually emulate well, and how much effort it takes to get there.</p>
 
-<h2>What to Watch For</h2>
-<ul>
-<li><strong>The bootleg trap</strong>, devices built around VT369-style chips (NES-compatible, not real arcade hardware) often bundle 200+ "games" that turn out to be unlicensed clones and homebrew hacks, cataloged in enthusiast bootleg-game wikis. No Pac-Man, no Donkey Kong, just look-alikes.</li>
-<li><strong>Genuinely licensed compact options</strong>, devices built around real Namco or SNK licenses deliver actual classics (Pac-Man, Galaga, Dig Dug, dozens of Neo Geo titles) with premium displays, at a similar price point to the bootleg boxes.</li>
-<li><strong>Expandable options</strong>, some cabinet-style devices accept extra MAME ROMs via SD card, letting you add real arcade classics after the fact, the one feature the bootleg boxes almost never offer without heavy soldering.</li>
-<li><strong>The maximalist route</strong>, a Raspberry Pi running RetroPie, or a MiSTer FPGA setup, both scale to tens of thousands of games or hardware-accurate arcade cores respectively, at the cost of more setup effort.</li>
-</ul>
+<h2>ODROID-GO</h2>
+<p>The ODROID-GO by Hardkernel is a DIY handheld built around an ESP32 microcontroller. It has a 2.4-inch 320x240 TFT display, a speaker, D-pad, face buttons, shoulder buttons, a Micro SD card slot, and a built-in rechargeable battery. The whole thing runs on Retro-Go firmware, which loads everything from the SD card. The ESP32 is a dual-core chip running at 240 MHz with 4 MB of PSRAM, which is enough for 8-bit systems but starts to struggle with anything heavier.</p>
+<p><strong>What it plays well:</strong> NES, Game Boy, Game Boy Color, Sega Master System, Sega Game Gear, PC Engine, ColecoVision, Atari Lynx, Game and Watch. DOOM also runs on it, including mods.</p>
+<p><strong>What it does not play well:</strong> SNES is slow and often unplayable. Game Boy Advance is out of reach. No 16-bit console emulation beyond what the SNES situation shows.</p>
+<p><strong>Game packs:</strong> Full game packs for all supported systems are on the SD card. No need to pick and choose.</p>
+<p><strong>Why use it:</strong> It is the smallest and cheapest of the three, and for pure 8-bit gaming it is surprisingly capable. The Retro-Go firmware is clean, boots fast, and the battery lasts a long time. It is the grab-and-go option when you just want to play some NES or Game Boy games on the couch.</p>
 
-<p class="note">If a mini-arcade's game list reads like a string of titles you've genuinely never heard of, that's the tell. Real arcade classics have instantly recognisable names, bootlegs hide behind vague, generic-sounding ones.</p>
+<h2>PocketGo</h2>
+<p>The original PocketGo by BittBoy is a handheld in a Game-Boy-Advance-style landscape form factor with a 2.4-inch IPS display at 320x240. It runs on an Allwinner F1C100S chip at 533 to 798 MHz with 32 MB of RAM. The community CFW 1.3 firmware replaces the stock software and adds better emulator support, a cleaner menu system, and more configurable options. It has D-pad, four face buttons, shoulder buttons, and runs off a 1000 mAh battery.</p>
+<p><strong>What it plays well:</strong> Game Boy, Game Boy Color, Game Boy Advance, NES, Sega Genesis, Sega Master System. The GBA emulation is the real draw here, something the ODROID-GO cannot do.</p>
+<p><strong>What it does not play well:</strong> SNES is playable but not perfect, with occasional slowdowns. PlayStation is not an option.</p>
+<p><strong>Game packs:</strong> Full game packs for all supported systems are on the SD card.</p>
+<p><strong>Why use it:</strong> It is still pocketable, the IPS screen looks great, and it fills the gap between the ODROID-GO and the RG35XX. If you want Game Boy Advance on the go without carrying something bigger, this is the one. The CFW 1.3 firmware makes a real difference over the stock software.</p>
+
+<h2>RG35XX</h2>
+<p>The RG35XX by Anbernic is the serious handheld of the three. It has a 3.5-inch IPS display at 640x480, an Allwinner H313 quad-core ARM Cortex-A53 chip, and significantly more power than the other two. It runs a Linux-based operating system and can handle systems up to and including PlayStation 1. The build quality is noticeably better, with a sturdier feel and a screen that is both larger and sharper.</p>
+<p><strong>What it plays well:</strong> Everything the ODROID-GO and PocketGo do, plus PlayStation 1, CPS1/CPS2 arcade, Neo Geo, and more demanding SNES titles. It also supports HDMI output to a TV.</p>
+<p><strong>What it does not play well:</strong> Nintendo 64 and PSP are hit-or-miss. Dreamcast is mostly too much for it.</p>
+<p><strong>Game packs:</strong> Only the major platforms have game packs installed. The smaller systems are not pre-loaded.</p>
+<p><strong>Why use it:</strong> When you want the full experience, including PlayStation and arcade games, or when you want to hook the handheld up to a TV. It is the heaviest and least pocketable of the three, but it covers the widest range of systems.</p>
+
+<h2>Which One for What</h2>
+<table>
+<tr><th>Device</th><th>Best for</th><th>Games loaded</th><th>Screen</th></tr>
+<tr><td>ODROID-GO</td><td>NES, Game Boy, 8-bit on the couch</td><td>All systems</td><td>2.4" TFT</td></tr>
+<tr><td>PocketGo</td><td>Game Boy Advance, 16-bit on the go</td><td>All systems</td><td>2.4" IPS</td></tr>
+<tr><td>RG35XX</td><td>PlayStation, arcade, everything at home</td><td>Major platforms only</td><td>3.5" IPS</td></tr>
+</table>
+
+<p class="note">The market for tiny retro gaming handhelds is full of traps. If a device's game list reads like a string of titles you have never heard of, that is the tell. Real arcade classics have instantly recognisable names, bootlegs hide behind vague, generic-sounding ones. All three devices above run proper emulation firmware with real ROMs, not bootleg NES clones dressed up as something else.</p>
 </div>
