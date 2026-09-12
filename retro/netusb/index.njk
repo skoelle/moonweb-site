@@ -21,6 +21,7 @@ parent: "/retro/"
 
 <h2>Real Internet with STinG</h2>
 <p>For networking I use the STinG TCP/IP stack together with the <code>enec.stx</code> (or <code>enec3.stx</code> for 68030) network card driver. Once configured, the Mega ST gets a real IP address on the network and can reach the internet, connecting the 1980s machine to modern services. The original NetUSBee was developed by Candle'O'Sin, and the current production runs are sold by Lotharek in a sturdy grey metal case that matches the Atari look.</p>
+<p>STinG MAC addresses on my machines: Mega ST 4 "High" <code>00:B7:F8:77:C6:B3</code>, MiST <code>A0:CE:C8:5D:9C:A2</code>.</p>
 
 <h2>Exchanging Data with Windows via USB</h2>
 <p>The USB port is particularly handy for data exchange. I use a FAT16-formatted USB stick, which the ST can read and write through the USB mass-storage driver. Because FAT16 is also readable on a modern Windows PC, I can transfer files between the Atari and a Windows machine just by moving the stick between them, no special cables or network tricks required.</p>
@@ -33,4 +34,15 @@ parent: "/retro/"
 <li><a href="https://www.jungsi.de/retro-atari-st-netusbee/" target="_blank">NetUSBee [Atari ST] - Jungsi's Corner (installation guide)</a></li>
 <li><a href="https://lotharek.pl/productdetail.php?id=46" target="_blank">Netusbee - Lotharek (order page, firmware and drivers)</a></li>
 </ul>
+
+<h2>WiFi SNTP Clock</h2>
+<p>A separate ESP module provides WiFi time synchronisation for the Atari ST. <a href="https://www.chzsoft.de/site/hardware/wifi-sntp-clock-for-the-atari-st-tt-falcon/" target="_blank">czietz's simple WiFi SNTP firmware</a> runs on the ESP and communicates with the Atari over a serial connection. Once connected, Connect95 can be used for serial communication, and WgetST can download files via HTTP, though it is limited to HTTP only.</p>
+
+<h2>Going online via proxy</h2>
+<p>With STinG configured and the network running, the next step is getting actual services accessible from the Atari. Two approaches work well:</p>
+<ul>
+<li><a href="https://github.com/atauenis/webone" target="_blank">WebOne</a>, a proxy server that translates HTTP requests so that a vintage browser like Cab can browse the web through it. Installation docs are on the <a href="https://github.com/atauenis/webone/wiki/Linux-installation" target="_blank">GitHub wiki</a>.</li>
+<li><a href="https://github.com/tenox7/wrp" target="_blank">Web Rendering Proxy (WRP)</a>, an alternative that renders pages server-side and serves them as images, useful when nothing else works with the old browser. Runs as a Docker container.</li>
+</ul>
+<p>Both run on a Linux machine on the same network, with the Atari pointing its browser proxy settings at that machine's IP. A Linux LXC container on the homelab can serve as a dedicated Atari internet proxy server for this purpose.</p>
 </div>
