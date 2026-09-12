@@ -185,6 +185,18 @@ main > h1 {
   text-underline-offset: 2px;
 }
 .detail-content a:hover { color: var(--text); }
+.detail-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0 0.5rem;
+  border-radius: 8px;
+}
+.detail-content .caption {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0 0 1.5rem;
+}
 
 .back-link {
   display: inline-block;
