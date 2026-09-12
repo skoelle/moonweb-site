@@ -2,7 +2,7 @@
 title: "TOS: The Atari ST Operating System Explained"
 section: "retro"
 tags: "retro"
-description: "A short explanation of TOS, the operating system behind every Atari ST, and the versions that matter today."
+description: "A short explanation of TOS and GEM, the versions that matter today, and the multitasking add-ons Geneva and MiNT."
 layout: base.njk
 parent: "/retro/"
 ---
@@ -19,5 +19,15 @@ parent: "/retro/"
 
 <h2>TOS today</h2>
 <p>Modern replacements and alternatives like EmuTOS (a free, open-source reimplementation) and Kaos TOS are frequently used on modified machines to fix compatibility issues, add features, or simply avoid depending on scarce original ROM chips. PP's improved iTOS 1.04 is another popular option, adding real FAT16 filesystem support for much better hard disk handling. These are exactly the kind of setups used across the machines documented on this site.</p>
+
+<h2>TOS vs. GEM</h2>
+<p>TOS and GEM are often mentioned together, but they're two distinct layers. TOS is the whole operating system, and it has two main parts: GEMDOS, the low-level kernel handling files, disks and processes, and GEM, the graphical environment. GEM (Graphical Environment Manager) is the desktop and windowing layer itself, providing the icons, windows and drop-down menus, plus its application programming interface. So GEM is a component of TOS, not a separate system. Its origins go back to Digital Research's GEM for the PC, which Atari adapted for the ST.</p>
+
+<h2>Adding multitasking: Geneva and MiNT</h2>
+<p>Plain Atari TOS is a single-tasking system: only one main program runs at a time. Two well-known add-ons change that.</p>
+<h3>Geneva</h3>
+<p>Geneva is a resource-friendly, self-contained multitasking environment for the Atari ST. It runs on top of normal TOS and replaces or extends GEM, letting several GEM programs and accessories run in parallel, even on older and weaker Atari models without a big performance hit. It needs little memory and stays very compatible with older software that was never written for multitasking, which is why I run it on the <a href="/retro/mega-st-high/">"High"</a> workstation.</p>
+<h3>MiNT</h3>
+<p>MiNT (originally "MiNT is Not TOS", later "MiNT is Now TOS") is a much more powerful, Unix-like replacement kernel. It swaps GEMDOS for a Unix-style memory and process management layer, and together with a graphical shell like XaAES or N.AES it enables true, modern multitasking, today usually known as FreeMiNT. The catch is that it often needs stronger hardware, ideally a processor with a memory-management unit (PMMU) such as the Motorola 68030 in the TT or Falcon, and tends to run slowly on a bare old ST. I haven't managed to get MiNT running reliably on any of my machines, which is exactly why the "High" machine uses Geneva instead.</p>
 
 </div>
