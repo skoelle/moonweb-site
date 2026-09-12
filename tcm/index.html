@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TranceMission Archive - Pascal PC Intros from 1992-1995 - Graphics, Animation, and Sound</title>
+	<meta name="description" content="Explore three Pascal demo programs showcasing graphics, animation, and sound capabilities using Turbo Pascal and assembler. Learn about text and graphics animation, sound integration, and user interaction in Pascal programming.">
+	<link rel="canonical" href="https://www.moonweb.org/tcm/" />
+    <style>
+        body {
+            background-color: black;
+            color: #FFF741;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 18px; /* Schriftgröße des Textes */
+        }
+        .container {
+            text-align: center;
+            max-width: 1000px;
+            width: 100%;
+            padding: 20px;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .intro {
+            margin-bottom: 40px;
+        }
+        .program {
+            margin-bottom: 40px;
+        }
+        .screenshots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .screenshots a {
+            display: inline-block;
+            position: relative;
+        }
+        .screenshots img {
+            max-width: 300px;
+            height: auto;
+        }
+        .youtube-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+        }
+        a {
+            color: #E76D00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #CB4D00;
+            text-decoration: underline;
+        }
+        /* Lightbox CSS */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+			height: 450px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .lightbox-close:hover,
+        .lightbox-close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+		table {
+			border:0px;
+			border-color:#000000;
+		}
+		th {
+			text-align:left;
+		}
+		td {
+			text-align:left;
+		}
+		@media (max-width: 768px) {
+			#logo {
+				width:100%
+			}
+		}
+    </style>
+</head>  
+<body>
+    <div class="container">
+        <div class="logo">
+            <img id="logo" src="logo.png" alt="TranceMission Logo">
+        </div>
+        <div class="intro">
+			<p>TranceMission is a group known for creating demos and intros, primarily in the early 1990s. These demos often showcased advanced graphics, sound, and programming techniques using Turbo Pascal and assembler. The group was led by Stefan Koelle, who was responsible for coding, graphics, and music. TranceMission's work was characterized by creative animations, sound effects, and interactive elements, making them a notable name in the demo scene of that era. Their productions were designed to run on DOS-based PCs, often pushing the hardware capabilities of the time.</p>
+			<p>Sourcecode can be found on GitHub <a href="https://github.com/skoelle/dos-tcm-intros" target="_blank">https://github.com/skoelle/dos-tcm-intros</a>.</p>
+        </div>
+        <div class="program">
+            <img src="headline-star-intro.png" alt="Star Intro">
+            <div class="screenshots">
+                <a href="star-intro.png" onclick="openLightbox('star-intro.png'); return false;"><img src="star-intro.png" alt="Screenshot 1"></a>
+                <a href="https://www.youtube.com/embed/qdtqDdSPuG8?autoplay=1" onclick="openLightboxVideo(this.href); return false;">
+                    <img src="https://img.youtube.com/vi/qdtqDdSPuG8/hqdefault.jpg" alt="Video Thumbnail">
+                    <img src="play.png" alt="YouTube Logo" class="youtube-logo">
+                </a>
+            </div>
+			<p>This Pascal program is a demo that displays animated stars and text on the screen, along with playing sound effects.
+			<table>
+				<tr>
+					<th>Component</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>Initialization</td>
+					<td>Sets up graphics mode and clears the screen.</td>
+				</tr>
+				<tr>
+					<td>Text Display</td>
+					<td>Uses <code>writeline</code> procedure to display text.</td>
+				</tr>
+				<tr>
+					<td>Animation</td>
+					<td>Animates stars moving across the screen.</td>
+				</tr>
+				<tr>
+					<td>Sound</td>
+					<td>Plays sound if a SoundBlaster card is detected.</td>
+				</tr>
+				<tr>
+					<td>User Interaction</td>
+					<td>Waits for a key press to exit the demo.</td>
+				</tr>
+			</table>
+        </div>
+		<div class="program">
+            <img src="headline-logo-intro.png" alt="Logo Intro">
+            <div class="screenshots">
+                <a href="logo-intro2.png" onclick="openLightbox('logo-intro2.png'); return false;"><img src="logo-intro2.png" alt="Screenshot 1"></a>
+                <a href="logo-intro.png" onclick="openLightbox('logo-intro.png'); return false;"><img src="logo-intro.png" alt="Screenshot 2"></a>
+                <a href="https://www.youtube.com/embed/i4UOuAOxkn4?autoplay=1" onclick="openLightboxVideo(this.href); return false;">
+                    <img src="https://img.youtube.com/vi/i4UOuAOxkn4/hqdefault.jpg" alt="Video Thumbnail">
+                    <img src="play.png" alt="YouTube Logo" class="youtube-logo">
+                </a>
+            </div>
+			 <p>This Pascal program is a demo that displays animated text and graphics with sound effects.</p>
+				<table>
+					<tr>
+						<th>Component</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>Initialization</td>
+						<td>Sets up graphics mode and clears the screen.</td>
+					</tr>
+					<tr>
+						<td>Text Display</td>
+						<td>Uses <code>writeline</code> and <code>writeline2</code> procedures to display text.</td>
+					</tr>
+					<tr>
+						<td>Animation</td>
+						<td>Animates text using a sine wave effect. Speed is controlled by 'S' and 'A' keys.</td>
+					</tr>
+					<tr>
+						<td>Sound</td>
+						<td>Plays sound if a SoundBlaster card is detected. Volume is controlled by '+' and '-' keys.</td>
+					</tr>
+					<tr>
+						<td>User Interaction</td>
+						<td>Responds to key presses and exits on ESC, Enter, or Space key.</td>
+					</tr>
+				</table>
+        </div>
+        <div class="program">
+            <img src="headline-menu-intro.png" alt="Menu Intro">
+            <div class="screenshots">
+                <a href="menu-intro1.png" onclick="openLightbox('menu-intro1.png'); return false;"><img src="menu-intro1.png" alt="Screenshot 1"></a>
+                <!--<a href="menu-intro2.png" onclick="openLightbox('menu-intro2.png'); return false;"><img src="menu-intro2.png" alt="Screenshot 2"></a>-->
+				<a href="menu-intro3.png" onclick="openLightbox('menu-intro3.png'); return false;"><img src="menu-intro3.png" alt="Screenshot 3"></a>
+				<a href="https://www.youtube.com/embed/BvKIsfDLH48?autoplay=1" onclick="openLightboxVideo(this.href); return false;">
+                    <img src="https://img.youtube.com/vi/BvKIsfDLH48/hqdefault.jpg" alt="Video Thumbnail">
+					<img src="play.png" alt="YouTube Logo" class="youtube-logo">
+                </a>
+                
+            </div>
+			<p>This Pascal program is a demo that displays a menu with animated text and graphics, along with playing sound effects.
+			 <table>
+				<tr>
+					<th>Component</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					<td>Initialization</td>
+					<td>Sets up graphics mode and clears the screen.</td>
+				</tr>
+				<tr>
+					<td>Text Display</td>
+					<td>Uses <code>writeline</code> procedure to display text.</td>
+				</tr>
+				<tr>
+					<td>Animation</td>
+					<td>Animates a logo and text with a wobble effect.</td>
+				</tr>
+				<tr>
+					<td>Sound</td>
+					<td>Plays sound if a SoundBlaster card is detected.</td>
+				</tr>
+				<tr>
+					<td>User Interaction</td>
+					<td>Allows navigation through a menu using the keyboard and exits the demo on specific key presses.</td>
+				</tr>
+			</table>
+        </div>
+		<div>
+			<p>Stefan Koelle 1992 - 1995</p>
+        </div>
+    </div>
+
+    <!-- Lightbox HTML -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" src="">
+        <iframe class="lightbox-content" id="lightbox-video" width="560" height="315" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox-img').style.display = 'block';
+            document.getElementById('lightbox-video').style.display = 'none';
+            document.getElementById('lightbox').style.display = 'block';
+        }
+
+        function openLightboxVideo(src) {
+            document.getElementById('lightbox-video').src = src;
+            document.getElementById('lightbox-video').style.display = 'block';
+            document.getElementById('lightbox-img').style.display = 'none';
+            document.getElementById('lightbox').style.display = 'block';
+        }
+
+        function closeLightbox(event) {
+            if (event.target.id === 'lightbox' || event.target.className === 'lightbox-close') {
+                document.getElementById('lightbox').style.display = 'none';
+                document.getElementById('lightbox-video').src = '';
+            }
+        }
+    </script>
+</body>
+</html>

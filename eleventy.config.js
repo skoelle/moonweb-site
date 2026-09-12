@@ -48,6 +48,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("retro/mega-st-high/*.jpg");
   eleventyConfig.addPassthroughCopy("retro/mistery-core/*.jpg");
 
+  // Standalone demo group archives (static HTML)
+  eleventyConfig.addPassthroughCopy("phobia/**");
+  eleventyConfig.addPassthroughCopy("tcm/**");
+
   // Root-level shared assets
   eleventyConfig.addPassthroughCopy({ "shared/base.css": "shared-base.css" });
   eleventyConfig.addPassthroughCopy({ "shared/favicon/hub.svg": "favicon.svg" });
