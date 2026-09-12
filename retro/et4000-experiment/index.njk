@@ -31,7 +31,7 @@ parent: "/retro/"
 <li><strong>The missing -12V</strong>, many ET4000 cards need -12V for their output drivers, usually tapped from the RS-232 port, adding yet another drain on an already stressed supply. The card I used avoids this.</li>
 <li><strong>Heat with nowhere to go</strong>, the card runs hot, and the Mega ST case has zero provision for active cooling.</li>
 <li><strong>Signal integrity issues</strong>, the ISA-to-MegaBus adapter introduces reflections at higher frequencies, and access to ET4000 RAM is roughly 65% slower than native ST RAM, with no hardware BitBLT to make up for it.</li>
-<li><strong>DVI incompatibility</strong>, the EIZO monitor has DVI-D (digital only), but all available DVI-to-VGA adapters only work with DVI-I (which includes analog lines). Since the EIZO lacks the analog pins, a DVI adapter cannot be used, which is why the ET4000 connects via the self-built <a href="/retro/atari-vga/">VGA adapter</a> instead.</li>
+<li><strong>DVI incompatibility</strong>, the EIZO monitor has DVI-D (digital only), but all available DVI-to-VGA adapters only work with DVI-I (which includes analog lines). Since the EIZO lacks the analog pins, a DVI adapter cannot be used. The ET4000 has its own VGA output and connects directly to the monitor. The self-built <a href="/retro/atari-vga/">VGA adapter</a> on the Atari's native VGA output is only used as a fallback for diagnostics, when something goes wrong during boot before the ET4000 driver loads.</li>
 </ul>
 
 <h2>How It Got Working</h2>
