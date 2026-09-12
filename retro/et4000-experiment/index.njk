@@ -17,6 +17,14 @@ parent: "/retro/"
 <h2>The Card and Driver</h2>
 <p>I can confirm that a card with the RAMDAC SC11487CN works with the Nova T8 and T6 drivers. And importantly, this particular card does not need -12V, which simplifies the wiring considerably. The STGA adapter comes with its own VDI (STGA_VDI.SYS, v1.3b), a control panel as a CPX module, and a ROM module that switches to the VGA automatically at boot.</p>
 
+<h2>Nova driver loading order</h2>
+<p>When using the ET4000 with Nova drivers, the loading order in the auto-start folder matters. The correct sequence is:</p>
+<ol>
+<li><code>Emulator.prg</code> (must be first)</li>
+<li><code>menu.prg</code> or <code>xmenu.prg</code></li>
+<li><code>sta_vdi.prg</code></li>
+</ol>
+
 <h2>What Made It Difficult</h2>
 <ul>
 <li><strong>Power supply overload</strong>, the stock Mega ST PSU simply wasn't designed to feed a MonSTerBoard, an ET4000, and a MegaBus adapter at the same time. The 5V and 12V rails ended up right at their instability limit.</li>

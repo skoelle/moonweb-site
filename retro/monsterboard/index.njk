@@ -52,6 +52,14 @@ parent: "/retro/"
 <h2>My Setup</h2>
 <p>In my Mega ST 4 "High" machine the MonSTerBoard provides the 8 MB of TT-RAM that TOS 2.06 and Geneva use for real multitasking. For storage I use the dual IDE interface, booting the system directly from a CompactFlash card. I started with a 4 GB card, but that didn't work reliably, so I switched to a 1 GB card, which works fine. There's no ACSI hard drive connected in this machine; the IDE boot is noticeably faster than an ACSI drive would be. Combined with the <a href="/retro/et4000-experiment/">ET4000 graphics card</a> and its dedicated monitor, it's the most capable machine in the fleet.</p>
 
+<h2>Geneva and NeoDesk</h2>
+<p>Geneva and NeoDesk run together well on the MonSTerBoard, using the 8 MB of AltRAM. The two desktop modes can be switched without renaming any files:</p>
+<ul>
+<li><strong>Standard Desktop</strong>, the default TOS desktop.</li>
+<li><strong>Geneva</strong>, start <code>auto\geneva.prg</code> with "G" and <code>auto\neoload.prg</code> also with "G". Rename <code>newdesk.inf</code> to <code>newdesk.inX</code> (with an X instead of F).</li>
+</ul>
+<p>Geneva and NeoDesk can also be started directly from the desktop without renaming anything.</p>
+
 <h2>Gallery</h2>
 <img src="monster-ide.jpg" alt="MonSTerBoard IDE adapter with CompactFlash card" width="640" height="480" loading="lazy">
 <p class="caption">The MonSTerBoard IDE adapter with a CompactFlash card attached.</p>
