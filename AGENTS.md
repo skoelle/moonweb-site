@@ -161,6 +161,10 @@ CSS-Dateien werden als Passthrough kopiert (kein Hash im Dateinamen). Bei CSS-Ae
 
 Bei jeder CSS-Anpassung `?v=N` um 1 erhoehen, sonst cached der Browser die alte Datei.
 
+### skoelle GitHub-Repo im Auge behalten
+
+Bei Aenderungen an stefankoelle.de (Inhalte, Technologien, URLs) pruefen, ob die Datei `../skoelle/README.md` ebenfalls aktualisiert werden muss. Das README ist die Kurzform des Lebenslaufs und soll mit stefankoelle.de synchron bleiben.
+
 ## CI/CD
 
 ### IONOS SFTP (www.moonweb.org)
