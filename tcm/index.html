@@ -263,6 +263,52 @@
         <iframe class="lightbox-content" id="lightbox-video" width="560" height="315" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
 
+    <canvas id="starfield" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></canvas>
+    <script>
+        (function() {
+            if (window.matchMedia("(max-width: 768px)").matches) return;
+            const canvas = document.getElementById('starfield');
+            const ctx = canvas.getContext('2d');
+            let w, h, scrollY = 0;
+            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+            resize();
+            window.addEventListener('resize', resize);
+            window.addEventListener('scroll', function() { scrollY = window.scrollY; }, { passive: true });
+
+            const layers = [
+                { count: 80, speed: 0.3, sizeMin: 0.5, sizeMax: 1.2, alpha: 0.4 },
+                { count: 50, speed: 0.7, sizeMin: 1.0, sizeMax: 2.0, alpha: 0.6 },
+                { count: 25, speed: 1.5, sizeMin: 1.5, sizeMax: 3.0, alpha: 0.9 },
+            ];
+            const stars = [];
+            for (const layer of layers) {
+                for (let i = 0; i < layer.count; i++) {
+                    stars.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        speed: layer.speed + Math.random() * 0.3,
+                        size: layer.sizeMin + Math.random() * (layer.sizeMax - layer.sizeMin),
+                        alpha: layer.alpha * (0.7 + Math.random() * 0.3),
+                    });
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+                for (const s of stars) {
+                    s.x += s.speed;
+                    if (s.x > w + 5) { s.x = -5; s.y = Math.random() * h; }
+                    const y = ((s.y - scrollY * 0.02) % h + h) % h;
+                    ctx.beginPath();
+                    ctx.arc(s.x, y, s.size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255,255,255,' + s.alpha + ')';
+                    ctx.fill();
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+    </script>
     <script>
         function openLightbox(src) {
             document.getElementById('lightbox-img').src = src;
