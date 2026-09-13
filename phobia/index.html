@@ -6,13 +6,18 @@
     <title>PHOBIA DemoGroup Archive - Nostalgic PC Intros from 1994</title>
 	<meta name="description" content="Explore the PHOBIA DemoGroup Archive, showcasing the 1994 PC intros, including the notable Phobia Welcome Intro. Relive the early days of PC intros with source code and more.">
 	<link rel="canonical" href="https://www.moonweb.org/phobia/" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #1a1a1a;
             margin: 0;
             color: #f0f0f0;
-            font-family: 'Arial', sans-serif;
+            font-family: 'VT323', monospace;
             line-height: 1.6;
+            font-size: 20px;
+            overflow-x: hidden;
         }
         .header {
             display: flex;
@@ -67,7 +72,7 @@
             flex: 2 1 300px;
         }
         .program-info h2 {
-            font-size: 1.5em;
+            font-size: 1em;
             margin-top: 0;
             margin-bottom: 10px;
         }
@@ -77,6 +82,9 @@
             padding: 20px;
             background-color: #333;
             margin-top: 20px;
+        }
+        h1, h2 {
+            font-family: 'Press Start 2P', cursive;
         }
         @media (max-width: 600px) {
 			h1 {
@@ -90,8 +98,6 @@
 				width: 100%;
 				height: auto;
 			}
-			#phobialogo { display: none !important; }
-			#phobialogo-fallback { display: inline !important; }
             .content {
                 padding: 15px 10px;
                 flex-direction: column;
@@ -113,6 +119,7 @@
 		  text-align:left;
 		  vertical-align: top;
 		  padding-right: 20px;
+		  overflow-wrap: break-word;
 		  }
 		a {
 			color:#00A6FF;
@@ -171,11 +178,11 @@
     <div class="content">
 	
 		<div class="welcome">
-		<h1 style="margin-top: 0;">Welcome to the PHOBIA DemoGroup Archive</h1>
+		<h1>PHOBIA DemoGroup Archive</h1>
 
 		<p>This site showcases the releases from my DemoGroup, PHOBIA. Although PHOBIA existed only briefly on the PC in 1994, it made a notable impact with its focus on PC intros. The highlight of our work was the major release, the Phobia Welcome Intro.</p>
 		<p>Feel free to explore and enjoy the nostalgia of the early days of PC intros.</p>
-		<p>Best regards, Stefan Koelle</p>
+		<p style="margin-bottom: 1.5em;">Best regards, Stefan Koelle</p>
 		</div>
 		
         <div class="program">
@@ -279,7 +286,6 @@
     </div>
     <script>
         (function() {
-            if (window.matchMedia("(max-width: 600px)").matches) return;
             var canvas = document.getElementById('phobialogo');
             var fallback = document.getElementById('phobialogo-fallback');
             var ctx = canvas.getContext('2d');
@@ -357,7 +363,6 @@
     </script>
     <script>
         (function() {
-            if (window.matchMedia("(max-width: 600px)").matches) return;
             var canvas = document.getElementById('copperbars');
             var ctx = canvas.getContext('2d');
             var w, h;
