@@ -18,6 +18,7 @@
             line-height: 1.6;
             font-size: 20px;
             overflow-x: hidden;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
         }
         .header {
             display: flex;
@@ -113,6 +114,20 @@
             }
             .program-info {
                 text-align: left;
+            }
+            .content table {
+                width: 100%;
+            }
+            .content table tr {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 0.8em;
+            }
+            .content table td {
+                padding-right: 0;
+            }
+            .content table td:first-child {
+                margin-bottom: 0.2em;
             }
         }
 		th, td {
