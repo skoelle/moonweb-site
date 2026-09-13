@@ -7,6 +7,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "stefankoelle/.htaccess": ".htaccess" });
   eleventyConfig.addPassthroughCopy({ "stefankoelle/pdf/cv.pdf": "pdf/cv.pdf" });
   eleventyConfig.addPassthroughCopy({ "shared/base.css": "shared-base.css" });
+  eleventyConfig.addPassthroughCopy({ "shared/fonts/lobster-latin.woff2": "fonts/lobster-latin.woff2" });
   eleventyConfig.addPassthroughCopy({ "shared/theme-hub.css": "theme.css" });
   eleventyConfig.addPassthroughCopy({ "shared/favicon/hub.svg": "favicon.svg" });
 

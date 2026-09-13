@@ -10,6 +10,14 @@
 
 * { box-sizing: border-box; }
 
+@font-face {
+  font-family: 'Lobster';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/lobster-latin.woff2') format('woff2');
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;

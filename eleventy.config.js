@@ -56,6 +56,7 @@ module.exports = function (eleventyConfig) {
 
   // Root-level shared assets
   eleventyConfig.addPassthroughCopy({ "shared/base.css": "shared-base.css" });
+  eleventyConfig.addPassthroughCopy({ "shared/fonts/lobster-latin.woff2": "fonts/lobster-latin.woff2" });
   eleventyConfig.addPassthroughCopy({ "shared/favicon/hub.svg": "favicon.svg" });
   eleventyConfig.addPassthroughCopy({ "hub/robots.txt": "robots.txt" });
 
