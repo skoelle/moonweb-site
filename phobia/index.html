@@ -17,12 +17,13 @@
         .header {
             display: flex;
             align-items: center;
+            justify-content: center;
             background-color: #000071;
-			padding-top:5px;
-            padding-left: 20px;
+            padding: 10px 0;
         }
-        .header img {
-            margin-right: 20px;
+        .header img, .header canvas {
+            height: 120px;
+            margin-right: 0;
         }
         .header a {
             margin: 0 15px;
@@ -36,7 +37,9 @@
         .content {
             display: flex;
             flex-wrap: wrap;
-            padding: 40px;
+            padding: 20px 15px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
         .program {
             display: flex;
@@ -55,12 +58,17 @@
         .program-description {
             margin-top: 10px;
             font-size: 1.1em;
+            line-height: 1.4;
+        }
+        .program-description p {
+            margin: 0.3em 0;
         }
         .program-info {
             flex: 2 1 300px;
         }
         .program-info h2 {
-            font-size: 2em;
+            font-size: 1.5em;
+            margin-top: 0;
             margin-bottom: 10px;
         }
         .footer {
@@ -70,18 +78,20 @@
             background-color: #333;
             margin-top: 20px;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
 			h1 {
 				font-size: 1.7em;
 			}
 			.program-info h2 {
-				font-size: 1.5em;
+				font-size: 1.2em;
 				margin-bottom: 10px;
 			}
-			.header img {
+			.header img, .header canvas {
 				width: 100%;
+				height: auto;
 			}
             .content {
+                padding: 15px 10px;
                 flex-direction: column;
                 align-items: left;
             }
@@ -97,8 +107,10 @@
                 text-align: left;
             }
         }
-		th {
+		th, td {
 		  text-align:left;
+		  vertical-align: top;
+		  padding-right: 20px;
 		  }
 		a {
 			color:#00A6FF;
@@ -150,13 +162,14 @@
 <body>
     <div class="header">
         <a href="index.html">
-            <img src="phobialogo.png" alt="PHOBIA">
+            <canvas id="phobialogo" style="margin-right:20px;image-rendering:pixelated;"></canvas>
+            <img id="phobialogo-fallback" src="phobialogo.png" alt="PHOBIA" style="display:none;">
         </a>
     </div>
     <div class="content">
 	
 		<div class="welcome">
-		<h1>Welcome to the PHOBIA DemoGroup Archive</h1>
+		<h1 style="margin-top: 0;">Welcome to the PHOBIA DemoGroup Archive</h1>
 
 		<p>This site showcases the releases from my DemoGroup, PHOBIA. Although PHOBIA existed only briefly on the PC in 1994, it made a notable impact with its focus on PC intros. The highlight of our work was the major release, the Phobia Welcome Intro.</p>
 		<p>Feel free to explore and enjoy the nostalgia of the early days of PC intros.</p>
@@ -178,51 +191,47 @@
         <p>This intro utilized an early version of the X-LIB unit, specifically the TextGraf.pas, which was also developed by Stefan Koelle. The source code for the intro is available on GitHub. The primary technique used in this intro to create the illusion of movement was through color palette changes, rather than altering the pixels on the screen.</p>
         <p>The music for the intro was borrowed from an old Amiga demo and played using a public Mod-Player. The font used in the intro was custom-created and compiled into the executable as an object, along with the music and graphics.</p>
         
-        <h2>Key Details:</h2>
+        <h2>Facts</h2>
         <table>
             <tr>
-                <th>Feature</th>
-                <th>Description</th>
-            </tr>
-            <tr>
-                <td>Programming Language</td>
+                <td><b>Language</b></td>
                 <td>Turbo Pascal with inline assembler</td>
             </tr>
             <tr>
-                <td>Year</td>
+                <td><b>Year</b></td>
                 <td>1994</td>
             </tr>
             <tr>
-                <td>Developer</td>
+                <td><b>Developer</b></td>
                 <td>Stefan Koelle</td>
             </tr>
             <tr>
-                <td>Development Machine</td>
+                <td><b>Development Machine</b></td>
                 <td>486 DX2-66 DOS PC</td>
             </tr>
             <tr>
-                <td>Graphics Technique</td>
+                <td><b>Graphics Technique</b></td>
                 <td>Color palette changes</td>
             </tr>
             <tr>
-                <td>Music Source</td>
+                <td><b>Music Source</b></td>
                 <td>Old Amiga demo</td>
             </tr>
             <tr>
-                <td>Music Player</td>
+                <td><b>Music Player</b></td>
                 <td>Public Mod-Player</td>
             </tr>
             <tr>
-                <td>Custom Font</td>
+                <td><b>Custom Font</b></td>
                 <td>Compiled into the executable as an object</td>
             </tr>
             <tr>
-                <td>Graphics Library</td>
+                <td><b>Graphics Library</b></td>
                 <td>Early version of X-LIB unit (TextGraf.pas)</td>
             </tr>
             <tr>
-                <td>Source Code</td>
-                <td>Available on GitHub <a href="https://github.com/skoelle/dos-phobia-welcome-intro" target="_blank">https://github.com/skoelle/dos-phobia-welcome-intro</a></td>
+                <td><b>Source Code</b></td>
+                <td>Available on GitHub<br><a href="https://github.com/skoelle/dos-phobia-welcome-intro" target="_blank">https://github.com/skoelle/dos-phobia-welcome-intro</a></td>
             </tr>
         </table>
             </div>
@@ -265,5 +274,83 @@
             <iframe id="video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
+    <script>
+        (function() {
+            if (window.matchMedia("(max-width: 600px)").matches) return;
+            var canvas = document.getElementById('phobialogo');
+            var fallback = document.getElementById('phobialogo-fallback');
+            var ctx = canvas.getContext('2d');
+            var img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                fallback.style.display = 'none';
+                canvas.style.display = 'inline';
+                var origData = null;
+                try {
+                    ctx.drawImage(img, 0, 0);
+                    origData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                } catch(e) {
+                    fallback.style.display = 'inline';
+                    canvas.style.display = 'none';
+                    return;
+                }
+                var pixels = origData.data;
+                var blueMap = {};
+                for (var i = 0; i < pixels.length; i += 4) {
+                    var r = pixels[i], g = pixels[i+1], b = pixels[i+2];
+                    if (b > 30 && b > r * 1.3 && b > g * 1.2) {
+                        var key = r + ',' + g + ',' + b;
+                        if (!blueMap[key]) blueMap[key] = { r: r, g: g, b: b, count: 0 };
+                        blueMap[key].count++;
+                    }
+                }
+                var palette = [];
+                for (var k in blueMap) {
+                    if (blueMap[k].count >= 500) palette.push(blueMap[k]);
+                }
+                palette.sort(function(a, b) {
+                    var la = a.r * 0.299 + a.g * 0.587 + a.b * 0.114;
+                    var lb = b.r * 0.299 + b.g * 0.587 + b.b * 0.114;
+                    return la - lb;
+                });
+                var origColors = palette.map(function(c) { return { r: c.r, g: c.g, b: c.b }; });
+                var rotColors = origColors.slice();
+                var offset = 0;
+                function draw() {
+                    var out = ctx.createImageData(canvas.width, canvas.height);
+                    out.data.set(pixels);
+                    var d = out.data;
+                    for (var i = 0; i < palette.length; i++) {
+                        rotColors[i] = origColors[(i + offset) % palette.length];
+                    }
+                    var lookup = {};
+                    for (var i = 0; i < palette.length; i++) {
+                        var oc = origColors[i];
+                        var rc = rotColors[i];
+                        lookup[oc.r + ',' + oc.g + ',' + oc.b] = rc;
+                    }
+                    for (var i = 0; i < d.length; i += 4) {
+                        var key = d[i] + ',' + d[i+1] + ',' + d[i+2];
+                        if (lookup[key]) {
+                            d[i]   = lookup[key].r;
+                            d[i+1] = lookup[key].g;
+                            d[i+2] = lookup[key].b;
+                        }
+                    }
+                    ctx.putImageData(out, 0, 0);
+                    offset = (offset + 1) % palette.length;
+                    setTimeout(function() { requestAnimationFrame(draw); }, 120);
+                }
+                draw();
+            };
+            img.onerror = function() {
+                fallback.style.display = 'inline';
+                canvas.style.display = 'none';
+            };
+            img.src = 'phobialogo.png';
+        })();
+    </script>
 </body>
 </html>
