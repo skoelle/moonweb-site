@@ -7,6 +7,20 @@
 	<meta name="description" content="Explore three Pascal demo programs showcasing graphics, animation, and sound capabilities using Turbo Pascal and assembler. Learn about text and graphics animation, sound integration, and user interaction in Pascal programming.">
 	<link rel="canonical" href="https://www.moonweb.org/tcm/" />
     <style>
+		@font-face {
+			font-family: 'VT323';
+			font-style: normal;
+			font-weight: 400;
+			font-display: swap;
+			src: url('fonts/vt323-latin.woff2') format('woff2');
+		}
+		@font-face {
+			font-family: 'Press Start 2P';
+			font-style: normal;
+			font-weight: 400;
+			font-display: swap;
+			src: url('fonts/pressstart2p-latin.woff2') format('woff2');
+		}
         body {
             background-color: black;
             color: #FFF741;
@@ -14,10 +28,15 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            font-family: Arial, sans-serif;
+            font-family: 'VT323', monospace;
             margin: 0;
             padding: 0;
-            font-size: 18px; /* Schriftgröße des Textes */
+            font-size: 20px;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        }
+        h1, h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1em;
         }
         .container {
             text-align: center;
@@ -100,19 +119,26 @@
             text-decoration: none;
             cursor: pointer;
         }
-		table {
-			border:0px;
-			border-color:#000000;
-		}
-		th {
+		th, td {
 			text-align:left;
-		}
-		td {
-			text-align:left;
+			vertical-align: top;
+			padding-right: 20px;
+			overflow-wrap: break-word;
 		}
 		@media (max-width: 768px) {
 			#logo {
 				width:100%
+			}
+			table tr {
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 0.8em;
+			}
+			table td {
+				padding-right: 0;
+			}
+			table td:first-child {
+				margin-bottom: 0.2em;
 			}
 		}
 		.footer {
@@ -147,27 +173,23 @@
 			<p>This Pascal program is a demo that displays animated stars and text on the screen, along with playing sound effects.</p>
 			<table>
 				<tr>
-					<th>Component</th>
-					<th>Description</th>
-				</tr>
-				<tr>
-					<td>Initialization</td>
+					<td><b>Initialization</b></td>
 					<td>Sets up graphics mode and clears the screen.</td>
 				</tr>
 				<tr>
-					<td>Text Display</td>
-					<td>Uses <code>writeline</code> procedure to display text.</td>
+					<td><b>Text Display</b></td>
+					<td>Uses writeline procedure to display text.</td>
 				</tr>
 				<tr>
-					<td>Animation</td>
+					<td><b>Animation</b></td>
 					<td>Animates stars moving across the screen.</td>
 				</tr>
 				<tr>
-					<td>Sound</td>
+					<td><b>Sound</b></td>
 					<td>Plays sound if a SoundBlaster card is detected.</td>
 				</tr>
 				<tr>
-					<td>User Interaction</td>
+					<td><b>User Interaction</b></td>
 					<td>Waits for a key press to exit the demo.</td>
 				</tr>
 			</table>
@@ -185,27 +207,23 @@
 			 <p>This Pascal program is a demo that displays animated text and graphics with sound effects.</p>
 				<table>
 					<tr>
-						<th>Component</th>
-						<th>Description</th>
-					</tr>
-					<tr>
-						<td>Initialization</td>
+						<td><b>Initialization</b></td>
 						<td>Sets up graphics mode and clears the screen.</td>
 					</tr>
 					<tr>
-						<td>Text Display</td>
-						<td>Uses <code>writeline</code> and <code>writeline2</code> procedures to display text.</td>
+						<td><b>Text Display</b></td>
+						<td>Uses writeline and writeline2 procedures to display text.</td>
 					</tr>
 					<tr>
-						<td>Animation</td>
+						<td><b>Animation</b></td>
 						<td>Animates text using a sine wave effect. Speed is controlled by 'S' and 'A' keys.</td>
 					</tr>
 					<tr>
-						<td>Sound</td>
+						<td><b>Sound</b></td>
 						<td>Plays sound if a SoundBlaster card is detected. Volume is controlled by '+' and '-' keys.</td>
 					</tr>
 					<tr>
-						<td>User Interaction</td>
+						<td><b>User Interaction</b></td>
 						<td>Responds to key presses and exits on ESC, Enter, or Space key.</td>
 					</tr>
 				</table>
@@ -225,27 +243,23 @@
 		<p>This Pascal program is a demo that displays a menu with animated text and graphics, along with playing sound effects.</p>
 		 <table>
 				<tr>
-					<th>Component</th>
-					<th>Description</th>
-				</tr>
-				<tr>
-					<td>Initialization</td>
+					<td><b>Initialization</b></td>
 					<td>Sets up graphics mode and clears the screen.</td>
 				</tr>
 				<tr>
-					<td>Text Display</td>
-					<td>Uses <code>writeline</code> procedure to display text.</td>
+					<td><b>Text Display</b></td>
+					<td>Uses writeline procedure to display text.</td>
 				</tr>
 				<tr>
-					<td>Animation</td>
+					<td><b>Animation</b></td>
 					<td>Animates a logo and text with a wobble effect.</td>
 				</tr>
 				<tr>
-					<td>Sound</td>
+					<td><b>Sound</b></td>
 					<td>Plays sound if a SoundBlaster card is detected.</td>
 				</tr>
 				<tr>
-					<td>User Interaction</td>
+					<td><b>User Interaction</b></td>
 					<td>Allows navigation through a menu using the keyboard and exits the demo on specific key presses.</td>
 				</tr>
 			</table>
