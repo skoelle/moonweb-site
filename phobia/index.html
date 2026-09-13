@@ -90,6 +90,8 @@
 				width: 100%;
 				height: auto;
 			}
+			#phobialogo { display: none !important; }
+			#phobialogo-fallback { display: inline !important; }
             .content {
                 padding: 15px 10px;
                 flex-direction: column;
@@ -264,6 +266,7 @@
             </div>
         </div>-->
     </div>
+    <canvas id="copperbars" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></canvas>
     <div class="footer">
         PHOBIA website - initially created November 1999 - code from 1994 - Stefan Koelle<br>
         Part of <a href="/">moonweb.org</a> · <a href="/retro/">Retro Corner</a> · <a href="/impressum/">Legal Notice</a>
@@ -350,6 +353,40 @@
                 canvas.style.display = 'none';
             };
             img.src = 'phobialogo.png';
+        })();
+    </script>
+    <script>
+        (function() {
+            if (window.matchMedia("(max-width: 600px)").matches) return;
+            var canvas = document.getElementById('copperbars');
+            var ctx = canvas.getContext('2d');
+            var w, h;
+            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+            resize();
+            window.addEventListener('resize', resize);
+            var bars = [
+                { baseY: 0.45, amplitude: 0.18, speed: 0.7, r: 255, g: 199, b: 0, barH: 50 },
+                { baseY: 0.55, amplitude: 0.15, speed: 1.1, r: 239, g: 0, b: 0, barH: 50 },
+                { baseY: 0.52, amplitude: 0.20, speed: 0.9, r: 4, g: 203, b: 0, barH: 50 },
+            ];
+            function draw(t) {
+                ctx.clearRect(0, 0, w, h);
+                for (var i = 0; i < bars.length; i++) {
+                    var bar = bars[i];
+                    var y = h * bar.baseY + Math.sin(t * 0.001 * bar.speed) * h * bar.amplitude;
+                    var halfH = bar.barH / 2;
+                    for (var row = -halfH; row <= halfH; row++) {
+                        var rel = row / halfH;
+                        var alpha = 1 - rel * rel;
+                        var py = Math.round(y + row);
+                        if (py < 0 || py >= h) continue;
+                        ctx.fillStyle = 'rgba(' + bar.r + ',' + bar.g + ',' + bar.b + ',' + alpha.toFixed(3) + ')';
+                        ctx.fillRect(0, py, w, 1);
+                    }
+                }
+                requestAnimationFrame(draw);
+            }
+            requestAnimationFrame(draw);
         })();
     </script>
 </body>
