@@ -61,6 +61,26 @@
             height: auto;
             border-radius: 10px;
         }
+        .video-thumb {
+            position: relative;
+            cursor: pointer;
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-left: 35px solid rgba(255,255,255,0.9);
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            filter: drop-shadow(0 0 6px rgba(0,0,0,0.6));
+            transition: opacity 0.2s;
+        }
+        .video-thumb:hover .play-button {
+            opacity: 0.7;
+        }
         .program-description {
             margin-top: 10px;
             font-size: 1.1em;
@@ -195,14 +215,17 @@
 		<div class="welcome">
 		<h1>PHOBIA DemoGroup Archive</h1>
 
-		<p>This site showcases the releases from my DemoGroup, PHOBIA. Although PHOBIA existed only briefly on the PC in 1994, it made a notable impact with its focus on PC intros. The highlight of our work was the major release, the Phobia Welcome Intro.</p>
+		<p>This site showcases the releases from my DemoGroup, PHOBIA. Although PHOBIA existed only briefly in 1994, it made a notable impact with its focus on PC intros. The highlight of our work was the Phobia Welcome Intro.</p>
 		<p>Feel free to explore and enjoy the nostalgia of the early days of PC intros.</p>
 		<p style="margin-bottom: 1.5em;">Best regards, Stefan Koelle</p>
 		</div>
 		
         <div class="program">
             <div class="program-image">
-                <img src="welcomeintro.png" alt="Program 1 Image" onclick="openLightbox()">
+                <div class="video-thumb" onclick="openLightbox()">
+                    <img src="welcomeintro.png" alt="Program 1 Image">
+                    <div class="play-button"></div>
+                </div>
                 <div class="program-description">
                     <p><b>Phobia Welcome Intro</b></p>
                     <p><a href="#" onclick="openLightbox()">YouTube Video of the Intro</a></p>
@@ -211,9 +234,9 @@
             </div>
             <div class="program-info">
                 <h2>Phobia Welcome Intro</h2>
-                <p>The Phobia Welcome Intro was programmed in 1994 using Turbo Pascal, with inline assembler for the graphics routines. The idea for this intro was inspired by an Amiga demo, though the specific name of the demo has been forgotten. All graphics and programming were done by Stefan Koelle on a 486 DX2-66 DOS PC.</p>
-        <p>This intro utilized an early version of the X-LIB unit, specifically the TextGraf.pas, which was also developed by Stefan Koelle. The source code for the intro is available on GitHub. The primary technique used in this intro to create the illusion of movement was through color palette changes, rather than altering the pixels on the screen.</p>
-        <p>The music for the intro was borrowed from an old Amiga demo and played using a public Mod-Player. The font used in the intro was custom-created and compiled into the executable as an object, along with the music and graphics.</p>
+                <p>The Phobia Welcome Intro was programmed in 1994 using Turbo Pascal, with inline assembler for the graphics routines. This intro was inspired by an Amiga demo, though the specific name has been forgotten. All graphics and programming were done by Stefan Koelle on a 486 DX2-66 DOS PC.</p>
+        <p>This intro utilized an early version of the X-LIB unit, specifically the TextGraf.pas, which was also developed by Stefan Koelle. The source code for the intro is available on GitHub. The primary technique used to create the illusion of movement was color palette changes, rather than altering the pixels on the screen.</p>
+        <p>The music for the intro was borrowed from an old Amiga demo and played using a public Mod-Player. The font used in the intro was custom and compiled into the executable as an object, along with the music and graphics.</p>
         
         <h2>Facts</h2>
         <table>
