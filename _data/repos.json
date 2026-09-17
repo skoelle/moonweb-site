@@ -1,5 +1,22 @@
 [
   {
+    "title": "Chat Archive",
+    "emoji": "💬",
+    "category": "code",
+    "subcategory": "Dev Tools",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "SQLAlchemy",
+      "Tauri",
+      "Rust"
+    ],
+    "repo": "chat-archive",
+    "repo_url": "https://github.com/skoelle/chat-archive",
+    "summary": null
+  },
+  {
     "title": "PeopleCostCounter",
     "emoji": "💰",
     "category": "code",
@@ -13,6 +30,22 @@
     "repo": "PeopleCostCounter",
     "repo_url": "https://github.com/skoelle/PeopleCostCounter",
     "summary": "A vanilla JS single-page tool that shows in real time how much a meeting is costing, based on team size and average salary, with English and German UIs."
+  },
+  {
+    "title": "Smeagol WYSIWYG",
+    "emoji": "🧙",
+    "category": "code",
+    "subcategory": "Dev Tools",
+    "description": "Personal wiki with WYSIWYG editor for Markdown files",
+    "status": "active",
+    "stack": [
+      "Go",
+      "Milkdown",
+      "Markdown"
+    ],
+    "repo": "smeagol-wysiwyg",
+    "repo_url": "https://github.com/skoelle/smeagol-wysiwyg",
+    "summary": "A personal wiki with a real WYSIWYG editor. Single Go binary, Markdown files on disk, instant save, live reload, full-text search."
   },
   {
     "title": "kctl-tui",
@@ -259,7 +292,7 @@
     ],
     "repo": "moonweb-site",
     "repo_url": "https://github.com/skoelle/moonweb-site",
-    "summary": "Monorepo for moonweb.org - my personal homelab hub. Six static sites (Eleventy) covering infrastructure, smart home, code, and retro hardware. Deployed to Cloudflare Pages or IONOS."
+    "summary": "Monorepo for moonweb.org - my personal homelab hub. Six static sites (Eleventy) covering infrastructure, smart home, code, and retro hardware. Deployed to IONOS."
   },
   {
     "title": "www.moonweb.org",
