@@ -14,7 +14,7 @@
     ],
     "repo": "chat-archive",
     "repo_url": "https://github.com/skoelle/chat-archive",
-    "summary": null
+    "summary": "Import Instagram & Facebook (incl. E2EE) chat takeouts into a searchable MySQL database with a REST API for analysis"
   },
   {
     "title": "PeopleCostCounter",
