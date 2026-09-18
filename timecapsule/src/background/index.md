@@ -22,7 +22,7 @@ First computer program (Bowling)
 <b>1991</b>
 First complete computer game (Atom Oh No!)
 
-<b>1992</b>
+<b>1993</b>
 First Intel computer (80486)
 
 <b>1994</b>
