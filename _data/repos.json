@@ -82,6 +82,21 @@
     "summary": "Cloudflare + FreeDNS DynDNS-Updater for FritzBox (TR-064) as Docker Container"
   },
   {
+    "title": "imap2gmail",
+    "emoji": "📬",
+    "category": "code",
+    "subcategory": "Infra Tools",
+    "status": "active",
+    "stack": [
+      "TypeScript",
+      "Node.js",
+      "imapflow"
+    ],
+    "repo": "imap2gmail",
+    "repo_url": "https://github.com/skoelle/imap2gmail",
+    "summary": "Tiny Docker relay that replaces Gmail POP fetching: source IMAP → Gmail APPEND → delete source → optional ntfy. IDLE push, spam routing, failure recovery."
+  },
+  {
     "title": "M5Stack Dashboard",
     "emoji": "🌡️",
     "category": "code",
