@@ -3,7 +3,7 @@
     "title": "Chat Archive",
     "emoji": "💬",
     "category": "code",
-    "subcategory": "Dev Tools",
+    "subcategory": "Archiving Tools",
     "status": "active",
     "stack": [
       "Python",
@@ -15,6 +15,24 @@
     "repo": "chat-archive",
     "repo_url": "https://github.com/skoelle/chat-archive",
     "summary": "Import Instagram & Facebook (incl. E2EE) chat takeouts into a searchable MySQL database with a REST API for analysis"
+  },
+  {
+    "title": "YouTube Playlist Sync",
+    "emoji": "🎬",
+    "category": "code",
+    "subcategory": "Archiving Tools",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "SQLAlchemy",
+      "APScheduler",
+      "yt-dlp",
+      "Docker"
+    ],
+    "repo": "yt-playlist-sync",
+    "repo_url": "https://github.com/skoelle/yt-playlist-sync",
+    "summary": "Self-hosted service that watches a YouTube channel's public playlists and downloads them with yt-dlp to your NAS. Hourly discovery, nightly incremental syncs, one-shot playlists, a built-in web UI with local video player, and nightly SQLite backups."
   },
   {
     "title": "PeopleCostCounter",
