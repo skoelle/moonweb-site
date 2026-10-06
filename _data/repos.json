@@ -83,6 +83,22 @@
     "summary": "A small terminal entry point (Go + Bubble Tea) for everyday Kubernetes work: guided context/team/namespace selection, a 3-pane k9s status view, guided rollout restarts, and an AWS Secrets Manager <-> Kubernetes Secret diff/force-sync workflow."
   },
   {
+    "title": "opencode-prune",
+    "emoji": "🧹",
+    "category": "code",
+    "subcategory": "Dev Tools",
+    "status": "active",
+    "stack": [
+      "Bash",
+      "jq",
+      "SQLite",
+      "opencode"
+    ],
+    "repo": "opencode-prune",
+    "repo_url": "https://github.com/skoelle/opencode-prune",
+    "summary": "Clean up your opencode session database – dry run by default, export before every delete. Bash + jq + read-only SQLite."
+  },
+  {
     "title": "DynDns Updater",
     "emoji": "📡",
     "category": "code",
