@@ -1,44 +1,81 @@
 ---
-title: "YouTube Archiving: TubeArchivist & TubeSync"
+title: "YouTube Archiving: From TubeArchivist and TubeSync to yt-playlist-sync"
 section: "smarthome"
 tags: "smarthome"
 parent: "/smarthome/"
-description: "Self-hosted YouTube archiving and media management running on the Synology NAS, comparing TubeArchivist and TubeSync."
+description: "Self-hosted YouTube archiving on the Synology NAS: why TubeArchivist and TubeSync were replaced by the custom tool yt-playlist-sync, and how the old libraries were exported and imported."
 layout: base.njk
 ---
-<h1>YouTube Archiving: TubeArchivist &amp; TubeSync</h1>
+<h1>YouTube Archiving: From TubeArchivist and TubeSync to yt-playlist-sync</h1>
 <div class="detail-content">
 
-<p>Two self-hosted YouTube tools run on the Synology NAS via Docker Compose, each taking a different approach to the same goal: keeping offline copies of channels worth rewatching. TubeArchivist provides a full archive with search and metadata, while TubeSync focuses on automatic synchronization of playlists into a media server library.</p>
+<p>Keeping offline copies of YouTube channels worth rewatching started with two self-hosted tools running side by side on the Synology NAS. Neither turned out to be the right fit, so both were replaced by a custom build: <a href="https://github.com/skoelle/yt-playlist-sync">yt-playlist-sync</a>.</p>
 
-<h2>TubeArchivist</h2>
-<p>TubeArchivist self-hosts a searchable archive of downloaded YouTube content (Elasticsearch, Redis, and the TubeArchivist app itself). It's used to archive channels worth rewatching, including tutorials, long-form content, and anything that might disappear behind copyright strikes or channel deletions.</p>
+<h2>What ran before</h2>
+<p>TubeArchivist and TubeSync approached the same goal from different directions. TubeArchivist provided a full archive with search and metadata, while TubeSync focused on pushing playlists into a media server library. Both ran via Docker Compose on docker-host-nas, and for a while both ran in parallel, because neither could replace the other.</p>
 
-<h3>Synology-specific troubleshooting</h3>
-<p>Running Elasticsearch on Synology's DSM kernel isn't fully straightforward: newer Elasticsearch releases require a Linux kernel feature (SECCOMP) that Synology's kernel doesn't compile in. The fix is version-pinning Elasticsearch to the last release that still works without it, rather than fighting the kernel.</p>
+<h3>TubeArchivist</h3>
+<p>TubeArchivist self-hosts a searchable archive of downloaded YouTube content (Elasticsearch, Redis, and the TubeArchivist app itself). It's used to archive channels worth rewatching, including tutorials, long-form content, and anything that might disappear behind copyright strikes or channel deletions. Two things stayed unsatisfying:</p>
 <ul>
-<li>Synology's Container Manager doesn't always auto-join containers to the same Docker network even when they're defined in one Compose file, so an explicit named network avoids silent connectivity failures between the app, Elasticsearch, and Redis.</li>
-<li>A version upgrade of the app itself required a very specific step-by-step path (skipping versions breaks the database migration) rather than jumping straight to the latest release.</li>
-<li>Initial indexing of large channels takes significant time: Elasticsearch needs to build and optimize indices for full-text search across video titles, descriptions, and metadata.</li>
+<li><b>Playlist detection.</b> New playlists on subscribed channels were not always recognized by the app, so the videos in them were simply skipped during automatic downloads. The workaround was submitting videos and playlists by hand through the built-in submission tool, which works but defeats the purpose of automated archiving. This issue was never resolved.</li>
+<li><b>A heavy stack on a NAS kernel.</b> Newer Elasticsearch releases need a kernel feature (SECCOMP) that Synology's DSM kernel doesn't compile in, so Elasticsearch had to be version-pinned. Containers sometimes failed to join the same Docker network even when defined in one Compose file, app upgrades had to follow a very specific step-by-step path because skipping versions breaks the database migration, and the initial indexing of large channels took a long time.</li>
 </ul>
 
-<h3>Playlist detection problems</h3>
-<p>The main frustration with TubeArchivist is automatic playlist detection. New playlists added to subscribed channels are not always recognized by the app, meaning videos in those playlists get skipped during automatic downloads. The workaround is manually submitting individual videos or playlists through the TubeArchivist web interface using the built-in submission tool, which works but defeats the purpose of automated archiving. This issue remains unresolved.</p>
+<h3>TubeSync</h3>
+<p>TubeSync takes the simpler route: it syncs YouTube playlists straight into a media server library without the archive UI. Everything is manual, playlists have to be added by URL, and there is no discovery of new content at all. It's a pure download-and-organize tool, reliable for a fixed list of playlists but impossible to leave alone.</p>
 
-<h2>TubeSync</h2>
-<p>TubeSync takes a simpler approach: it syncs YouTube playlists directly into a media server library (like Jellyfin or Plex) without the full archive UI. Everything is manual: playlists must be added by URL, and there's no automatic discovery of new content from subscribed channels. It's a pure download-and-organize tool rather than a searchable archive.</p>
+<h3>The result</h3>
+<p>Both tools were never really convincing. TubeArchivist had the better archive but missed playlists, TubeSync downloaded reliably but needed constant curation, and keeping both felt like running two half-solutions. Shutting one of them down was never an option because each covered what the other lacked.</p>
 
-<h2>Current state</h2>
-<p>Both tools run in parallel on docker-host-nas, each with different strengths. TubeArchivist provides the better archive and search experience but has the playlist detection gap. TubeSync is more reliable for syncing specific playlists but requires manual curation. Neither has fully replaced the other yet, and the ideal solution of shutting one down hasn't been found.</p>
+<h2>yt-playlist-sync</h2>
+<p><a href="https://github.com/skoelle/yt-playlist-sync">yt-playlist-sync</a> is a self-hosted service built to replace both. It watches the public playlists of one YouTube channel and downloads them as video with <a href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> to a NAS share. No Google login, no API keys, only public playlists.</p>
+<ul>
+<li><b>Discovery every hour.</b> New playlists are found every 50 to 70 minutes and downloaded right away.</li>
+<li><b>Nightly incremental sync.</b> Regular playlists are synced once per night, with a per-playlist download archive so only new videos are fetched.</li>
+<li><b>Oneshot playlists.</b> Playlists whose title contains a keyword (default <code>setlist</code>) are downloaded once and never touched again afterwards, with a status, an error summary and a retry button for failed runs.</li>
+<li><b>It never deletes anything.</b> Playlists that disappear from YouTube are only marked as removed.</li>
+<li><b>One download at a time</b>, with sleeps between videos and between jobs, to stay polite towards YouTube.</li>
+<li><b>A small web UI</b> with status, sync and oneshot tabs, plus a playlist detail page with cover, thumbnail gallery, metadata from the local <code>.info.json</code> files, placeholder rows for missing videos and a built-in player that streams the downloaded files.</li>
+<li><b>Operational guards:</b> Healthchecks pings, a pause on HTTP 429 or 403, a self-updating yt-dlp with an atomic swap, a weekly image rebuild and a nightly backup of the database and the download archives.</li>
+</ul>
+<p>It runs as a Docker container from the public image <code>ghcr.io/skoelle/yt-playlist-sync:latest</code> on port 8048, with three volumes: <code>/config</code> for the SQLite database and archives, <code>/data</code> for the downloads, and <code>/backup</code> for the nightly copies.</p>
+
+<h2>Migration: export from both, import into the new tool</h2>
+<p>Both existing libraries were moved over without re-downloading anything. Each exporter writes the folder layout yt-playlist-sync itself downloads into (<code>&lt;Playlist title&gt; [&lt;playlist id&gt;]/NN - &lt;Title&gt; [&lt;video id&gt;].mp4</code>), together with a <code>manifest.json</code>, yt-dlp style <code>.info.json</code> sidecars, covers and the download archive files. Nothing is deleted or overwritten, and every step starts with a dry run.</p>
+
+<h3>Export from TubeArchivist</h3>
+<p><code>python -m app.ta_export</code> pulls playlists, videos and metadata from the TubeArchivist REST API and pairs them with the media files on disk. It runs as a container on the NAS itself with the TubeArchivist folder mounted read-only, so the videos never travel over the network twice. Run order: report only, then metadata only, then the full copy.</p>
+<pre><code>.venv/bin/python -m app.ta_export --dry-run --metadata-only   # report only
+.venv/bin/python -m app.ta_export --metadata-only             # metadata, no videos
+.venv/bin/python -m app.ta_export                             # full copy</code></pre>
+
+<h3>Export from TubeSync</h3>
+<p>TubeSync has no JSON API, so <code>python -m app.ts_export</code> opens its SQLite database read-only, pairs the rows with the files below its <code>downloads/</code> folder and writes exactly the same tree. The report, the manifests and the rules are identical to the TubeArchivist export.</p>
+<pre><code>.venv/bin/python -m app.ts_export --dry-run --metadata-only   # report only
+.venv/bin/python -m app.ts_export                             # full copy</code></pre>
+
+<h3>Import into yt-playlist-sync</h3>
+<p>The export is only a folder tree until the app knows about it. <code>python -m app.ta_import</code> reads the <code>manifest.json</code> files and writes playlists, video entries and download archives into the database, offline, without YouTube and without either old tool. The app has to be stopped first, and a preview comes free with <code>--dry-run</code>.</p>
+<pre><code>docker compose run --rm yt-playlist-sync python -m app.ta_import --dry-run
+docker compose run --rm yt-playlist-sync python -m app.ta_import</code></pre>
+<ul>
+<li>Imported playlists become <b>oneshot</b>, so the nightly sync never touches them.</li>
+<li>Local files decide the state: <code>done</code> only when every entry has a file on disk, otherwise <code>idle</code>, so missing videos can be fetched later with a retry.</li>
+<li>Entries are upserted, never removed, and nothing on disk is moved or deleted.</li>
+<li>Every local video gets a line in the yt-dlp download archive, so later sync runs don't re-check it.</li>
+<li>For playlists that exist twice, <code>python -m app.forget</code> clears a playlist (report first, apply on request, folder moved to quarantine, backup beforehand) so the import starts from a clean state.</li>
+</ul>
 
 <h2>How it fits into the backup strategy</h2>
-<p>Downloaded media files and Elasticsearch metadata are backed up as part of the NAS backup volumes, since they take significant time to re-download and re-index. The Redis cache is excluded, as it only holds session data and can be safely rebuilt on restart.</p>
-
+<p>Without Elasticsearch and Redis there is much less state to protect. Downloaded media files still ride on the NAS backup volumes, and the application state is two small things that the service backs up itself every night at 00:30 with rotation.</p>
 <table>
 <tr><th>Data</th><th>Included in NAS backup?</th></tr>
 <tr><td>Downloaded media files</td><td>Yes, via the NAS's own backup volumes</td></tr>
-<tr><td>Elasticsearch metadata/index</td><td>Yes, via the NAS's own backup volumes</td></tr>
-<tr><td>Redis cache</td><td>No, safe to delete/rebuild, only holds session data</td></tr>
+<tr><td>SQLite database (<code>/config</code>)</td><td>Yes, nightly copy into <code>/backup</code>, kept copies are rotated</td></tr>
+<tr><td>yt-dlp download archives (<code>/config</code>)</td><td>Yes, nightly tarball into <code>/backup</code>, rotated as well</td></tr>
 </table>
+
+<h2>What it took</h2>
+<p>The basic functions that were actually needed were up and running after a single day of SPEC-driven development: write the specification first, then build against it. Within one week, done next to the day job, I migrated everything from the old tools, added extra features (exports, importer, maintenance CLI, gallery, backups) and brought the service into a state that is good enough to run in production. TubeArchivist and TubeSync are switched off.</p>
 
 </div>
