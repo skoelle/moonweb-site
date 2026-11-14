@@ -1,13 +1,34 @@
+{% macro cards(list) %}
+{% for card in list %}
+<a class="card" href="{{ card.href }}">
+  <h3>{% if card.emoji %}{{ card.emoji }} {% endif %}{{ card.title }}</h3>
+  <p>{{ card.summary }}</p>
+</a>
+{% endfor %}
+{% endmacro %}
+
 {% for section in sections %}
-<section class="card-section">
-  <h2>{{ section.heading }}</h2>
-  <div class="card-grid">
-    {% for card in section.cards %}
-    <a class="card" href="{{ card.href }}">
-      <h3>{% if card.emoji %}{{ card.emoji }} {% endif %}{{ card.title }}</h3>
-      <p>{{ card.summary }}</p>
-    </a>
-    {% endfor %}
+<section class="card-section{% if section.aside %} card-section--split{% endif %}">
+  {% if section.aside %}
+  <div class="card-split">
+    <div class="card-split-main">
+      <h2>{{ section.heading }}</h2>
+      <div class="card-grid"{% if section.columns %} data-columns="{{ section.columns }}"{% endif %}>
+        {{ cards(section.cards) }}
+      </div>
+    </div>
+    <aside class="card-split-aside">
+      <h2>{{ section.aside.heading }}</h2>
+      <div class="card-grid card-grid--aside">
+        {{ cards(section.aside.cards) }}
+      </div>
+    </aside>
   </div>
+  {% else %}
+  <h2>{{ section.heading }}</h2>
+  <div class="card-grid"{% if section.columns %} data-columns="{{ section.columns }}"{% endif %}>
+    {{ cards(section.cards) }}
+  </div>
+  {% endif %}
 </section>
 {% endfor %}

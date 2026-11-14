@@ -8,6 +8,14 @@ layout: base.njk
 ogImage: "/stefan-koelle-foto.jpg"
 sections:
   - heading: "Homelab sites"
+    columns: 3
+    aside:
+      heading: "About me"
+      cards:
+        - title: "CV / stefankoelle.de"
+          summary: "Career, contact, and background, plus the full project portfolio."
+          href: "https://stefankoelle.de"
+          emoji: "👤"
     cards:
       - title: "infra"
         summary: "Stack overview: Proxmox, Synology, network, backups, and how I work."
@@ -29,13 +37,8 @@ sections:
         summary: "Physical retro hardware collection."
         href: "/retro/"
         emoji: "🕹️"
-  - heading: "About me"
-    cards:
-      - title: "CV / stefankoelle.de"
-        summary: "Career, contact, and background."
-        href: "https://stefankoelle.de"
-        emoji: "👤"
   - heading: "Time capsules"
+    columns: 4
     cards:
       - title: "28k8.moonweb.org"
         summary: "tHE tEMPLE BBS Mailbox and 90s releases archive."
