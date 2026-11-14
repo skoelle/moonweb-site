@@ -1,6 +1,6 @@
 title: "MVG Departures"
 emoji: "🚆"
 category: code
-subcategory: "Smart Home Apps"
+subcategory: "Apps"
 status: active
 stack: [Python, FastAPI]

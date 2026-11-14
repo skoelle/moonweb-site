@@ -1,5 +1,91 @@
 [
   {
+    "title": "Darts Calendar",
+    "emoji": "🎯",
+    "category": "code",
+    "subcategory": "Apps",
+    "status": "active",
+    "stack": [
+      "Python",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "GitHub Actions",
+      "ICS",
+      "JSON"
+    ],
+    "summary": "PDC tournament calendar as a website, JSON file and subscribable ICS feed, rebuilt and deployed daily",
+    "repo": "darts-calender",
+    "repo_url": "https://github.com/skoelle/darts-calender"
+  },
+  {
+    "title": "Focus App",
+    "emoji": "✅",
+    "category": "code",
+    "subcategory": "Apps",
+    "status": "active",
+    "stack": [
+      "C#",
+      ".NET",
+      "React",
+      "TypeScript",
+      "Entity Framework Core",
+      "MariaDB",
+      "Docker"
+    ],
+    "repo": "focusapp",
+    "repo_url": "https://github.com/skoelle/focusapp",
+    "summary": "A clean, modern todo application with drag & drop reordering. Built with React, TypeScript, and ASP.NET Core. Features responsive design, MariaDB persistence, and Docker deployment."
+  },
+  {
+    "title": "Google Calender Sync",
+    "emoji": "📅",
+    "category": "code",
+    "subcategory": "Apps",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "Uvicorn",
+      "Jinja2"
+    ],
+    "repo": "calender_sync",
+    "repo_url": "https://github.com/skoelle/calender_sync",
+    "summary": "Syncs a private Google Calendar (ICS) into MariaDB, with recurring-event expansion, soft-delete tracking, and a FastAPI web UI/REST API"
+  },
+  {
+    "title": "MVG Departures",
+    "emoji": "🚇",
+    "category": "code",
+    "subcategory": "Apps",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "Uvicorn",
+      "Jinja2"
+    ],
+    "repo": "mvg-departures",
+    "repo_url": "https://github.com/skoelle/mvg-departures",
+    "summary": "Compact MVG/S‑Bahn departure monitor (FastAPI) with configurable stations, direction filters, and a mobile‑friendly HTML and JSON view"
+  },
+  {
+    "title": "iCloud Contacts Sync",
+    "emoji": "🔄",
+    "category": "code",
+    "subcategory": "Apps",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "Uvicorn",
+      "Jinja2"
+    ],
+    "repo": "icloud-contacts-sync",
+    "repo_url": "https://github.com/skoelle/icloud-contacts-sync",
+    "summary": "Automated iCloud contacts sync to MariaDB via CardDAV delta sync, with a multi-user account mapping, birthday email digest, and an internal read-only API/web view behind Authelia."
+  },
+  {
     "title": "Chat Archive",
     "emoji": "💬",
     "category": "code",
@@ -171,13 +257,16 @@
     "subcategory": "Retro",
     "status": "active",
     "stack": [
+      "Flutter",
+      "Dart",
       "C#",
       ".NET",
-      "Console"
+      "Python",
+      "Docker"
     ],
+    "summary": "Flutter desktop gallery and terminal launcher for Marcer's Atari ST/Falcon GameDVD archive — browse the full catalog with screenshots, metadata and box scans, or launch ZIPs in Hatari.",
     "repo": "marcer-gamedvd-launcher",
-    "repo_url": "https://github.com/skoelle/marcer-gamedvd-launcher",
-    "summary": "Console launcher for Marcer's Atari ST/Falcon GameDVD USB stick — browse, compare, and launch games from the terminal with overlay/patch mode."
+    "repo_url": "https://github.com/skoelle/marcer-gamedvd-launcher"
   },
   {
     "title": "Phobia Welcome Intro",
@@ -227,73 +316,6 @@
     "repo": "turbopascal-xlib-unit",
     "repo_url": "https://github.com/skoelle/turbopascal-xlib-unit",
     "summary": "This Pascal unit, xlibunit, is a graphics library designed for use in Turbo Pascal programs. It provides various procedures for initializing and manipulating VGA graphics modes, handling color palettes, and drawing on the screen. It's particularly useful for creating graphic demos."
-  },
-  {
-    "title": "Focus App",
-    "emoji": "🎯",
-    "category": "code",
-    "subcategory": "Smart Home Apps",
-    "status": "active",
-    "stack": [
-      "C#",
-      ".NET",
-      "React",
-      "TypeScript",
-      "Entity Framework Core",
-      "MariaDB",
-      "Docker"
-    ],
-    "repo": "focusapp",
-    "repo_url": "https://github.com/skoelle/focusapp",
-    "summary": "A clean, modern todo application with drag & drop reordering. Built with React, TypeScript, and ASP.NET Core. Features responsive design, MariaDB persistence, and Docker deployment."
-  },
-  {
-    "title": "Google Calender Sync",
-    "emoji": "📅",
-    "category": "code",
-    "subcategory": "Smart Home Apps",
-    "status": "active",
-    "stack": [
-      "Python",
-      "FastAPI",
-      "Uvicorn",
-      "Jinja2"
-    ],
-    "repo": "calender_sync",
-    "repo_url": "https://github.com/skoelle/calender_sync",
-    "summary": "Syncs a private Google Calendar (ICS) into MariaDB, with recurring-event expansion, soft-delete tracking, and a FastAPI web UI/REST API"
-  },
-  {
-    "title": "MVG Departures",
-    "emoji": "🚇",
-    "category": "code",
-    "subcategory": "Smart Home Apps",
-    "status": "active",
-    "stack": [
-      "Python",
-      "FastAPI",
-      "Uvicorn",
-      "Jinja2"
-    ],
-    "repo": "mvg-departures",
-    "repo_url": "https://github.com/skoelle/mvg-departures",
-    "summary": "Compact MVG/S‑Bahn departure monitor (FastAPI) with configurable stations, direction filters, and a mobile‑friendly HTML and JSON view"
-  },
-  {
-    "title": "iCloud Contacts Sync",
-    "emoji": "🔄",
-    "category": "code",
-    "subcategory": "Smart Home Apps",
-    "status": "active",
-    "stack": [
-      "Python",
-      "FastAPI",
-      "Uvicorn",
-      "Jinja2"
-    ],
-    "repo": "icloud-contacts-sync",
-    "repo_url": "https://github.com/skoelle/icloud-contacts-sync",
-    "summary": "Automated iCloud contacts sync to MariaDB via CardDAV delta sync, with a multi-user account mapping, birthday email digest, and an internal read-only API/web view behind Authelia."
   },
   {
     "title": "28k8 tHE tEMPLE BBS",

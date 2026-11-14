@@ -212,7 +212,7 @@ Cloudflare redirects forward old subdomains:
 ```yaml
 title: "MVG Departures"
 category: code              # code | smarthome | infra
-subcategory: "Web Apps"     # drives grouping on www.moonweb.org/code/
+subcategory: "Apps"         # drives grouping on www.moonweb.org/code/
 status: active
 stack: [Python, FastAPI]
 hosted_on: "Docker Host Debian (PVE)"

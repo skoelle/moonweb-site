@@ -212,7 +212,7 @@ repo: auto                      # Auto (GitHub name)
 ### Valid Subcategories
 
 - Web Projects
-- Smart Home Apps
+- Apps
 - Infra Tools
 - Archiving Tools
 - Dev Tools
