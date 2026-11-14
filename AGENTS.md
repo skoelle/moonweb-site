@@ -2,7 +2,7 @@
 
 ## Projektuebersicht
 
-Monorepo fuer 6 statische Websites unter www.moonweb.org + stefankoelle.de, basierend auf Eleventy (11ty).
+Monorepo fuer 7 statische Websites unter www.moonweb.org + stefankoelle.de, basierend auf Eleventy (11ty).
 
 ### Websites (IONOS SFTP)
 
@@ -12,6 +12,7 @@ Monorepo fuer 6 statische Websites unter www.moonweb.org + stefankoelle.de, basi
 | infra | www.moonweb.org/infra/ | Infrastruktur-Uebersicht (Proxmox, Synology, Netzwerk) | Uebersicht + 8 Detailseiten |
 | smarthome | www.moonweb.org/smarthome/ | Smart Home Projekte und Dashboards | Uebersicht + 9 Detailseiten |
 | code | www.moonweb.org/code/ | GitHub-Projekte (aggregiert via .moonweb.yml) | Fertig |
+| apps | www.moonweb.org/apps/ | App-Showcase: Live-Apps + Community-Beta, mit Screenshots (Daten aus `_data/apps.json`) | Fertig |
 | retro | www.moonweb.org/retro/ | Physische Retro-Hardware | Uebersicht + 13 Detailseiten |
 | timecapsule | www.moonweb.org/timecapsule/ | 2000er Internet-Zeitkapsel (altes Design) | Fertig |
 
@@ -34,6 +35,7 @@ moonweb-site/
 ├── infra/                  # Index.njk + 8 Subseiten
 ├── smarthome/              # Index.njk + 9 Subseiten
 ├── code/                   # Index.njk
+├── apps/                   # Index.njk + img/ (WebP-Screenshots)
 ├── retro/                  # Index.njk + 13 Subseiten
 ├── timecapsule/            # Eleventy 2.x (eigene Config)
 │   ├── eleventy.config.js
@@ -57,7 +59,8 @@ moonweb-site/
 │   ├── base.css             # Shared CSS (Layout, Cards, Typografie)
 │   └── favicon/             # Favicon-SVGs pro Section
 ├── _data/
-│   └── repos.json           # GitHub-Aggregator Output
+│   ├── repos.json           # GitHub-Aggregator Output
+│   └── apps.json            # App-Showcase-Daten (apps/)
 ├── scripts/
 │   ├── github-aggregator/   # Python: liest .moonweb.yml -> repos.json
 │   └── cloudflare/          # Redirect-Setup fuer alte Subdomains

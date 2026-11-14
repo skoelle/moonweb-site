@@ -3,6 +3,7 @@ const SITES = {
   infra: { pathPrefix: "/infra" },
   smarthome: { pathPrefix: "/smarthome" },
   code: { pathPrefix: "/code" },
+  apps: { pathPrefix: "/apps" },
   retro: { pathPrefix: "/retro" },
 };
 
@@ -27,6 +28,9 @@ module.exports = function (eleventyConfig) {
   }
 
   // --- Passthrough copies ---
+
+  // Apps: app showcase screenshots
+  eleventyConfig.addPassthroughCopy("apps/img/*.webp");
 
   // Retro: Storm ST / Cloudy ST page images
   eleventyConfig.addPassthroughCopy("retro/storm-cloudy/*.jpg");

@@ -49,7 +49,7 @@ jobs:
           find dist/moonweb -type f | wc -l
 
           # Verify key directories exist
-          for dir in "" infra smarthome code retro timecapsule; do
+          for dir in "" infra smarthome code apps retro timecapsule; do
             if [ -n "$dir" ] && [ ! -d "dist/moonweb/$dir" ]; then
               echo "Error: dist/moonweb/$dir not found"
               exit 1
@@ -109,6 +109,7 @@ jobs:
           echo "| infra | https://www.moonweb.org/infra/ |" >> $GITHUB_STEP_SUMMARY
           echo "| smarthome | https://www.moonweb.org/smarthome/ |" >> $GITHUB_STEP_SUMMARY
           echo "| code | https://www.moonweb.org/code/ |" >> $GITHUB_STEP_SUMMARY
+          echo "| apps | https://www.moonweb.org/apps/ |" >> $GITHUB_STEP_SUMMARY
           echo "| retro | https://www.moonweb.org/retro/ |" >> $GITHUB_STEP_SUMMARY
           echo "| timecapsule | https://www.moonweb.org/timecapsule/ |" >> $GITHUB_STEP_SUMMARY
 

@@ -6,7 +6,7 @@
   <title>{{ title }}{% if 'moonweb' not in title and 'stefankoelle' not in title %} · moonweb.org{% endif %}</title>
   <meta name="description" content="{{ description }}">
   <meta name="author" content="Stefan Koelle">
-  <meta name="theme-color" content="{% if section == 'hub' %}#3b6ea5{% elif section == 'infra' %}#99333A{% elif section == 'smarthome' %}#1f8a8a{% elif section == 'code' %}#3E5098{% elif section == 'retro' %}#8a6d3b{% else %}#3b6ea5{% endif %}">
+  <meta name="theme-color" content="{% if section == 'hub' %}#3b6ea5{% elif section == 'infra' %}#99333A{% elif section == 'smarthome' %}#1f8a8a{% elif section == 'code' %}#3E5098{% elif section == 'apps' %}#c2410c{% elif section == 'retro' %}#8a6d3b{% else %}#3b6ea5{% endif %}">
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
   <meta property="og:title" content="{{ title }}{% if 'moonweb' not in title and 'stefankoelle' not in title %} · moonweb.org{% endif %}">
   <meta property="og:description" content="{{ description }}">
@@ -20,7 +20,7 @@
   {% if ogImage %}<meta name="twitter:image" content="{{ site.url }}{{ ogImage }}">{% endif %}
   <link rel="icon" href="{% if section and section != 'hub' %}/{{ section }}/favicon.svg{% else %}/favicon.svg{% endif %}">
   <link rel="stylesheet" href="/shared-base.css">
-  <style>:root { --accent: {% if section == 'infra' %}#99333A{% elif section == 'smarthome' %}#1f8a8a{% elif section == 'code' %}#3E5098{% elif section == 'retro' %}#8a6d3b{% else %}#3b6ea5{% endif %}; }</style>
+  <style>:root { --accent: {% if section == 'infra' %}#99333A{% elif section == 'smarthome' %}#1f8a8a{% elif section == 'code' %}#3E5098{% elif section == 'apps' %}#c2410c{% elif section == 'retro' %}#8a6d3b{% else %}#3b6ea5{% endif %}; }</style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -71,6 +71,7 @@
       <a href="/infra/">infra</a>
       <a href="/smarthome/">smarthome</a>
       <a href="/code/">code</a>
+      <a href="/apps/">apps</a>
       <a href="/retro/">retro</a>
       <a href="https://stefankoelle.de">cv</a>
     </nav>

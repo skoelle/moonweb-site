@@ -1,0 +1,60 @@
+---
+title: "Apps: Live Projects & Community Beta Experiments | moonweb"
+section: "apps"
+tags: "apps"
+description: "Apps I build and run myself: a PDC darts tournament calendar with ICS feed and a Munich metalcore show guide in community beta."
+layout: base.njk
+---
+<h1>Apps</h1>
+<p class="site-intro">Things I build for myself and then keep running. Some are live and open to everyone, others are still in a community beta while the rough edges get sanded down. Each entry explains what the app does and where to find it.</p>
+
+{% for app in apps %}
+<section class="app" id="{{ app.slug }}">
+  <div class="app-header">
+    <div class="app-heading">
+      <h2>{% if app.emoji %}<span class="app-emoji">{{ app.emoji }}</span> {% endif %}{{ app.title }}</h2>
+      <span class="app-badge app-badge--{{ app.status }}">{{ app.statusLabel }}</span>
+    </div>
+    <p class="app-summary">{{ app.summary }}</p>
+  </div>
+
+  <div class="app-body">
+    <div class="app-text">
+      {% for paragraph in app.intro %}
+      <p>{{ paragraph }}</p>
+      {% endfor %}
+
+      {% if app.statusNote %}
+      <p class="app-note">{{ app.statusNote }}</p>
+      {% endif %}
+
+      <p class="app-stack-label">Built with</p>
+      <p class="app-stack">{{ app.stack | join(" · ") }}</p>
+
+      <div class="app-actions">
+        {% if app.url %}
+        <a class="app-button" href="{{ app.url }}" target="_blank" rel="noopener">{{ app.urlLabel }}</a>
+        {% endif %}
+        {% if app.repo %}
+        <a class="app-button app-button--secondary" href="{{ app.repo }}" target="_blank" rel="noopener">{{ app.repoLabel }}</a>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if app.screenshots %}
+    <div class="app-shots{% if app.screenshots.length == 1 %} app-shots--single{% endif %}">
+      {% for shot in app.screenshots %}
+      <figure class="app-shot">
+        <a href="{{ shot.src }}" target="_blank" rel="noopener">
+          <img src="{{ shot.src }}" alt="{{ shot.alt }}" loading="lazy">
+        </a>
+        {% if shot.caption %}<figcaption>{{ shot.caption }}</figcaption>{% endif %}
+      </figure>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endfor %}
+
+<p class="apps-more">More apps are in the works. This page grows as they leave the lab.</p>

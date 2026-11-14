@@ -1,0 +1,57 @@
+[
+  {
+    "slug": "darts-calendar",
+    "title": "Darts Calendar",
+    "emoji": "🎯",
+    "status": "live",
+    "statusLabel": "Live",
+    "summary": "PDC tournament calendar as a website, a JSON file and a subscribable ICS feed, rebuilt and deployed every day.",
+    "intro": [
+      "Darts Calendar is a slim tournament calendar for the PDC season. It collects upcoming events from public sources, normalises them and publishes the result in three shapes: a browsable website, a plain JSON file and an ICS feed you can subscribe to from any calendar app.",
+      "The site offers a card view and a table view, filters for broadcaster and series, a live badge for tournaments that are currently running, and a short \"up next\" list. Because the whole thing is rebuilt by a GitHub Action every morning, the schedule stays current without any manual work."
+    ],
+    "url": "https://www.moonweb.org/darts/",
+    "urlLabel": "Open calendar",
+    "repo": "https://github.com/skoelle/darts-calender",
+    "repoLabel": "Source on GitHub",
+    "stack": ["Python", "Vanilla JS", "GitHub Actions", "ICS", "JSON"],
+    "screenshots": [
+      {
+        "src": "/apps/img/darts-karten.webp",
+        "alt": "Darts Calendar card view with sender and series filters",
+        "caption": "Card view with broadcaster and series filters, live badge and season stats."
+      },
+      {
+        "src": "/apps/img/darts-tabelle.webp",
+        "alt": "Darts Calendar table view grouped by month",
+        "caption": "Table view grouped by month, with venue, duration and broadcaster."
+      }
+    ]
+  },
+  {
+    "slug": "metalcore-munich",
+    "title": "Metalcore Munich",
+    "emoji": "🤘",
+    "status": "beta",
+    "statusLabel": "Community Beta",
+    "statusNote": "The beta is password-protected. Access is shared with the local scene, not published here.",
+    "summary": "A pit-first show guide for the Munich metalcore, deathcore and hardcore scene, assembled from public venue data.",
+    "intro": [
+      "Metalcore Munich answers one question: which shows in Munich are actually worth the trip this week? It pulls event calendars from local venues, merges duplicate entries, matches bands against a curated database and sorts everything into scene buckets from metalcore and deathcore to punk, rock and the occasional oddity.",
+      "Instead of marketing copy, each entry shows the facts that matter: start time, venue, support acts, genre tags, how many independent sources back the listing, and whether a show was updated, sold out or removed. A timeline view, venue ranking, band directory and a changelog of data changes round it off.",
+      "The site is currently in a community beta while the data pipeline and the scene taxonomy are being tuned. The public domain is coming once the beta phase settles."
+    ],
+    "url": "https://metalcoremunich.moonweb.workers.dev",
+    "urlLabel": "Open beta",
+    "repo": null,
+    "repoLabel": null,
+    "stack": ["Astro", "Python", "Cloudflare Workers"],
+    "screenshots": [
+      {
+        "src": "/apps/img/metalcore-shows.webp",
+        "alt": "Metalcore Munich show timeline with genre and venue filters",
+        "caption": "The shows timeline: tier and genre filters, source counts and scene tags."
+      }
+    ]
+  }
+]
