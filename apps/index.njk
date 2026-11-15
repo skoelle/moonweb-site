@@ -18,7 +18,7 @@ layout: base.njk
     <p class="app-summary">{{ app.summary }}</p>
   </div>
 
-  <div class="app-body">
+  <div class="app-body{% if app.screenshots %} app-body--with-shots{% endif %}">
     <div class="app-text">
       {% for paragraph in app.intro %}
       <p>{{ paragraph }}</p>
@@ -42,12 +42,21 @@ layout: base.njk
     </div>
 
     {% if app.screenshots %}
-    <div class="app-shots{% if app.screenshots.length == 1 %} app-shots--single{% endif %}">
+    <div class="app-shots">
       {% for shot in app.screenshots %}
-      <figure class="app-shot">
-        <a href="{{ shot.src }}" target="_blank" rel="noopener">
+      <figure class="app-shot{% if shot.srcMobile %} app-shot--paired{% endif %}">
+        <a class="app-shot-desktop" href="{{ shot.src }}" target="_blank" rel="noopener"
+           data-lightbox="{{ app.slug }}" data-src="{{ shot.src }}"
+           data-alt="{{ shot.alt }}"{% if shot.caption %} data-caption="{{ shot.caption }}"{% endif %}>
           <img src="{{ shot.src }}" alt="{{ shot.alt }}" loading="lazy">
         </a>
+        {% if shot.srcMobile %}
+        <a class="app-shot-mobile" href="{{ shot.srcMobile }}" target="_blank" rel="noopener"
+           data-lightbox="{{ app.slug }}" data-src="{{ shot.srcMobile }}"
+           data-alt="{{ shot.alt }} on a phone"{% if shot.caption %} data-caption="{{ shot.caption }} (phone view)"{% endif %}>
+          <img src="{{ shot.srcMobile }}" alt="{{ shot.alt }} on a phone" loading="lazy">
+        </a>
+        {% endif %}
         {% if shot.caption %}<figcaption>{{ shot.caption }}</figcaption>{% endif %}
       </figure>
       {% endfor %}

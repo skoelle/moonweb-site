@@ -48,9 +48,28 @@
     "stack": ["Astro", "Python", "Cloudflare Workers"],
     "screenshots": [
       {
-        "src": "/apps/img/metalcore-shows.webp",
-        "alt": "Metalcore Munich show timeline with genre and venue filters",
-        "caption": "The shows timeline: tier and genre filters, source counts and scene tags."
+        "src": "/apps/img/metalcore-shows-desktop.webp",
+        "srcMobile": "/apps/img/metalcore-shows-mobile.webp",
+        "alt": "Metalcore Munich show timeline with tier, genre and venue filters",
+        "caption": "Shows timeline: tier and genre filters, source counts and scene flags like New, Upgraded and Mosh."
+      },
+      {
+        "src": "/apps/img/metalcore-venues-desktop.webp",
+        "srcMobile": "/apps/img/metalcore-venues-mobile.webp",
+        "alt": "Metalcore Munich venue ranking with show counts and next date",
+        "caption": "Venues ranked by show count and mosh shows, with address and next date."
+      },
+      {
+        "src": "/apps/img/metalcore-bands-desktop.webp",
+        "srcMobile": "/apps/img/metalcore-bands-mobile.webp",
+        "alt": "Metalcore Munich band directory with scene, origin and upcoming shows",
+        "caption": "The pit roster: 566 bands with scene, origin and upcoming shows."
+      },
+      {
+        "src": "/apps/img/metalcore-changes-desktop.webp",
+        "srcMobile": "/apps/img/metalcore-changes-mobile.webp",
+        "alt": "Metalcore Munich changelog of added, updated and removed mosh events",
+        "caption": "Mosh changelog: what was added, updated or removed on each data run."
       }
     ]
   }

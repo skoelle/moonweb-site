@@ -29,8 +29,9 @@ module.exports = function (eleventyConfig) {
 
   // --- Passthrough copies ---
 
-  // Apps: app showcase screenshots
+  // Apps: app showcase screenshots and lightbox script
   eleventyConfig.addPassthroughCopy("apps/img/*.webp");
+  eleventyConfig.addPassthroughCopy({ "apps/lightbox.js": "apps/lightbox.js" });
 
   // Retro: Storm ST / Cloudy ST page images
   eleventyConfig.addPassthroughCopy("retro/storm-cloudy/*.jpg");
