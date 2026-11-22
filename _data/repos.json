@@ -70,6 +70,24 @@
     "summary": "Compact MVG/S‑Bahn departure monitor (FastAPI) with configurable stations, direction filters, and a mobile‑friendly HTML and JSON view"
   },
   {
+    "title": "Spot History Manager",
+    "emoji": "📍",
+    "category": "code",
+    "subcategory": "Apps",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "Uvicorn",
+      "Jinja2",
+      "Pillow",
+      "SQLite"
+    ],
+    "repo": "spot-history-manager",
+    "repo_url": "https://github.com/skoelle/spot-history-manager",
+    "summary": "Collect and explore check-in and visit history from Foursquare, Yelp and Google Timeline"
+  },
+  {
     "title": "iCloud Contacts Sync",
     "emoji": "🔄",
     "category": "code",
@@ -200,6 +218,22 @@
     "repo": "dyndns-updater",
     "repo_url": "https://github.com/skoelle/dyndns-updater",
     "summary": "Cloudflare + FreeDNS DynDNS-Updater for FritzBox (TR-064) as Docker Container"
+  },
+  {
+    "title": "Weblog Analysis",
+    "emoji": "📊",
+    "category": "code",
+    "subcategory": "Infra Tools",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "SQLite",
+      "Docker"
+    ],
+    "repo": "weblog-analysis",
+    "repo_url": "https://github.com/skoelle/weblog-analysis",
+    "summary": "Web log analysis for Apache/nginx combined access logs: weekly visitors, bots and crawling in a FastAPI + SQLite dashboard"
   },
   {
     "title": "imap2gmail",
