@@ -7,7 +7,7 @@ www.moonweb.org/           -> Central index & gateway
 www.moonweb.org/infra/     -> Infrastructure overview (Proxmox, Synology, Docker)
 www.moonweb.org/smarthome/ -> Smart home automation, media & everyday tools
 www.moonweb.org/code/      -> Curated GitHub project catalog
-www.moonweb.org/apps/      -> App showcase: live apps and community beta
+www.moonweb.org/apps/      -> App showcase: live apps, desktop tools and community beta
 www.moonweb.org/retro/     -> Physical retro hardware collection
 www.moonweb.org/timecapsule/ -> 2000s internet time capsule (retro design)
 stefankoelle.de            -> CV, career, personal site (LED Matrix docs)
@@ -185,7 +185,7 @@ All moonweb.org sites are accessible under `www.moonweb.org` as subdirectories:
 | `www.moonweb.org/infra/` | Infrastructure |
 | `www.moonweb.org/smarthome/` | Smart Home & Tools |
 | `www.moonweb.org/code/` | Code catalog |
-| `www.moonweb.org/apps/` | App showcase (live + beta) |
+| `www.moonweb.org/apps/` | App showcase (live, desktop + beta) |
 | `www.moonweb.org/retro/` | Retro hardware |
 | `www.moonweb.org/timecapsule/` | 2000s time capsule |
 | `www.moonweb.org/impressum/` | Legal notice |

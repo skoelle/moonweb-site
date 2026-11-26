@@ -12,7 +12,7 @@ Monorepo fuer 7 statische Websites unter www.moonweb.org + stefankoelle.de, basi
 | infra | www.moonweb.org/infra/ | Infrastruktur-Uebersicht (Proxmox, Synology, Netzwerk) | Uebersicht + 12 Detailseiten |
 | smarthome | www.moonweb.org/smarthome/ | Smart Home, Dashboards und eigene Tools | Uebersicht + 17 Detailseiten |
 | code | www.moonweb.org/code/ | GitHub-Projekte (aggregiert via .moonweb.yml) | Fertig |
-| apps | www.moonweb.org/apps/ | App-Showcase: Live-Apps + Community-Beta, mit Screenshots (Daten aus `_data/apps.json`) | Fertig |
+| apps | www.moonweb.org/apps/ | App-Showcase: Live-Apps, Desktop-Tools + Community-Beta, mit Screenshots (Daten aus `_data/apps.json`) | Fertig |
 | retro | www.moonweb.org/retro/ | Physische Retro-Hardware | Uebersicht + 13 Detailseiten |
 | timecapsule | www.moonweb.org/timecapsule/ | 2000er Internet-Zeitkapsel (altes Design) | Fertig |
 

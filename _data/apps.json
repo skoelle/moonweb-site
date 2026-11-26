@@ -29,6 +29,35 @@
     ]
   },
   {
+    "slug": "marcer-gamedvd",
+    "title": "Marcer GameDVD",
+    "emoji": "🕹️",
+    "status": "live",
+    "statusLabel": "Desktop App",
+    "summary": "A Flutter desktop gallery and launcher for Marcer's Atari ST/Falcon GameDVD archive, with metadata, screenshots and box scans.",
+    "intro": [
+      "Marcer GameDVD is a desktop browser and launcher for Marcer's Atari ST and Falcon GameDVD archive. It turns the catalogue into a gallery with screenshots, game metadata, curated box scans and manuals, and launches ZIPs directly in Hatari.",
+      "The app is a read-only consumer of the archive. It can pull optional AtariLegend and PirateFinder metadata on demand, including crew histories, menu-disk appearances and trivia, while the local files remain the source of truth. Next to the Flutter desktop app, the repository contains a legacy C# console launcher and Python maintenance tools."
+    ],
+    "url": null,
+    "urlLabel": null,
+    "repo": "https://github.com/skoelle/marcer-gamedvd-launcher",
+    "repoLabel": "Source on GitHub",
+    "stack": ["Flutter", "Dart", "C#", ".NET", "Python", "Docker"],
+    "screenshots": [
+      {
+        "src": "/apps/img/marcer-catalog.webp",
+        "alt": "Marcer GameDVD catalog grid with filters and detail sidebar",
+        "caption": "Catalog grid with section tabs, filters, search and the detail sidebar."
+      },
+      {
+        "src": "/apps/img/marcer-lightbox.webp",
+        "alt": "Marcer GameDVD full-screen gallery lightbox with variant filmstrip",
+        "caption": "Full-screen lightbox with release variants and a variant filmstrip."
+      }
+    ]
+  },
+  {
     "slug": "metalcore-munich",
     "title": "Metalcore Munich",
     "emoji": "🤘",
