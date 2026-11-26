@@ -27,6 +27,9 @@ layout: base.njk
 <li>Provides advanced VLAN segmentation beyond what the main Fritz!Box offers.</li>
 </ul>
 
+<h2>Local DNS host source</h2>
+<p>The router also acts as a second host source for the local DNS setup. <a href="https://github.com/skoelle/fritz-lan-dns">fritz-lan-dns</a> reads DHCP leases and static hosts over ubus, so devices that only exist on the OpenWrt side still resolve under the private local domain. See <a href="/infra/local-dns/">Local DNS</a> for the full query flow.</p>
+
 <h2>IoT VLAN 189</h2>
 <p>A dedicated, isolated network segment for IoT devices, running on a separate small WiFi access point on a different channel. This keeps smart home hardware, including the balcony sensors and light controller, off the main network while maintaining full connectivity to the homelab services.</p>
 <ul>

@@ -24,6 +24,7 @@ layout: base.njk
 <li><strong>Purpose</strong>, network-wide DNS sinkhole and ad/tracker blocking for every device on the home network.</li>
 <li><strong>Why LXC</strong>, DNS resolution needs to be rock-solid and always reachable at a fixed IP; running it as a lean, dedicated LXC avoids depending on the Docker host VM being up, and keeps it isolated from Docker networking quirks that could interfere with DNS.</li>
 <li><strong>Advantage</strong>, near-zero overhead, boots in seconds after a Proxmox host reboot, and its stability is decoupled from whatever is happening on the Docker hosts.</li>
+<li><strong>Local DNS delegation</strong>, Pi-hole remains the primary resolver, but forwards the private local domain to CoreDNS, which is fed by <a href="https://github.com/skoelle/fritz-lan-dns">fritz-lan-dns</a>. See <a href="/infra/local-dns/">Local DNS</a> for the full setup.</li>
 </ul>
 
 <h2>Ubuntu-Worker</h2>

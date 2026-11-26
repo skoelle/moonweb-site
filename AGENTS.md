@@ -9,7 +9,7 @@ Monorepo fuer 7 statische Websites unter www.moonweb.org + stefankoelle.de, basi
 | Site | URL | Zweck | Status |
 |------|-----|-------|--------|
 | hub | www.moonweb.org/ | Zentrale Indexseite, verlinkt alles | Fertig |
-| infra | www.moonweb.org/infra/ | Infrastruktur-Uebersicht (Proxmox, Synology, Netzwerk) | Uebersicht + 8 Detailseiten |
+| infra | www.moonweb.org/infra/ | Infrastruktur-Uebersicht (Proxmox, Synology, Netzwerk) | Uebersicht + 12 Detailseiten |
 | smarthome | www.moonweb.org/smarthome/ | Smart Home Projekte und Dashboards | Uebersicht + 9 Detailseiten |
 | code | www.moonweb.org/code/ | GitHub-Projekte (aggregiert via .moonweb.yml) | Fertig |
 | apps | www.moonweb.org/apps/ | App-Showcase: Live-Apps + Community-Beta, mit Screenshots (Daten aus `_data/apps.json`) | Fertig |
@@ -32,7 +32,7 @@ Monorepo fuer 7 statische Websites unter www.moonweb.org + stefankoelle.de, basi
 ```
 moonweb-site/
 ├── hub/                    # Index + Redirects (.htm) + impressum.njk
-├── infra/                  # Index.njk + 8 Subseiten
+├── infra/                  # Index.njk + 12 Subseiten
 ├── smarthome/              # Index.njk + 9 Subseiten
 ├── code/                   # Index.njk
 ├── apps/                   # Index.njk + img/ (WebP-Screenshots)

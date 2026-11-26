@@ -28,9 +28,9 @@ layout: base.njk
 
 <h2>Own GitHub projects</h2>
 <ul>
-<li><strong>icloud-contacts-sync</strong>, syncs contact data between iCloud and other systems.</li>
-<li><strong>calendar-sync</strong>, keeps calendars synchronized across sources.</li>
-<li><strong>mvg-departures</strong>, pulls Munich public transport (MVG) departure data for local dashboards.</li>
+<li><strong><a href="https://github.com/skoelle/icloud-contacts-sync">icloud-contacts-sync</a></strong>, syncs contact data between iCloud and other systems.</li>
+<li><strong><a href="https://github.com/skoelle/calender_sync">calender_sync</a></strong>, keeps calendars synchronized across sources.</li>
+<li><strong><a href="https://github.com/skoelle/mvg-departures">mvg-departures</a></strong>, pulls Munich public transport (MVG) departure data for local dashboards.</li>
 <li><strong>wetter-api</strong>, a small weather API/worker pair, built from a custom GHCR image and updated automatically via Watchtower.</li>
 </ul>
 
@@ -39,7 +39,9 @@ layout: base.njk
 <li><strong>mosquitto-mqtt</strong>, central MQTT broker for smart-home and sensor messaging.</li>
 <li><strong>grafana, prometheus, influxdb</strong>, the monitoring and metrics stack for dashboards and time-series data.</li>
 <li><strong>healthchecks, uptime-kuma, cadvisor</strong>, service and container health/uptime monitoring.</li>
-<li><strong>dyndns-updater</strong>, keeps DNS pointed at the home connection; my own project, see <a href="https://github.com/skoelle/dyndns-updater">skoelle/dyndns-updater</a> on GitHub.</li>
+<li><strong>dyndns-updater</strong>, keeps DNS pointed at the home connection; my own project, see <a href="/infra/dynamic-dns/">Dynamic DNS</a> and <a href="https://github.com/skoelle/dyndns-updater">skoelle/dyndns-updater</a> on GitHub.</li>
+<li><strong>fritz-lan-dns and CoreDNS</strong>, generate and serve the private local domain from FRITZ!Box host data; my own project, see <a href="/infra/local-dns/">Local DNS</a> and <a href="https://github.com/skoelle/fritz-lan-dns">skoelle/fritz-lan-dns</a> on GitHub.</li>
+<li><strong>imap2gmail</strong>, relays a source IMAP inbox into Gmail as a replacement for Gmail POP fetching; my own project, see <a href="/infra/mail-relay/">Mail Relay</a> and <a href="https://github.com/skoelle/imap2gmail">skoelle/imap2gmail</a> on GitHub.</li>
 <li><strong>watchtower</strong>, automatically checks for and applies container image updates on a daily schedule.</li>
 <li><strong>authelia, nginx-proxy-manager</strong>, authentication layer and reverse proxy for exposing internal services safely.</li>
 <li><strong>postfix</strong>, internal mail relay used by other containers (e.g. Watchtower notifications) to send email.</li>
@@ -58,6 +60,7 @@ layout: base.njk
 <li><strong>Open WebUI</strong>, chat interface for locally hosted LLMs.</li>
 <li><strong>Stirling PDF</strong>, self-hosted PDF toolkit for merging, splitting, converting, compressing, and editing documents without uploading them to external services.</li>
 <li><strong>ArchiveBox</strong>, personal web archiving of bookmarked pages.</li>
+<li><strong>weblog-analysis</strong>, privacy-friendly visitor and bot analysis from server access logs, with no client-side tracking; my own project, see <a href="/infra/web-analytics/">Web Log Analytics</a> and <a href="https://github.com/skoelle/weblog-analysis">skoelle/weblog-analysis</a> on GitHub.</li>
 <li><strong>yt-playlist-sync [NAS]</strong>, self-built tool that watches the public playlists of a YouTube channel and downloads them with yt-dlp directly onto NAS storage; it runs on docker-host-nas specifically because it needs direct volume access to the Synology's disks. Replaces TubeArchivist and TubeSync.</li>
 <li><strong>Music Stretto</strong>, music streaming server for the local MP3 library on the Synology, accessible from the home dashboard.</li>
 </ul>

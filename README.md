@@ -91,7 +91,7 @@ npm run build:moonweb                # builds moonweb + timecapsule (for deploym
 ```
 moonweb-site/
 ├── hub/                          # Central index + redirect .htm files
-├── infra/                        # Infra overview + 8 detail pages
+├── infra/                        # Infra overview + 12 detail pages
 ├── smarthome/                    # Smart home overview + 9 detail pages
 ├── code/                         # GitHub catalog
 ├── retro/                        # Retro hardware + 13 detail pages

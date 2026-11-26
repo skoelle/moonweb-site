@@ -47,6 +47,9 @@ ensures that if Prometheus itself stops scraping, an alert fires within
 minutes. More sophisticated alerting rules (disk space prediction,
 temperature thresholds) are planned but not yet implemented.</p>
 
+<h2>Visitor analytics</h2>
+<p>Metrics are not the only signal. <a href="/infra/web-analytics/">Web Log Analytics</a> reads Apache and nginx access logs and reports weekly visitors, bots, scanners and per-vhost traffic. It is intentionally separate from Prometheus, which tracks system health rather than audience behavior.</p>
+
 <h2>Open items</h2>
 <ul>
 <li>Alerting rules are not yet configured for most services.</li>

@@ -1,0 +1,51 @@
+---
+title: "Local DNS"
+section: "infra"
+tags: "infra"
+parent: "/infra/"
+description: "How Pi-hole and CoreDNS give the homelab a private local domain, backed by live FRITZ!Box host data and an optional OpenWrt source."
+layout: base.njk
+---
+<h1>Local DNS</h1>
+<div class="detail-content">
+
+<p>The homelab uses Pi-hole as its primary DNS resolver, but a flat with servers, containers and smart-home devices needs more than ad blocking. A second resolver, CoreDNS, answers a private local domain so services can be reached by name instead of IP. Both layers are fed by <a href="https://github.com/skoelle/fritz-lan-dns">fritz-lan-dns</a>, my own service that collects mesh and host data from the FRITZ!Box, stores it in SQLite, and generates DNS records from it.</p>
+
+<h2>Why a second DNS layer</h2>
+<ul>
+<li><strong>Pi-hole stays primary</strong>, every client keeps using Pi-hole for ad and tracker blocking, so nothing changes for normal internet traffic.</li>
+<li><strong>Local names without hosts files</strong>, CoreDNS serves names for the private domain from the collected host list, so devices do not need manual entries.</li>
+<li><strong>One source of truth</strong>, the FRITZ!Box already knows which device has which address. The service reads that data instead of maintaining a second inventory by hand.</li>
+</ul>
+
+<h2>Query flow</h2>
+<p>Pi-hole answers everything it normally answers and conditionally forwards only the private local domain to CoreDNS:</p>
+<pre><code>Client -> Pi-hole -> conditional forward for the local domain
+                 -> CoreDNS
+                    |- known host from dns/hosts -> answer
+                    `- unknown name -> FRITZ!Box fallback -> answer rewritten to the local domain</code></pre>
+<p>CoreDNS runs on the same Proxmox host as Pi-hole and only answers the local domain. The fallback keeps names working even before they appear in the generated host list.</p>
+
+<h2>Collecting host data</h2>
+<ul>
+<li>An hourly TR-064 pull from the FRITZ!Box keeps the database current.</li>
+<li>Mesh topology including LAN, WiFi and Powerline links, WiFi radios, channels and connected clients, and every known host, active or offline.</li>
+<li>A web UI with dashboard, topology, WiFi, hosts, DNS and history views.</li>
+<li>DNS records generated from hostnames and IPs, with conflict detection and source information.</li>
+</ul>
+
+<h2>OpenWrt as a second source</h2>
+<p>Devices that only exist behind the <a href="/infra/openwrt/">OpenWrt router</a> can be added as a second host source. The service reads DHCP leases and static hosts over ubus, so those devices also resolve under the local domain instead of being invisible to the FRITZ!Box.</p>
+
+<h2>Safety model</h2>
+<ul>
+<li>CoreDNS answers only the private local domain. Queries for anything else return <code>REFUSED</code>, so the container is not an open resolver.</li>
+<li>Unknown names inside the local domain fall back to the FRITZ!Box, and the answer is rewritten to the original local name.</li>
+<li>The Pi-hole LXC remains the single DNS entry point for clients. The CoreDNS container is only reachable through that delegation.</li>
+</ul>
+
+<h2>Where it runs</h2>
+<p>Pi-hole runs as a lean <a href="/infra/lxc/">LXC container</a> on the main Proxmox host. CoreDNS and fritz-lan-dns run as Docker containers on the primary <a href="/infra/docker/">Docker host</a>. See the <a href="https://github.com/skoelle/fritz-lan-dns">fritz-lan-dns repository</a> for configuration details.</p>
+
+<p class="note">IP addresses, the actual local domain and credentials are intentionally left out of this page.</p>
+</div>

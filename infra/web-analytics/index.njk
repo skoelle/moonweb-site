@@ -1,0 +1,45 @@
+---
+title: "Web Log Analytics"
+section: "infra"
+tags: "infra"
+parent: "/infra/"
+description: "Privacy-friendly visitor and bot analysis from Apache and nginx access logs, with no client-side tracking and own traffic excluded by network history."
+layout: base.njk
+---
+<h1>Web Log Analytics</h1>
+<div class="detail-content">
+
+<p>This site and my other public sites do not use client-side analytics or tracking scripts. Instead, <a href="https://github.com/skoelle/weblog-analysis">weblog-analysis</a> reads Apache and nginx access logs from the shared host, stores the parsed data in SQLite, and serves a FastAPI dashboard.</p>
+
+<h2>Privacy by design</h2>
+<ul>
+<li>The host already anonymizes client addresses before they are written. IPv4 is masked to a network and IPv6 is truncated to a prefix.</li>
+<li>A "visitor" therefore means a network, not a person. The UI states this openly.</li>
+<li>My own traffic is excluded by network and time interval, using the history from <a href="/infra/dynamic-dns/">dyndns-updater</a>.</li>
+</ul>
+
+<h2>Pipeline</h2>
+<ul>
+<li><strong>Fetch</strong>, a scheduled job pulls new log files over SFTP from the shared host.</li>
+<li><strong>Ingest</strong>, lines are parsed, the vhost field is extracted, and records are written to SQLite.</li>
+<li><strong>Retention</strong>, older raw data and database rows are pruned on a schedule.</li>
+<li><strong>Dashboard</strong>, a FastAPI app serves the reports at an internal port behind the usual authentication layer.</li>
+</ul>
+
+<h2>What it shows</h2>
+<ul>
+<li>Weekly requests and unique networks, split into human, bot and scanner traffic.</li>
+<li>Categories for search bots, AI bots, monitoring, scrapers, scanners and requests without a user agent.</li>
+<li>Per-vhost traffic, with aliases merged so <code>www.</code> variants do not split the numbers.</li>
+<li>Top bots, top paths, top networks with drill-down, status codes and referers.</li>
+<li>Filters for status class and time range, applied consistently across the Analyse tab.</li>
+</ul>
+
+<h2>Not a monitoring replacement</h2>
+<p>This tool answers "who reads the sites and what hits them", not "is the infrastructure healthy". Host, container and network metrics stay in <a href="/infra/monitoring/">Prometheus and Grafana</a>. Keeping the two separate means log analysis can be noisy and exploratory without affecting alerting.</p>
+
+<h2>Deployment</h2>
+<p>It runs as a Docker container with a bind-mounted SQLite database and log directory. See the <a href="https://github.com/skoelle/weblog-analysis">weblog-analysis repository</a> for the SFTP settings and compose example.</p>
+
+<p class="note">Hostnames, credentials and real visitor networks are not published here.</p>
+</div>

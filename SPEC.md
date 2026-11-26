@@ -119,7 +119,7 @@ A local aggregator script reads `.moonweb.yml` from all repos via the GitHub API
 ```
 moonweb-site/
 ├── hub/                    # Index + Redirects (.htm) + impressum.njk
-├── infra/                  # Index.njk + 8 Subseiten
+├── infra/                  # Index.njk + 12 Subseiten
 ├── smarthome/              # Index.njk + 9 Subseiten
 ├── code/                   # Index.njk
 ├── retro/                  # Index.njk + 13 Subseiten

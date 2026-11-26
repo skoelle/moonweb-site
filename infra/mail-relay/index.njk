@@ -1,0 +1,47 @@
+---
+title: "Mail Relay: IMAP to Gmail"
+section: "infra"
+tags: "infra"
+parent: "/infra/"
+description: "A small container that replaces Gmail POP fetching by relaying a source IMAP inbox into Gmail, with routing rules, state tracking and recovery."
+layout: base.njk
+---
+<h1>Mail Relay: IMAP to Gmail</h1>
+<div class="detail-content">
+
+<p>Gmail is retiring POP fetching ("Get mail from other accounts"), so the old setup of pulling an external inbox into Gmail is going away. <a href="https://github.com/skoelle/imap2gmail">imap2gmail</a> replaces it with a small long-running container that relays mail over IMAP instead.</p>
+
+<h2>Flow</h2>
+<pre><code>Source IMAP -> read raw message -> append to Gmail -> delete from source -> optional ntfy</code></pre>
+<ul>
+<li>The container selects the source inbox and keeps a state file with <code>uidValidity</code> and the last processed UID.</li>
+<li>New messages are fetched as raw RFC822 data and appended to the matching Gmail folder.</li>
+<li>Only after a successful append is the source message marked deleted and expunged.</li>
+<li>IDLE provides push delivery, with a fallback poll as a safety net.</li>
+</ul>
+
+<h2>Routing rules</h2>
+<ul>
+<li><strong>Remove list</strong>, matching messages are moved to the source trash and never delivered.</li>
+<li><strong>Archive rules</strong>, matching messages go straight to Gmail All Mail without a notification.</li>
+<li><strong>Spam</strong>, messages with a spam header can be routed to the Gmail spam folder.</li>
+<li><strong>Other domains</strong>, mail that is not addressed to one of my domains can be filed into a separate folder.</li>
+</ul>
+<p>Rules are evaluated in a fixed order: removal first, then archive, then spam, then the domain check.</p>
+
+<h2>Failure handling</h2>
+<ul>
+<li>If an append fails, the message is counted as failed and the UID advances, so one bad message cannot block the queue forever.</li>
+<li>If the delete fails after a successful append, the container rolls back the Gmail copy by Message-ID.</li>
+<li>A crash between append and delete is recovered on startup through a pending UID in the state file.</li>
+<li>Optional ntfy notifications report successful deliveries, repeated failures and recovery.</li>
+</ul>
+
+<h2>Not the outbound relay</h2>
+<p>This container handles inbound mail only. Outbound mail from other containers, such as Watchtower notifications, still goes through the internal Postfix relay described on the <a href="/infra/docker/">Docker container strategy</a> page.</p>
+
+<h2>Deployment</h2>
+<p>It runs as a Docker container with a persistent volume for the state file. See the <a href="https://github.com/skoelle/imap2gmail">imap2gmail repository</a> for folder names, credentials and the compose example.</p>
+
+<p class="note">Mail addresses, credentials and folder names are not published here.</p>
+</div>

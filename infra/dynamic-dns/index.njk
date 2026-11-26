@@ -1,0 +1,39 @@
+---
+title: "Dynamic DNS"
+section: "infra"
+tags: "infra"
+parent: "/infra/"
+description: "How dyndns-updater keeps Cloudflare and FreeDNS records pointed at the changing home IPv4 address, using only the FRITZ!Box as the IP source."
+layout: base.njk
+---
+<h1>Dynamic DNS</h1>
+<div class="detail-content">
+
+<p>The home connection receives a changing public IPv4 address. <a href="https://github.com/skoelle/dyndns-updater">dyndns-updater</a> keeps public DNS records pointed at whatever address the FRITZ!Box currently has, so self-hosted services stay reachable through stable names.</p>
+
+<h2>Where the IP comes from</h2>
+<p>The updater reads the public address exclusively through the FRITZ!Box TR-064 interface. It deliberately ignores IP values passed in webhook parameters, so a webhook cannot be used to point DNS records somewhere else.</p>
+
+<h2>Providers and update policy</h2>
+<ul>
+<li><strong>Cloudflare</strong>, one or more A records configured as DNS-only, updated through the API.</li>
+<li><strong>FreeDNS</strong>, an existing update URL is called when the address changes.</li>
+<li><strong>Only on change</strong>, DNS is written only when the detected address differs from the last one, which keeps API calls and logs quiet.</li>
+<li><strong>Healthcheck heartbeat</strong>, every poll cycle reports in, even when no update was needed.</li>
+</ul>
+
+<h2>Triggers</h2>
+<ul>
+<li>Container start.</li>
+<li>An internal webhook for an immediate update after a reconnect.</li>
+<li>A fallback poll every 15 minutes.</li>
+</ul>
+
+<h2>History for other tools</h2>
+<p>The service keeps a history of addresses and their active intervals. <a href="/infra/web-analytics/">Web Log Analytics</a> uses that history to exclude my own traffic from access-log reports in a time-aware way, instead of hard-coding a network that may change later.</p>
+
+<h2>Deployment</h2>
+<p>It runs as a Docker container on the primary <a href="/infra/docker/">Docker host</a>, following the same compose layout as the rest of the stack. See the <a href="https://github.com/skoelle/dyndns-updater">dyndns-updater repository</a> for environment variables and provider setup.</p>
+
+<p class="note">Zone IDs, tokens, hostnames and the real public address are not published here.</p>
+</div>
