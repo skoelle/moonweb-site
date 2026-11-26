@@ -105,6 +105,25 @@
     "summary": "Collect and explore check-in and visit history from Foursquare, Yelp and Google Timeline"
   },
   {
+    "title": "TV-Guide",
+    "emoji": "📺",
+    "category": "code",
+    "subcategory": "Apps",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "Uvicorn",
+      "Jinja2",
+      "SQLite",
+      "HTMX",
+      "Docker"
+    ],
+    "summary": "Browse the TVHeadend EPG, match shows against IMDb, keep saved searches, and trigger recordings from one web UI.",
+    "repo": "tv-guide",
+    "repo_url": "https://github.com/skoelle/tv-guide"
+  },
+  {
     "title": "YouTube Playlist Sync",
     "emoji": "🎬",
     "category": "code",

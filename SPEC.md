@@ -36,7 +36,7 @@ Old subdomain redirects (via Cloudflare):
 |---|---|---|---|
 | hub | `/` | Gateway, links to everything, one-line description per destination | Minimal |
 | infra | `/infra/` | Shallow, structured overview of the stack: Proxmox, Synology, VLANs, Docker hosting, dev environment | Reference, high-level only |
-| smarthome | `/smarthome/` | Why the homelab exists, sensors, automation, calendar/contacts sync, dashboards, media | Project storytelling |
+| smarthome | `/smarthome/` | Why the homelab exists, sensors, automation, calendar/contacts sync, dashboards, media, personal tools | Project storytelling |
 | code | `/code/` | Curated, sorted GitHub catalog, overview only, always linking out to GitHub | Portfolio |
 | retro | `/retro/` | Physical retro hardware collection (not software/demos, that's 28k8's domain) | Simple, factual |
 | timecapsule | `/timecapsule/` | Original www.moonweb.org content from 2001, preserved as-is | Retro 2001 design |
@@ -120,7 +120,7 @@ A local aggregator script reads `.moonweb.yml` from all repos via the GitHub API
 moonweb-site/
 ├── hub/                    # Index + Redirects (.htm) + impressum.njk
 ├── infra/                  # Index.njk + 12 Subseiten
-├── smarthome/              # Index.njk + 9 Subseiten
+├── smarthome/              # Index.njk + 17 Subseiten
 ├── code/                   # Index.njk
 ├── retro/                  # Index.njk + 13 Subseiten
 ├── timecapsule/            # Eleventy 2.x (eigene Config)

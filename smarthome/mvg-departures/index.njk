@@ -1,0 +1,52 @@
+---
+title: "MVG Departures"
+section: "smarthome"
+tags: "smarthome"
+parent: "/smarthome/"
+description: "A compact Munich U-Bahn and S-Bahn departure monitor with station profiles, direction filters, HTML and JSON views."
+layout: base.njk
+---
+<h1>MVG Departures</h1>
+<div class="detail-content">
+
+<p><a href="https://github.com/skoelle/mvg-departures">MVG Departures</a> is a small departure monitor for Munich U-Bahn and S-Bahn connections. It is built for quick glances on a phone and for the dashboards around the flat, not for route planning or full timetable browsing.</p>
+
+<img src="/smarthome/img/mvg-departures.webp" alt="Mobile MVG departure monitor with line, destination, departure time and delay" width="395" height="529" loading="lazy">
+<p class="caption">The mobile view shows the next departures for the selected profile, including delays.</p>
+
+<h2>What it shows</h2>
+<ul>
+<li>Line, destination, planned departure, delay and disruption messages.</li>
+<li>U-Bahn and S-Bahn are visually separated with blue and green icons.</li>
+<li>A configurable number of departures per station, with a short cache to avoid unnecessary API calls.</li>
+<li>A mobile-first layout that also works well on small wall displays.</li>
+</ul>
+
+<h2>Profiles and filters</h2>
+<p>Stations are grouped into profiles such as outbound and return journeys. Each station has a type and an optional list of destinations to hide. The filter is deliberately an exclusion list: only the named destinations are removed, while new or unknown destinations stay visible. That way a line change or diversion shows up instead of silently disappearing.</p>
+<ul>
+<li>Profiles are selected with clickable tiles when more than one exists.</li>
+<li>A URL parameter selects a profile directly, which makes a profile bookmarkable and embeddable.</li>
+<li>The HTML view refreshes itself with a meta refresh, configurable through the refresh interval.</li>
+</ul>
+
+<h2>Endpoints</h2>
+<table>
+<tr><th>Endpoint</th><th>Purpose</th></tr>
+<tr><td><code>/</code></td><td>Mobile HTML view with auto-refresh</td></tr>
+<tr><td><code>/?profile=&lt;name&gt;</code></td><td>HTML view for a specific profile</td></tr>
+<tr><td><code>/api/departures</code></td><td>JSON list for the first profile</td></tr>
+<tr><td><code>/api/departures?profile=&lt;name&gt;</code></td><td>JSON list for a specific profile</td></tr>
+<tr><td><code>/healthz</code></td><td>Healthcheck for Docker and Watchtower</td></tr>
+</table>
+
+<h2>Deployment</h2>
+<p>The service runs as a Docker container from a GHCR image. A local <code>config.yaml</code> with stations and profiles is mounted read-only, and the timezone is set through the environment. The image is rebuilt on every push to main, with an automatic cleanup that keeps only the last few versions. A Watchtower label allows routine image updates.</p>
+
+<h2>Where the data appears</h2>
+<p>The same departure data feeds the <a href="/smarthome/home-dashboard-controls/">home dashboard</a> and the ESP32 dashboards in the flat. The <a href="https://github.com/skoelle/m5stack-dashboard">M5Stack dashboard</a> and the <a href="https://github.com/skoelle/wt32sc01-dashboard">WT32-SC01 dashboard</a> both show live MVG departures next to weather and calendar information.</p>
+
+<p>See the <a href="https://github.com/skoelle/mvg-departures">MVG Departures repository</a> for the configuration format, Docker image and CI setup.</p>
+
+<p class="note">The actual station list and commute profiles stay in the local configuration and are not published here.</p>
+</div>

@@ -1,0 +1,44 @@
+---
+title: "Spot History"
+section: "smarthome"
+tags: "smarthome"
+parent: "/smarthome/"
+description: "Check-in and visit history from Foursquare, Yelp and Google Timeline, collected into SQLite, indexed, and shown on a map."
+layout: base.njk
+---
+<h1>Spot History</h1>
+<div class="detail-content">
+
+<p>Check-in and visit history is spread across services that each keep a different slice of the past. <a href="https://github.com/skoelle/spot-history-manager">Spot History</a> collects those slices, stores each source separately, and builds a central index that can be explored as a list or on an OpenStreetMap map.</p>
+
+<h2>Sources</h2>
+<ul>
+<li><strong>Foursquare and Swarm</strong>, incremental API sync of check-ins, venues, photos, lists and tips, with a one-time full backfill and optional premium endpoints.</li>
+<li><strong>Yelp</strong>, a one-time import from the HTML export, including check-ins, comments, surveys, business interactions and reviews.</li>
+<li><strong>Google Timeline</strong>, an import of the manual Google Maps export, enriched with free OpenStreetMap data because Google no longer provides an API or web export for the current timeline.</li>
+</ul>
+
+<h2>Data model</h2>
+<ul>
+<li>Each source keeps its own SQLite database under <code>db/</code>, so an import never blocks or rewrites another source.</li>
+<li>A central, rebuildable index merges the sources, resolves duplicate places and writes GeoJSON for the map.</li>
+<li>Original media and generated 320 px thumbnails are kept next to the databases.</li>
+<li>Merged places and manual assignments are kept as explicit state, with OSM data taking priority over manual data, and manual data taking priority over source data.</li>
+</ul>
+
+<h2>Web interface</h2>
+<ul>
+<li>A FastAPI and Jinja app serves the list and a Leaflet map with OpenStreetMap tiles. Leaflet itself is vendored locally, and list and map selection stay synchronized.</li>
+<li>Visit cards show dates, categories, source links and photos. Stats and audit views expose gaps and unmatched places.</li>
+<li>A sync page starts Foursquare, Yelp, Google and OSM jobs inside the container, rebuilds the index afterwards and writes logs under <code>data/sync/logs/</code>.</li>
+<li>The UI has no authentication. It is meant to sit behind the reverse proxy and is not exposed directly.</li>
+</ul>
+
+<h2>Backups</h2>
+<p>The tool uses the SQLite online backup API, so backups are WAL-safe and can run while the app is in use. A backup is verified after it is written. Backups run from the host through cron or systemd and live on a separate mount, so they do not share the data volume they protect.</p>
+
+<h2>Deployment</h2>
+<p>It runs as a Docker container with <code>db/</code>, <code>data/</code> and <code>backup/</code> mounted from the host. The container uses UID/GID 1000, so the mounted directories must be writable by that user. There is no built-in schedule; syncs are started from the UI or by a host job. See the <a href="https://github.com/skoelle/spot-history-manager">Spot History repository</a> for the compose example and the import workflows.</p>
+
+<p class="note">This page describes the tool, not the data. Personal locations, photos and visits are not published here.</p>
+</div>

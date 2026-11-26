@@ -22,7 +22,7 @@ sections:
         href: "/infra/"
         emoji: "🏗️"
       - title: "smarthome"
-        summary: "What's actually running on the homelab, and why."
+        summary: "Smart home automation, dashboards, media, and the self-built tools behind them."
         href: "/smarthome/"
         emoji: "🏠"
       - title: "code"
@@ -75,7 +75,7 @@ sections:
 <section class="about-expanded">
   <h2>What this site is about</h2>
   <p>moonweb is the personal project site of Stefan Kölle (also spelled Stefan Koelle in English), a collection of projects that have grown over the past 25 years. What started as a single 486 running a BBS in the mid-90s has turned into a full homelab with Proxmox, Docker, smart home automation, and a growing collection of retro hardware. The name "moonweb" comes from the original domain moonweb.org, which has been online since 2000.</p>
-  <p>Each section of this site documents a different part of the setup. The <a href="/infra/">infrastructure section</a> covers the Proxmox cluster, Synology NAS, Docker containers, networking, and backup strategies. The <a href="/smarthome/">smart home section</a> shows what automation projects are running, from Tasmota energy monitoring to MQTT sensors and AirPlay audio. The <a href="/code/">code section</a> lists the public GitHub projects that power these setups, and the <a href="/retro/">retro section</a> documents the hardware collection.</p>
+  <p>Each section of this site documents a different part of the setup. The <a href="/infra/">infrastructure section</a> covers the Proxmox cluster, Synology NAS, Docker containers, networking, and backup strategies. The <a href="/smarthome/">smart home section</a> shows what runs at home, from Tasmota energy monitoring and MQTT sensors to AirPlay audio, media tools and personal services. The <a href="/code/">code section</a> lists the public GitHub projects that power these setups, and the <a href="/retro/">retro section</a> documents the hardware collection.</p>
 
   <h2>What I do professionally</h2>
   <p>I work as a Senior Software Developer &amp; Architect at TENHIL GmbH (formerly stellenanzeigen.de), where I build and maintain microservices on .NET and Kubernetes. My day job involves designing cloud-native architectures, building APIs, and migrating legacy applications to modern stacks. I've been working with .NET since the early 2000s and have used everything from ASP Classic to the latest .NET 10 features.</p>
@@ -83,7 +83,7 @@ sections:
 
   <h2>The homelab</h2>
   <p>The homelab has been evolving since the mid-90s. Today it runs on a <a href="/infra/proxmox/">Proxmox cluster</a> with a Synology DS918+ NAS, multiple Docker hosts, and an OpenWrt router for multi-WAN failover. The setup includes Prometheus and Grafana for <a href="/infra/monitoring/">monitoring</a>, InfluxDB for time-series data from smart home sensors, and a full <a href="/infra/backup-strategy/">backup strategy</a> covering NAS snapshots, offsite copies, and cloud storage.</p>
-  <p>The smart home side includes HomematicIP thermostats bridged to MQTT, <a href="/smarthome/tasmota-energy/">Tasmota smart plugs</a> for energy monitoring, AirPlay multi-room audio on Raspberry Pi devices, and various ESP32-based dashboards and LED matrix displays. Everything is documented in the respective sections of this site.</p>
+  <p>The smart home side includes HomematicIP thermostats bridged to MQTT, <a href="/smarthome/tasmota-energy/">Tasmota smart plugs</a> for energy monitoring, AirPlay multi-room audio on Raspberry Pi devices, various ESP32-based dashboards and LED matrix displays, plus self-built tools such as <a href="/smarthome/tv-guide/">TV-Guide</a>, a personal wiki and check-in history. Everything is documented in the respective sections of this site.</p>
 
   <h2>Retro computing</h2>
   <p>Outside of work, I collect and maintain retro hardware. The collection includes Atari ST machines (a <a href="/retro/atari-mega-st-fleet/">Mega ST 4 fleet</a> and a Mega ST 2), Amiga systems, and various MiSTer and MiST FPGA setups for preservation. The DOS environment is rebuilt rather than original, I reproduce a <a href="/retro/dos-486-tower/">486 DX2-66</a> on the MiSTer FPGA. I also run Batocera in the living room for casual retro gaming. The retro section documents the hardware, the maintenance, and the occasional deep-dive into compatibility issues like the <a href="/retro/atari-monitor-compatibility/">15kHz monitor problem</a> on the Atari ST. On the Amiga side, I'm following <a href="/retro/the-a1200/">The A1200</a> console ahead of its December 2026 launch.</p>

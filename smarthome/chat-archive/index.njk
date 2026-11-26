@@ -1,0 +1,43 @@
+---
+title: "Chat Archive"
+section: "smarthome"
+tags: "smarthome"
+parent: "/smarthome/"
+description: "Import Instagram, Facebook, XING and LinkedIn takeout messages into a searchable MariaDB archive with a REST API."
+layout: base.njk
+---
+<h1>Chat Archive</h1>
+<div class="detail-content">
+
+<p>Takeout exports from social networks are complete but hard to search. <a href="https://github.com/skoelle/chat-archive">Chat Archive</a> imports those exports into a searchable MariaDB database and exposes a REST API for further analysis, without uploading the messages to another service.</p>
+
+<h2>Architecture</h2>
+<ul>
+<li><strong>Tauri importer</strong>, a desktop tool extracts the takeout ZIP locally and sends the raw JSON files to the API over HTTP. It contains no parsing or database logic.</li>
+<li><strong>FastAPI service</strong>, the API handles encoding fixes, parsing and normalization for each platform, writes to MySQL or MariaDB, and exposes REST endpoints for later analysis.</li>
+<li><strong>Two clear halves</strong>, the importer is the transport and the API owns the data model. That keeps the desktop tool small and lets the parser evolve without rebuilding it.</li>
+</ul>
+
+<h2>Supported platforms</h2>
+<ul>
+<li>Instagram takeout messages.</li>
+<li>Facebook messages, including the end-to-end encrypted export.</li>
+<li>XING and LinkedIn exports, as a ZIP or a single CSV file.</li>
+</ul>
+
+<h2>Security model</h2>
+<p>The API does not sit behind Authelia, because the Tauri client is a plain HTTP client without a browser session, while Authelia forward-auth depends on cookie-based browser logins. Instead, the API protects itself with a static API token in the <code>X-API-Key</code> header. That is sufficient for the internal homelab network, but the API should not be exposed to the internet without an additional network allowlist or proxy rule.</p>
+
+<h2>Setup order</h2>
+<ol>
+<li>Deploy the API and set the token in its environment.</li>
+<li>Build or run the Tauri importer with the same token.</li>
+<li>Point the importer at a takeout ZIP and import.</li>
+</ol>
+<p>The API stores the normalized messages in MariaDB, so the database can be backed up with the normal database job. See the <a href="https://github.com/skoelle/chat-archive">Chat Archive repository</a> for the API setup, importer build and platform details.</p>
+
+<h2>Deployment</h2>
+<p>The API runs as an internal container or service and connects to the central <a href="/infra/lxc/">MariaDB LXC container</a>. The importer runs on a desktop machine where the takeout files already are, which keeps the raw export local until it is sent to the API.</p>
+
+<p class="note">The messages themselves are personal data and are not published here.</p>
+</div>

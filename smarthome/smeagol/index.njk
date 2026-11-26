@@ -1,0 +1,39 @@
+---
+title: "Smeagol Wiki"
+section: "smarthome"
+tags: "smarthome"
+parent: "/smarthome/"
+description: "A personal Markdown wiki with a real WYSIWYG editor, full-text search, live reload and no database."
+layout: base.njk
+---
+<h1>Smeagol Wiki</h1>
+<div class="detail-content">
+
+<p>Notes, project knowledge and reference material live in a Markdown vault. <a href="https://github.com/skoelle/smeagol-wysiwyg">Smeagol</a> is a personal wiki that makes that vault editable in the browser without forcing raw Markdown editing.</p>
+
+<h2>Why a WYSIWYG wiki</h2>
+<p>Plain Markdown is excellent for storage and versioning, but it is not always the right interface for quick edits. Smeagol keeps the files as Markdown while using Milkdown as a real WYSIWYG editor. Formatting is applied directly in the page, changes are saved automatically after a short typing pause, and the result on disk is still valid Markdown.</p>
+
+<h2>Architecture</h2>
+<ul>
+<li><strong>Single Go binary</strong>, the server and the embedded frontend ship as one binary with no database and no runtime dependencies.</li>
+<li><strong>Markdown vault</strong>, the binary points at a directory of Markdown files, including arbitrarily deep subdirectories. Each folder can have its own <code>README.md</code> as an index page.</li>
+<li><strong>No persistent index</strong>, full-text search scans the vault on demand, so externally changed files are picked up without a rebuild.</li>
+<li><strong>Live reload</strong>, when a file changes outside the browser, an open page updates automatically. If the page is being edited at the same time, it shows a conflict warning instead of overwriting silently.</li>
+<li><strong>Offline frontend</strong>, the editor and its vendor assets are embedded in the binary. No npm or Node build step is required.</li>
+</ul>
+
+<h2>Features</h2>
+<ul>
+<li>Tree view of the whole vault, accessible on mobile viewports.</li>
+<li>Full-text search across content and paths.</li>
+<li>Formatting toolbar for headings, bold, italic, inline code, lists, blockquotes, code blocks, horizontal rules and hard breaks.</li>
+<li>Instant save with visible status, live reload and conflict handling.</li>
+<li>Light mode interface and a single Go build output.</li>
+</ul>
+
+<h2>Deployment</h2>
+<p>The wiki runs as a single Go binary in the homelab and points at a Markdown directory on homelab storage. Because the vault is just files, it is covered by the normal file and snapshot backup chain. See the <a href="https://github.com/skoelle/smeagol-wysiwyg">Smeagol repository</a> for the build and configuration details.</p>
+
+<p class="note">The vault contains personal notes and is not published here.</p>
+</div>

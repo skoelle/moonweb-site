@@ -1,0 +1,55 @@
+---
+title: "iCloud Contacts Sync"
+section: "smarthome"
+tags: "smarthome"
+parent: "/smarthome/"
+description: "Multiple iCloud accounts synced into MariaDB via CardDAV delta sync, with a birthday digest and a read-only web view behind Authelia."
+layout: base.njk
+---
+<h1>iCloud Contacts Sync</h1>
+<div class="detail-content">
+
+<p>Contacts are spread across several iCloud accounts, and the useful views are not always the ones Apple offers. <a href="https://github.com/skoelle/icloud-contacts-sync">iCloud Contacts Sync</a> keeps every account in sync with a central MariaDB database, sends a birthday digest, and serves a read-only web view for the homelab.</p>
+
+<img src="/smarthome/img/icloud-contacts-dashboard.webp" alt="iCloud Contacts dashboard with contact count, upcoming birthdays and sync status" width="823" height="906" loading="lazy">
+<p class="caption">The dashboard shows the latest sync status, upcoming birthdays and a contact overview.</p>
+
+<h2>How the sync works</h2>
+<ul>
+<li><strong>CardDAV delta sync</strong>, the service uses RFC 6578 sync tokens, so regular runs only transfer changes since the previous sync instead of the whole address book.</li>
+<li><strong>Initial full sync</strong>, when an account has no stored token yet, the first run imports the complete address book.</li>
+<li><strong>15-minute cadence</strong>, each account is checked every 15 minutes. Every run records upserts and deletes in the sync history.</li>
+<li><strong>MariaDB storage</strong>, contacts, groups, sync state and run history live in the central database, not in the container.</li>
+</ul>
+
+<h2>Multiple accounts</h2>
+<p>Each Apple ID gets an entry in a local account file with a unique name, the Apple email address, an app-specific password, the matching Authelia user and an optional birthday mail recipient. Optional per-account settings add a healthcheck URL and a chat sender name for the Chat Archive mapping. The file holds credentials, stays on the host and is mounted into the container read-only.</p>
+
+<h2>Birthday digest</h2>
+<ul>
+<li>Each account with a configured recipient gets its own HTML email with birthdays and contact links.</li>
+<li>A send log prevents duplicate mails on the same day and keeps a history per account.</li>
+<li>If mail delivery fails, the contact sync continues unaffected and the next run retries.</li>
+</ul>
+
+<h2>Web view and API</h2>
+<ul>
+<li>A separate API container serves the dashboard, search, contact details and contact groups.</li>
+<li>The API expects a reverse proxy with Authelia forward authentication and only shows contacts for the logged-in user.</li>
+<li>Birthday endpoints expose today and the next N days, and sync-run endpoints show the last 50 runs with status and errors.</li>
+<li>Contact groups are read from the CardDAV group memberships and are available through the web view and API.</li>
+</ul>
+
+<img src="/smarthome/img/icloud-contacts-detail.webp" alt="iCloud Contacts detail page with contact data, groups and sync metadata" width="823" height="902" loading="lazy">
+<p class="caption">A contact detail page with groups, contact fields and sync metadata.</p>
+
+<h2>Chat Archive integration</h2>
+<p>The web view can optionally connect to <a href="/smarthome/chat-archive/">Chat Archive</a>. It then shows the most frequent chat partners, links them to matching contacts and displays the message history for a contact. A contact chat can also be exported as Markdown, including contact data and notes.</p>
+
+<h2>Deployment and data</h2>
+<p>The sync and API run as Docker containers from GHCR. MariaDB runs in the central <a href="/infra/lxc/">LXC container</a>, and the account file is mounted from the host. CI builds the image and can trigger a Watchtower webhook after a new push. Because the data lives in MariaDB, backups follow the normal database backup path described in the <a href="/infra/backup-strategy/">backup strategy</a>.</p>
+
+<p>See the <a href="https://github.com/skoelle/icloud-contacts-sync">iCloud Contacts Sync repository</a> for the account format, database setup and compose example, and <a href="/infra/docker/">Docker container strategy</a> for the surrounding stack.</p>
+
+<p class="note">Contact data is personal and is not published here. The screenshots use demo data.</p>
+</div>

@@ -33,6 +33,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("apps/img/*.webp");
   eleventyConfig.addPassthroughCopy({ "apps/lightbox.js": "apps/lightbox.js" });
 
+  // Smarthome: detail page screenshots
+  eleventyConfig.addPassthroughCopy("smarthome/img/*.webp");
+
   // Retro: Storm ST / Cloudy ST page images
   eleventyConfig.addPassthroughCopy("retro/storm-cloudy/*.jpg");
 

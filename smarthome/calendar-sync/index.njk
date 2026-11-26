@@ -1,0 +1,47 @@
+---
+title: "Google Calendar Sync"
+section: "smarthome"
+tags: "smarthome"
+parent: "/smarthome/"
+description: "A private Google Calendar ICS feed imported into MariaDB, with recurring event expansion, a web UI, REST API and email digests."
+layout: base.njk
+---
+<h1>Google Calendar Sync</h1>
+<div class="detail-content">
+
+<p>The calendar lives in Google Calendar, but the dashboards and notifications run in the homelab. <a href="https://github.com/skoelle/calender_sync">Google Calendar Sync</a> imports a private ICS feed into MariaDB and turns it into a local data source for widgets, APIs and email reminders.</p>
+
+<img src="/smarthome/img/calendar-sync.webp" alt="Google Calendar Sync web UI with upcoming events and search" width="860" height="699" loading="lazy">
+<p class="caption">The web UI lists upcoming events and offers a search across the imported calendar.</p>
+
+<h2>Sync model</h2>
+<ul>
+<li><strong>ICS import</strong>, a private Google Calendar ICS feed is polled every 15 minutes by default.</li>
+<li><strong>Recurring events</strong>, RRULE and EXDATE are expanded, and RECURRENCE-ID exceptions become individual event instances.</li>
+<li><strong>Soft delete</strong>, events that disappear from the feed are marked as deleted instead of being removed immediately.</li>
+<li><strong>Time window</strong>, the import covers a configurable window, by default 90 days in the past and 365 days in the future.</li>
+<li><strong>Single direction</strong>, Google Calendar is the source. The homelab database is a read model, not a second calendar to write back to.</li>
+</ul>
+
+<h2>Web UI and API</h2>
+<ul>
+<li>A FastAPI container serves the upcoming events, a search view and a health endpoint.</li>
+<li>The JSON API exposes events under <code>/api/events</code> for dashboards and other tools.</li>
+<li>The API and web UI run as a separate container on port 8000, next to the sync worker.</li>
+<li>A local demo mode uses SQLite and sample events, so the UI and API can be tested without MariaDB or Docker.</li>
+</ul>
+
+<h2>Email notifications</h2>
+<ul>
+<li>An optional daily HTML email lists the upcoming events at a configured hour and timezone.</li>
+<li>An optional weekly preview sends events for the next week that match configured search terms.</li>
+<li>The weekly mail only goes out when there are matching events, and each send is recorded in a log table.</li>
+</ul>
+
+<h2>Deployment and data</h2>
+<p>The sync worker and API run as Docker containers. Events live in MariaDB in the central <a href="/infra/lxc/">LXC container</a>, with an optional bootstrap mode that creates the database and user on first start. CI publishes the image to GHCR. The calendar view on the <a href="/smarthome/home-dashboard-controls/">home dashboard</a> reads from this service, and the database is covered by the normal database backup path.</p>
+
+<p>See the <a href="https://github.com/skoelle/calender_sync">Google Calendar Sync repository</a> for the environment variables, database schema and compose setup.</p>
+
+<p class="note">The private ICS URL, calendar contents and notification addresses are not published here.</p>
+</div>

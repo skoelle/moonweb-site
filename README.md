@@ -5,7 +5,7 @@ Monorepo for the **moonweb.org** homelab, seven static sites built with [Elevent
 ```
 www.moonweb.org/           -> Central index & gateway
 www.moonweb.org/infra/     -> Infrastructure overview (Proxmox, Synology, Docker)
-www.moonweb.org/smarthome/ -> Smart home projects & dashboards
+www.moonweb.org/smarthome/ -> Smart home automation, media & everyday tools
 www.moonweb.org/code/      -> Curated GitHub project catalog
 www.moonweb.org/apps/      -> App showcase: live apps and community beta
 www.moonweb.org/retro/     -> Physical retro hardware collection
@@ -92,7 +92,7 @@ npm run build:moonweb                # builds moonweb + timecapsule (for deploym
 moonweb-site/
 ├── hub/                          # Central index + redirect .htm files
 ├── infra/                        # Infra overview + 12 detail pages
-├── smarthome/                    # Smart home overview + 9 detail pages
+├── smarthome/                    # Smart home overview + 17 detail pages
 ├── code/                         # GitHub catalog
 ├── retro/                        # Retro hardware + 13 detail pages
 ├── timecapsule/                  # 2000s retro design (Eleventy 2.x)
@@ -183,7 +183,7 @@ All moonweb.org sites are accessible under `www.moonweb.org` as subdirectories:
 |-----|---------|
 | `www.moonweb.org/` | Hub (root) |
 | `www.moonweb.org/infra/` | Infrastructure |
-| `www.moonweb.org/smarthome/` | Smart Home |
+| `www.moonweb.org/smarthome/` | Smart Home & Tools |
 | `www.moonweb.org/code/` | Code catalog |
 | `www.moonweb.org/apps/` | App showcase (live + beta) |
 | `www.moonweb.org/retro/` | Retro hardware |

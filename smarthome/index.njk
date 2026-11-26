@@ -1,8 +1,8 @@
 ---
-title: "Smart Home Projects, Home Assistant, MQTT & IoT | moonweb"
+title: "Smart Home & Everyday Tools, Home Assistant, MQTT & IoT | moonweb"
 section: "smarthome"
 tags: "smarthome"
-description: "Smart home projects: Home Assistant, MQTT sensors, AirPlay audio, OctoPrint, and energy monitoring."
+description: "Smart home automation, dashboards, media and self-built everyday tools: Home Assistant, MQTT, AirPlay, OctoPrint, TV-Guide, contacts, calendar and more."
 layout: base.njk
 sections:
   - heading: "Control & Automation"
@@ -41,26 +41,42 @@ sections:
         summary: "Real-time temperature and humidity monitoring across all rooms with historical charts."
         href: "/smarthome/air-quality/"
         emoji: "🌡️"
-  - heading: "Personal services"
+  - heading: "Personal tools & services"
     cards:
       - title: "iCloud Contacts Sync"
         summary: "Private iCloud contacts synced into the homelab, with birthday notifier and web UI."
-        href: "https://github.com/skoelle/icloud-contacts-sync"
+        href: "/smarthome/icloud-contacts-sync/"
         emoji: "👥"
       - title: "MVG departures"
         summary: "Compact Munich transit departure monitor for desktop and mobile."
-        href: "https://github.com/skoelle/mvg-departures"
+        href: "/smarthome/mvg-departures/"
         emoji: "🚇"
       - title: "Google Calendar sync"
         summary: "Private calendar synced into the homelab with notifier and web interface."
-        href: "https://github.com/skoelle/calender_sync"
+        href: "/smarthome/calendar-sync/"
         emoji: "📅"
       - title: "Focus App"
         summary: "A clean, modern todo application with drag & drop reordering."
-        href: "https://github.com/skoelle/focusapp"
+        href: "/smarthome/focus-app/"
         emoji: "✅"
+      - title: "Spot History"
+        summary: "Check-in and visit history from Foursquare, Yelp and Google Timeline, mapped and searchable."
+        href: "/smarthome/spot-history/"
+        emoji: "📍"
+      - title: "Smeagol Wiki"
+        summary: "Personal Markdown wiki with a WYSIWYG editor, full-text search and live reload."
+        href: "/smarthome/smeagol/"
+        emoji: "🧙"
+      - title: "Chat Archive"
+        summary: "Takeout messages from Instagram, Facebook, XING and LinkedIn in a searchable MariaDB archive."
+        href: "/smarthome/chat-archive/"
+        emoji: "💬"
   - heading: "Media"
     cards:
+      - title: "TV-Guide"
+        summary: "Browse the TVHeadend EPG, find 80s and 90s films and series, keep saved searches and trigger recordings."
+        href: "/smarthome/tv-guide/"
+        emoji: "📺"
       - title: "AirPlay audio"
         summary: "Multi-room AirPlay receivers with software volume boost."
         href: "/smarthome/airplay-audio/"
@@ -78,8 +94,8 @@ sections:
         href: "/smarthome/kids-rfid-player/"
         emoji: "🎵"
 ---
-<h1>Smart Home Projects</h1>
-<p class="site-intro">The heart of the homelab. Home Assistant, MQTT sensors, dashboards, and automation projects that make everyday life a little more interesting.</p>
+<h1>Smart Home & Everyday Tools</h1>
+<p class="site-intro">The heart of the homelab. Home Assistant, MQTT sensors, dashboards, media, and the self-built tools that make everyday life a little easier.</p>
 
 {% include "card-grid.njk" %}
 
@@ -92,5 +108,5 @@ sections:
   <p>The goal is subtle automation that improves daily life without being intrusive. Lights turn on when someone enters a room, music starts playing in the bathroom when the light switches on, and LED matrix displays show the time, weather, and laundry status. But nothing talks unless spoken to, no voice assistants, no always-on microphones, just simple sensor-driven automation that runs locally without cloud dependencies.</p>
 
   <h2>Self-hosted services</h2>
-  <p>Beyond hardware automation, several self-hosted services run on the Synology NAS: yt-playlist-sync, my own YouTube archiving tool that replaced TubeArchivist and TubeSync, OctoPrint for remote 3D printer control, iCloud Contacts Sync for keeping the address book up to date, and a Google Calendar sync for dashboard widgets. Each service is containerized and backed up as part of the NAS backup strategy.</p>
+  <p>Beyond hardware automation, several self-hosted services run across the homelab: yt-playlist-sync for YouTube archiving, OctoPrint for remote 3D printer control, iCloud Contacts Sync, a Google Calendar sync for dashboard widgets, TV-Guide on top of TVHeadend, Spot History for check-in data, Smeagol as a personal wiki, and Chat Archive for takeout messages. Each service is containerized where possible and covered by the backup strategy for its host or database.</p>
 </section>

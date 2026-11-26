@@ -1,0 +1,51 @@
+---
+title: "TV-Guide"
+section: "smarthome"
+tags: "smarthome"
+parent: "/smarthome/"
+description: "Browse the TVHeadend EPG, match shows against IMDb, keep saved searches, and trigger recordings from one web UI."
+layout: base.njk
+---
+<h1>TV-Guide</h1>
+<div class="detail-content">
+
+<p>TVHeadend records reliably, but its EPG interface is built for configuration rather than discovery. <a href="https://github.com/skoelle/tv-guide">TV-Guide</a> is a small web app on top of it that makes the programme guide browsable, finds 80s and 90s films and series, keeps saved searches, and triggers recordings without leaving the page.</p>
+
+<h2>What it does</h2>
+<ul>
+<li><strong>Browse the EPG</strong>, with "running now", "tonight" and filters for type, decade, genre, status and upcoming airings.</li>
+<li><strong>Keep fiction visible</strong>, films and series stay in the main views while non-fiction formats are hidden by default. A manual mark can pull an automatically classified format back into the film or series views.</li>
+<li><strong>Work details</strong>, each work shows the EPG title and the IMDb title, type, runtime, rating, genres, cast, crew and episodes where available.</li>
+<li><strong>Person pages</strong>, cast and crew names open an internal page with upcoming and past airings, plus a link to the IMDb profile.</li>
+</ul>
+
+<h2>Data pipeline</h2>
+<ul>
+<li><strong>EPG import</strong>, an hourly, change-aware XMLTV import from TVHeadend keeps <code>epg.db</code> current without rewriting unchanged data.</li>
+<li><strong>IMDb build</strong>, after the first EPG change of the day, the IMDb datasets are rebuilt and shows are matched against them. Cast, crew and episodes are only built for works that are actually matched, which keeps the database small.</li>
+<li><strong>Review queue</strong>, uncertain matches go into a review queue instead of being accepted silently. A wrong match can be removed and put back into review with fresh suggestions.</li>
+<li><strong>TMDB posters</strong>, posters and metadata are fetched from TMDB and cached locally in <code>app.db</code> and <code>data/posters/</code>. The page never hotlinks image URLs, and cached data is refreshed at most every six months.</li>
+<li><strong>Separate state</strong>, <code>epg.db</code> and <code>imdb.db</code> are reproducible inputs. User overrides, saved searches, hits and the poster cache live in <code>app.db</code>.</li>
+</ul>
+
+<h2>Saved searches and email</h2>
+<ul>
+<li>Filters are validated and stored as saved searches, with hit tracking for each new match.</li>
+<li>After every refresh, TV-Guide sends one digest email for all open hits of searches with notifications enabled.</li>
+<li>Failed sends are retried on the next run. A dry run writes the email to a local outbox, and a test mode sends a single test message.</li>
+</ul>
+
+<h2>Recordings</h2>
+<ul>
+<li><strong>Series</strong>, "record series" creates a TVHeadend Autorec for the EPG title on the selected channel.</li>
+<li><strong>Films</strong>, "record film" creates a single recording for exactly that airing.</li>
+<li><strong>Safety checks</strong>, TV-Guide resolves the matching EPG event, reuses an existing series link when available, falls back to an exact title match, and detects existing timers and recordings before creating anything.</li>
+<li>If the event is no longer in the EPG, the page shows an error instead of recording the wrong programme. The TVHeadend account needs DVR and recorder permissions.</li>
+</ul>
+
+<h2>Deployment</h2>
+<p>The app runs as a Docker container from a GHCR image on a homelab Docker host, with TVHeadend reachable on <code>docker-host-nas</code>. Configuration, the ignore list and <code>data/</code> are mounted as volumes. The IMDb raw datasets use a separate mount so they stay out of the regular data backup. Only <code>app.db</code> is non-reproducible state and needs a backup; the EPG, IMDb and raw datasets can be rebuilt.</p>
+<p>Development runs on the Xubuntu VM without a container, using the local virtualenv and test suite. See the <a href="https://github.com/skoelle/tv-guide">TV-Guide repository</a> for configuration, the scheduler and the compose example, and <a href="/infra/docker/">Docker container strategy</a> for the surrounding media stack.</p>
+
+<p class="note">TV-Guide is an internal tool. Channel lists, credentials and the actual recording library are not published here.</p>
+</div>

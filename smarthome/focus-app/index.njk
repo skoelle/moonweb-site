@@ -1,0 +1,43 @@
+---
+title: "Focus App"
+section: "smarthome"
+tags: "smarthome"
+parent: "/smarthome/"
+description: "A minimalist todo app with drag and drop ordering, a React frontend, an ASP.NET Core API and MariaDB persistence."
+layout: base.njk
+---
+<h1>Focus App</h1>
+<div class="detail-content">
+
+<p><a href="https://github.com/skoelle/focusapp">Focus App</a> is a small todo application for daily tasks. It stays deliberately simple: one list, fast editing, drag and drop ordering, and no accounts or collaboration features to get in the way.</p>
+
+<img src="/smarthome/img/focus-app.webp" alt="Focus App todo list with drag and drop ordering" width="965" height="774" loading="lazy">
+<p class="caption">The main todo view, with tasks that can be reordered by drag and drop.</p>
+
+<h2>Features</h2>
+<ul>
+<li>Create, edit and delete tasks with a title and an optional description.</li>
+<li>Reorder tasks by drag and drop, with the order persisted in the database.</li>
+<li>Responsive layout for desktop and mobile.</li>
+<li>REST API behind the frontend, so other tools can read or change tasks later.</li>
+</ul>
+
+<h2>Architecture</h2>
+<ul>
+<li><strong>Frontend</strong>, React and TypeScript built with Vite.</li>
+<li><strong>Backend</strong>, ASP.NET Core with Entity Framework Core.</li>
+<li><strong>Database</strong>, MariaDB in the central <a href="/infra/lxc/">LXC container</a>.</li>
+<li><strong>Container</strong>, a multi-stage Docker build that combines the Node frontend build with the .NET runtime.</li>
+<li><strong>CI/CD</strong>, GitHub Actions builds the image, pushes it to GHCR and cleans up old image versions.</li>
+</ul>
+
+<h2>API and data</h2>
+<p>The API exposes CRUD endpoints under <code>/api/focustasks</code> for listing, creating, updating and deleting tasks. In production the data lives in MariaDB, with an initialization script for the database and service user. Without a configured database the app falls back to a local SQLite demo mode with sample tasks.</p>
+
+<h2>Security and deployment</h2>
+<p>In the homelab the app runs behind nginx and <a href="/infra/docker/">Authelia</a>, so the UI and API are not exposed directly. The container listens on port 5000 and is configured entirely through environment variables for the database connection. The image comes from GHCR and is updated through the usual container workflow.</p>
+
+<p>See the <a href="https://github.com/skoelle/focusapp">Focus App repository</a> for the database init script, environment variables and compose setup. The app is also linked from the <a href="/smarthome/home-dashboard-controls/">home dashboard</a>.</p>
+
+<p class="note">Task contents are personal and are not published here. The screenshot uses demo data.</p>
+</div>
