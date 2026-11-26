@@ -217,7 +217,6 @@ repo: auto                      # Auto (GitHub name)
 - Web Projects
 - Apps
 - Infra Tools
-- Archiving Tools
 - Dev Tools
 - Retro
 - Maker Firmware
