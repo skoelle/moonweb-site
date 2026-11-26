@@ -28,8 +28,8 @@ layout: base.njk
 
 <h2>Own GitHub projects</h2>
 <ul>
-<li><strong><a href="https://github.com/skoelle/icloud-contacts-sync">icloud-contacts-sync</a></strong>, syncs contact data between iCloud and other systems.</li>
-<li><strong><a href="https://github.com/skoelle/calender_sync">calender_sync</a></strong>, keeps calendars synchronized across sources.</li>
+<li><strong><a href="https://github.com/skoelle/icloud-contacts-sync">icloud-contacts-sync</a></strong>, syncs iCloud contacts into MariaDB via CardDAV, with a birthday digest and a read-only web view.</li>
+<li><strong><a href="https://github.com/skoelle/calender_sync">calender_sync</a></strong>, imports a private Google Calendar ICS feed into MariaDB, expanding recurring events for dashboards and notifications.</li>
 <li><strong><a href="https://github.com/skoelle/mvg-departures">mvg-departures</a></strong>, pulls Munich public transport (MVG) departure data for local dashboards.</li>
 <li><strong>wetter-api</strong>, a small weather API/worker pair, built from a custom GHCR image and updated automatically via Watchtower.</li>
 </ul>
@@ -61,8 +61,14 @@ layout: base.njk
 <li><strong>Stirling PDF</strong>, self-hosted PDF toolkit for merging, splitting, converting, compressing, and editing documents without uploading them to external services.</li>
 <li><strong>ArchiveBox</strong>, personal web archiving of bookmarked pages.</li>
 <li><strong>weblog-analysis</strong>, privacy-friendly visitor and bot analysis from server access logs, with no client-side tracking; my own project, see <a href="/infra/web-analytics/">Web Log Analytics</a> and <a href="https://github.com/skoelle/weblog-analysis">skoelle/weblog-analysis</a> on GitHub.</li>
+</ul>
+
+<h2>Media containers</h2>
+<ul>
+<li><strong>TVHeadend [NAS]</strong>, live TV, EPG and recording server, running on docker-host-nas with direct access to the media storage.</li>
+<li><strong>Jellyfin [NAS]</strong>, media server for the local film and series library on the NAS.</li>
+<li><strong>Navidrome [NAS]</strong>, music streaming server for the local MP3 library on the NAS, reachable from the home dashboard.</li>
 <li><strong>yt-playlist-sync [NAS]</strong>, self-built tool that watches the public playlists of a YouTube channel and downloads them with yt-dlp directly onto NAS storage; it runs on docker-host-nas specifically because it needs direct volume access to the Synology's disks. Replaces TubeArchivist and TubeSync.</li>
-<li><strong>Music Stretto</strong>, music streaming server for the local MP3 library on the Synology, accessible from the home dashboard.</li>
 </ul>
 
 <h2>Development tools</h2>

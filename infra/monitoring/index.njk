@@ -10,16 +10,17 @@ layout: base.njk
 <div class="detail-content">
 
 <p>Prometheus and Grafana form the central monitoring stack for the whole
-homelab, running as Docker containers on the NAS. Every machine in the
-flat, including the Proxmox host, Docker VM, Synology NAS, and Raspberry
-Pi devices, feeds metrics into this central instance.</p>
+homelab, running as Docker containers on the NAS. The main Proxmox host,
+the two monitored Docker hosts (docker-host-pve and docker-host-nas), the
+Synology NAS, and the Raspberry Pi devices feed metrics into this central
+instance.</p>
 
 <h2>What's monitored</h2>
 <ul>
 <li><strong>Proxmox host metrics</strong>, a PVE exporter reports node-level and per-VM/LXC CPU, memory, and disk metrics into a dedicated Grafana dashboard.</li>
-<li><strong>Host metrics everywhere</strong>, a node exporter runs on the NAS, the Docker host, and every Raspberry Pi, feeding basic CPU/RAM/disk/network stats.</li>
-<li><strong>Container metrics</strong>, cAdvisor runs on both the Docker host and the NAS, breaking down resource usage per container.</li>
-<li><strong>Network hardware via SNMP</strong>, an SNMP exporter polls a network-attached printer for toner level, page count, and status, proving the same pattern works for any SNMP-capable device.</li>
+<li><strong>Host metrics on the main machines</strong>, a node exporter runs on the main Proxmox host, both monitored Docker hosts, the NAS, and every Raspberry Pi, feeding basic CPU/RAM/disk/network stats.</li>
+<li><strong>Container metrics</strong>, cAdvisor runs on both monitored Docker hosts and the NAS, breaking down resource usage per container.</li>
+<li><strong>Network hardware via SNMP</strong>, an SNMP exporter polls the FRITZ!Box, the Zyxel switches, the OpenWrt router, and a network-attached printer for uptime, throughput, toner level, page count and status.</li>
 </ul>
 
 <h2>Dashboards</h2>
@@ -27,6 +28,7 @@ Pi devices, feeds metrics into this central instance.</p>
 <tr><th>Dashboard</th><th>Focus</th></tr>
 <tr><td>Proxmox monitoring (extended)</td><td>Node-level and per-guest VM/LXC metrics</td></tr>
 <tr><td>Docker container monitoring</td><td>Per-container CPU/memory/network/disk</td></tr>
+<tr><td>Network infrastructure</td><td>FRITZ!Box, Zyxel switches and OpenWrt via SNMP</td></tr>
 <tr><td>Network printer</td><td>Toner level, page count, online/offline status via SNMP</td></tr>
 </table>
 
@@ -40,20 +42,19 @@ scrape intervals (15 seconds for hosts, 60 seconds for network devices),
 and retention policies.</p>
 
 <h2>Alerting</h2>
-<p>Basic alerting is configured through Prometheus Alertmanager, which
-sends notifications to a dedicated Telegram channel for critical events
-like host-down or disk-full conditions. The dead-man's-switch pattern
-ensures that if Prometheus itself stops scraping, an alert fires within
-minutes. More sophisticated alerting rules (disk space prediction,
-temperature thresholds) are planned but not yet implemented.</p>
+<p>There is no central Alertmanager channel. Uptime Kuma watches service
+reachability, and Healthchecks covers scheduled jobs with a dead-man's-switch
+pattern: if a backup, sync or other job does not report in, the missed check
+raises the alert. More sophisticated Prometheus alerting rules (disk space
+prediction, temperature thresholds) are not configured yet.</p>
 
 <h2>Visitor analytics</h2>
 <p>Metrics are not the only signal. <a href="/infra/web-analytics/">Web Log Analytics</a> reads Apache and nginx access logs and reports weekly visitors, bots, scanners and per-vhost traffic. It is intentionally separate from Prometheus, which tracks system health rather than audience behavior.</p>
 
 <h2>Open items</h2>
 <ul>
-<li>Alerting rules are not yet configured for most services.</li>
-<li>The secondary (test) Proxmox host isn't monitored yet; it's usually powered off.</li>
+<li>Prometheus alerting rules are not configured for most services.</li>
+<li>The secondary Proxmox host (pve2) is always on for the Xubuntu dev VM, but it is not monitored yet.</li>
 <li>Retention policy for Prometheus data hasn't been tuned.</li>
 </ul>
 

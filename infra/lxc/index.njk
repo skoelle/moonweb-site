@@ -36,7 +36,7 @@ layout: base.njk
 
 <h2>MariaDB</h2>
 <ul>
-<li><strong>Purpose</strong>, central relational database instance, currently used by services such as nginx-proxy-manager, reachable over the network at a fixed internal IP.</li>
+<li><strong>Purpose</strong>, central relational database instance, currently used by services such as the calendar sync, iCloud contacts sync, FocusApp and nginx-proxy-manager, reachable over the network at a fixed internal IP.</li>
 <li><strong>Why LXC</strong>, a database benefits from direct, persistent disk access and predictable performance without the extra storage-driver indirection of Docker volumes; running it as an unprivileged LXC keeps it isolated while still feeling like a native MariaDB install.</li>
 <li><strong>Advantage</strong>, simple backup via <code>mysqldump</code>, straightforward remote access configuration (bind-address, dedicated service users per consuming application), and one central database that multiple Docker containers on other hosts can connect to over the network instead of each running their own database container.</li>
 </ul>
