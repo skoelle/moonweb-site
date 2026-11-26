@@ -38,6 +38,24 @@
     "summary": "A clean, modern todo application with drag & drop reordering. Built with React, TypeScript, and ASP.NET Core. Features responsive design, MariaDB persistence, and Docker deployment."
   },
   {
+    "title": "Fritz!Box LAN DNS",
+    "emoji": "🌐",
+    "category": "code",
+    "subcategory": "Apps",
+    "status": "active",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "Uvicorn",
+      "Jinja2",
+      "SQLite",
+      "CoreDNS"
+    ],
+    "repo": "fritz-lan-dns",
+    "repo_url": "https://github.com/skoelle/fritz-lan-dns",
+    "summary": "Collects FRITZ!Box mesh and host data into SQLite, serves a web UI, and generates a CoreDNS zone for a local domain."
+  },
+  {
     "title": "Google Calender Sync",
     "emoji": "📅",
     "category": "code",
